@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonCrawler", "DungeonCrawler\DungeonCrawler\DungeonCrawler.csproj", "{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DungeonCrawlerContent", "DungeonCrawler\DungeonCrawlerContent\DungeonCrawlerContent.contentproj", "{156055EA-4F17-444E-8C7D-1A7E80885D30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{382F53DD-0649-4DA7-A20F-046AA64866F3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}.Debug|x86.ActiveCfg = Debug|x86
+		{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}.Debug|x86.Build.0 = Debug|x86
+		{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}.Release|x86.ActiveCfg = Release|x86
+		{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}.Release|x86.Build.0 = Release|x86
+		{156055EA-4F17-444E-8C7D-1A7E80885D30}.Debug|x86.ActiveCfg = Debug|x86
+		{156055EA-4F17-444E-8C7D-1A7E80885D30}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
