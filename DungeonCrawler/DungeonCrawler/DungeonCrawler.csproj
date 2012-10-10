@@ -110,6 +110,7 @@
     <Compile Include="Components\MovementComponent.cs" />
     <Compile Include="Components\MovementSpriteComponent.cs" />
     <Compile Include="Components\GameComponent.cs" />
+    <Compile Include="Components\NetworkComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Entities\Entity.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
+    <Compile Include="Systems\NetworkSystem.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
   </ItemGroup>
   <ItemGroup>
