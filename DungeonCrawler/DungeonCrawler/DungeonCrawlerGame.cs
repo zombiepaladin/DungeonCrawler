@@ -27,6 +27,17 @@ using DungeonCrawler.Systems;
 
 namespace DungeonCrawler
 {
+    public enum GameState
+    {
+        SplashScreen,
+        SignIn,
+        CharacterSelection,
+        NetworkSetup,
+        Gameplay,
+        GameMenu,
+        Credits,
+    }
+
     /// <summary>
     /// A DungeonCrawler game
     /// </summary>
@@ -39,9 +50,20 @@ namespace DungeonCrawler
 
         #endregion
 
+        #region Public Members
+
+        /// <summary>
+        /// The current GameState
+        /// TODO: Change initial state to SplashScreen
+        /// </summary>
+        public GameState GameState = GameState.SignIn;
+
+        #endregion
+
         #region Game Components
 
         // Game Components
+        public NetworkComponent NetworkComponent;
         public PositionComponent PositionComponent;
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
@@ -52,6 +74,7 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
+        NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
 
@@ -67,6 +90,7 @@ namespace DungeonCrawler
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
+            Components.Add(new GamerServicesComponent(this));
         }
 
 
@@ -79,6 +103,7 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             // Initialize Components
+            NetworkComponent = new NetworkComponent();
             PositionComponent = new PositionComponent();
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
@@ -97,6 +122,7 @@ namespace DungeonCrawler
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Create game systems
+            NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
 
@@ -146,9 +172,67 @@ namespace DungeonCrawler
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
+            if (GameState == DungeonCrawler.GameState.SignIn)
+            {
+                // Requires at least one player to sign in
+                if (Gamer.SignedInGamers.Count == 0)
+                {
+                    if (IsActive) Guide.ShowSignIn(4, false);
+                }
+                else
+                {
+                    GameState = GameState.NetworkSetup;
+                }
+            }
+
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            MovementSystem.Update(elapsedTime);
+            switch (GameState)
+            {
+                case GameState.SplashScreen:
+                    // TODO: Update splash screens
+                    break;
+
+                case GameState.SignIn:
+                    // Requires at least one player to sign in
+                    if (Gamer.SignedInGamers.Count == 0)
+                    {
+                        if (IsActive) Guide.ShowSignIn(4, false);
+                    }
+                    else
+                    {
+                        GameState = GameState.NetworkSetup;
+                    }
+                    break;
+
+                case GameState.CharacterSelection:
+                    // TODO: Update character selection screen
+                    break;
+
+                case GameState.NetworkSetup:
+                    NetworkSystem.Update(elapsedTime);
+                    break;
+
+                case GameState.GameMenu:
+                    // TODO: Update game menu screen
+
+                    // Game Menu does not pause game!
+                    // Update game systems
+                    NetworkSystem.Update(elapsedTime);
+                    MovementSystem.Update(elapsedTime);
+                    break;
+
+                case GameState.Gameplay:
+                    // Update game systems
+                    NetworkSystem.Update(elapsedTime);
+                    MovementSystem.Update(elapsedTime);
+                    break;
+
+                case GameState.Credits:
+                    // TODO: Update credits
+                    break;
+            }
+
 
             base.Update(gameTime);
         }
@@ -162,7 +246,8 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            
+
+            NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
 
             base.Draw(gameTime);
