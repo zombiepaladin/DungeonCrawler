@@ -15,6 +15,7 @@ using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Net;
+using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Input;
 using DungeonCrawler.Components;
 #endregion
@@ -101,11 +102,11 @@ namespace DungeonCrawler.Systems
                 {
                     CreateSession();
                 }
-                else if (Keyboard.GetState().IsKeyDown(Keys.A) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                else if (Keyboard.GetState().IsKeyDown(Keys.B) ||
+                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.B) ||
+                    GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.B) ||
+                    GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.B) ||
+                    GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.B))
                 {
                     JoinSession();
                 }
@@ -113,10 +114,7 @@ namespace DungeonCrawler.Systems
             else
             {
                 // send local object updates
-                foreach (Network network in game.NetworkComponent.Local)
-                {
-                    // TODO: send a custom packet for every updated component on local network entities
-                }
+                SendLocalEntityUpdates();
                 
                 // Pump the session 
                 session.Update();
@@ -125,7 +123,7 @@ namespace DungeonCrawler.Systems
                 if (session == null) game.GameState = GameState.NetworkSetup;
 
                 // Read packets for remote updates
-                // TODO: read custom packets for updated entities, and apply them to 
+                RecieveRemoteEntityUpdates();
             }
         }
 
@@ -221,6 +219,126 @@ namespace DungeonCrawler.Systems
 
 
         /// <summary>
+        /// Sends updates on all entities under local authority
+        /// </summary>
+        void SendLocalEntityUpdates()
+        {
+            foreach (Local local in game.LocalComponent.All)
+            {
+                // Send position
+                if (game.PositionComponent.Contains(local.EntityID))
+                {
+                    Position position = game.PositionComponent[local.EntityID];
+                    packetWriter.Write(position.EntityID);
+                    packetWriter.Write((short)PacketTypes.Position);
+                    packetWriter.Write(position.Center);
+                    packetWriter.Write(position.Radius);
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                }
+
+                // Send sprite
+                if (game.SpriteComponent.Contains(local.EntityID))
+                {
+                    Sprite sprite = game.SpriteComponent[local.EntityID];
+                    packetWriter.Write(sprite.EntityID);
+                    packetWriter.Write((short)PacketTypes.Sprite);
+                    packetWriter.Write(sprite.SpriteSheet.Name);
+                    packetWriter.Write(sprite.SpriteBounds.X);
+                    packetWriter.Write(sprite.SpriteBounds.Y);
+                    packetWriter.Write(sprite.SpriteBounds.Width);
+                    packetWriter.Write(sprite.SpriteBounds.Height);
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                }
+
+                // Send movement sprite
+                if (game.MovementSpriteComponent.Contains(local.EntityID))
+                {
+                    MovementSprite sprite = game.MovementSpriteComponent[local.EntityID];
+                    packetWriter.Write(sprite.EntityID);
+                    packetWriter.Write((short)PacketTypes.MovementSprite);
+                    packetWriter.Write(sprite.SpriteSheet.Name);
+                    packetWriter.Write(sprite.SpriteBounds.X);
+                    packetWriter.Write(sprite.SpriteBounds.Y);
+                    packetWriter.Write(sprite.SpriteBounds.Width);
+                    packetWriter.Write(sprite.SpriteBounds.Height);
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Update remote entity components based on network input
+        /// TODO: Reloading the texture every frame may quickly 
+        /// become cost-prohibitive we may need a better option
+        /// </summary>
+        void RecieveRemoteEntityUpdates()
+        {
+            // Each local gamer recieves network messages - so process them all
+            foreach(LocalNetworkGamer gamer in session.LocalGamers)
+            {
+                // Process all waiting packets
+                while (gamer.IsDataAvailable)
+                {
+                    NetworkGamer sender;
+
+                    // Read a single packet from the network
+                    gamer.ReceiveData(packetReader, out sender);
+
+                    // Discard local packets - we already know local state
+                    if (sender.IsLocal) continue;
+
+
+                    // Look up the entity associated with this network packet
+                    uint entityID = game.RemoteComponent.FindRemoteEntity(sender.Id, packetReader.ReadUInt32());
+                    string textureName;
+
+                    // process the packet
+                    PacketTypes packetType = (PacketTypes)packetReader.ReadInt16();
+                    switch (packetType)
+                    {
+                        case PacketTypes.Position:
+                            Position position = new Position()
+                            {
+                                EntityID = entityID,
+                                Center = packetReader.ReadVector2(),
+                                Radius = packetReader.ReadSingle(),
+                            };
+                            game.PositionComponent[entityID] = position;
+                            break;
+
+                        case PacketTypes.Sprite:
+                            Sprite sprite = new Sprite();
+                            textureName = packetReader.ReadString();
+                            sprite.EntityID = entityID;
+                            sprite.SpriteSheet = game.Content.Load<Texture2D>(textureName);
+                            sprite.SpriteSheet.Name = textureName;
+                            sprite.SpriteBounds.X = packetReader.ReadInt32();
+                            sprite.SpriteBounds.Y = packetReader.ReadInt32();
+                            sprite.SpriteBounds.Width = packetReader.ReadInt32();
+                            sprite.SpriteBounds.Height = packetReader.ReadInt32();
+                            game.SpriteComponent[entityID] = sprite;
+                            break;
+
+                        case PacketTypes.MovementSprite:
+                            MovementSprite movementSprite = new MovementSprite();
+                            textureName = packetReader.ReadString();
+                            movementSprite.EntityID = entityID;
+                            movementSprite.SpriteSheet = game.Content.Load<Texture2D>(textureName);
+                            movementSprite.SpriteSheet.Name = textureName;
+                            movementSprite.SpriteBounds.X = packetReader.ReadInt32();
+                            movementSprite.SpriteBounds.Y = packetReader.ReadInt32();
+                            movementSprite.SpriteBounds.Width = packetReader.ReadInt32();
+                            movementSprite.SpriteBounds.Height = packetReader.ReadInt32();
+                            game.MovementSpriteComponent[entityID] = movementSprite;
+                            break;
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
         /// Helper method for setting up network session event handlers
         /// </summary>
         void HookSessonEvents()
@@ -237,17 +355,67 @@ namespace DungeonCrawler.Systems
         #region Event Handlers
 
         /// <summary>
-        /// Handles a player joining the game.
+        /// Handles a player joining the game.  The new gamer should be sent 
+        /// all the entity components it will need to synchonize with this 
+        /// peer (i.e. all the components this peer has authority over)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         void GamerJoinedEventHandler(object sender, GamerJoinedEventArgs e)
-        {            
+        {
+            // We only need to update remote gamers - local ones will share
+            // our local game state
+            if (!e.Gamer.IsLocal)
+            {
+                // Send components for all entitys that we have authority over
+                // (i.e. those with a local component)
+                foreach (Local local in game.LocalComponent.All)
+                {
+                    // Send position
+                    if (game.PositionComponent.Contains(local.EntityID))
+                    {
+                        Position position = game.PositionComponent[local.EntityID];
+                        packetWriter.Write(position.EntityID);
+                        packetWriter.Write((short)PacketTypes.Position);
+                        packetWriter.Write(position.Center);
+                        packetWriter.Write(position.Radius);
+                    }
+
+                    // Send sprite
+                    if (game.SpriteComponent.Contains(local.EntityID))
+                    {
+                        Sprite sprite = game.SpriteComponent[local.EntityID];
+                        packetWriter.Write(sprite.EntityID);
+                        packetWriter.Write((short)PacketTypes.Sprite);
+                        packetWriter.Write(sprite.SpriteSheet.Name);
+                        packetWriter.Write(sprite.SpriteBounds.X);
+                        packetWriter.Write(sprite.SpriteBounds.Y);
+                        packetWriter.Write(sprite.SpriteBounds.Width);
+                        packetWriter.Write(sprite.SpriteBounds.Height);
+                    }
+
+                    // Send movement sprite
+                    if (game.MovementSpriteComponent.Contains(local.EntityID))
+                    {
+                        MovementSprite sprite = game.MovementSpriteComponent[local.EntityID];
+                        packetWriter.Write(sprite.EntityID);
+                        packetWriter.Write((short)PacketTypes.MovementSprite);
+                        packetWriter.Write(sprite.SpriteSheet.Name);
+                        packetWriter.Write(sprite.SpriteBounds.X);
+                        packetWriter.Write(sprite.SpriteBounds.Y);
+                        packetWriter.Write(sprite.SpriteBounds.Width);
+                        packetWriter.Write(sprite.SpriteBounds.Height);
+                    }
+
+                    // Send the data
+                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder, e.Gamer);
+                }
+            }
         }
 
 
         /// <summary>
-        /// Handles a player leaving.  Any elements belongong to that player must
+        /// Handles a player leaving.  Any entities belongong to that player must
         /// have authority transferred to another player (this is the responsiblity
         /// of the host)
         /// </summary>
@@ -255,6 +423,11 @@ namespace DungeonCrawler.Systems
         /// <param name="e"></param>
         void GamerLeftEventHandler(object sender, GamerLeftEventArgs e)
         {
+            if (session.IsHost)
+            {
+                // TODO: Transfer authority for the remote player's entities
+                // to another player
+            }
         }
 
 

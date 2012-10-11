@@ -63,7 +63,9 @@ namespace DungeonCrawler
         #region Game Components
 
         // Game Components
-        public NetworkComponent NetworkComponent;
+        public PlayerComponent PlayerComponent;
+        public LocalComponent LocalComponent;
+        public RemoteComponent RemoteComponent;
         public PositionComponent PositionComponent;
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
@@ -74,6 +76,7 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
+        InputSystem InputSystem;
         NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
@@ -103,7 +106,9 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             // Initialize Components
-            NetworkComponent = new NetworkComponent();
+            PlayerComponent = new PlayerComponent();
+            LocalComponent = new LocalComponent();
+            RemoteComponent = new RemoteComponent();
             PositionComponent = new PositionComponent();
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
@@ -122,33 +127,46 @@ namespace DungeonCrawler
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Create game systems
+            InputSystem = new InputSystem(this);
             NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
 
             // Testing code
+            uint entityID = Entity.NextEntity();
+            Texture2D spriteSheet = Content.Load<Texture2D>("Spritesheets/wind_fae");
+            spriteSheet.Name = "Spritesheets/wind_fae";
             Position position = new Position()
             {
-                EntityID = 0,
+                EntityID = entityID,
                 Center = new Vector2(400, 50),
                 Radius = 32f,
             };
-            PositionComponent.Add(0, position);
-            Movement movement = new Movement() { 
-                EntityID = 0,
+            PositionComponent.Add(entityID, position);
+            Movement movement = new Movement() {
+                EntityID = entityID,
                 Direction = new Vector2(0, 1),
                 Speed = 200f,
             };
-            MovementComponent.Add(0, movement);
+            MovementComponent.Add(entityID, movement);
             MovementSprite movementSprite = new MovementSprite() {
-                EntityID = 0,
+                EntityID = entityID,
                 Facing = Facing.South,
-                SpriteSheet = Content.Load<Texture2D>("Spritesheets/wind_fae"),
+                SpriteSheet = spriteSheet,
                 SpriteBounds = new Rectangle(0, 0, 64, 64),
                 Timer = 0f,
             };
             MovementSpriteComponent.Add(0, movementSprite);
-
+            Local local = new Local(){
+                EntityID = entityID,
+            };
+            LocalComponent.Add(entityID, local);
+            Player player = new Player()
+            {
+                EntityID = entityID,
+                PlayerIndex = PlayerIndex.One,
+            };
+            PlayerComponent.Add(entityID, player);
 
         }
 
@@ -224,6 +242,7 @@ namespace DungeonCrawler
 
                 case GameState.Gameplay:
                     // Update game systems
+                    InputSystem.Update(elapsedTime);
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     break;
