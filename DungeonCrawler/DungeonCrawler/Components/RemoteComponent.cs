@@ -13,6 +13,7 @@
 #region Using Statements
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -23,12 +24,18 @@ namespace DungeonCrawler.Components
     public struct Remote
     {
         /// <summary>
-        /// The entity this Local component belongs to
+        /// The entity this Remote component belongs to
         /// </summary>
         public uint EntityID;
 
+        /// <summary>
+        /// The ID of the remote gamer this entity belongs to
+        /// </summary>
         public byte RemoteGamerID;
 
+        /// <summary>
+        /// The EntityID of the element on the remote system
+        /// </summary>
         public uint RemoteEntityID;
     }
 

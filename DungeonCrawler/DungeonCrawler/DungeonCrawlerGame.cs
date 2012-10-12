@@ -23,6 +23,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawler.Components;
 using DungeonCrawler.Systems;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler
@@ -57,6 +58,12 @@ namespace DungeonCrawler
         /// TODO: Change initial state to SplashScreen
         /// </summary>
         public GameState GameState = GameState.SignIn;
+
+        /// <summary>
+        /// An AggregateFactory for creating entities quickly
+        /// from pre-defined aggregations of components
+        /// </summary>
+        public AggregateFactory AggregateFactory;
 
         #endregion
 
@@ -105,6 +112,8 @@ namespace DungeonCrawler
         /// </summary>
         protected override void Initialize()
         {
+            AggregateFactory = new AggregateFactory(this);
+
             // Initialize Components
             PlayerComponent = new PlayerComponent();
             LocalComponent = new LocalComponent();
@@ -133,40 +142,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            uint entityID = Entity.NextEntity();
-            Texture2D spriteSheet = Content.Load<Texture2D>("Spritesheets/wind_fae");
-            spriteSheet.Name = "Spritesheets/wind_fae";
-            Position position = new Position()
-            {
-                EntityID = entityID,
-                Center = new Vector2(400, 50),
-                Radius = 32f,
-            };
-            PositionComponent.Add(entityID, position);
-            Movement movement = new Movement() {
-                EntityID = entityID,
-                Direction = new Vector2(0, 1),
-                Speed = 200f,
-            };
-            MovementComponent.Add(entityID, movement);
-            MovementSprite movementSprite = new MovementSprite() {
-                EntityID = entityID,
-                Facing = Facing.South,
-                SpriteSheet = spriteSheet,
-                SpriteBounds = new Rectangle(0, 0, 64, 64),
-                Timer = 0f,
-            };
-            MovementSpriteComponent.Add(0, movementSprite);
-            Local local = new Local(){
-                EntityID = entityID,
-            };
-            LocalComponent.Add(entityID, local);
-            Player player = new Player()
-            {
-                EntityID = entityID,
-                PlayerIndex = PlayerIndex.One,
-            };
-            PlayerComponent.Add(entityID, player);
+            AggregateFactory.CreateFromAggregate(Aggregate.FairyPlayer);
 
         }
 
