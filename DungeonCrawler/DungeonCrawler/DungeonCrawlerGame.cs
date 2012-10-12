@@ -23,6 +23,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawler.Components;
 using DungeonCrawler.Systems;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler
@@ -58,12 +59,20 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
+        /// <summary>
+        /// An AggregateFactory for creating entities quickly
+        /// from pre-defined aggregations of components
+        /// </summary>
+        public AggregateFactory AggregateFactory;
+
         #endregion
 
         #region Game Components
 
         // Game Components
-        public NetworkComponent NetworkComponent;
+        public PlayerComponent PlayerComponent;
+        public LocalComponent LocalComponent;
+        public RemoteComponent RemoteComponent;
         public PositionComponent PositionComponent;
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
@@ -74,6 +83,7 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
+        InputSystem InputSystem;
         NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
@@ -102,8 +112,12 @@ namespace DungeonCrawler
         /// </summary>
         protected override void Initialize()
         {
+            AggregateFactory = new AggregateFactory(this);
+
             // Initialize Components
-            NetworkComponent = new NetworkComponent();
+            PlayerComponent = new PlayerComponent();
+            LocalComponent = new LocalComponent();
+            RemoteComponent = new RemoteComponent();
             PositionComponent = new PositionComponent();
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
@@ -122,33 +136,13 @@ namespace DungeonCrawler
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Create game systems
+            InputSystem = new InputSystem(this);
             NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            Position position = new Position()
-            {
-                EntityID = 0,
-                Center = new Vector2(400, 50),
-                Radius = 32f,
-            };
-            PositionComponent.Add(0, position);
-            Movement movement = new Movement() { 
-                EntityID = 0,
-                Direction = new Vector2(0, 1),
-                Speed = 200f,
-            };
-            MovementComponent.Add(0, movement);
-            MovementSprite movementSprite = new MovementSprite() {
-                EntityID = 0,
-                Facing = Facing.South,
-                SpriteSheet = Content.Load<Texture2D>("Spritesheets/wind_fae"),
-                SpriteBounds = new Rectangle(0, 0, 64, 64),
-                Timer = 0f,
-            };
-            MovementSpriteComponent.Add(0, movementSprite);
-
+            AggregateFactory.CreateFromAggregate(Aggregate.FairyPlayer);
 
         }
 
@@ -224,6 +218,7 @@ namespace DungeonCrawler
 
                 case GameState.Gameplay:
                     // Update game systems
+                    InputSystem.Update(elapsedTime);
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     break;

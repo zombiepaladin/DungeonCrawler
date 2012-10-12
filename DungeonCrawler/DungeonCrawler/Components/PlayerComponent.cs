@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// Entity.cs
+// LocalComponent.cs 
 //
 // Author: Nathan Bean
 //
@@ -11,35 +11,33 @@
 #endregion
 
 #region Using Statements
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 #endregion
 
-namespace DungeonCrawler.Entities
+namespace DungeonCrawler.Components
 {
     /// <summary>
-    /// A class for generating entity IDs
+    /// A structure indicating the local nature of an entity
     /// </summary>
-    public class Entity
+    public struct Player
     {
         /// <summary>
-        /// The count of unique entities in the game
+        /// The entity this Player component belongs to
         /// </summary>
-        private static uint entityCounter = 0;
+        public uint EntityID;
 
         /// <summary>
-        /// The current number of entities in the game
+        /// The PlayerIndex of this entity's player
         /// </summary>
-        public int Count
-        {
-            get { return (int)entityCounter; }
-        }
+        public PlayerIndex PlayerIndex;
+    }
 
-        /// <summary>
-        /// Generate a new, unique Entity ID
-        /// </summary>
-        /// <returns>The Entity ID</returns>
-        public static uint NextEntity()
-        {
-            return entityCounter++;
-        }
+    /// <summary>
+    /// The player components for all entities in a game world
+    /// </summary>
+    public class PlayerComponent : GameComponent<Player>
+    {
+
     }
 }
