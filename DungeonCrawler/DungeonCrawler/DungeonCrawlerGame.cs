@@ -247,7 +247,7 @@ namespace DungeonCrawler
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            NetworkSystem.Draw(elapsedTime);
+            //NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
 
             base.Draw(gameTime);
