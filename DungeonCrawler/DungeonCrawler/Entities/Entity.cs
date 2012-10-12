@@ -13,7 +13,7 @@
 #region Using Statements
 #endregion
 
-namespace DungeonCrawler
+namespace DungeonCrawler.Entities
 {
     /// <summary>
     /// A class for generating entity IDs
