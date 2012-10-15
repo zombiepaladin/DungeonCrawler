@@ -142,7 +142,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.FairyPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.CultistPlayer);
 
         }
 
@@ -178,6 +178,9 @@ namespace DungeonCrawler
                     GameState = GameState.NetworkSetup;
                 }
             }
+
+            //REMOVE
+            GameState = GameState.Gameplay;
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -219,7 +222,10 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-                    NetworkSystem.Update(elapsedTime);
+
+                    //UNCOMMENT
+                    //NetworkSystem.Update(elapsedTime);
+
                     MovementSystem.Update(elapsedTime);
                     break;
 
