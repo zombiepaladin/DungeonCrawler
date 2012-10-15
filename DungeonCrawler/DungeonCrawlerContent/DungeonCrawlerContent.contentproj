@@ -48,6 +48,26 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DungeonCrawlerContentPipeline\DungeonCrawlerContentPipeline.csproj">
+      <Project>{F8623AB2-ED4F-462D-A764-5550925BC318}</Project>
+      <Name>DungeonCrawlerContentPipeline</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\test.tmx">
+      <Name>test</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\shapesz.png">
+      <Name>shapesz</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
