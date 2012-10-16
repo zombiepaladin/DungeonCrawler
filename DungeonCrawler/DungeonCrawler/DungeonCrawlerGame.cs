@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -64,7 +66,6 @@ namespace DungeonCrawler
         /// from pre-defined aggregations of components
         /// </summary>
         public AggregateFactory AggregateFactory;
-
         #endregion
 
         #region Game Components
@@ -77,7 +78,8 @@ namespace DungeonCrawler
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
         public SpriteComponent SpriteComponent;
-
+        public HUDSpriteComponent HUDSpriteComponent;
+        public HUDComponent HUDComponent;
         #endregion
 
         #region Game Systems
@@ -113,7 +115,6 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
-
             // Initialize Components
             PlayerComponent = new PlayerComponent();
             LocalComponent = new LocalComponent();
@@ -122,7 +123,8 @@ namespace DungeonCrawler
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
             SpriteComponent = new SpriteComponent();
-            
+            HUDSpriteComponent = new HUDSpriteComponent();
+            HUDComponent = new HUDComponent();
             base.Initialize();
         }
 
@@ -143,7 +145,7 @@ namespace DungeonCrawler
 
             // Testing code
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
-
+            
         }
 
         /// <summary>
@@ -191,7 +193,7 @@ namespace DungeonCrawler
                     // Requires at least one player to sign in
                     if (Gamer.SignedInGamers.Count == 0)
                     {
-                        if (IsActive) Guide.ShowSignIn(4, false);
+                       if (IsActive) Guide.ShowSignIn(4, false);
                     }
                     else
                     {

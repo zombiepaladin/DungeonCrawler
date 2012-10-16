@@ -107,6 +107,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\HUDComponent.cs" />
+    <Compile Include="Components\HUDSpriteComponent.cs" />
     <Compile Include="Components\PlayerComponent.cs" />
     <Compile Include="Components\RemoteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
