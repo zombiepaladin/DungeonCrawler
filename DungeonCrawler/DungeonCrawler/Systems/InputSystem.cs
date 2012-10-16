@@ -175,6 +175,7 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
                 }
+                //A temporary solution...
                 if (gamePadState.IsButtonUp(Buttons.DPadRight) && keyboardState.IsKeyUp(Keys.Right)
                     && gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left)
                     && gamePadState.IsButtonUp(Buttons.DPadUp) && keyboardState.IsKeyUp(Keys.Up)
