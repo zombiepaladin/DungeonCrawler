@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\DoorComponent.cs" />
     <Compile Include="Components\PlayerComponent.cs" />
     <Compile Include="Components\RemoteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />
@@ -114,10 +115,13 @@
     <Compile Include="Components\MovementSpriteComponent.cs" />
     <Compile Include="Components\GameComponent.cs" />
     <Compile Include="Components\PositionComponent.cs" />
+    <Compile Include="Components\RoomComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />
+    <Compile Include="Entities\DoorFactory.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\RoomFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />

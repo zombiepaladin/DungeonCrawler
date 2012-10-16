@@ -77,6 +77,8 @@ namespace DungeonCrawler
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
         public SpriteComponent SpriteComponent;
+        public RoomComponent RoomComponent;
+        public DoorComponent DoorComponent;
 
         #endregion
 
@@ -122,6 +124,8 @@ namespace DungeonCrawler
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
             SpriteComponent = new SpriteComponent();
+            DoorComponent = new DoorComponent();
+            RoomComponent = new RoomComponent();
             
             base.Initialize();
         }
