@@ -64,7 +64,7 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Draw(float elapsedTime)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null);
 
             // Draw all Sprites
             foreach (Sprite sprite in game.SpriteComponent.All)

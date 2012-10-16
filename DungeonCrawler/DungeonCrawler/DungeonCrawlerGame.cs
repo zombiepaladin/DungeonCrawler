@@ -146,7 +146,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.FairyPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
 
         }
 
@@ -246,7 +246,7 @@ namespace DungeonCrawler
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            NetworkSystem.Draw(elapsedTime);
+            //NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
 
             base.Draw(gameTime);
