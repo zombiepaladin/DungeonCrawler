@@ -80,6 +80,17 @@ namespace DungeonCrawler.Systems
         private SoundEffect menuSelectSound;
 
         /// <summary>
+        /// A Texture to hold a blank white value for drawing
+        /// </summary>
+        private Texture2D whiteRectangle;
+
+        /// <summary>
+        /// Holds the place for the white and grey rectangles to be drawn
+        /// </summary>
+        private Rectangle whiteRectLoc;
+        private Rectangle greyRectLoc;
+
+        /// <summary>
         /// The holder for the session enum values
         /// </summary>
         private int menuSessionState = 0;
@@ -214,15 +225,21 @@ namespace DungeonCrawler.Systems
             currentSessionName = "No Sessions Found";
 
             TextLocations = new Vector2[] {
-                new Vector2(600, 230), //Select Mode
+                new Vector2(550, 230), //Select Mode
                 new Vector2(400, 330), //Create Session
                 new Vector2(700, 330), //Join Session
                 new Vector2(400, 530), //Create Go
-                new Vector2(700, 430), //Session Name
+                new Vector2(700, 430), //Join Session Name
                 new Vector2(700, 530) //Join Go
             };
 
             menuSpriteLocation = TextLocations[1] - new Vector2(10, 0);
+
+            whiteRectangle = new Texture2D(game.GraphicsDevice, 1, 1);
+            whiteRectangle.SetData(new[] { Color.White });
+
+            whiteRectLoc = new Rectangle(350, 200, 600, 400);
+            greyRectLoc = new Rectangle(345, 195, 610, 410);
         }
 
         #endregion
@@ -592,9 +609,13 @@ namespace DungeonCrawler.Systems
                 // TODO: Render network menu
                 spriteBatch.Begin();
 
+                spriteBatch.Draw(whiteRectangle, greyRectLoc, Color.Gray);
+
+                spriteBatch.Draw(whiteRectangle, whiteRectLoc, Color.White);
+
                 Color color;
 
-                spriteBatch.DrawString(spriteFont, "Select Mode", TextLocations[0], Color.Black);
+                spriteBatch.DrawString(spriteFont, "Select Network Mode", TextLocations[0], Color.Black);
 
                 if (menuState == NetworkMenuState.SelectMode || menuState == NetworkMenuState.CreateSession)
                     color = Color.Black;
