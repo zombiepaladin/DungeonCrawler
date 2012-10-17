@@ -238,34 +238,37 @@ namespace DungeonCrawler
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
-            for (int i = 0; i < CurrentMap.LayerCount; i++)
+            if (CurrentMap != null) 
             {
-                // To minimize drawn tiles, we limit ourselves to those onscreen
-                int miny = 0;
-                    //(int)((-scrollDistance - 2 * CurrentMap.Layers[i].ScrollOffset) / (CurrentMap.TileHeight * 2));
-                int maxy = CurrentMap.Height;
-
-                // And those that exist
-                //if (miny < 0) miny = 0;
-              //  if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
-
-                for (int y = miny; y < maxy; y++)
+                for (int i = 0; i < CurrentMap.LayerCount; i++)
                 {
-                    // Since our maps are only as wide as our rendering area, 
-                    // no need for optimizaiton here
-                    for (int x = 0; x < CurrentMap.Width; x++)
+                    // To minimize drawn tiles, we limit ourselves to those onscreen
+                    int miny = 0;
+                    //(int)((-scrollDistance - 2 * CurrentMap.Layers[i].ScrollOffset) / (CurrentMap.TileHeight * 2));
+                    int maxy = CurrentMap.Height;
+
+                    // And those that exist
+                    //if (miny < 0) miny = 0;
+                    //  if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
+
+                    for (int y = miny; y < maxy; y++)
                     {
-                        int index = x + y * CurrentMap.Width;
-                        TileData tileData = CurrentMap.Layers[i].TileData[index];
-                        if (tileData.TileID != 0)
+                        // Since our maps are only as wide as our rendering area, 
+                        // no need for optimizaiton here
+                        for (int x = 0; x < CurrentMap.Width; x++)
                         {
-                            Tile tile = CurrentMap.Tiles[tileData.TileID - 1];
-                            Rectangle onScreen = new Rectangle(
-                                x * CurrentMap.TileWidth,
-                                (int)(y * CurrentMap.TileHeight),
-                                CurrentMap.TileWidth,
-                                CurrentMap.TileHeight);
-                            spriteBatch.Draw(CurrentMap.Textures[tile.TextureID], onScreen, tile.Source, Color.White, 0f, new Vector2(CurrentMap.TileWidth / 2, CurrentMap.TileHeight / 2), tileData.SpriteEffects, CurrentMap.Layers[i].LayerDepth);
+                            int index = x + y * CurrentMap.Width;
+                            TileData tileData = CurrentMap.Layers[i].TileData[index];
+                            if (tileData.TileID != 0)
+                            {
+                                Tile tile = CurrentMap.Tiles[tileData.TileID - 1];
+                                Rectangle onScreen = new Rectangle(
+                                    x * CurrentMap.TileWidth,
+                                    (int)(y * CurrentMap.TileHeight),
+                                    CurrentMap.TileWidth,
+                                    CurrentMap.TileHeight);
+                                spriteBatch.Draw(CurrentMap.Textures[tile.TextureID], onScreen, tile.Source, Color.White, 0f, new Vector2(CurrentMap.TileWidth / 2, CurrentMap.TileHeight / 2), tileData.SpriteEffects, CurrentMap.Layers[i].LayerDepth);
+                            }
                         }
                     }
                 }
