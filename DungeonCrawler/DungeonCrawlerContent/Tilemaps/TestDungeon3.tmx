@@ -24,14 +24,18 @@
  </objectgroup>
  <objectgroup name="Entities" width="40" height="23"/>
  <objectgroup name="Triggers" width="40" height="23">
-  <object name="Trigger" type="MapChange" x="-3" y="321" width="65" height="69">
+  <object name="Trigger" type="Door" x="-3" y="321" width="65" height="69">
    <properties>
-    <property name="destination" value="TestDungeon1"/>
-    <property name="direction" value="left"/>
+    <property name="destinationRoom" value="TestDungeon1"/>
+    <property name="destinationSpawn" value="2"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="PlayerSpawns" width="40" height="23">
-  <object name="PlayerSpawn" type="left" x="83" y="323" width="59" height="59"/>
+  <object name="PlayerSpawn" x="96" y="351" width="25" height="26">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
