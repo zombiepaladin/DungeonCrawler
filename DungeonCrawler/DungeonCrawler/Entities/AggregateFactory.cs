@@ -33,15 +33,24 @@ namespace DungeonCrawler.Entities
         /// </summary>
         /// <param name="aggregate">The specific aggreage to create</param>
         public void CreateFromAggregate(Aggregate aggregate)
-        {
+        { 
+            uint entityID;
+            Texture2D spriteSheet;
+            Position position;
+            Movement movement;
+            MovementSprite movementSprite;
+            Local local;
+            Player player;
+            HUDAggregateFactory hudagg;
+
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
-                    uint entityID = Entity.NextEntity();
-                    Texture2D spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
                     spriteSheet.Name = "Spritesheets/wind_fae";
                     
-                    Position position = new Position()
+                    position = new Position()
                     {
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
@@ -49,14 +58,14 @@ namespace DungeonCrawler.Entities
                     };
                     game.PositionComponent[entityID] = position;
                     
-                    Movement movement = new Movement() {
+                    movement = new Movement() {
                         EntityID = entityID,
                         Direction = new Vector2(0, 1),
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
                     
-                    MovementSprite movementSprite = new MovementSprite() {
+                    movementSprite = new MovementSprite() {
                         EntityID = entityID,
                         Facing = Facing.South,
                         SpriteSheet = spriteSheet,
@@ -65,12 +74,12 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
                     
-                    Local local = new Local(){
+                    local = new Local(){
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
 
-                    Player player = new Player()
+                    player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
@@ -89,6 +98,49 @@ namespace DungeonCrawler.Entities
                     break;
 
                 case Aggregate.GargranianPlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
+                    spriteSheet.Name = "Spritesheets/gargranian";
+                    
+                    position = new Position()
+                    {
+                        EntityID = entityID,
+                        Center = new Vector2(400, 50),
+                        Radius = 32f,
+                    };
+                    game.PositionComponent[entityID] = position;
+                    
+                    movement = new Movement() {
+                        EntityID = entityID,
+                        Direction = new Vector2(0, 1),
+                        Speed = 200f,
+                    };
+                    game.MovementComponent[entityID] = movement;
+                    
+                    movementSprite = new MovementSprite() {
+                        EntityID = entityID,
+                        Facing = Facing.South,
+                        SpriteSheet = spriteSheet,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        Timer = 0f,
+                    };
+                    game.MovementSpriteComponent[entityID] = movementSprite;
+                    
+                    local = new Local(){
+                        EntityID = entityID,
+                    };
+                    game.LocalComponent[entityID] = local;
+
+                    player = new Player()
+                    {
+                        EntityID = entityID,
+                        PlayerIndex = PlayerIndex.One,
+                    };
+                    game.PlayerComponent[entityID] = player;
+                    //Create HUD
+                    hudagg = new HUDAggregateFactory(game);
+                    hudagg.CreateHUD(player);
+                    
                     break;
 
                 case Aggregate.SpacePiratePlayer:
