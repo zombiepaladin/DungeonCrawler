@@ -4,8 +4,11 @@
 //
 // Author: Nathan Bean
 //
+<<<<<<< HEAD
+=======
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 //
+>>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -38,7 +41,10 @@ namespace DungeonCrawler.Systems
         private KeyboardState oldKeyboardState;
 
         private GamePadState[] oldGamePadState;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
         #endregion
 
         #region Constructors
@@ -65,7 +71,10 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
+<<<<<<< HEAD
+=======
             
+>>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
             // Update all entities that have a movement component
             foreach (Player player in game.PlayerComponent.All)
             {
@@ -88,6 +97,8 @@ namespace DungeonCrawler.Systems
                     movement.Direction.Normalize();
                 game.MovementComponent[player.EntityID] = movement;
 
+<<<<<<< HEAD
+=======
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];
@@ -208,6 +219,7 @@ namespace DungeonCrawler.Systems
                 }*/
                 #endregion //end key up
                 #endregion //end hud control
+>>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
                 // Cache last frame's input state
                 oldKeyboardState = keyboardState;
                 oldGamePadState[(int)player.PlayerIndex] = gamePadState;
