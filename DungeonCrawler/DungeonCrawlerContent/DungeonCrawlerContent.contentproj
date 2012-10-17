@@ -49,13 +49,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritefonts\Pescadero.spritefont">
-      <Name>Pescadero</Name>
-      <Importer>FontDescriptionImporter</Importer>
-      <Processor>FontDescriptionProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Spritesheets\menuSelect.png">
       <Name>menuSelect</Name>
       <Importer>TextureImporter</Importer>

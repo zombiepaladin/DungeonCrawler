@@ -700,32 +700,24 @@ namespace DungeonCrawler.Systems
         {
             try
             {
-                //using (availableSessions =
-                  //  NetworkSession.Find(
-                  //      NetworkSessionType.SystemLink,  // Session Type
-                 //       4,                              // Max local gamers
-               //         null                            // Search Properties
-                //        ))
-              //  {
-                    if (availableSessions.Count == 0)
-                    {
-                        // No sessions available
-                        // TODO: Offer feedback
-                        return;
-                    }
+                if (availableSessions.Count == 0)
+                {
+                    // No sessions available
+                    // TODO: Offer feedback
+                    return;
+                }
 
-                    // Join the first session found
-                    session = NetworkSession.Join(availableSessions[selectedSession]);
+                // Join the selected session found
+                session = NetworkSession.Join(availableSessions[selectedSession]);
 
-                    // Set ourselves as guest
-                    isHost = false;
+                // Set ourselves as guest
+                isHost = false;
 
-                    // Set up the session event handlers
-                    HookSessonEvents();
+                // Set up the session event handlers
+                HookSessonEvents();
 
-                    // Update our game state
-                    game.GameState = GameState.Gameplay;
-               // }
+                // Update our game state
+                game.GameState = GameState.Gameplay;
             }
             catch (Exception e)
             {
