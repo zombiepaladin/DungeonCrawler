@@ -41,6 +41,7 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
+            HUDAggregateFactory hudagg;
 
             switch (aggregate)
             {
@@ -136,6 +137,9 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
+                    //Create HUD
+                    hudagg = new HUDAggregateFactory(game);
+                    hudagg.CreateHUD(player);
                     
                     break;
 
