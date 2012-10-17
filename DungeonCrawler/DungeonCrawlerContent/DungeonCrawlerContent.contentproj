@@ -132,6 +132,45 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\TestDungeon1.tmx">
+      <Name>TestDungeon1</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilemaps\TestDungeon2.tmx">
+      <Name>TestDungeon2</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilemaps\TestDungeon3.tmx">
+      <Name>TestDungeon3</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\Z18-TileA1.png">
+      <Name>Z18-TileA1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Tilesets\Z18-TileC.png">
+      <Name>Z18-TileC</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\DungeonCrawlerContentPipeline\DungeonCrawlerContentPipeline.csproj">
+      <Project>{F8623AB2-ED4F-462D-A764-5550925BC318}</Project>
+      <Name>DungeonCrawlerContentPipeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\DungeonCrawlerWindowsLibrary\DungeonCrawlerWindowsLibrary.csproj">
+      <Project>{D7699F50-B82D-4612-A8DC-52CF0FDA2813}</Project>
+      <Name>DungeonCrawlerWindowsLibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
