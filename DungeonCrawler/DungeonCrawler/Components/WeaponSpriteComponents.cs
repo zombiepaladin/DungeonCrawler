@@ -2,45 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Components
 {
-    #region Melee
-    /// <summary>
-    /// Contains information for drawing a melee weapon and it's animations.
-    /// </summary>
-    public struct MeleeWeaponSprite
+
+    public struct WeaponSprite
     {
         public uint EntityID;
+        public Texture2D SpriteSheet;
+        public Rectangle Spritebounds;
     }
 
-    public class MeleeWeaponSpriteComponent : GameComponent<MeleeWeaponSprite>
-    {
-
-    }
-    #endregion
-
-    #region Ranged
-    /// <summary>
-    /// Contains information for drawing a ranged weapon and it's animations.
-    /// </summary>
-    public struct RangedWeaponSprite
+    public class WeaponSpriteComponent : GameComponent<WeaponSprite>
     {
     }
 
-    public class RangedWeaponSpriteComponent : GameComponent<RangedWeaponSprite>
-    {
-    }
-
-    /// <summary>
-    /// Contains information for drawing a bullet.
-    /// </summary>
     public struct BulletSprite
     {
+        public uint EntityID;
+        public Texture2D SpriteSheet;
+        public Rectangle Spritebounds;
     }
 
-    public class BulletSpriteCompoenet : GameComponent<BulletSprite>
+    public class BulletSpriteComponent : GameComponent<BulletSprite>
     {
     }
-    #endregion
 }
