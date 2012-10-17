@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -59,6 +61,7 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
+        public static LevelManager LevelManager;
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
@@ -77,6 +80,10 @@ namespace DungeonCrawler
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
         public SpriteComponent SpriteComponent;
+        public RoomComponent RoomComponent;
+        public DoorComponent DoorComponent;
+		public HUDSpriteComponent HUDSpriteComponent;
+        public HUDComponent HUDComponent;
 
         #endregion
 
@@ -122,7 +129,14 @@ namespace DungeonCrawler
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
             SpriteComponent = new SpriteComponent();
+            DoorComponent = new DoorComponent();
+            RoomComponent = new RoomComponent();
+			HUDSpriteComponent = new HUDSpriteComponent();
+            HUDComponent = new HUDComponent();
             
+
+            LevelManager = new LevelManager(this);
+
             base.Initialize();
         }
 
@@ -142,7 +156,10 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.CultistPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+
+            LevelManager.LoadContent();
+            LevelManager.LoadLevel("TestDungeon3");
 
         }
 
@@ -227,6 +244,7 @@ namespace DungeonCrawler
                     //NetworkSystem.Update(elapsedTime);
 
                     MovementSystem.Update(elapsedTime);
+                    LevelManager.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -247,10 +265,10 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            NetworkSystem.Draw(elapsedTime);
+            LevelManager.Draw(elapsedTime);
+            //NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
-
+           
             base.Draw(gameTime);
         }
     }

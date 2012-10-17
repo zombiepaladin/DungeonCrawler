@@ -71,16 +71,15 @@ namespace DungeonCrawler.Systems
                     MovementSprite movementSprite = game.MovementSpriteComponent[movement.EntityID];
                     
                     // Set the direction of movement
-                    //This makes sure that the Idle frame is displayed and 
-                    //that the player is facing their last direction, thanks to Michael F. for solution
+                    float angle = (float)Math.Atan2(movement.Direction.Y, movement.Direction.X);
                     if (movement.Direction.X == 0 && movement.Direction.Y == 0)
                     {
-                        movementSprite.Frame = 1;
+                        // He's not moving, so update the sprite bounds with the idle animation
+                        movementSprite.SpriteBounds.X = 64;
+                        movementSprite.SpriteBounds.Y = 64 * (int)movementSprite.Facing;
                     }
                     else
                     {
-
-                        float angle = (float)Math.Atan2(movement.Direction.Y, movement.Direction.X);
                         if (angle > -MathHelper.PiOver4 && angle < MathHelper.PiOver4)
                             movementSprite.Facing = Facing.East;
                         else if (angle >= MathHelper.PiOver4 && angle <= 3f * MathHelper.PiOver4)
@@ -89,7 +88,7 @@ namespace DungeonCrawler.Systems
                             movementSprite.Facing = Facing.North;
                         else
                             movementSprite.Facing = Facing.West;
-
+                   
                         // Update the timing
                         movementSprite.Timer += elapsedTime;
                         if (movementSprite.Timer > 0.1f)
@@ -98,12 +97,11 @@ namespace DungeonCrawler.Systems
                             if (movementSprite.Frame > 2) movementSprite.Frame = 0;
                             movementSprite.Timer -= 0.1f;
                         }
+
+                        // Update the sprite bounds
+                        movementSprite.SpriteBounds.X = 64 * movementSprite.Frame;
+                        movementSprite.SpriteBounds.Y = 64 * (int)movementSprite.Facing;
                     }
-
-                    // Update the sprite bounds
-                    movementSprite.SpriteBounds.X = 64 * movementSprite.Frame;
-                    movementSprite.SpriteBounds.Y = 64 * (int)movementSprite.Facing;
-
                     // Apply our updates
                     game.MovementSpriteComponent[movement.EntityID] = movementSprite;
                 }
