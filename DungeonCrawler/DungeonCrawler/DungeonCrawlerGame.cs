@@ -159,7 +159,7 @@ namespace DungeonCrawler
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
 
             LevelManager.LoadContent();
-            LevelManager.LoadLevel("TestDungeon1");
+            LevelManager.LoadLevel("TestDungeon2");
 
         }
 

@@ -82,7 +82,30 @@ namespace DungeonCrawler
                 //////////    CurrentSong = null;
                 //////////}
 
-               
+                for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
+                {
+                    for (int j = 0; j < CurrentMap.GameObjectGroups[i].GameObjectData.Count(); j++)
+                    {
+                        GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
+                        Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
+
+                        switch (goData.Category)
+                        {
+                            case "PlayerSpawn":
+                                break;
+
+                            case "Enemy":
+                                //goData.Type
+                                break;
+                            case "Trigger":
+                                //goData.Type
+                                break;
+                           
+                        }
+                    }
+                }
+
+
                 //// Load the game objects
                 //for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
                 //{
@@ -209,9 +232,9 @@ namespace DungeonCrawler
 
             // Draw level
             Viewport viewport = game.GraphicsDevice.Viewport;
-            //basicEffect.World = Matrix.CreateScale(2, 2, 1);
-            //basicEffect.View = Matrix.CreateTranslation(new Vector3(0, 0, 0));
-            basicEffect.Projection = Matrix.CreateOrthographicOffCenter(0, viewport.Width, viewport.Height, 0, 0, -1);
+            //basicEffect.World = Matrix.CreateScale(1, 1, 1);
+            //basicEffect.View = Matrix.CreateTranslation(new Vector3(10, 0, 10));
+            basicEffect.Projection = Matrix.CreateOrthographicOffCenter(-15, viewport.Width, viewport.Height, -15, 0, -1);
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
@@ -220,11 +243,11 @@ namespace DungeonCrawler
                 // To minimize drawn tiles, we limit ourselves to those onscreen
                 int miny = 0;
                     //(int)((-scrollDistance - 2 * CurrentMap.Layers[i].ScrollOffset) / (CurrentMap.TileHeight * 2));
-                int maxy = miny + 15;
+                int maxy = CurrentMap.Height;
 
                 // And those that exist
-                if (miny < 0) miny = 0;
-                if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
+                //if (miny < 0) miny = 0;
+              //  if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
 
                 for (int y = miny; y < maxy; y++)
                 {
