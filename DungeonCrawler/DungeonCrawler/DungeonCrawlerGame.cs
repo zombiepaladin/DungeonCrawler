@@ -156,7 +156,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer);
 
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
