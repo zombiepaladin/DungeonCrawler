@@ -18,6 +18,8 @@ using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Input;
 using DungeonCrawler.Components;
+using Microsoft.Xna.Framework.Audio;
+using System.ComponentModel;
 #endregion
 
 namespace DungeonCrawler.Systems
@@ -29,6 +31,126 @@ namespace DungeonCrawler.Systems
     public class NetworkSystem
     {
         #region Private and Protected Members
+
+        /// <summary>
+        /// The enum for the network selection
+        /// </summary>
+        private enum NetworkMenuState
+        {
+            SelectMode = 0,
+            JoinSession,
+            CreateSession
+        };
+
+        /// <summary>
+        /// The enum for the Join Session Options
+        /// </summary>
+        private enum SelectSessionState
+        {
+            Join = 0,
+            Create
+        };
+
+        /// <summary>
+        /// The enum for the Join Session Options
+        /// </summary>
+        private enum JoinSessionState
+        {
+            //SetName = 0,
+            Start
+        };
+
+        /// <summary>
+        /// The enum for the Create Session Options
+        /// </summary>
+        private enum CreateSessionState
+        {
+            SelectSession = 0,
+            Start
+        };
+
+        /// <summary>
+        /// The holder for the main enum values
+        /// </summary>
+        private NetworkMenuState menuState = 0;
+
+        /// <summary>
+        /// The menu select sound effect
+        /// </summary>
+        private SoundEffect menuSelectSound;
+
+        /// <summary>
+        /// The holder for the session enum values
+        /// </summary>
+        private int menuSessionState = 0;
+
+        /// <summary>
+        /// Background worker to find the available sessions
+        /// </summary>
+        private BackgroundWorker backgroundWorker;
+
+        /// <summary>
+        /// Bool explaining if we're searching or not.
+        /// </summary>
+        private bool searchingForAvailableSessions;
+
+        /// <summary>
+        /// The spritefont for the text to draw
+        /// </summary>
+        private SpriteFont spriteFont;
+
+        /// <summary>
+        /// The sprite for the option selector
+        /// </summary>
+        private Texture2D menuSprite;
+
+        /// <summary>
+        /// The location of the option selector
+        /// </summary>
+        private Vector2 menuSpriteLocation;
+
+        /// <summary>
+        /// Struct with bool values for pressed keys
+        /// </summary>
+        private struct PressedKeys
+        {
+            public bool up;
+            public bool down;
+            public bool left;
+            public bool right;
+            public bool space;
+            public bool b;
+        };
+
+        /// <summary>
+        /// Holder for pressed keys
+        /// </summary>
+        private PressedKeys pressedKeys;
+        
+        /// <summary>
+        /// The sessions available for joining
+        /// </summary>
+        AvailableNetworkSessionCollection availableSessions;
+
+        /// <summary>
+        /// The selected session
+        /// </summary>
+        int selectedSession = 0;
+
+        /// <summary>
+        /// The name of the selected session
+        /// </summary>
+        private string currentSessionName;
+
+        /// <summary>
+        /// Spritebatch, need a different one instead?
+        /// </summary>
+        private SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// Contains the locations of each text
+        /// </summary>
+        private Vector2[] TextLocations;
 
         /// <summary>
         /// The game this system belongs to
@@ -75,6 +197,27 @@ namespace DungeonCrawler.Systems
         {
             this.game = game;
 
+            menuSprite = game.Content.Load<Texture2D>("Spritesheets/menuSelect");
+            spriteFont = game.Content.Load<SpriteFont>("Spritefonts/Pescadero");
+
+            menuSelectSound = game.Content.Load<SoundEffect>("Sounds/MenuSelect");
+
+            this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+
+            searchingForAvailableSessions = false;
+
+            currentSessionName = "No Sessions Found";
+
+            TextLocations = new Vector2[] {
+                new Vector2(400, 30), //Select Mode
+                new Vector2(200, 130), //Create Session
+                new Vector2(500, 130), //Join Session
+                new Vector2(200, 330), //Create Go
+                new Vector2(500, 230), //Session Name
+                new Vector2(500, 330) //Join Go
+            };
+
+            menuSpriteLocation = TextLocations[1] - new Vector2(10, 0);
         }
 
         #endregion
@@ -92,23 +235,317 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
+            if (searchingForAvailableSessions)
+                return;
+
             if (game.GameState == GameState.NetworkSetup)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.A) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
-                    GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                switch (menuState)
                 {
-                    CreateSession();
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.B) ||
-                    GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.B) ||
-                    GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.B) ||
-                    GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.B) ||
-                    GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.B))
-                {
-                    JoinSession();
+                    case NetworkMenuState.SelectMode:
+                        if (menuSessionState == 1)
+                        {
+                            if (Keyboard.GetState().IsKeyDown(Keys.Left) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.X <= -1)
+                            {
+                                if (!pressedKeys.left)
+                                {
+                                    menuSessionState--;
+                                    menuSpriteLocation = TextLocations[1] - new Vector2(10, 0);
+                                    pressedKeys.left = true;
+
+
+                                    menuSelectSound.Play();
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.left = false;
+                            }
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Space) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                            {
+                                if (!pressedKeys.space)
+                                {
+
+                                    try
+                                    {
+                                        menuSelectSound.Play();
+
+                                        backgroundWorker = new BackgroundWorker();
+
+                                        backgroundWorker.DoWork += 
+                                            new DoWorkEventHandler(findAvailableSessions);
+                                        backgroundWorker.RunWorkerCompleted += 
+                                            new RunWorkerCompletedEventHandler(foundAvailableSessions);
+
+                                        backgroundWorker.RunWorkerAsync();
+
+                                        searchingForAvailableSessions = true;
+
+                                        pressedKeys.space = true;
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        //Throw error
+                                    }
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.space = false;
+                            }
+                        }
+
+                        if (menuSessionState == 0)
+                        {
+                            if (Keyboard.GetState().IsKeyDown(Keys.Right) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.X >= 1)
+                            {
+                                if(!pressedKeys.right)
+                                {
+                                    menuSessionState++;
+                                    menuSpriteLocation = TextLocations[2] - new Vector2(10, 0);
+                                    pressedKeys.right = true;
+
+                                    menuSelectSound.Play();
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.right = false;
+                            }
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Space) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                            {
+                                if (!pressedKeys.space)
+                                {
+                                    menuSelectSound.Play();
+
+                                    menuState = NetworkMenuState.CreateSession;
+                                    menuSpriteLocation = TextLocations[3] - new Vector2(10, 0);
+                                    pressedKeys.space = true;
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.space = false;
+                            }
+
+                        }
+
+                        break;
+                    case NetworkMenuState.JoinSession:
+
+                        if (menuSessionState == 0) //select game
+                        {
+                            if (Keyboard.GetState().IsKeyDown(Keys.Down) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y >= 1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.Y >= 1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.Y >= 1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.Y >= 1)
+                            {
+                                if (!pressedKeys.down)
+                                {
+                                    menuSessionState++;
+                                    menuSpriteLocation = TextLocations[5] - new Vector2(10, 0);
+                                    pressedKeys.down = true;
+
+
+                                    menuSelectSound.Play();
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.down = false;
+                            }
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Left) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.X <= -1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.X <= -1)
+                            {
+                                if (!pressedKeys.left)
+                                {
+                                    if (availableSessions.Count > 0)
+                                    {
+                                        selectedSession--;
+                                        selectedSession %= availableSessions.Count;
+                                        currentSessionName = string.Format("Session %d", selectedSession);
+
+                                        menuSelectSound.Play();
+                                    }
+                                    pressedKeys.left = true;
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.left = false;
+                            }
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Right) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.X >= 1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.X >= 1)
+                            {
+                                if (!pressedKeys.right)
+                                {
+                                    if (availableSessions.Count > 0)
+                                    {
+                                        selectedSession++;
+                                        selectedSession %= availableSessions.Count;
+                                        currentSessionName = string.Format("Session %d", selectedSession);
+
+                                        menuSelectSound.Play();
+                                    }
+                                    pressedKeys.right = true;
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.right = false;
+                            }
+                        }
+                        else if (menuSessionState == 1) //go
+                        {
+                            if (Keyboard.GetState().IsKeyDown(Keys.Up) ||
+                                GamePad.GetState(PlayerIndex.One).ThumbSticks.Left.Y <= -1 ||
+                                GamePad.GetState(PlayerIndex.Two).ThumbSticks.Left.Y <= -1 ||
+                                GamePad.GetState(PlayerIndex.Three).ThumbSticks.Left.Y <= -1 ||
+                                GamePad.GetState(PlayerIndex.Four).ThumbSticks.Left.Y <= -1)
+                            {
+                                if (!pressedKeys.up)
+                                {
+                                    menuSessionState--;
+                                    menuSpriteLocation = TextLocations[4] - new Vector2(10, 0);
+                                    pressedKeys.up = true;
+
+                                    menuSelectSound.Play();
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.up = false;
+                            }
+
+                            if (Keyboard.GetState().IsKeyDown(Keys.Space) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                            {
+                                if (!pressedKeys.space)
+                                {
+                                    menuSelectSound.Play();
+
+                                    JoinSession();
+
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                pressedKeys.space = false;
+                            }
+                        }
+
+
+                        if (Keyboard.GetState().IsKeyDown(Keys.B) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.B))
+                        {
+                            if (!pressedKeys.b)
+                            {
+                                menuSessionState = 1;
+                                menuState = NetworkMenuState.SelectMode;
+                                menuSpriteLocation = TextLocations[2] - new Vector2(10, 0);
+                                pressedKeys.b = true;
+
+                                menuSelectSound.Play();
+
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            pressedKeys.b = false;
+                        }
+
+                        break;
+                    case NetworkMenuState.CreateSession:
+                        if (Keyboard.GetState().IsKeyDown(Keys.Space) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.A) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.A))
+                        {
+                            if (!pressedKeys.space)
+                            {
+
+                                menuSelectSound.Play();
+                                CreateSession();
+
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            pressedKeys.space = false;
+                        }
+
+                        if (Keyboard.GetState().IsKeyDown(Keys.B) ||
+                                GamePad.GetState(PlayerIndex.One).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Two).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Three).IsButtonDown(Buttons.B) ||
+                                GamePad.GetState(PlayerIndex.Four).IsButtonDown(Buttons.B))
+                        {
+                            if (!pressedKeys.b)
+                            {
+                                menuSessionState = 0;
+                                menuState = NetworkMenuState.SelectMode;
+                                menuSpriteLocation = TextLocations[1] - new Vector2(10, 0);
+                                pressedKeys.b = true;
+
+                                menuSelectSound.Play();
+
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            pressedKeys.b = false;
+                        }
+                        break;
                 }
             }
             else
@@ -136,6 +573,47 @@ namespace DungeonCrawler.Systems
             if (game.GameState == GameState.NetworkSetup)
             {
                 // TODO: Render network menu
+                spriteBatch.Begin();
+
+                Color color;
+
+                spriteBatch.DrawString(spriteFont, "Select Mode", TextLocations[0], Color.Black);
+
+                if (menuState == NetworkMenuState.SelectMode || menuState == NetworkMenuState.CreateSession)
+                    color = Color.Black;
+                else
+                    color = Color.Gray;
+                spriteBatch.DrawString(spriteFont, "Create Session", TextLocations[1], color);
+
+                if (menuState == NetworkMenuState.SelectMode || menuState == NetworkMenuState.JoinSession)
+                    color = Color.Black;
+                else
+                    color = Color.Gray;
+                spriteBatch.DrawString(spriteFont, "Join Session", TextLocations[2], color);
+
+                if(searchingForAvailableSessions)
+                    spriteBatch.DrawString(spriteFont, "searching for sessions", 
+                        TextLocations[2] + new Vector2(0, 50), Color.Black);
+
+                if (menuState == NetworkMenuState.CreateSession)
+                    color = Color.Black;
+                else
+                    color = Color.Gray;
+                spriteBatch.DrawString(spriteFont, "Go!", TextLocations[3], color);
+
+                if (menuState == NetworkMenuState.JoinSession)
+                    color = Color.Black;
+                else
+                    color = Color.Gray;
+                spriteBatch.DrawString(spriteFont, currentSessionName, TextLocations[4], color);
+                spriteBatch.DrawString(spriteFont, "Go!", TextLocations[5], color);
+
+
+                //Draw the sprite
+                spriteBatch.Draw(menuSprite, menuSpriteLocation, Color.White);
+
+                spriteBatch.End();
+
             }
         }
 
@@ -184,13 +662,13 @@ namespace DungeonCrawler.Systems
         {
             try
             {
-                using (AvailableNetworkSessionCollection availableSessions =
-                    NetworkSession.Find(
-                        NetworkSessionType.SystemLink,  // Session Type
-                        4,                              // Max local gamers
-                        null                            // Search Properties
-                        ))
-                {
+                //using (availableSessions =
+                  //  NetworkSession.Find(
+                  //      NetworkSessionType.SystemLink,  // Session Type
+                 //       4,                              // Max local gamers
+               //         null                            // Search Properties
+                //        ))
+              //  {
                     if (availableSessions.Count == 0)
                     {
                         // No sessions available
@@ -199,7 +677,7 @@ namespace DungeonCrawler.Systems
                     }
 
                     // Join the first session found
-                    session = NetworkSession.Join(availableSessions[0]);
+                    session = NetworkSession.Join(availableSessions[selectedSession]);
 
                     // Set ourselves as guest
                     isHost = false;
@@ -209,7 +687,7 @@ namespace DungeonCrawler.Systems
 
                     // Update our game state
                     game.GameState = GameState.Gameplay;
-                }
+               // }
             }
             catch (Exception e)
             {
@@ -472,6 +950,44 @@ namespace DungeonCrawler.Systems
         /// <param name="e"></param>
         void HostChangedEventHandler(object sender, HostChangedEventArgs e)
         {
+        }
+
+        /// <summary>
+        /// This event handler takes the background worker's work
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void findAvailableSessions(object sender, EventArgs e)
+        {
+            availableSessions =
+                NetworkSession.Find(
+                    NetworkSessionType.SystemLink,  // Session Type
+                    4,                              // Max local gamers
+                    null                            // Search Properties
+                    );
+
+        }
+
+        /// <summary>
+        /// This event handler takes the case when the available sessions are found
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void foundAvailableSessions(object sender, EventArgs e)
+        {
+            searchingForAvailableSessions = false;
+
+            if (availableSessions.Count == 0)
+                currentSessionName = "No Sessions Found";
+            else
+                currentSessionName = "Session 1";
+
+            selectedSession = 0;
+
+            menuState = NetworkMenuState.JoinSession;
+            menuSessionState = 0;
+            menuSpriteLocation = TextLocations[4] - new Vector2(10, 0);
+
         }
 
         #endregion
