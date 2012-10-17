@@ -56,14 +56,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritesheets\SpaceP.png">
-      <Name>SpaceP</Name>
     <Compile Include="ControllerTGAs\xboxControllerBack.tga">
       <Name>xboxControllerBack</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
     <Compile Include="ControllerTGAs\xboxControllerButtonA.tga">
       <Name>xboxControllerButtonA</Name>
       <Importer>TextureImporter</Importer>
@@ -200,6 +199,13 @@
   <ItemGroup>
     <Compile Include="Spritesheets\MzombieBx2.png">
       <Name>MzombieBx2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\SpacePBig.png">
+      <Name>SpacePBig</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
