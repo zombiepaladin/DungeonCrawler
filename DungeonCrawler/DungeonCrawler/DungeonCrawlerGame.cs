@@ -68,6 +68,11 @@ namespace DungeonCrawler
         /// </summary>
         public AggregateFactory AggregateFactory;
 
+        /// <summary>
+        /// The CharacterSelectionScreen
+        /// </summary>
+        public CharacterSelectionScreen CharacterSelectionScreen;
+
         #endregion
 
         #region Game Components
@@ -133,7 +138,8 @@ namespace DungeonCrawler
             RoomComponent = new RoomComponent();
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
-            
+
+            CharacterSelectionScreen = new CharacterSelectionScreen(graphics,this);
 
             LevelManager = new LevelManager(this);
 
@@ -155,8 +161,10 @@ namespace DungeonCrawler
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
 
+            CharacterSelectionScreen.LoadContent();
+
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+            //AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
 
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon2");
@@ -192,7 +200,7 @@ namespace DungeonCrawler
                 }
                 else
                 {
-                    GameState = GameState.NetworkSetup;
+                    GameState = GameState.CharacterSelection;
                 }
             }
 
@@ -212,12 +220,13 @@ namespace DungeonCrawler
                     }
                     else
                     {
-                        GameState = GameState.NetworkSetup;
+                        GameState = GameState.CharacterSelection;
                     }
                     break;
 
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
+                    CharacterSelectionScreen.Update(gameTime);
                     break;
 
                 case GameState.NetworkSetup:
@@ -260,8 +269,9 @@ namespace DungeonCrawler
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             LevelManager.Draw(elapsedTime);
-            //NetworkSystem.Draw(elapsedTime);
+            NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
+            CharacterSelectionScreen.Draw(elapsedTime);
            
             base.Draw(gameTime);
         }

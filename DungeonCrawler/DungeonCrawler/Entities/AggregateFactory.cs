@@ -32,7 +32,7 @@ namespace DungeonCrawler.Entities
         /// Creates Entities from aggregates (collections of components)
         /// </summary>
         /// <param name="aggregate">The specific aggreage to create</param>
-        public void CreateFromAggregate(Aggregate aggregate)
+        public void CreateFromAggregate(Aggregate aggregate, PlayerIndex playerIndex)
         { 
             uint entityID;
             Texture2D spriteSheet;
@@ -82,7 +82,7 @@ namespace DungeonCrawler.Entities
                     player = new Player()
                     {
                         EntityID = entityID,
-                        PlayerIndex = PlayerIndex.One,
+                        PlayerIndex = playerIndex,
                     };
                     game.PlayerComponent[entityID] = player;
                     
@@ -134,7 +134,7 @@ namespace DungeonCrawler.Entities
                     player = new Player()
                     {
                         EntityID = entityID,
-                        PlayerIndex = PlayerIndex.One,
+                        PlayerIndex = playerIndex,
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
