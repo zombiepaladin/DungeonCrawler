@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -64,7 +66,7 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Draw(float elapsedTime)
         {
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null);
 
             // Draw all Sprites
             foreach (Sprite sprite in game.SpriteComponent.All)
@@ -94,6 +96,23 @@ namespace DungeonCrawler.Systems
                                 1f,                                             // scale
                                 SpriteEffects.None,
                                 0);
+            }
+            //Draw HUD
+            foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
+            {
+                if (sprite.isSeen) //A,B,X,Y, and Dpad are temp on screen
+                {
+                    Position position = game.PositionComponent[sprite.EntityID];
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+                }
             }
 
             spriteBatch.End();

@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -77,6 +79,10 @@ namespace DungeonCrawler
         public MovementComponent MovementComponent;
         public MovementSpriteComponent MovementSpriteComponent;
         public SpriteComponent SpriteComponent;
+        public RoomComponent RoomComponent;
+        public DoorComponent DoorComponent;
+		public HUDSpriteComponent HUDSpriteComponent;
+        public HUDComponent HUDComponent;
 
         #endregion
 
@@ -122,6 +128,10 @@ namespace DungeonCrawler
             MovementComponent = new MovementComponent();
             MovementSpriteComponent = new MovementSpriteComponent();
             SpriteComponent = new SpriteComponent();
+            DoorComponent = new DoorComponent();
+            RoomComponent = new RoomComponent();
+			HUDSpriteComponent = new HUDSpriteComponent();
+            HUDComponent = new HUDComponent();
             
             base.Initialize();
         }
@@ -142,7 +152,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.FairyPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
 
         }
 
@@ -242,7 +252,7 @@ namespace DungeonCrawler
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            NetworkSystem.Draw(elapsedTime);
+            //NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
 
             base.Draw(gameTime);
