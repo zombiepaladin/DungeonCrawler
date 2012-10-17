@@ -39,9 +39,12 @@ namespace DungeonCrawler.Entities
                       BButtonSprite,
                       XButtonSprite,
                       YButtonSprite,
-                      DPadSprite;
+                      DPadSprite,
+                      HeatlhStatusSprite,
+                      ItemStatusSprite,
+                      SkillStatusSprite;
             HUD hud;
-            
+            #region buttons
             //Make A button
             entityID = Entity.NextEntity();
             spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonA");
@@ -143,7 +146,64 @@ namespace DungeonCrawler.Entities
                 SpriteBounds = new Rectangle(0, 0, 186, 186),
             };
             game.HUDSpriteComponent[entityID] = DPadSprite;
+            #endregion
 
+            #region status
+            //Health
+            entityID = Entity.NextEntity();
+            spriteSheet = game.Content.Load<Texture2D>("Spritesheets/StatusBar");
+            position = new Position()
+            {
+                EntityID = entityID,
+                Center = new Vector2(500, 695),
+                Radius = 40f, //dont care really...
+            };
+            game.PositionComponent[entityID] = position;
+            HeatlhStatusSprite = new HUDSprite()
+            {
+                EntityID = entityID,
+                isSeen = true,
+                SpriteSheet = spriteSheet,
+                SpriteBounds = new Rectangle(5, 95, 346, 66),
+            };
+            game.HUDSpriteComponent[entityID] = HeatlhStatusSprite;
+            //Item
+            entityID = Entity.NextEntity();
+            spriteSheet = game.Content.Load<Texture2D>("Spritesheets/StatusBar");
+            position = new Position()
+            {
+                EntityID = entityID,
+                Center = new Vector2(45, 695),
+                Radius = 40f, //dont care really...
+            };
+            game.PositionComponent[entityID] = position;
+            ItemStatusSprite = new HUDSprite()
+            {
+                EntityID = entityID,
+                isSeen = true,
+                SpriteSheet = spriteSheet,
+                SpriteBounds = new Rectangle(3, 10, 346, 66),
+            };
+            game.HUDSpriteComponent[entityID] = ItemStatusSprite;
+            //Skill
+            entityID = Entity.NextEntity();
+            spriteSheet = game.Content.Load<Texture2D>("Spritesheets/StatusBar");
+            position = new Position()
+            {
+                EntityID = entityID,
+                Center = new Vector2(960, 695),
+                Radius = 40f, //dont care really...
+            };
+            game.PositionComponent[entityID] = position;
+            SkillStatusSprite = new HUDSprite()
+            {
+                EntityID = entityID,
+                isSeen = true,
+                SpriteSheet = spriteSheet,
+                SpriteBounds = new Rectangle(3, 180, 346, 66),
+            };
+            game.HUDSpriteComponent[entityID] = SkillStatusSprite;
+            #endregion
             hud = new HUD()
             {
                 EntityID = player.EntityID,
@@ -152,6 +212,9 @@ namespace DungeonCrawler.Entities
                 XButtonSpriteID = XButtonSprite.EntityID,
                 YButtonSpriteID = YButtonSprite.EntityID,
                 DPadSpriteID = DPadSprite.EntityID,
+                HealthStatusSpriteID = HeatlhStatusSprite.EntityID,
+                ItemStatusSpriteID = ItemStatusSprite.EntityID,
+                SkillStatusSpriteID = SkillStatusSprite.EntityID,
             };
             game.HUDComponent[player.EntityID] = hud;
         }

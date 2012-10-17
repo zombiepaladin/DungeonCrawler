@@ -61,6 +61,7 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
+        public static LevelManager LevelManager;
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
@@ -133,6 +134,9 @@ namespace DungeonCrawler
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
             
+
+            LevelManager = new LevelManager(this);
+
             base.Initialize();
         }
 
@@ -153,6 +157,9 @@ namespace DungeonCrawler
 
             // Testing code
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+
+            LevelManager.LoadContent();
+            LevelManager.LoadLevel("TestDungeon3");
 
         }
 
@@ -231,6 +238,7 @@ namespace DungeonCrawler
                     InputSystem.Update(elapsedTime);
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
+                    LevelManager.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -251,10 +259,10 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+            LevelManager.Draw(elapsedTime);
             //NetworkSystem.Draw(elapsedTime);
             RenderingSystem.Draw(elapsedTime);
-
+           
             base.Draw(gameTime);
         }
     }
