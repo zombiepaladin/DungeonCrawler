@@ -49,6 +49,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Spritesheets\menuSelect.png">
+      <Name>menuSelect</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sounds\MenuSelect.wav">
+      <Name>MenuSelect</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Spritesheets\gargranian.png">
       <Name>gargranian</Name>
       <Importer>TextureImporter</Importer>
