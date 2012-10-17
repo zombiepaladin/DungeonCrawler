@@ -85,6 +85,11 @@ namespace DungeonCrawler.Systems
         private int menuSessionState = 0;
 
         /// <summary>
+        /// The timer for the searching available sessions text
+        /// </summary>
+        private float searchingtimer = 0;
+
+        /// <summary>
         /// Background worker to find the available sessions
         /// </summary>
         private BackgroundWorker backgroundWorker;
@@ -209,12 +214,12 @@ namespace DungeonCrawler.Systems
             currentSessionName = "No Sessions Found";
 
             TextLocations = new Vector2[] {
-                new Vector2(400, 30), //Select Mode
-                new Vector2(200, 130), //Create Session
-                new Vector2(500, 130), //Join Session
-                new Vector2(200, 330), //Create Go
-                new Vector2(500, 230), //Session Name
-                new Vector2(500, 330) //Join Go
+                new Vector2(600, 230), //Select Mode
+                new Vector2(400, 330), //Create Session
+                new Vector2(700, 330), //Join Session
+                new Vector2(400, 530), //Create Go
+                new Vector2(700, 430), //Session Name
+                new Vector2(700, 530) //Join Go
             };
 
             menuSpriteLocation = TextLocations[1] - new Vector2(10, 0);
@@ -236,7 +241,11 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             if (searchingForAvailableSessions)
+            {
+                searchingtimer += elapsedTime;
+                searchingtimer %= 1;
                 return;
+            }
 
             if (game.GameState == GameState.NetworkSetup)
             {
@@ -393,7 +402,11 @@ namespace DungeonCrawler.Systems
                                     {
                                         selectedSession--;
                                         selectedSession %= availableSessions.Count;
-                                        currentSessionName = string.Format("Session %d", selectedSession);
+                                        currentSessionName = string.Format("Session %s : %d / %d", 
+                                            availableSessions[selectedSession].HostGamertag,
+                                            availableSessions[selectedSession].CurrentGamerCount,
+                                            availableSessions[selectedSession].CurrentGamerCount 
+                                                + availableSessions[selectedSession].OpenPublicGamerSlots);
 
                                         menuSelectSound.Play();
                                     }
@@ -419,7 +432,11 @@ namespace DungeonCrawler.Systems
                                     {
                                         selectedSession++;
                                         selectedSession %= availableSessions.Count;
-                                        currentSessionName = string.Format("Session %d", selectedSession);
+                                        currentSessionName = string.Format("Session %s : %d / %d",
+                                            availableSessions[selectedSession].HostGamertag,
+                                            availableSessions[selectedSession].CurrentGamerCount,
+                                            availableSessions[selectedSession].CurrentGamerCount
+                                                + availableSessions[selectedSession].OpenPublicGamerSlots);
 
                                         menuSelectSound.Play();
                                     }
@@ -591,7 +608,7 @@ namespace DungeonCrawler.Systems
                     color = Color.Gray;
                 spriteBatch.DrawString(spriteFont, "Join Session", TextLocations[2], color);
 
-                if(searchingForAvailableSessions)
+                if(searchingForAvailableSessions && searchingtimer <= .5)
                     spriteBatch.DrawString(spriteFont, "searching for sessions", 
                         TextLocations[2] + new Vector2(0, 50), Color.Black);
 
@@ -980,7 +997,11 @@ namespace DungeonCrawler.Systems
             if (availableSessions.Count == 0)
                 currentSessionName = "No Sessions Found";
             else
-                currentSessionName = "Session 1";
+                currentSessionName = string.Format("Session %s : %d / %d",
+                    availableSessions[0].HostGamertag,
+                    availableSessions[0].CurrentGamerCount,
+                    availableSessions[0].CurrentGamerCount
+                        + availableSessions[0].OpenPublicGamerSlots);
 
             selectedSession = 0;
 
