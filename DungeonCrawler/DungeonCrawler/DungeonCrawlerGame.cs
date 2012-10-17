@@ -196,9 +196,6 @@ namespace DungeonCrawler
                 }
             }
 
-            //REMOVE
-            GameState = GameState.Gameplay;
-
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             switch (GameState)
@@ -240,8 +237,7 @@ namespace DungeonCrawler
                     // Update game systems
                     InputSystem.Update(elapsedTime);
 
-                    //UNCOMMENT
-                    //NetworkSystem.Update(elapsedTime);
+                    NetworkSystem.Update(elapsedTime);
 
                     MovementSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
