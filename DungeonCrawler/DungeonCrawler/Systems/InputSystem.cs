@@ -62,7 +62,7 @@ namespace DungeonCrawler.Systems
         /// The time between this and the previous frame.
         /// </param>
         public void Update(float elapsedTime)
-        {
+         {
             // Update all entities that have a movement component
             foreach (Player player in game.PlayerComponent.All)
             {

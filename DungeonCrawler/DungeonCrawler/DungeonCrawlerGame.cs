@@ -142,7 +142,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+            AggregateFactory.CreateFromAggregate(Aggregate.CyborgPlayer);
 
         }
 
