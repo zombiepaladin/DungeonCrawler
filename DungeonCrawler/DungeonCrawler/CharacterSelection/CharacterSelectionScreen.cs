@@ -231,8 +231,8 @@ namespace DungeonCrawler
         public void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-            //    game.Exit();
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+                game.GameState = GameState.SignIn;
 
             if ((GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter)) && !playerOne.connected)
             {
