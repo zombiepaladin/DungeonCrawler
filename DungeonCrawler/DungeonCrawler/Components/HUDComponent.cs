@@ -30,6 +30,7 @@ namespace DungeonCrawler.Components
         public uint HealthStatusSpriteID;
         public uint ItemStatusSpriteID;
         public uint SkillStatusSpriteID;
+        public uint PsiStatusSpriteID;
     }
     public class HUDComponent : GameComponent<HUD>
     {
