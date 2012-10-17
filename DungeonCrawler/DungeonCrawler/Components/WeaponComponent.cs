@@ -22,7 +22,8 @@ namespace DungeonCrawler.Components
     public enum WeaponEffect
     {
         Stun = 0x1,
-
+        One_Hit_KO = 0x2,
+        Slow = 0x4,
     }
 
     /// <summary>
@@ -49,6 +50,11 @@ namespace DungeonCrawler.Components
         /// The range this weapon has. Ranged weapon should have a large range while Melee should have a very small range.
         /// </summary>
         public float Range;
+
+        /// <summary>
+        /// Chance for a critical hit.
+        /// </summary>
+        public float Critical;
 
         /// <summary>
         /// This weapon's type.
@@ -81,16 +87,6 @@ namespace DungeonCrawler.Components
         /// Damage the bullet does. (Should be the same as the weapon that created it.)
         /// </summary>
         public float Damage;
-
-        /// <summary>
-        /// Direction the bullet is traveling. (Should be normalized.)
-        /// </summary>
-        public Vector2 Direction;
-
-        /// <summary>
-        /// The speed of the bullet.
-        /// </summary>
-        public float Speed;
     }
 
     public class BulletComponent : GameComponent<Bullet>

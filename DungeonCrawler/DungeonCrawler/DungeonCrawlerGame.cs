@@ -59,7 +59,7 @@ namespace DungeonCrawler
         /// The current GameState
         /// TODO: Change initial state to SplashScreen
         /// </summary>
-        public GameState GameState = GameState.SignIn;
+        public GameState GameState = GameState.SplashScreen;
 
         public static LevelManager LevelManager;
         /// <summary>
