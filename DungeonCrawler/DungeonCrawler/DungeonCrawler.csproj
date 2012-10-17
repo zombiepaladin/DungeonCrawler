@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ProjectGuid>{F692F1C6-14DE-4880-B6B7-CFA4A22C792A}</ProjectGuid>
@@ -109,7 +109,7 @@
   <ItemGroup>
     <Compile Include="Components\DoorComponent.cs" />
     <Compile Include="Components\PlayerComponent.cs" />
-	<Compile Include="Components\HUDComponent.cs" />
+    <Compile Include="Components\HUDComponent.cs" />
     <Compile Include="Components\HUDSpriteComponent.cs" />
     <Compile Include="Components\RemoteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />
@@ -119,7 +119,9 @@
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\RoomComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
-	<Compile Include="Entities\HUDAggregateFactory.cs" />
+    <Compile Include="Components\WeaponComponent.cs" />
+    <Compile Include="Components\WeaponSpriteComponents.cs" />
+    <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />
     <Compile Include="Entities\DoorFactory.cs" />
