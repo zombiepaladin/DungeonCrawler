@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -79,6 +81,8 @@ namespace DungeonCrawler
         public SpriteComponent SpriteComponent;
         public RoomComponent RoomComponent;
         public DoorComponent DoorComponent;
+		public HUDSpriteComponent HUDSpriteComponent;
+        public HUDComponent HUDComponent;
 
         #endregion
 
@@ -126,6 +130,8 @@ namespace DungeonCrawler
             SpriteComponent = new SpriteComponent();
             DoorComponent = new DoorComponent();
             RoomComponent = new RoomComponent();
+			HUDSpriteComponent = new HUDSpriteComponent();
+            HUDComponent = new HUDComponent();
             
             base.Initialize();
         }
