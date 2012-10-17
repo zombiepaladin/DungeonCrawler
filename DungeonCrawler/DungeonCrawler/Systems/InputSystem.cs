@@ -98,6 +98,7 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
                     //TODO: Set skill
+                    //      Show skill being set
                 }
                 if (gamePadState.IsButtonDown(Buttons.B) || keyboardState.IsKeyDown(Keys.D2))
                 {

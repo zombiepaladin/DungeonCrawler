@@ -62,10 +62,6 @@
       <Project>{D7699F50-B82D-4612-A8DC-52CF0FDA2813}</Project>
       <Name>DungeonCrawlerWindowsLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DungeonCrawlerXboxLibrary\DungeonCrawlerXboxLibrary.csproj">
-      <Project>{9588FBCE-7501-4863-9718-C606C81C6D6A}</Project>
-      <Name>DungeonCrawlerXboxLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.ContentPipelineExtensions.targets" />

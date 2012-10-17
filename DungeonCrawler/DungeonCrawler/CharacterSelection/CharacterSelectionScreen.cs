@@ -130,7 +130,7 @@ namespace DungeonCrawler
             titleImage.Scale = (float)(new Vector2(viewport.Width, viewport.Height).Length()) / (float)(new Vector2(titleTexture.Width, titleTexture.Height).Length());
 
             // Initialize the sprite font
-            spriteFont = game.Content.Load<SpriteFont>("SpriteFont/Pescadero");
+            spriteFont = game.Content.Load<SpriteFont>("SpriteFonts/Pescadero");
 
             // Initialize the character buttons and the text for each button and the character's aggregate
             // The Cultist Character
