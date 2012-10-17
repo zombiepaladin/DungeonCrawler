@@ -42,6 +42,7 @@ namespace DungeonCrawler.Entities
                       DPadSprite,
                       HeatlhStatusSprite,
                       ItemStatusSprite,
+                      PsiStatusSprite,
                       SkillStatusSprite;
             HUD hud;
             #region buttons
@@ -155,7 +156,7 @@ namespace DungeonCrawler.Entities
             position = new Position()
             {
                 EntityID = entityID,
-                Center = new Vector2(500, 695),
+                Center = new Vector2(45, 40),
                 Radius = 40f, //dont care really...
             };
             game.PositionComponent[entityID] = position;
@@ -185,6 +186,24 @@ namespace DungeonCrawler.Entities
                 SpriteBounds = new Rectangle(3, 10, 346, 66),
             };
             game.HUDSpriteComponent[entityID] = ItemStatusSprite;
+            //Psi
+            entityID = Entity.NextEntity();
+            spriteSheet = game.Content.Load<Texture2D>("Spritesheets/StatusBar");
+            position = new Position()
+            {
+                EntityID = entityID,
+                Center = new Vector2(960, 40),
+                Radius = 40f, //dont care really...
+            };
+            game.PositionComponent[entityID] = position;
+            PsiStatusSprite = new HUDSprite()
+            {
+                EntityID = entityID,
+                isSeen = true,
+                SpriteSheet = spriteSheet,
+                SpriteBounds = new Rectangle(3, 258, 346, 66),
+            };
+            game.HUDSpriteComponent[entityID] = PsiStatusSprite;
             //Skill
             entityID = Entity.NextEntity();
             spriteSheet = game.Content.Load<Texture2D>("Spritesheets/StatusBar");
