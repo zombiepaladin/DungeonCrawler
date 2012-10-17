@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Components
 {
-
     public struct WeaponSprite
     {
         public uint EntityID;
         public Texture2D SpriteSheet;
         public Rectangle Spritebounds;
+        public Facing Facing;
     }
 
     public class WeaponSpriteComponent : GameComponent<WeaponSprite>
