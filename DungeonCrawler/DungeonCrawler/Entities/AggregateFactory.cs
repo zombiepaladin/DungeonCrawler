@@ -41,7 +41,7 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
-            HUDAggregateFactory hudagg;
+            HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
 
             switch (aggregate)
             {
@@ -85,7 +85,9 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
-                    
+
+                    hudagg.CreateHUD(player);
+
                     break;
 
                 case Aggregate.CultistPlayer:
@@ -129,12 +131,20 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
 
+                    hudagg.CreateHUD(player);
+
                     break;
 
                 case Aggregate.CyborgPlayer:
+
+                    //Uncomment on implementation of this aggregate
+                    //hudagg.CreateHUD(player);
                     break;
 
                 case Aggregate.EarthianPlayer:
+
+                    //Uncomment on implementation of this aggregate
+                    //hudagg.CreateHUD(player);
                     break;
 
                 case Aggregate.GargranianPlayer:
@@ -177,16 +187,21 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
-                    //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
+
                     hudagg.CreateHUD(player);
                     
                     break;
 
                 case Aggregate.SpacePiratePlayer:
+
+                    //Uncomment on implementation of this aggregate
+                    //hudagg.CreateHUD(player);
                     break;
 
                 case Aggregate.ZombiePlayer:
+
+                    //Uncomment on implementation of this aggregate
+                    //hudagg.CreateHUD(player);
                     break;
             }
         }
