@@ -107,10 +107,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\EnemyAIComponent.cs" />
+    <Compile Include="Entities\EnemyAI.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="Components\DoorComponent.cs" />
     <Compile Include="Components\PlayerComponent.cs" />
-	<Compile Include="Components\HUDComponent.cs" />
+    <Compile Include="Components\HUDComponent.cs" />
     <Compile Include="Components\HUDSpriteComponent.cs" />
     <Compile Include="Components\RemoteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />
@@ -120,7 +122,7 @@
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\RoomComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
-	<Compile Include="Entities\HUDAggregateFactory.cs" />
+    <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />
     <Compile Include="Entities\DoorFactory.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
+    <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
