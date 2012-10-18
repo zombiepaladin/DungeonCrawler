@@ -18,6 +18,17 @@ using Microsoft.Xna.Framework;
 namespace DungeonCrawler.Components
 {
     /// <summary>
+    /// The states of a player. This can help us determine what needs to be rendered.
+    /// </summary>
+    public enum PlayerState
+    {
+        Default,
+        Dead,
+        Attacking,
+        Inactive,
+    }
+
+    /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
     public struct Player
@@ -31,6 +42,11 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
+
+        /// <summary>
+        /// The current state of the player.
+        /// </summary>
+        public PlayerState State;
     }
 
     /// <summary>
