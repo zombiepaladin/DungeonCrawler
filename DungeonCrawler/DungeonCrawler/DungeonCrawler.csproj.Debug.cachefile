@@ -1,4 +1,8 @@
 Content\Spritesheets\wind_fae.xnb
+<<<<<<< HEAD
+=======
+Content\Spritesheets\Cultist.xnb
+>>>>>>> 82eb3e27e775144677f2518769cde2abe9f5444c
 Content\Spritesheets\menuSelect.xnb
 Content\Spritesheets\gargranian.xnb
 Content\ControllerTGAs\xboxControllerBack.xnb
@@ -32,11 +36,19 @@ Content\Spritesheets\charSelectCyborg.xnb
 Content\Spritesheets\charSelectSpacePirate.xnb
 Content\Spritesheets\charSelectZombie.xnb
 Content\Spritesheets\charSelectControls1.xnb
+<<<<<<< HEAD
 Content\Spritesheets\inventoryBackground.xnb
 Content\Spritesheets\selectInv.xnb
+=======
+Content\Spritesheets\charSelectCultist.xnb
+>>>>>>> 82eb3e27e775144677f2518769cde2abe9f5444c
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Tilemaps\TestDungeon1.xnb
 Content\Tilemaps\TestDungeon2.xnb
 Content\Tilemaps\TestDungeon3.xnb
 Content\SpriteFonts\Pescadero.xnb
+<<<<<<< HEAD
+=======
+Content\Spritesheets\Earthian2x.xnb
+>>>>>>> 82eb3e27e775144677f2518769cde2abe9f5444c

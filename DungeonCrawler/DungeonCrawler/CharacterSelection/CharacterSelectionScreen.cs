@@ -143,7 +143,7 @@ namespace DungeonCrawler
 
             // Initialize the character buttons and the text for each button and the character's aggregate
             // The Cultist Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectGargranian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectCultist");
             buttonPos = new Vector2(center.X - viewport.Width / 4, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
