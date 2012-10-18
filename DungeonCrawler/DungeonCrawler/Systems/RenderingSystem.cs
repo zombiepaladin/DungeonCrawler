@@ -114,7 +114,22 @@ namespace DungeonCrawler.Systems
                                     0);
                 }
             }
-
+            foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
+            {
+                if (sprite.isSeen)
+                {
+                    Position position = game.PositionComponent[sprite.EntityID];
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+                }
+            }
             spriteBatch.End();
         }
 

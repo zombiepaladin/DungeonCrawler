@@ -86,7 +86,8 @@ namespace DungeonCrawler
         public DoorComponent DoorComponent;
 		public HUDSpriteComponent HUDSpriteComponent;
         public HUDComponent HUDComponent;
-
+        public InventoryComponent InventoryComponent;
+        public InventorySpriteComponent InventorySpriteComponent;
         #endregion
 
         #region Game Systems
@@ -135,7 +136,8 @@ namespace DungeonCrawler
             RoomComponent = new RoomComponent();
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
-
+            InventoryComponent = new InventoryComponent();
+            InventorySpriteComponent = new InventorySpriteComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
 
             LevelManager = new LevelManager(this);

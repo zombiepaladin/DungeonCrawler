@@ -42,7 +42,7 @@ namespace DungeonCrawler.Entities
             Local local;
             Player player;
             HUDAggregateFactory hudagg;
-
+            InvAggregateFactory invagg;
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
@@ -134,6 +134,9 @@ namespace DungeonCrawler.Entities
                     //create HUD
                     hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg = new InvAggregateFactory(game);
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.EarthianPlayer:
@@ -182,7 +185,9 @@ namespace DungeonCrawler.Entities
                     //Create HUD
                     hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
-                    
+                    //create Inv
+                    invagg = new InvAggregateFactory(game);
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.SpacePiratePlayer:
@@ -228,7 +233,9 @@ namespace DungeonCrawler.Entities
                     //Create HUD
                     hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
-                    
+                    //create Inv
+                    invagg = new InvAggregateFactory(game);
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.ZombiePlayer:
@@ -274,6 +281,9 @@ namespace DungeonCrawler.Entities
                     //Create HUD
                     hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg = new InvAggregateFactory(game);
+                    invagg.CreateInv(player);
                     break;
             }
         }
