@@ -8,9 +8,9 @@ namespace DungeonCrawler.Components
 {
     #region Weapon
     /// <summary>
-    /// Type for the weapons.
+    /// The type of attack the weapon does.
     /// </summary>
-    public enum WeaponType
+    public enum WeaponAttackType
     {
         Melee,
         Ranged,
@@ -21,6 +21,7 @@ namespace DungeonCrawler.Components
     /// </summary>
     public enum WeaponEffect
     {
+        None = 0x0,
         Stun = 0x1,
         One_Hit_KO = 0x2,
         Slow = 0x4,
@@ -57,9 +58,9 @@ namespace DungeonCrawler.Components
         public float Critical;
 
         /// <summary>
-        /// This weapon's type.
+        /// This weapon's attack type.
         /// </summary>
-        public WeaponType Type;
+        public WeaponAttackType Type;
 
         /// <summary>
         /// The effects this weapon has.
@@ -67,8 +68,56 @@ namespace DungeonCrawler.Components
         public WeaponEffect Effect;
     }
 
+    /// <summary>
+    /// Manages the weapons currently in the game.
+    /// </summary>
     public class WeaponComponent : GameComponent<Weapon>
     {
+        /// <summary>
+        /// Returns true if the weapon has the given effect set.
+        /// </summary>
+        /// <param name="weapon">Weapon struct</param>
+        /// <param name="effect">The WeaponEffect to check</param>
+        /// <returns>True or false.</returns>
+        public bool HasEffect(Weapon weapon, WeaponEffect effect)
+        {
+            return (weapon.Effect & effect) != WeaponEffect.None;
+        }
+
+        public bool HasEffect(uint id, WeaponEffect effect)
+        {
+            return HasEffect(this[id], effect);
+        }
+
+        /// <summary>
+        /// Adds the given effect to the given Weapon.
+        /// </summary>
+        /// <param name="weapon">Weapon struct</param>
+        /// <param name="effect">The WeaponEffect to add.</param>
+        public void SetEffect(Weapon weapon, WeaponEffect effect)
+        {
+            weapon.Effect |= effect;
+        }
+
+        public void SetEffect(uint id, WeaponEffect effect)
+        {
+            SetEffect(this[id], effect);
+        }
+
+        /// <summary>
+        /// REmoves the given effect from the given Weapon.
+        /// </summary>
+        /// <param name="weapon">Weapon struct</param>
+        /// <param name="effect">The WeaponEffecft to remove.</param>
+        public void RemoveEffect(Weapon weapon, WeaponEffect effect)
+        {
+            weapon.Effect &= ~effect;
+        }
+
+        public void RemoveEffect(uint id, WeaponEffect effect)
+        {
+            RemoveEffect(this[id], effect);
+        }
     }
     #endregion
 

@@ -59,7 +59,7 @@ namespace DungeonCrawler
         /// The current GameState
         /// TODO: Change initial state to SplashScreen
         /// </summary>
-        public GameState GameState = GameState.SplashScreen;
+        public GameState GameState = GameState.Gameplay;
 
         public static LevelManager LevelManager;
         /// <summary>
@@ -88,6 +88,9 @@ namespace DungeonCrawler
         public HUDComponent HUDComponent;
         public InventoryComponent InventoryComponent;
         public InventorySpriteComponent InventorySpriteComponent;
+        public EquipmentComponent EquipmentComponent;
+        public WeaponComponent WeaponComponent;
+        public WeaponSpriteComponent WeaponSpriteComponent;
         #endregion
 
         #region Game Systems
@@ -138,8 +141,11 @@ namespace DungeonCrawler
             HUDComponent = new HUDComponent();
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
-            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
+            EquipmentComponent = new EquipmentComponent();
+            WeaponComponent = new WeaponComponent();
+            WeaponSpriteComponent = new WeaponSpriteComponent();
 
+            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
             base.Initialize();
@@ -162,7 +168,7 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
-            //AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
+            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
@@ -242,9 +248,7 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-
-                    NetworkSystem.Update(elapsedTime);
-
+                    //NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     break;
