@@ -28,22 +28,40 @@
   <object name="Enemy" type="TestEnemy" x="978" y="214" width="56" height="65"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23">
-  <object name="Trigger" type="MapChange" x="575" y="671" width="65" height="69">
+  <object name="Trigger" type="Door" x="575" y="671" width="65" height="69">
    <properties>
-    <property name="destination" value="TestDungeon2"/>
-    <property name="direction" value="down"/>
+    <property name="destinationRoom" value="TestDungeon2"/>
+    <property name="destinationSpawn" value="1"/>
    </properties>
   </object>
-  <object name="Trigger" type="MapChange" x="1214" y="319" width="66" height="63">
+  <object name="Trigger" type="Door" x="1214" y="319" width="66" height="63">
    <properties>
-    <property name="destination" value="TestDungeon3"/>
-    <property name="direction" value="right"/>
+    <property name="destinationRoom" value="TestDungeon3"/>
+    <property name="destinationSpawn" value="1"/>
+   </properties>
+  </object>
+  <object name="Trigger" type="Door" x="256" y="254" width="65" height="67">
+   <properties>
+    <property name="destinationRoom" value="TestDungeon1"/>
+    <property name="destinationSpawn" value="3"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="PlayerSpawns" width="40" height="23">
-  <object name="PlayerSpawn" type="right" x="1137" y="346" width="69" height="70"/>
-  <object name="PlayerSpawn" type="bottom" x="583" y="596" width="73" height="60"/>
-  <object name="PlayerSpawn" type="default" x="619" y="259" width="66" height="72"/>
+  <object name="PlayerSpawn" x="615" y="251" width="66" height="72">
+   <properties>
+    <property name="id" value="3"/>
+   </properties>
+  </object>
+  <object name="PlayerSpawn" x="609" y="624">
+   <properties>
+    <property name="id" value="1"/>
+   </properties>
+  </object>
+  <object name="PlayerSpawn" x="1177" y="355">
+   <properties>
+    <property name="id" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

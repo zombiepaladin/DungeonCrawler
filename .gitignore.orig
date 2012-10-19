@@ -6,5 +6,9 @@ obj
 TestResults
 
 # Solution user options
+<<<<<<< HEAD
+*.suo
+=======
 *.suo
 DungeonCrawler/DungeonCrawler/DungeonCrawler.csproj.Debug.cachefile
+>>>>>>> d4e0e8200d52b19657d5383e71db93516619019b

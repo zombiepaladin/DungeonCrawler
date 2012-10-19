@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// HUDAggregateFactory.cs 
+// InventorySpriteComponent.cs 
 //
 // Author: Nick Stanley
 //
@@ -13,26 +13,19 @@
 #region Using Statements
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using DungeonCrawler.Components;
 #endregion
-
 
 namespace DungeonCrawler.Components
 {
-    public struct HUD
+
+    public struct InventorySprite
     {
         public uint EntityID;
-        public uint AButtonSpriteID;
-        public uint BButtonSpriteID;
-        public uint XButtonSpriteID;
-        public uint YButtonSpriteID;
-        public uint DPadSpriteID;
-        public uint HealthStatusSpriteID;
-        public uint ItemStatusSpriteID;
-        public uint SkillStatusSpriteID;
-        public uint PsiStatusSpriteID;
+        public Texture2D SpriteSheet;
+        public Rectangle SpriteBounds;
+        public bool isSeen;
     }
-    public class HUDComponent : GameComponent<HUD>
+    public class InventorySpriteComponent : GameComponent<InventorySprite>
     {
     }
 }
