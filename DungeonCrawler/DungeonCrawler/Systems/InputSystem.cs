@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
+// Modified: Daniel Rymph added Inventory Controls, 10/17/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -38,6 +39,7 @@ namespace DungeonCrawler.Systems
         private KeyboardState oldKeyboardState;
 
         private GamePadState[] oldGamePadState;
+
         #endregion
 
         #region Constructors
@@ -91,6 +93,9 @@ namespace DungeonCrawler.Systems
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];
                 HUDSprite hs;
+                Inventory inv = game.InventoryComponent[player.EntityID];
+                InventorySprite isb;
+                InventorySprite iss;
                 #region key/Button DOWN
                 if (gamePadState.IsButtonDown(Buttons.A) || keyboardState.IsKeyDown(Keys.D1))
                 {
@@ -98,6 +103,7 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
                     //TODO: Set skill
+                    //      Show skill being set
                 }
                 if (gamePadState.IsButtonDown(Buttons.B) || keyboardState.IsKeyDown(Keys.D2))
                 {
@@ -148,7 +154,15 @@ namespace DungeonCrawler.Systems
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                     //TODO: Set item
                 }
-
+                if (gamePadState.IsButtonDown(Buttons.LeftShoulder) || keyboardState.IsKeyDown(Keys.Tab))
+                {
+                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
+                    isb.isSeen = true;
+                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
+                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
+                    iss.isSeen = true;
+                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
+                }
                 #endregion // end key down
                 #region key/Button UP
                 if (gamePadState.IsButtonUp(Buttons.A) && keyboardState.IsKeyUp(Keys.D1))
@@ -184,7 +198,16 @@ namespace DungeonCrawler.Systems
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                } 
+                }
+                if (gamePadState.IsButtonUp(Buttons.LeftShoulder) && keyboardState.IsKeyUp(Keys.Tab))
+                {
+                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
+                    isb.isSeen = false;
+                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
+                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
+                    iss.isSeen = false;
+                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
+                }
                 /*
                 if (gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left))
                 {

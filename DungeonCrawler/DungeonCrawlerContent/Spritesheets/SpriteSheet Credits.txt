@@ -3,6 +3,8 @@ From RPG Maker Collective:
 wind_fae.png
 http://rmcollective.wordpress.com/2012/04/26/fantasy-series-iii-the-fae-wind-earth/wind_fae/
 
+Cultist.png
+http://collective-arts.deviantart.com/gallery/#/d3569mn
 
 RPG Maker Collective License: 
 
@@ -12,4 +14,16 @@ Free to use in a commercial game if creator and blog is credited, we are notifie
 
 Free to post in other communities if they link back to us.
 
+<<<<<<< HEAD
 Free to edit and change if the original creator is credited.
+
+http://forums.rpgmakerweb.com/index.php?/topic/866-zombie-sprites/: MzombieB
+By Kazzador and Enterbrain
+Converted to MzombieBx2 via spriteX2
+=======
+Free to edit and change if the original creator is credited.
+
+http://forums.rpgmakerweb.com/index.php?/topic/866-zombie-sprites/: MzombieB
+By Kazzador and Enterbrain
+Converted to MzombieBx2 via spriteX2
+>>>>>>> ee532b8047c282d1dbe9b88bc4c29c81d42ef98b
