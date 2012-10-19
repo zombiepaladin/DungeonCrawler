@@ -11,14 +11,14 @@
 #endregion
 
 #region Using Statements
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler.Components
 {
-    public struct EnemyAIComponent
+    public struct EnemyAI
     {
         // <summary>
         /// The ID of the entity this AI belongs to
@@ -33,25 +33,9 @@ namespace DungeonCrawler.Components
 
     public class EnemyAIComponent : GameComponent<EnemyAI>
     {
-        /// <summary>
-        /// The game the Enemy belongs to
-        /// </summary>
-        DungeonCrawlerGame game;
-        IEnumerable<Position> HitList;
-        Position position;
-
-        /// <summary>
-        /// Creates a new AggregateFactory instance
-        /// </summary>
-        /// <param name="game"></param>
-        public EnemyAIComponent(DungeonCrawlerGame game)
+        public void Scan()
         {
-            this.game = game;
-        }
 
-        public void Scan(Position position)
-        {
-            
         }
 
         public void Attack()
