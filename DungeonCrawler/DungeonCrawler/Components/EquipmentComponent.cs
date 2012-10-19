@@ -10,6 +10,16 @@ namespace DungeonCrawler.Components
         public uint EntityID;
         public uint PlayerID;
         public uint WeaponID;
+
+        public uint Skill1ID;
+        public uint Skill2ID;
+        public uint Skill3ID;
+        public uint Skill4ID;
+
+        public uint Item1ID;
+        public uint Item2ID;
+        public uint Item3ID;
+        public uint Item4ID;
     }
 
     public class EquipmentComponent : GameComponent<Equipment>

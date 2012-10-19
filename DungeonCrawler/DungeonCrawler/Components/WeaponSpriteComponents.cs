@@ -18,15 +18,4 @@ namespace DungeonCrawler.Components
     public class WeaponSpriteComponent : GameComponent<WeaponSprite>
     {
     }
-
-    public struct BulletSprite
-    {
-        public uint EntityID;
-        public Texture2D SpriteSheet;
-        public Rectangle Spritebounds;
-    }
-
-    public class BulletSpriteComponent : GameComponent<BulletSprite>
-    {
-    }
 }

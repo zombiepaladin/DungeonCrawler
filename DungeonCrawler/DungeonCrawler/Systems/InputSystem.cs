@@ -89,9 +89,10 @@ namespace DungeonCrawler.Systems
                     movement.Direction.Normalize();
                 game.MovementComponent[player.EntityID] = movement;
 
-                if(keyboardState.IsKeyDown(Keys.Enter))
+                if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
                 {
-                    //player.State = PlayerState.Attacking;
+                    Equipment e = game.EquipmentComponent[player.EntityID];
+                    game.WeaponComponent.AddToAnimate(e.WeaponID);
                 }
 
                 #region HUD Displays
