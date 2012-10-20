@@ -32,6 +32,16 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private DungeonCrawlerGame game;
 
+        /// <summary>
+        /// The width of the room
+        /// </summary>
+        private int RoomWidth;
+
+        /// <summary>
+        /// The height of the room
+        /// </summary>
+        private int RoomHeight;
+
         #endregion
 
         #region Constructors
@@ -43,6 +53,8 @@ namespace DungeonCrawler.Systems
         public MovementSystem(DungeonCrawlerGame game)
         {
             this.game = game;
+            this.RoomHeight = 23;
+            this.RoomWidth = 40;
         }
 
         #endregion
@@ -63,6 +75,12 @@ namespace DungeonCrawler.Systems
                 // Update the entity's position in the world
                 Position position = game.PositionComponent[movement.EntityID];
                 position.Center += elapsedTime * movement.Speed * movement.Direction;
+                // Player clamping
+                // TODO: Get size of rooms from somewhere (probably from a room component)
+                if (position.Center.X - position.Radius < 2 * 32) position.Center.X = (2 * 32) + position.Radius;
+                if (position.Center.Y - position.Radius < 2 * 31) position.Center.Y = (2 * 31) + position.Radius;
+                if (position.Center.X + position.Radius > (RoomWidth - 2) * 32) position.Center.X = (RoomWidth - 2) * 32 - position.Radius;
+                if (position.Center.Y + position.Radius > (RoomHeight - 2) * 31) position.Center.Y = (RoomHeight - 2) * 31 - position.Radius;
                 game.PositionComponent[movement.EntityID] = position;
                 
                 // Update the entity's movement sprite
