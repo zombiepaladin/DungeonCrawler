@@ -8,8 +8,9 @@ namespace DungeonCrawler.Components
     public struct Equipment
     {
         public uint EntityID;
-        public uint PlayerID;
+
         public uint WeaponID;
+        public uint AltWeaponID;
 
         public uint Skill1ID;
         public uint Skill2ID;

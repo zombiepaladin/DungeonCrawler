@@ -32,9 +32,9 @@ namespace DungeonCrawler.Entities
         /// Creates Entities from aggregates (collections of components)
         /// </summary>
         /// <param name="aggregate">The specific aggreage to create</param>
-        public void CreateFromAggregate(Aggregate aggregate, PlayerIndex playerIndex)
+        public uint CreateFromAggregate(Aggregate aggregate, PlayerIndex playerIndex)
         {
-            uint entityID;
+            uint entityID = 0xFFFFFF;
             Texture2D spriteSheet;
             Position position;
             Movement movement;
@@ -300,7 +300,12 @@ namespace DungeonCrawler.Entities
                     invagg = new InvAggregateFactory(game);
                     invagg.CreateInv(player);
                     break;
+
+                default:
+                    throw new Exception("Unknown type.");
             }
+
+            return entityID;
         }
     }
 }

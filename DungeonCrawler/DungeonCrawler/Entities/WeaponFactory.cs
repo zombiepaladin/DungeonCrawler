@@ -69,51 +69,54 @@ namespace DungeonCrawler.Entities
         /// Creates a new weapon and adds it to the game.
         /// </summary>
         /// <param name="type">The type of weapon to create.</param>
-        public void CreateWeapon(WeaponType type)
+        public uint CreateWeapon(WeaponType type)
         {
             Sprite sprite;
+            uint eid = Entity.NextEntity();
 
             switch (type)
             {
                 case WeaponType.StandardSword:
                     //Weapon Component
-                    _standardSword.EntitiyID = Entity.NextEntity();
-                    _game.WeaponComponent.Add(_standardSword.EntitiyID, _standardSword);
+                    _standardSword.EntitiyID = eid;
+                    _game.WeaponComponent.Add(eid, _standardSword);
 
                     //Sprite Component (Consider making some of this static)
                     sprite = new Sprite()
                     {
-                        EntityID = _standardSword.EntitiyID,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Content/standardSword"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 96),
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword"),
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
                     };
-                    _game.SpriteComponent.Add(_standardSword.EntitiyID, sprite);
+                    _game.SpriteComponent.Add(eid, sprite);
 
                     //Position Component (Just make the placehold, this will be updated later)
-                    _game.PositionComponent.Add(_standardGun.EntitiyID, new Position());
+                    _game.PositionComponent.Add(eid, new Position());
                     break;
 
                 case WeaponType.StandardGun:
                     //Weapon Component
-                    _standardGun.EntitiyID = Entity.NextEntity();
-                    _game.WeaponComponent.Add(_standardGun.EntitiyID, _standardSword);
+                    _standardGun.EntitiyID = eid;
+                    _game.WeaponComponent.Add(eid, _standardSword);
 
                     //Sprite Component (Consider making some of this static)
                     sprite = new Sprite()
                     {
-                        EntityID = _standardGun.EntitiyID,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Content/standardGun"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 96),
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardGun"),
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
                     };
-                    _game.SpriteComponent.Add(_standardGun.EntitiyID, sprite);
+                    _game.SpriteComponent.Add(eid, sprite);
 
                     //Position Component (Just make the placehold, this will be updated later)
-                    _game.PositionComponent.Add(_standardGun.EntitiyID, new Position());
+                    _game.PositionComponent.Add(eid, new Position());
                     break;
 
                 default:
                     throw new Exception("Unknown WeaponType");
             }
+
+            return eid;
         }
 
         /// <summary>
@@ -122,35 +125,37 @@ namespace DungeonCrawler.Entities
         /// <param name="type"></param>
         /// <param name="position"></param>
         /// <param name="direction"></param>
-        public void CreateBullet(BulletType type, Position position, Vector2 direction)
+        public uint CreateBullet(BulletType type, Position position, Vector2 direction)
         {
             Movement movement;
+            uint eid = Entity.NextEntity();
 
             switch (type)
             {
                 case BulletType.StandardBullet:
                     //Bullet Component
-                    _standardBullet.EntityID = Entity.NextEntity();
+                    _standardBullet.EntityID = eid;
 
                     //Position Component
-                    position.EntityID = _standardBullet.EntityID;
-                    _game.PositionComponent.Add(_standardBullet.EntityID, position);
+                    position.EntityID = eid;
+                    _game.PositionComponent.Add(eid, position);
 
                     //Movement Component
                     direction.Normalize();
                     movement = new Movement()
                     {
-                        EntityID = _standardBullet.EntityID,
+                        EntityID = eid,
                         Direction = direction,
                         Speed = 1,
                     };
-                    _game.MovementComponent.Add(_standardBullet.EntityID, movement);
-
+                    _game.MovementComponent.Add(eid, movement);
                     break;
 
                 default:
                     throw new Exception("Unknown BulletType");
             }
+
+            return eid;
         }
     }
 }

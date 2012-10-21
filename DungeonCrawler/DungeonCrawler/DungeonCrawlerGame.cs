@@ -68,6 +68,8 @@ namespace DungeonCrawler
         /// </summary>
         public AggregateFactory AggregateFactory;
 
+        public WeaponFactory WeaponFactory;
+
         public CharacterSelectionScreen CharacterSelectionScreen;
 
         #endregion
@@ -126,6 +128,7 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            WeaponFactory = new WeaponFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -168,9 +171,15 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
+            Equipment e = new Equipment()
+            {
+                EntityID = AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One),
+                WeaponID = WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+            };
+            EquipmentComponent.Add(e.EntityID, e);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
+            //End Testing Code
 
         }
 
