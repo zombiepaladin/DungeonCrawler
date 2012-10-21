@@ -137,6 +137,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
     <Compile Include="CharacterSelection\Sprite.cs" />
+    <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
