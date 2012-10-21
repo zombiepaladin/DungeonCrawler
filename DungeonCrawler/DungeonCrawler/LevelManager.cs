@@ -73,14 +73,14 @@ namespace DungeonCrawler
                 CurrentMap.LoadContent(game.Content);
 
                 // Load the background music
-                //////////if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
-                //////////{
-                //////////    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
-                //////////}
-                //////////else
-                //////////{
-                //////////    CurrentSong = null;
-                //////////}
+                //if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
+                //{
+                //    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
+                //}
+                //else
+                //{
+                //    CurrentSong = null;
+                //}
 
                 for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
                 {
@@ -98,8 +98,14 @@ namespace DungeonCrawler
                                 //goData.Type
                                 break;
                             case "Trigger":
-                                //goData.Type
-                                break;
+                                switch (goData.Type)
+                                {
+                                    case "Door":
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            break;
 
                         }
                     }

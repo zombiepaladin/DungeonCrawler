@@ -41,8 +41,8 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
-            HUDAggregateFactory hudagg;
-            InvAggregateFactory invagg;
+            HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
+            InvAggregateFactory invagg = new InvAggregateFactory(game);
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
@@ -92,6 +92,50 @@ namespace DungeonCrawler.Entities
                     break;
 
                 case Aggregate.CultistPlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
+                    spriteSheet.Name = "Spritesheets/Cultist";
+                    
+                    position = new Position()
+                    {
+                        EntityID = entityID,
+                        Center = new Vector2(400, 50),
+                        Radius = 32f,
+                    };
+                    game.PositionComponent[entityID] = position;
+                    
+                    movement = new Movement() {
+                        EntityID = entityID,
+                        Direction = new Vector2(0, 1),
+                        Speed = 200f,
+                    };
+                    game.MovementComponent[entityID] = movement;
+                    
+                    movementSprite = new MovementSprite() {
+                        EntityID = entityID,
+                        Facing = Facing.South,
+                        SpriteSheet = spriteSheet,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        Timer = 0f,
+                    };
+                    game.MovementSpriteComponent[entityID] = movementSprite;
+                    
+                    local = new Local(){
+                        EntityID = entityID,
+                    };
+                    game.LocalComponent[entityID] = local;
+
+                    player = new Player()
+                    {
+                        EntityID = entityID,
+                        PlayerIndex = PlayerIndex.One,
+                    };
+                    game.PlayerComponent[entityID] = player;
+                    //Create HUD
+                    hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
+
                     break;
 
                 case Aggregate.CyborgPlayer:
@@ -138,14 +182,55 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
                     //create Inv
-                    invagg = new InvAggregateFactory(game);
                     invagg.CreateInv(player);
                     break;
 
                 case Aggregate.EarthianPlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
+                    spriteSheet.Name = "Spritesheets/Earthian2x";
+                    
+                    position = new Position()
+                    {
+                        EntityID = entityID,
+                        Center = new Vector2(400, 50),
+                        Radius = 32f,
+                    };
+                    game.PositionComponent[entityID] = position;
+                    
+                    movement = new Movement() {
+                        EntityID = entityID,
+                        Direction = new Vector2(0, 1),
+                        Speed = 200f,
+                    };
+                    game.MovementComponent[entityID] = movement;
+                    
+                    movementSprite = new MovementSprite() {
+                        EntityID = entityID,
+                        Facing = Facing.South,
+                        SpriteSheet = spriteSheet,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        Timer = 0f,
+                    };
+                    game.MovementSpriteComponent[entityID] = movementSprite;
+                    
+                    local = new Local(){
+                        EntityID = entityID,
+                    };
+                    game.LocalComponent[entityID] = local;
+
+                    player = new Player()
+                    {
+                        EntityID = entityID,
+                        PlayerIndex = playerIndex,
+                    };
+                    game.PlayerComponent[entityID] = player;
+                    //Create HUD
+                    hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.GargranianPlayer:
@@ -192,10 +277,8 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
                     //create Inv
-                    invagg = new InvAggregateFactory(game);
                     invagg.CreateInv(player);
                     break;
 
@@ -243,10 +326,8 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
                     //create Inv
-                    invagg = new InvAggregateFactory(game);
                     invagg.CreateInv(player);
                     break;
 
@@ -294,10 +375,8 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
                     //create Inv
-                    invagg = new InvAggregateFactory(game);
                     invagg.CreateInv(player);
                     break;
             }
