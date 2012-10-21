@@ -11,6 +11,11 @@ namespace DungeonCrawler.Entities
         StandardGun,
     }
 
+    public enum BulletType
+    {
+        StandardBullet,
+    }
+
     public class WeaponFactory
     {
         private DungeonCrawlerGame _game;
@@ -31,9 +36,18 @@ namespace DungeonCrawler.Entities
                     break;
 
                 default:
-                //Create the default sword.
-                    break;
+                    throw new Exception("Unknown WeaponType");
             }
         }
+
+        public void CreateBullet(BulletType type)
+        {
+            switch (type)
+            {
+                case BulletType.StandardBullet:
+                    break;
+
+                default:
+                    throw new Exception("Unknown BulletType");
     }
 }

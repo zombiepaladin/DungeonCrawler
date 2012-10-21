@@ -73,6 +73,25 @@ namespace DungeonCrawler.Components
     /// </summary>
     public class WeaponComponent : GameComponent<Weapon>
     {
+        //Keeps track of weapons activly in use.
+        private List<uint> _weaponsInUse = new List<uint>(4);
+
+        /// <summary>
+        /// Returns all weapons currently in use. (I don't like creating a list everytime. Refactor)
+        /// </summary>
+        public IEnumerable<Weapon> WeaponsInUse
+        {
+            get
+            {
+                List<Weapon> _retList = new List<Weapon>(_weaponsInUse.Count);
+                foreach (uint id in _weaponsInUse)
+                {
+                    _retList.Add(this[id]);
+                }
+                return _retList;
+            }
+        }
+
         /// <summary>
         /// Returns true if the weapon has the given effect set.
         /// </summary>
@@ -117,6 +136,17 @@ namespace DungeonCrawler.Components
         public void RemoveEffect(uint id, WeaponEffect effect)
         {
             RemoveEffect(this[id], effect);
+        }
+
+        public void AddToInUse(uint weaponID)
+        {
+            if(!_weaponsInUse.Contains(weaponID))
+                _weaponsInUse.Add(weaponID);
+        }
+
+        public void RemoveFromInUse(uint weaponID)
+        {
+            _weaponsInUse.Remove(weaponID);
         }
     }
     #endregion
