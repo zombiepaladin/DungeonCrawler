@@ -13,8 +13,8 @@ namespace DungeonCrawler.Components
     /// </summary>
     public enum WeaponAttackType
     {
-        Melee,
-        Ranged,
+        Melee, //Attacks enemies in around player.
+        Ranged, //Creates a bullet entity.
     }
 
     /// <summary>
@@ -23,9 +23,9 @@ namespace DungeonCrawler.Components
     public enum WeaponEffect
     {
         None = 0x0,
-        Stun = 0x1,
-        One_Hit_KO = 0x2,
-        Slow = 0x4,
+        Stun = 0x1, //Stop enemy attacks for a short period.
+        One_Hit_KO = 0x2, //Instantly kill the enemy.
+        Slow = 0x4, //Slow the enemy attacks.
     }
 
     /// <summary>

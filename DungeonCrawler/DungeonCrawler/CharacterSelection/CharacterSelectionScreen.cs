@@ -156,7 +156,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 0] = Aggregate.CultistPlayer;
 
             // The Earthian Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectGargranian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectEarthian");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;

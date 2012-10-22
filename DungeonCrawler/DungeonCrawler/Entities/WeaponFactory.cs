@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Entities
 {
+    /// <summary>
+    /// Type of weapon to create.
+    /// </summary>
     public enum WeaponType
     {
         WeakSword,
@@ -16,11 +19,17 @@ namespace DungeonCrawler.Entities
         StandardGun,
     }
 
+    /// <summary>
+    /// Type of bullet to create.
+    /// </summary>
     public enum BulletType
     {
         StandardBullet,
     }
 
+    /// <summary>
+    /// Handles creating weapons and bullets and adding them to the game.
+    /// </summary>
     public class WeaponFactory
     {
         #region Base Weapons
@@ -68,7 +77,7 @@ namespace DungeonCrawler.Entities
         }
 
         /// <summary>
-        /// Creates a new weapon and adds it to the game.
+        /// Creates a new weapon and adds it to the game. (No other components created)
         /// </summary>
         /// <param name="type">The type of weapon to create.</param>
         public uint CreateWeapon(WeaponType type)
@@ -109,7 +118,7 @@ namespace DungeonCrawler.Entities
         }
 
         /// <summary>
-        /// Creates a new bullet and adds it to the game.
+        /// Creates a new bullet and adds it to the game. (Will also create the position, movement, and sprite components)
         /// </summary>
         /// <param name="type"></param>
         /// <param name="position"></param>

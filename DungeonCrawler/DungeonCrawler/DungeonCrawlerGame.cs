@@ -59,16 +59,30 @@ namespace DungeonCrawler
         /// The current GameState
         /// TODO: Change initial state to SplashScreen
         /// </summary>
-        public GameState GameState = GameState.Gameplay;
+        public GameState GameState = GameState.SignIn;
 
         public static LevelManager LevelManager;
+
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
         /// </summary>
         public AggregateFactory AggregateFactory;
 
+        /// <summary>
+        /// A factory for creating weapons and bullets.
+        /// </summary>
         public WeaponFactory WeaponFactory;
+        
+        /// <summary>
+        /// A DoorFactory for creating doors
+        /// </summary>
+        public DoorFactory DoorFactory;
+
+        /// <summary>
+        /// A RoomFactory for creating rooms
+        /// </summary>
+        public RoomFactory RoomFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
 
@@ -130,6 +144,8 @@ namespace DungeonCrawler
         {
             AggregateFactory = new AggregateFactory(this);
             WeaponFactory = new WeaponFactory(this);
+            DoorFactory = new DoorFactory(this);
+            RoomFactory = new RoomFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();

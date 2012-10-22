@@ -92,7 +92,7 @@ namespace DungeonCrawler.Systems
                 if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
                 {
                     Equipment e = game.EquipmentComponent[player.EntityID];
-                    PlayerAttacking(player.EntityID);
+                    //Need to set an attacking flag here.
                 }
 
                 #region HUD Displays
