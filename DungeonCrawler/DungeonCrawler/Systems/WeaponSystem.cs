@@ -35,12 +35,6 @@ namespace DungeonCrawler.Systems
             _timer += elapsedTime;
             bool spriteRemoved = false;
 
-            WeaponSprite[] weaponSprites = _game.WeaponSpriteComponent.All.ToArray();
-            for (int i = 0; i < weaponSprites.Length; i++)
-            {
-                UpdateWeaponSprite(weaponSprites[i]);
-            }
-
             foreach (Player player in _game.PlayerComponent.All)
             {
 
@@ -110,7 +104,7 @@ namespace DungeonCrawler.Systems
         {
             bool removed = false;
 
-            if (_timer >= .01f)
+            if (_timer >= .05f)
             {
                 if (sprite.SpriteBounds.X < 192)
                 {

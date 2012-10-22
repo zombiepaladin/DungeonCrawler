@@ -102,6 +102,7 @@ namespace DungeonCrawler.Systems
             foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
+                position.Center += new Vector2(10); //Offset the weapon a bit;
                 spriteBatch.Draw(sprite.SpriteSheet,
                                 position.Center,
                                 sprite.SpriteBounds,
