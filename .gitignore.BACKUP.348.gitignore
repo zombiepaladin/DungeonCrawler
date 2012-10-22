@@ -1,0 +1,15 @@
+# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
+bin
+obj
+
+# mstest test results
+TestResults
+
+# Solution user options
+*.suo
+<<<<<<< HEAD
+DungeonCrawler/DungeonCrawler/DungeonCrawler.csproj.Debug.cachefile
+DungeonCrawler/DungeonCrawler/DungeonCrawler.csproj.Debug.cachefile
+=======
+DungeonCrawler/DungeonCrawler/DungeonCrawler.csproj.Debug.cachefile
+>>>>>>> c4ec1a30b6470c57eabe89036089f14f951f1856

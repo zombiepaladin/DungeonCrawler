@@ -33,7 +33,7 @@ namespace DungeonCrawler.Entities
         /// </summary>
         /// <param name="aggregate">The specific aggreage to create</param>
         public void CreateFromAggregate(Aggregate aggregate, PlayerIndex playerIndex)
-        { 
+        {
             uint entityID;
             Texture2D spriteSheet;
             Position position;
@@ -41,14 +41,60 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
-            HUDAggregateFactory hudagg;
-
+            HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
+            InvAggregateFactory invagg = new InvAggregateFactory(game);
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
                     spriteSheet.Name = "Spritesheets/wind_fae";
+
+                    position = new Position()
+                    {
+                        EntityID = entityID,
+                        Center = new Vector2(400, 50),
+                        Radius = 32f,
+                    };
+                    game.PositionComponent[entityID] = position;
+
+                    movement = new Movement()
+                    {
+                        EntityID = entityID,
+                        Direction = new Vector2(0, 1),
+                        Speed = 200f,
+                    };
+                    game.MovementComponent[entityID] = movement;
+
+                    movementSprite = new MovementSprite()
+                    {
+                        EntityID = entityID,
+                        Facing = Facing.South,
+                        SpriteSheet = spriteSheet,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        Timer = 0f,
+                    };
+                    game.MovementSpriteComponent[entityID] = movementSprite;
+
+                    local = new Local()
+                    {
+                        EntityID = entityID,
+                    };
+                    game.LocalComponent[entityID] = local;
+
+                    player = new Player()
+                    {
+                        EntityID = entityID,
+                        PlayerIndex = playerIndex,
+                    };
+                    game.PlayerComponent[entityID] = player;
+
+                    break;
+
+                case Aggregate.CultistPlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
+                    spriteSheet.Name = "Spritesheets/Cultist";
                     
                     position = new Position()
                     {
@@ -82,20 +128,21 @@ namespace DungeonCrawler.Entities
                     player = new Player()
                     {
                         EntityID = entityID,
-                        PlayerIndex = playerIndex,
+                        PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
-                    
-                    break;
+                    //Create HUD
+                    hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
 
-                case Aggregate.CultistPlayer:
                     break;
 
                 case Aggregate.CyborgPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/cyborg");
                     spriteSheet.Name = "Spritesheets/cyborg";
-                    
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -103,15 +150,17 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-                    
-                    movement = new Movement() {
+
+                    movement = new Movement()
+                    {
                         EntityID = entityID,
                         Direction = new Vector2(0, 1),
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    
-                    movementSprite = new MovementSprite() {
+
+                    movementSprite = new MovementSprite()
+                    {
                         EntityID = entityID,
                         Facing = Facing.South,
                         SpriteSheet = spriteSheet,
@@ -119,8 +168,9 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
-                    
-                    local = new Local(){
+
+                    local = new Local()
+                    {
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
@@ -132,17 +182,15 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.EarthianPlayer:
-                    break;
-
-                case Aggregate.GargranianPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
-                    spriteSheet.Name = "Spritesheets/gargranian";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
+                    spriteSheet.Name = "Spritesheets/Earthian2x";
                     
                     position = new Position()
                     {
@@ -180,16 +228,16 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
-                    
+                    //create Inv
+                    invagg.CreateInv(player);
                     break;
 
-                case Aggregate.SpacePiratePlayer:
-                                        entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
-                    spriteSheet.Name = "Spritesheets/SpacePBig";
-                    
+                case Aggregate.GargranianPlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
+                    spriteSheet.Name = "Spritesheets/gargranian";
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -197,15 +245,17 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-                    
-                    movement = new Movement() {
+
+                    movement = new Movement()
+                    {
                         EntityID = entityID,
                         Direction = new Vector2(0, 1),
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    
-                    movementSprite = new MovementSprite() {
+
+                    movementSprite = new MovementSprite()
+                    {
                         EntityID = entityID,
                         Facing = Facing.South,
                         SpriteSheet = spriteSheet,
@@ -213,8 +263,58 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
-                    
-                    local = new Local(){
+
+                    local = new Local()
+                    {
+                        EntityID = entityID,
+                    };
+                    game.LocalComponent[entityID] = local;
+
+                    player = new Player()
+                    {
+                        EntityID = entityID,
+                        PlayerIndex = playerIndex,
+                    };
+                    game.PlayerComponent[entityID] = player;
+                    //Create HUD
+                    hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
+                    break;
+
+                case Aggregate.SpacePiratePlayer:
+                    entityID = Entity.NextEntity();
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
+                    spriteSheet.Name = "Spritesheets/SpacePBig";
+
+                    position = new Position()
+                    {
+                        EntityID = entityID,
+                        Center = new Vector2(400, 50),
+                        Radius = 32f,
+                    };
+                    game.PositionComponent[entityID] = position;
+
+                    movement = new Movement()
+                    {
+                        EntityID = entityID,
+                        Direction = new Vector2(0, 1),
+                        Speed = 200f,
+                    };
+                    game.MovementComponent[entityID] = movement;
+
+                    movementSprite = new MovementSprite()
+                    {
+                        EntityID = entityID,
+                        Facing = Facing.South,
+                        SpriteSheet = spriteSheet,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        Timer = 0f,
+                    };
+                    game.MovementSpriteComponent[entityID] = movementSprite;
+
+                    local = new Local()
+                    {
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
@@ -226,16 +326,16 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
-                    
+                    //create Inv
+                    invagg.CreateInv(player);
                     break;
 
                 case Aggregate.ZombiePlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
                     spriteSheet.Name = "Spritesheets/MzombieBx2";
-                    
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -243,15 +343,17 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-                    
-                    movement = new Movement() {
+
+                    movement = new Movement()
+                    {
                         EntityID = entityID,
                         Direction = new Vector2(0, 1),
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    
-                    movementSprite = new MovementSprite() {
+
+                    movementSprite = new MovementSprite()
+                    {
                         EntityID = entityID,
                         Facing = Facing.South,
                         SpriteSheet = spriteSheet,
@@ -259,8 +361,9 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
-                    
-                    local = new Local(){
+
+                    local = new Local()
+                    {
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
@@ -272,8 +375,9 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg = new HUDAggregateFactory(game);
                     hudagg.CreateHUD(player);
+                    //create Inv
+                    invagg.CreateInv(player);
                     break;
             }
         }

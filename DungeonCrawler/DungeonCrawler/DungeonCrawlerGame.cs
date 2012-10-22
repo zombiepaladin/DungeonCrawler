@@ -62,11 +62,22 @@ namespace DungeonCrawler
         public GameState GameState = GameState.SignIn;
 
         public static LevelManager LevelManager;
+
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
         /// </summary>
         public AggregateFactory AggregateFactory;
+
+        /// <summary>
+        /// A DoorFactory for creating doors
+        /// </summary>
+        public DoorFactory DoorFactory;
+
+        /// <summary>
+        /// A RoomFactory for creating rooms
+        /// </summary>
+        public RoomFactory RoomFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
 
@@ -86,7 +97,8 @@ namespace DungeonCrawler
         public DoorComponent DoorComponent;
 		public HUDSpriteComponent HUDSpriteComponent;
         public HUDComponent HUDComponent;
-
+        public InventoryComponent InventoryComponent;
+        public InventorySpriteComponent InventorySpriteComponent;
         #endregion
 
         #region Game Systems
@@ -122,6 +134,8 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            DoorFactory = new DoorFactory(this);
+            RoomFactory = new RoomFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -135,7 +149,8 @@ namespace DungeonCrawler
             RoomComponent = new RoomComponent();
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
-
+            InventoryComponent = new InventoryComponent();
+            InventorySpriteComponent = new InventorySpriteComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
 
             LevelManager = new LevelManager(this);
@@ -159,8 +174,6 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            // Testing code
-            //AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
@@ -240,7 +253,9 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
+
                     NetworkSystem.Update(elapsedTime);
+
                     MovementSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     break;
