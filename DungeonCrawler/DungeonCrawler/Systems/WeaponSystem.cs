@@ -33,6 +33,7 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             _timer += elapsedTime;
+            bool spriteRemoved = false;
 
             WeaponSprite[] weaponSprites = _game.WeaponSpriteComponent.All.ToArray();
             for (int i = 0; i < weaponSprites.Length; i++)
@@ -42,12 +43,22 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
+
+
                 if (_game.PlayerInfoComponent[player.EntityID].State != PlayerState.Attacking)
                     continue;
-                CreateWeaponSprite(_game.EquipmentComponent[player.EntityID]);
-                PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
-                info.State = PlayerState.Default;
-                _game.PlayerInfoComponent[player.EntityID] = info;
+
+                if(_game.WeaponSpriteComponent.Contains(player.EntityID))
+                    spriteRemoved = UpdateWeaponSprite(_game.WeaponSpriteComponent[player.EntityID]);
+                else
+                    CreateWeaponSprite(_game.EquipmentComponent[player.EntityID]);
+
+                if(spriteRemoved)
+                {
+                    PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+                    info.State = PlayerState.Default;
+                    _game.PlayerInfoComponent[player.EntityID] = info;
+                }
             }
         }
 
@@ -60,7 +71,7 @@ namespace DungeonCrawler.Systems
 
             WeaponSprite sprite = new WeaponSprite()
             {
-                EntityID = Entity.NextEntity(),
+                EntityID = equipment.EntityID,
             };
 
             switch (type)
@@ -77,9 +88,6 @@ namespace DungeonCrawler.Systems
                     break;
             }
             _game.WeaponSpriteComponent.Add(sprite.EntityID, sprite);
-
-            position.EntityID = sprite.EntityID;
-            _game.PositionComponent.Add(position.EntityID, position);
         }
 
         //Handles creating the Bullet object and sprite.
@@ -102,7 +110,7 @@ namespace DungeonCrawler.Systems
         {
             bool removed = false;
 
-            if (_timer >= .05f)
+            if (_timer >= .01f)
             {
                 if (sprite.SpriteBounds.X < 192)
                 {
