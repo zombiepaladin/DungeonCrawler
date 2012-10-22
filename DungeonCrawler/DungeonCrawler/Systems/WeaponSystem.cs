@@ -33,14 +33,7 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             _timer += elapsedTime;
-            foreach (Player player in _game.PlayerComponent.All)
-            {
-                if (true) //Need to figure out attacking flag
-                    continue;
-
-                Equipment e = _game.EquipmentComponent[player.EntityID];
-                
-            }
+            //Implement logic here.
         }
 
         //Handles Creating the WeaponSprite.
@@ -48,6 +41,7 @@ namespace DungeonCrawler.Systems
         {
             WeaponType type = _game.WeaponComponent[equipment.WeaponID].Type;
             Position position = _game.PositionComponent[equipment.EntityID];
+            int y = (int)_game.MovementSpriteComponent[equipment.EntityID].Facing * 64;
 
             Sprite sprite = new Sprite()
             {
@@ -60,11 +54,11 @@ namespace DungeonCrawler.Systems
                 case WeaponType.StandardSword:
                 case WeaponType.StrongSword:
                     sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
-                    sprite.SpriteBounds = new Rectangle(0, 0, 64, 64);
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.StandardGun:
                     sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardGun");
-                    sprite.SpriteBounds = new Rectangle(0, 0, 64, 64);
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }
             _game.SpriteComponent.Add(sprite.EntityID, sprite);
@@ -74,33 +68,34 @@ namespace DungeonCrawler.Systems
         }
 
         //Handles creating the Bullet object and sprite.
-        private void CreateBulletAndSprite(uint weaponID)
+        private void CreateBulletAndSprite(Equipment equipment)
         {
-
+            Position position = _game.PositionComponent[equipment.EntityID];
+            Vector2 direction = _game.MovementComponent[equipment.EntityID].Direction;
+            switch (_game.WeaponComponent[equipment.WeaponID].Type)
+            {
+                case WeaponType.StandardGun:
+                    _game.WeaponFactory.CreateBullet(BulletType.StandardBullet, direction, position);
+                    break;
+                default:
+                    throw new Exception("Unknown weapon type.");
+            }
         }
 
         //Handles updating already made weapon sprites.
-        private void UpdateWeaponSprite(uint weaponID)
+        private void UpdateWeaponSprite(uint spriteID)
         {
-            Sprite sprite = _game.SpriteComponent[weaponID];
+            Sprite sprite = _game.SpriteComponent[spriteID];
 
-            if (ring(.5f))
+            if (_timer >= .5f)
             {
                 if (sprite.SpriteBounds.X < 192)
                     sprite.SpriteBounds.X += 64;
                 else
-                    _game.SpriteComponent.Remove(weaponID);
-            }
-        }
+                    _game.SpriteComponent.Remove(spriteID);
 
-        /// <summary>
-        /// Use this to determine if timer has elasped.
-        /// </summary>
-        /// <param name="alarm"></param>
-        /// <returns></returns>
-        private bool ring(float alarm)
-        {
-            return (_timer % alarm) < .0001;
+                _timer = 0;
+            }
         }
     }
 }

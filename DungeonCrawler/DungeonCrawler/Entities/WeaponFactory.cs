@@ -114,36 +114,41 @@ namespace DungeonCrawler.Entities
         /// <param name="type"></param>
         /// <param name="position"></param>
         /// <param name="direction"></param>
-        public uint CreateBullet(BulletType type, Position position, Vector2 direction)
+        public uint CreateBullet(BulletType type, Vector2 direction, Position position)
         {
+            Bullet bullet;
             Movement movement;
+            Sprite sprite;
             uint eid = Entity.NextEntity();
+
+            position.EntityID = eid;
 
             switch (type)
             {
                 case BulletType.StandardBullet:
-                    //Bullet Component
-                    _standardBullet.EntityID = eid;
-
-                    //Position Component
-                    position.EntityID = eid;
-                    _game.PositionComponent.Add(eid, position);
-
-                    //Movement Component
-                    direction.Normalize();
+                    bullet = _standardBullet;
+                    bullet.EntityID = eid;
                     movement = new Movement()
                     {
                         EntityID = eid,
                         Direction = direction,
                         Speed = 1,
                     };
-                    _game.MovementComponent.Add(eid, movement);
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheet/StandardBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 5, 5),
+                    };
                     break;
-
                 default:
                     throw new Exception("Unknown BulletType");
             }
 
+            _game.BulletComponent.Add(eid, bullet);
+            _game.MovementComponent.Add(eid, movement);
+            _game.PositionComponent.Add(eid, position);
+            _game.SpriteComponent.Add(eid, sprite);
             return eid;
         }
     }

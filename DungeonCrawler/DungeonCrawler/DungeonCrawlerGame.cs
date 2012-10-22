@@ -92,6 +92,7 @@ namespace DungeonCrawler
         public InventorySpriteComponent InventorySpriteComponent;
         public EquipmentComponent EquipmentComponent;
         public WeaponComponent WeaponComponent;
+        public BulletComponent BulletComponent;
         #endregion
 
         #region Game Systems
@@ -101,6 +102,7 @@ namespace DungeonCrawler
         NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
+        WeaponSystem WeaponSystem;
 
         #endregion
 
@@ -145,6 +147,7 @@ namespace DungeonCrawler
             InventorySpriteComponent = new InventorySpriteComponent();
             EquipmentComponent = new EquipmentComponent();
             WeaponComponent = new WeaponComponent();
+            BulletComponent = new BulletComponent();
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
@@ -166,6 +169,7 @@ namespace DungeonCrawler
             NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
+            WeaponSystem = new WeaponSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
@@ -255,8 +259,9 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-                    //NetworkSystem.Update(elapsedTime);
+                    NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
+                    WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     break;
 
@@ -264,7 +269,6 @@ namespace DungeonCrawler
                     // TODO: Update credits
                     break;
             }
-
 
             base.Update(gameTime);
         }
