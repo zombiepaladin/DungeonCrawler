@@ -56,4 +56,28 @@ namespace DungeonCrawler.Components
     {
 
     }
+
+    ///<summary>
+    ///Contains current information for the player.
+    ///</summary>
+    public struct PlayerInfo
+    {
+        ///<summary>
+        ///The entity the player information belongs to.
+        ///</summary>
+        public uint EntityID;
+
+        ///<summary>
+        ///The current state of the player.
+        ///</summary>
+        public PlayerState State;
+    }
+
+    ///<summary>
+    ///The player information components.
+    ///</summary>
+    public class PlayerInfoComponent : GameComponent<PlayerInfo>
+    {
+        
+    }
 }
