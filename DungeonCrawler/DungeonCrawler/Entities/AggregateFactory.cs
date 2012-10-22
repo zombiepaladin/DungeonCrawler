@@ -41,8 +41,10 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
+            PlayerInfo info;
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
+
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
@@ -89,6 +91,13 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerComponent[entityID] = player;
 
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+
                     break;
 
                 case Aggregate.CultistPlayer:
@@ -130,6 +139,14 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
                     };
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -180,6 +197,14 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
                     };
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+
                     game.PlayerComponent[entityID] = player;
                     //create HUD
                     hudagg.CreateHUD(player);
@@ -227,6 +252,15 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                     };
                     game.PlayerComponent[entityID] = player;
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+                    game.PlayerInfoComponent[entityID] = info;
+                    
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv
@@ -276,6 +310,15 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                     };
                     game.PlayerComponent[entityID] = player;
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+                    game.PlayerInfoComponent[entityID] = info;
+                    
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv
@@ -325,6 +368,15 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+                    game.PlayerInfoComponent[entityID] = info;
+                    
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv
@@ -374,6 +426,15 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                     };
                     game.PlayerComponent[entityID] = player;
+
+                    info = new PlayerInfo()
+                    {
+                        Health = 100,
+                        Psi = 100,
+                        State = PlayerState.Default,
+                    };
+                    game.PlayerInfoComponent[entityID] = info;
+                    
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv

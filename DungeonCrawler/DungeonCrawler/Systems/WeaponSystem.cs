@@ -33,7 +33,22 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             _timer += elapsedTime;
-            //Implement logic here.
+
+            WeaponSprite[] weaponSprites = _game.WeaponSpriteComponent.All.ToArray();
+            for (int i = 0; i < weaponSprites.Length; i++)
+            {
+                UpdateWeaponSprite(weaponSprites[i]);
+            }
+
+            foreach (Player player in _game.PlayerComponent.All)
+            {
+                if (_game.PlayerInfoComponent[player.EntityID].State != PlayerState.Attacking)
+                    continue;
+                CreateWeaponSprite(_game.EquipmentComponent[player.EntityID]);
+                PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+                info.State = PlayerState.Default;
+                _game.PlayerInfoComponent[player.EntityID] = info;
+            }
         }
 
         //Handles Creating the WeaponSprite.
@@ -43,7 +58,7 @@ namespace DungeonCrawler.Systems
             Position position = _game.PositionComponent[equipment.EntityID];
             int y = (int)_game.MovementSpriteComponent[equipment.EntityID].Facing * 64;
 
-            Sprite sprite = new Sprite()
+            WeaponSprite sprite = new WeaponSprite()
             {
                 EntityID = Entity.NextEntity(),
             };
@@ -61,7 +76,7 @@ namespace DungeonCrawler.Systems
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }
-            _game.SpriteComponent.Add(sprite.EntityID, sprite);
+            _game.WeaponSpriteComponent.Add(sprite.EntityID, sprite);
 
             position.EntityID = sprite.EntityID;
             _game.PositionComponent.Add(position.EntityID, position);
@@ -82,20 +97,28 @@ namespace DungeonCrawler.Systems
             }
         }
 
-        //Handles updating already made weapon sprites.
-        private void UpdateWeaponSprite(uint spriteID)
+        //Handles updating already made weapon sprites. Returns if the sprite was removed.
+        private bool UpdateWeaponSprite(WeaponSprite sprite)
         {
-            Sprite sprite = _game.SpriteComponent[spriteID];
+            bool removed = false;
 
-            if (_timer >= .5f)
+            if (_timer >= .05f)
             {
                 if (sprite.SpriteBounds.X < 192)
+                {
                     sprite.SpriteBounds.X += 64;
+                    _game.WeaponSpriteComponent[sprite.EntityID] = sprite;
+                }
                 else
-                    _game.SpriteComponent.Remove(spriteID);
+                {
+                    _game.WeaponSpriteComponent.Remove(sprite.EntityID);
+                    removed = true;
+                }
 
                 _timer = 0;
             }
+
+            return removed;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace DungeonCrawler
         /// The current GameState
         /// TODO: Change initial state to SplashScreen
         /// </summary>
-        public GameState GameState = GameState.SignIn;
+        public GameState GameState = GameState.Gameplay;
 
         public static LevelManager LevelManager;
 
@@ -107,6 +107,8 @@ namespace DungeonCrawler
         public EquipmentComponent EquipmentComponent;
         public WeaponComponent WeaponComponent;
         public BulletComponent BulletComponent;
+        public PlayerInfoComponent PlayerInfoComponent;
+        public WeaponSpriteComponent WeaponSpriteComponent;
         #endregion
 
         #region Game Systems
@@ -164,6 +166,8 @@ namespace DungeonCrawler
             EquipmentComponent = new EquipmentComponent();
             WeaponComponent = new WeaponComponent();
             BulletComponent = new BulletComponent();
+            PlayerInfoComponent = new PlayerInfoComponent();
+            WeaponSpriteComponent = new WeaponSpriteComponent();
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
@@ -275,7 +279,7 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-                    NetworkSystem.Update(elapsedTime);
+                    //NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);

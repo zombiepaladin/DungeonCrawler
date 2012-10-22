@@ -42,11 +42,6 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
-
-        /// <summary>
-        /// What the player is currently doing.
-        /// </summary>
-        public PlayerState State;
     }
 
     /// <summary>
@@ -66,6 +61,16 @@ namespace DungeonCrawler.Components
         ///The entity the player information belongs to.
         ///</summary>
         public uint EntityID;
+
+        /// <summary>
+        /// Current amount of health the player has.
+        /// </summary>
+        public int Health;
+
+        /// <summary>
+        /// Current amount of psi the player has.
+        /// </summary>
+        public int Psi;
 
         ///<summary>
         ///The current state of the player.
