@@ -71,7 +71,6 @@ namespace DungeonCrawler.Entities
         /// <param name="type">The type of weapon to create.</param>
         public uint CreateWeapon(WeaponType type)
         {
-            Sprite sprite;
             uint eid = Entity.NextEntity();
 
             switch (type)
@@ -80,36 +79,12 @@ namespace DungeonCrawler.Entities
                     //Weapon Component
                     _standardSword.EntitiyID = eid;
                     _game.WeaponComponent.Add(eid, _standardSword);
-
-                    //Sprite Component (Consider making some of this static)
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                    };
-                    _game.SpriteComponent.Add(eid, sprite);
-
-                    //Position Component (Just make the placehold, this will be updated later)
-                    _game.PositionComponent.Add(eid, new Position());
                     break;
 
                 case WeaponType.StandardGun:
                     //Weapon Component
                     _standardGun.EntitiyID = eid;
                     _game.WeaponComponent.Add(eid, _standardSword);
-
-                    //Sprite Component (Consider making some of this static)
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardGun"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                    };
-                    _game.SpriteComponent.Add(eid, sprite);
-
-                    //Position Component (Just make the placehold, this will be updated later)
-                    _game.PositionComponent.Add(eid, new Position());
                     break;
 
                 default:
