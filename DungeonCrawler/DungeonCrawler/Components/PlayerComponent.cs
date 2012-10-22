@@ -42,6 +42,11 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
+
+        /// <summary>
+        /// What the player is currently doing.
+        /// </summary>
+        public PlayerState State;
     }
 
     /// <summary>

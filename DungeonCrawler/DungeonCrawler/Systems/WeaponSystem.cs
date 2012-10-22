@@ -5,6 +5,7 @@ using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using DungeonCrawler.Entities;
 
 namespace DungeonCrawler.Systems
 {
@@ -32,37 +33,44 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             _timer += elapsedTime;
-            foreach (Weapon weapon in _game.WeaponComponent.WeaponsInUse)
+            foreach (Player player in _game.PlayerComponent.All)
             {
-                if (_game.SpriteComponent.Contains(weapon.EntitiyID))
-                    UpdateWeaponSprite(weapon.EntitiyID);
-                else
-                {
-                    CreateWeaponSprite(weapon.EntitiyID);
-                    if (weapon.Type == WeaponAttackType.Ranged) //TODO implement timer.
-                        CreateBulletAndSprite(weapon.EntitiyID);
-                }
+                if (true) //Need to figure out attacking flag
+                    continue;
+
+                Equipment e = _game.EquipmentComponent[player.EntityID];
+                
             }
         }
 
         //Handles Creating the WeaponSprite.
-        private void CreateWeaponSprite(uint weaponID)
+        private void CreateWeaponSprite(Equipment equipment)
         {
+            WeaponType type = _game.WeaponComponent[equipment.WeaponID].Type;
+            Position position = _game.PositionComponent[equipment.EntityID];
+
             Sprite sprite = new Sprite()
             {
-                EntityID = weaponID,
-                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword"),
-                SpriteBounds = new Rectangle(0, 0, 64, 64),
+                EntityID = Entity.NextEntity(),
             };
-            _game.SpriteComponent.Add(weaponID, sprite);
 
-            Position position = new Position()
+            switch (type)
             {
-                EntityID = weaponID,
-                Center = new Vector2(25),
-                Radius = 32,
-            };
-            _game.PositionComponent.Add(weaponID, position);
+                case WeaponType.WeakSword:
+                case WeaponType.StandardSword:
+                case WeaponType.StrongSword:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteBounds = new Rectangle(0, 0, 64, 64);
+                    break;
+                case WeaponType.StandardGun:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardGun");
+                    sprite.SpriteBounds = new Rectangle(0, 0, 64, 64);
+                    break;
+            }
+            _game.SpriteComponent.Add(sprite.EntityID, sprite);
+
+            position.EntityID = sprite.EntityID;
+            _game.PositionComponent.Add(position.EntityID, position);
         }
 
         //Handles creating the Bullet object and sprite.
@@ -85,6 +93,11 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        /// <summary>
+        /// Use this to determine if timer has elasped.
+        /// </summary>
+        /// <param name="alarm"></param>
+        /// <returns></returns>
         private bool ring(float alarm)
         {
             return (_timer % alarm) < .0001;

@@ -92,7 +92,6 @@ namespace DungeonCrawler
         public InventorySpriteComponent InventorySpriteComponent;
         public EquipmentComponent EquipmentComponent;
         public WeaponComponent WeaponComponent;
-        public WeaponSpriteComponent WeaponSpriteComponent;
         #endregion
 
         #region Game Systems
@@ -146,7 +145,6 @@ namespace DungeonCrawler
             InventorySpriteComponent = new InventorySpriteComponent();
             EquipmentComponent = new EquipmentComponent();
             WeaponComponent = new WeaponComponent();
-            WeaponSpriteComponent = new WeaponSpriteComponent();
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);

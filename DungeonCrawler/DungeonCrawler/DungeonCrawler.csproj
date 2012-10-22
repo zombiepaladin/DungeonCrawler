@@ -132,7 +132,6 @@
     <Compile Include="Components\GameComponent.cs" />
     <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\WeaponComponent.cs" />
-    <Compile Include="Components\WeaponSpriteComponents.cs" />
     <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />

@@ -10,7 +10,9 @@ namespace DungeonCrawler.Entities
 {
     public enum WeaponType
     {
+        WeakSword,
         StandardSword,
+        StrongSword,
         StandardGun,
     }
 
@@ -22,7 +24,7 @@ namespace DungeonCrawler.Entities
     public class WeaponFactory
     {
         #region Base Weapons
-        //Base weapon objects. Everything but the entity id will be set here.
+        //Base weapon objects. Everything but the entity id will be set here. We can use if we want to create variations of weapons (like a strong, standard, weak variation of the sword)
 
         private static Weapon _standardSword = new Weapon()
         {
@@ -31,7 +33,7 @@ namespace DungeonCrawler.Entities
             Effect = WeaponEffect.None,
             Range = 1,
             Speed = 1f,
-            Type = WeaponAttackType.Melee,
+            AttackType = WeaponAttackType.Melee,
         };
 
         private static Weapon _standardGun = new Weapon()
@@ -41,7 +43,7 @@ namespace DungeonCrawler.Entities
             Effect = WeaponEffect.None,
             Range = 1,
             Speed = 1f,
-            Type = WeaponAttackType.Ranged,
+            AttackType = WeaponAttackType.Ranged,
         };
 
         private static Bullet _standardBullet = new Bullet()
@@ -72,25 +74,37 @@ namespace DungeonCrawler.Entities
         public uint CreateWeapon(WeaponType type)
         {
             uint eid = Entity.NextEntity();
+            Weapon weapon;
 
             switch (type)
             {
+                case WeaponType.WeakSword:
+                    weapon = _standardSword;
+                    weapon.Critical *= .5f;
+                    weapon.Damage *= .5f;
+                    break;
+
                 case WeaponType.StandardSword:
-                    //Weapon Component
-                    _standardSword.EntitiyID = eid;
-                    _game.WeaponComponent.Add(eid, _standardSword);
+                    weapon = _standardSword;
+                    break;
+
+                case WeaponType.StrongSword:
+                    weapon = _standardSword;
+                    weapon.Critical *= 2;
+                    weapon.Damage *= 2;
                     break;
 
                 case WeaponType.StandardGun:
-                    //Weapon Component
-                    _standardGun.EntitiyID = eid;
-                    _game.WeaponComponent.Add(eid, _standardSword);
+                    weapon = _standardGun;
                     break;
 
                 default:
                     throw new Exception("Unknown WeaponType");
             }
 
+            weapon.EntitiyID = eid;
+            weapon.Type = type;
+            _game.WeaponComponent.Add(eid, weapon);
             return eid;
         }
 
