@@ -174,7 +174,6 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
