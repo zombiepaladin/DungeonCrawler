@@ -86,6 +86,7 @@ namespace DungeonCrawler.Systems
             // Draw all MovementSprites
             foreach (MovementSprite sprite in game.MovementSpriteComponent.All)
             {
+                
                 Position position = game.PositionComponent[sprite.EntityID];
                 spriteBatch.Draw(sprite.SpriteSheet,
                                 position.Center,
@@ -100,7 +101,50 @@ namespace DungeonCrawler.Systems
             //Draw HUD
             foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
             {
+                Color playerColor;
+                PlayerIndex playerDex = sprite.PlayerIndex;
+                Vector2 drawHere;
+                switch (playerDex)
+                {
+                    case PlayerIndex.One:
+                        playerColor = Color.Red;
+                        break;
+                    case PlayerIndex.Two:
+                        playerColor = Color.Blue;
+                        break;
+                    case PlayerIndex.Three:
+                        playerColor = Color.Green;
+                        break;
+                    case PlayerIndex.Four:
+                        playerColor = Color.Magenta;
+                        break;
+                    default:
+                        playerColor = Color.White;
+                        break;
+                }
+                
                 if (sprite.isSeen) //A,B,X,Y, and Dpad are temp on screen
+                {
+                    
+                    Position position = game.PositionComponent[sprite.EntityID];
+                    if (sprite.isStatus)
+                        drawHere = position.Center;
+                    else
+                        drawHere = new Vector2(position.Radius, position.Radius);
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    playerColor,
+                                    0f,                                             // rotation
+                                    drawHere,  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+                }
+            }
+            foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
+            {
+                if (sprite.isSeen)
                 {
                     Position position = game.PositionComponent[sprite.EntityID];
                     spriteBatch.Draw(sprite.SpriteSheet,
@@ -114,7 +158,6 @@ namespace DungeonCrawler.Systems
                                     0);
                 }
             }
-
             spriteBatch.End();
         }
 

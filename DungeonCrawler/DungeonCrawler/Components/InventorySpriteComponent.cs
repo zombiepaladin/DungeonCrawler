@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// HUDSpriteComponent.cs 
+// InventorySpriteComponent.cs 
 //
 // Author: Nick Stanley
 //
@@ -18,16 +18,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace DungeonCrawler.Components
 {
 
-    public struct HUDSprite
+    public struct InventorySprite
     {
         public uint EntityID;
         public Texture2D SpriteSheet;
         public Rectangle SpriteBounds;
         public bool isSeen;
-        public bool isStatus;
-        public PlayerIndex PlayerIndex;
     }
-    public class HUDSpriteComponent : GameComponent<HUDSprite>
+    public class InventorySpriteComponent : GameComponent<InventorySprite>
     {
     }
 }

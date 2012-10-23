@@ -86,7 +86,8 @@ namespace DungeonCrawler
         public DoorComponent DoorComponent;
 		public HUDSpriteComponent HUDSpriteComponent;
         public HUDComponent HUDComponent;
-
+        public InventoryComponent InventoryComponent;
+        public InventorySpriteComponent InventorySpriteComponent;
         #endregion
 
         #region Game Systems
@@ -135,7 +136,8 @@ namespace DungeonCrawler
             RoomComponent = new RoomComponent();
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
-
+            InventoryComponent = new InventoryComponent();
+            InventorySpriteComponent = new InventorySpriteComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
 
             LevelManager = new LevelManager(this);
@@ -160,7 +162,7 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
-            //AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
+            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
@@ -240,7 +242,9 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
+
                     NetworkSystem.Update(elapsedTime);
+
                     MovementSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     break;
