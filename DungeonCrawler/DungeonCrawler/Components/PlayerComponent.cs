@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Components
 {
+
     /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
@@ -31,6 +32,11 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
+
+        /// <summary>
+        /// The player's base health
+        /// </summary>
+        public int Health;
 
         /// <summary>
         /// This player's strength stat
@@ -56,6 +62,58 @@ namespace DungeonCrawler.Components
         /// This player's defense stat
         /// </summary>
         public int Defense;
+
+        /// <summary>
+        /// A struct containing all the player's ability modifiers
+        /// </summary>
+        public AbilityModifiers abilityModifiers;
+    }
+
+    /// <summary>
+    /// A struct containing modifiers based off of the stats
+    /// </summary>
+    public struct AbilityModifiers
+    {
+        /// <summary>
+        /// The reduces incoming melee damage
+        /// </summary>
+        public int meleeDamageReduction;
+
+        /// <summary>
+        /// The reduces incoming ranged damage
+        /// </summary>
+        public int rangedDamageReduction;
+
+        /// <summary>
+        /// Bonus to melee attack damage
+        /// </summary>
+        public int meleeAttackBonus;
+
+        /// <summary>
+        /// Bonus to ranged attack damage;
+        /// </summary>
+        public int RangedAttackBonus;
+
+        /// <summary>
+        /// Bonus to attack speed;
+        /// </summary>
+        public int MeleeAttackSpeed;
+
+
+        /// <summary>
+        /// Bonus to accuracy;
+        /// </summary>
+        public int Accuracy;
+
+        /// <summary>
+        /// Bonus to ranged spell effects
+        /// </summary>
+        public int SpellBonus;
+
+        /// <summary>
+        /// Bonus Health
+        /// </summary>
+        public int HealthBonus;
     }
 
     /// <summary>
