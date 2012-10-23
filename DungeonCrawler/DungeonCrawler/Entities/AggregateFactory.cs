@@ -54,6 +54,17 @@ namespace DungeonCrawler.Entities
             int intelligence;
             int defense;
 
+            //Miscelaneous modifyers for the potential ability modifiers
+            //Placeholders for racial/class bonuses and item bonuses.
+            int miscMeleeAttack=0;
+            int miscRangedAttack = 0;
+            int miscMeleeSpeed=0;
+            int miscAccuracy=0;
+            int miscMeleeDef=0;
+            int miscRangedDef=0;
+            int miscSpell=0;
+            int miscHealth=0;
+
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
@@ -105,11 +116,23 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        Health = 10 + ((int)(stamina - 10) / 2),
                         Strength = strength,
                         Stamina = stamina,
                         Agility = agility,
                         Intelligence = intelligence,
-                        Defense = defense
+                        Defense = defense,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense-10)/2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -159,11 +182,24 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        Health = 10 + ((int)(stamina - 10) / 2),
                         Strength = strength,
                         Stamina = stamina,
                         Agility = agility,
                         Intelligence = intelligence,
-                        Defense = defense
+                        Defense = defense,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
+
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
@@ -214,6 +250,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+
                     };
                     game.PlayerComponent[entityID] = player;
                     //create HUD
@@ -371,12 +408,24 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
                     spriteSheet.Name = "Spritesheets/MzombieBx2";
 
+                    //Placeholder values
+                    miscMeleeAttack = 5;
+                    miscMeleeDef = 5;
+                    miscRangedDef = -5;
+
+                    strength = 16;
+                    stamina = 5;
+                    agility = 5;
+                    intelligence = 10;
+                    defense = 14;
+
                     position = new Position()
                     {
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
                     };
+
                     game.PositionComponent[entityID] = position;
 
                     movement = new Movement()
@@ -407,7 +456,25 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        Health = 10 +((int)(stamina-10)/2),
+                        Strength = strength,
+                        Stamina = stamina,
+                        Agility = agility,
+                        Intelligence = intelligence,
+                        Defense = defense,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
                     };
+
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     hudagg.CreateHUD(player);
