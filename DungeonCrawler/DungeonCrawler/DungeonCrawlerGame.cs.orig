@@ -61,15 +61,25 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
-<<<<<<< HEAD
-=======
         public static LevelManager LevelManager;
->>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
+
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
         /// </summary>
         public AggregateFactory AggregateFactory;
+
+        /// <summary>
+        /// A DoorFactory for creating doors
+        /// </summary>
+        public DoorFactory DoorFactory;
+
+        /// <summary>
+        /// A RoomFactory for creating rooms
+        /// </summary>
+        public RoomFactory RoomFactory;
+
+        public CharacterSelectionScreen CharacterSelectionScreen;
 
         #endregion
 
@@ -87,7 +97,8 @@ namespace DungeonCrawler
         public DoorComponent DoorComponent;
 		public HUDSpriteComponent HUDSpriteComponent;
         public HUDComponent HUDComponent;
-
+        public InventoryComponent InventoryComponent;
+        public InventorySpriteComponent InventorySpriteComponent;
         #endregion
 
         #region Game Systems
@@ -123,6 +134,8 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            DoorFactory = new DoorFactory(this);
+            RoomFactory = new RoomFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -136,7 +149,9 @@ namespace DungeonCrawler
             RoomComponent = new RoomComponent();
 			HUDSpriteComponent = new HUDSpriteComponent();
             HUDComponent = new HUDComponent();
-            
+            InventoryComponent = new InventoryComponent();
+            InventorySpriteComponent = new InventorySpriteComponent();
+            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
 
             LevelManager = new LevelManager(this);
 
@@ -158,15 +173,17 @@ namespace DungeonCrawler
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
 
-            // Testing code
+            CharacterSelectionScreen.LoadContent();
 <<<<<<< HEAD
-            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer);
+            // Testing code
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.One);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Two);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Three);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Four);
 =======
-            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer);
-
+>>>>>>> c4ec1a30b6470c57eabe89036089f14f951f1856
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
->>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
 
         }
 
@@ -199,7 +216,7 @@ namespace DungeonCrawler
                 }
                 else
                 {
-                    GameState = GameState.NetworkSetup;
+                    GameState = GameState.CharacterSelection;
                 }
             }
 
@@ -219,12 +236,13 @@ namespace DungeonCrawler
                     }
                     else
                     {
-                        GameState = GameState.NetworkSetup;
+                        GameState = GameState.CharacterSelection;
                     }
                     break;
 
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
+                    CharacterSelectionScreen.Update(gameTime);
                     break;
 
                 case GameState.NetworkSetup:
@@ -243,12 +261,11 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
+
                     NetworkSystem.Update(elapsedTime);
+
                     MovementSystem.Update(elapsedTime);
-<<<<<<< HEAD
-=======
                     LevelManager.Update(elapsedTime);
->>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
                     break;
 
                 case GameState.Credits:
@@ -269,13 +286,13 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-<<<<<<< HEAD
-
-=======
-            LevelManager.Draw(elapsedTime);
->>>>>>> d4e0e8200d52b19657d5383e71db93516619019b
-            //NetworkSystem.Draw(elapsedTime);
-            RenderingSystem.Draw(elapsedTime);
+            CharacterSelectionScreen.Draw(elapsedTime);
+            if (GameState != GameState.CharacterSelection)
+            {
+                LevelManager.Draw(elapsedTime);
+                NetworkSystem.Draw(elapsedTime);
+                RenderingSystem.Draw(elapsedTime);
+            }
            
             base.Draw(gameTime);
         }
