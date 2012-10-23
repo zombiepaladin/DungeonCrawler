@@ -103,7 +103,6 @@ namespace DungeonCrawler.Systems
             {
                 Color playerColor;
                 PlayerIndex playerDex = sprite.PlayerIndex;
-                Vector2 drawHere;
                 switch (playerDex)
                 {
                     case PlayerIndex.One:
@@ -127,16 +126,12 @@ namespace DungeonCrawler.Systems
                 {
                     
                     Position position = game.PositionComponent[sprite.EntityID];
-                    if (sprite.isStatus)
-                        drawHere = position.Center;
-                    else
-                        drawHere = new Vector2(position.Radius, position.Radius);
                     spriteBatch.Draw(sprite.SpriteSheet,
                                     position.Center,
                                     sprite.SpriteBounds,
                                     playerColor,
                                     0f,                                             // rotation
-                                    drawHere,  // origin
+                                    new Vector2(position.Radius,position.Radius),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
                                     0);

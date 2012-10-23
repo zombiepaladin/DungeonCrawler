@@ -46,7 +46,7 @@ namespace DungeonCrawler.Entities
             #region buttons
             //Make A button
             entityID = Entity.NextEntity();
-            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonA");
+            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonA-BW");
             position = new Position()
             {
                 EntityID = entityID,
@@ -60,12 +60,14 @@ namespace DungeonCrawler.Entities
                 isSeen = false,
                 SpriteSheet = spriteSheet,
                 SpriteBounds = new Rectangle(0, 0, 80, 80),
+                PlayerIndex = player.PlayerIndex,
+                isStatus = false,
             };
             game.HUDSpriteComponent[entityID] = AButtonSprite;
 
             //Make B button
             entityID = Entity.NextEntity();
-            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonB");
+            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonB-BW");
             position = new Position()
             {
                 EntityID = entityID,
@@ -87,7 +89,7 @@ namespace DungeonCrawler.Entities
 
             //Make X Button
             entityID = Entity.NextEntity();
-            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonX");
+            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonX-BW");
 
             position = new Position()
             {
@@ -110,7 +112,7 @@ namespace DungeonCrawler.Entities
 
             //Make Y Button
             entityID = Entity.NextEntity();
-            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonY");
+            spriteSheet = game.Content.Load<Texture2D>("ControllerTGAs/xboxControllerButtonY-BW");
 
             position = new Position()
             {
@@ -164,13 +166,13 @@ namespace DungeonCrawler.Entities
                     corner = new Vector2(0, 0);
                     break;
                 case PlayerIndex.Two:
-                    corner = new Vector2(900, 0);
+                    corner = new Vector2(1024, 0);
                     break;
                 case PlayerIndex.Three:
-                    corner = new Vector2(0, 600);
+                    corner = new Vector2(0, 656);
                     break;
                 case PlayerIndex.Four:
-                    corner = new Vector2(900, 600);
+                    corner = new Vector2(1024, 656);
                     break;
                 default:
                     corner = new Vector2(0,0);
@@ -180,7 +182,7 @@ namespace DungeonCrawler.Entities
             {
                 EntityID = entityID,
                 Center = corner,
-                Radius = 40f,
+                Radius = 0f,//its a rectangle, so no radius for proper drawing
             };
             game.PositionComponent[entityID] = position;
             HeatlhPsiStatusSprite = new HUDSprite()

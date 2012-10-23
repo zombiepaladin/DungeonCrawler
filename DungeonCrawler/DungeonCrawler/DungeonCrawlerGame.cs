@@ -162,7 +162,10 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.One);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Two);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Three);
+            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Four);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
