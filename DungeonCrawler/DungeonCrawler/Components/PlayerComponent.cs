@@ -31,6 +31,31 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
+
+        /// <summary>
+        /// This player's strength stat
+        /// </summary>
+        public int Strength;
+
+        /// <summary>
+        /// This player's stamina stat
+        /// </summary>
+        public int Stamina;
+
+        /// <summary>
+        /// This player's agility stat
+        /// </summary>
+        public int Agility;
+
+        /// <summary>
+        /// This player's intelligence stat
+        /// </summary>
+        public int Intelligence;
+
+        /// <summary>
+        /// This player's defense stat
+        /// </summary>
+        public int Defense;
     }
 
     /// <summary>
