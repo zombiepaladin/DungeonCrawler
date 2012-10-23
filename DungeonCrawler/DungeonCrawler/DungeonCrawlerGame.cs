@@ -62,11 +62,22 @@ namespace DungeonCrawler
         public GameState GameState = GameState.SignIn;
 
         public static LevelManager LevelManager;
+
         /// <summary>
         /// An AggregateFactory for creating entities quickly
         /// from pre-defined aggregations of components
         /// </summary>
         public AggregateFactory AggregateFactory;
+
+        /// <summary>
+        /// A DoorFactory for creating doors
+        /// </summary>
+        public DoorFactory DoorFactory;
+
+        /// <summary>
+        /// A RoomFactory for creating rooms
+        /// </summary>
+        public RoomFactory RoomFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
 
@@ -123,6 +134,8 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            DoorFactory = new DoorFactory(this);
+            RoomFactory = new RoomFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -161,8 +174,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            // Testing code
-            AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.One);
+            //AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Two);
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Three);
             AggregateFactory.CreateFromAggregate(Aggregate.GargranianPlayer, PlayerIndex.Four);
