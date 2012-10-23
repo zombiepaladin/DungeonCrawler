@@ -1,4 +1,5 @@
 Content\Spritesheets\wind_fae.xnb
+Content\Spritesheets\Cultist.xnb
 Content\Spritesheets\gargranian.xnb
 Content\ControllerTGAs\xboxControllerBack.xnb
 Content\ControllerTGAs\xboxControllerButtonA.xnb
@@ -38,14 +39,4 @@ Content\Spritesheets\charSelectZombie.xnb
 Content\Spritesheets\charSelectControls1.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
-Content\Spritesheets\inventoryBackground.xnb
-Content\Spritesheets\selectInv.xnb
 Content\Spritesheets\charSelectCultist.xnb
-Content\Spritesheets\Cultist.xnb
-Content\Spritesheets\Earthian2x.xnb
-Content\Spritesheets\HealthPsi.xnb
-Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
-Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
-Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
-Content\ControllerTGAs\xboxControllerButtonY-BW.xnb
-Content\Spritesheets\charSelectEarthian.xnb

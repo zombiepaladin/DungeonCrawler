@@ -43,12 +43,31 @@ namespace DungeonCrawler.Entities
             Player player;
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
+
+            //I've defined these stats here more for convention really, this way
+            //all changeable code is at the top of each aggregate and the 
+            //implementation is afterwards. The wind fae is an example of how to 
+            //implement them, just define and use them to construct the player var.
+            int strength;
+            int stamina;
+            int agility;
+            int intelligence;
+            int defense;
+
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
                     spriteSheet.Name = "Spritesheets/wind_fae";
+
+                    //So here we just define our base values. Total sum is 50
+                    //The Earthian shoudl probably have base stats of 10 across the board
+                    strength = 4;
+                    stamina = 13;
+                    agility = 15;
+                    intelligence = 10;
+                    defense = 8;
 
                     position = new Position()
                     {
@@ -86,6 +105,11 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        Strength = strength,
+                        Stamina = stamina,
+                        Agility = agility,
+                        Intelligence = intelligence,
+                        Defense = defense
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -96,6 +120,12 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
                     spriteSheet.Name = "Spritesheets/Cultist";
                     
+                    strength = 4;
+                    stamina = 10;
+                    agility = 10;
+                    intelligence = 16;
+                    defense = 10;
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -129,6 +159,11 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        Strength = strength,
+                        Stamina = stamina,
+                        Agility = agility,
+                        Intelligence = intelligence,
+                        Defense = defense
                     };
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
