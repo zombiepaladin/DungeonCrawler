@@ -365,6 +365,18 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((stats.Defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((stats.Strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((stats.Agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((stats.Strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((stats.Agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
+                        }
+
                     };
                     game.PlayerComponent[entityID] = player;
 
