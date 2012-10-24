@@ -38,6 +38,11 @@ namespace DungeonCrawlerContentPipeline
         /// The height of the tilemap's tiles
         /// </summary>
         public int TileHeight;
+
+        /// <summary>
+        /// The width of the walls, in tiles
+        /// </summary>
+        public int WallWidth;
         
         /// <summary>
         /// A list of paths to all images used by this tilemap.

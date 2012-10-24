@@ -27,12 +27,9 @@ namespace DungeonCrawler.Entities
             this.game = game;
         }
 
-        public uint CreateRoom(string TilemapName)
+        public uint CreateRoom(string TilemapName, int width, int height, int tileWidth, int tileHeight, int wallWidth)
         {
             uint entityID = Entity.NextEntity();
-
-            /*Texture2D spriteSheet = game.Content.Load<Texture2D>("");
-            spriteSheet.Name = "";*/
 
             Position position = new Position()
             {
@@ -53,6 +50,11 @@ namespace DungeonCrawler.Entities
             {
                 EntityID = entityID,
                 Tilemap = TilemapName,
+                Width = width,
+                Height = height,
+                TileWidth = tileWidth,
+                TileHeight = tileHeight,
+                WallWidth = wallWidth,
             };
             room.idMap = new Dictionary<string,uint>();
             room.targetTypeMap= new Dictionary<string, string>();
