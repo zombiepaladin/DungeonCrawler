@@ -34,36 +34,6 @@ namespace DungeonCrawler.Components
         public PlayerIndex PlayerIndex;
 
         /// <summary>
-        /// The player's base health
-        /// </summary>
-        public int Health;
-
-        /// <summary>
-        /// This player's strength stat
-        /// </summary>
-        public int Strength;
-
-        /// <summary>
-        /// This player's stamina stat
-        /// </summary>
-        public int Stamina;
-
-        /// <summary>
-        /// This player's agility stat
-        /// </summary>
-        public int Agility;
-
-        /// <summary>
-        /// This player's intelligence stat
-        /// </summary>
-        public int Intelligence;
-
-        /// <summary>
-        /// This player's defense stat
-        /// </summary>
-        public int Defense;
-
-        /// <summary>
         /// A struct containing all the player's ability modifiers
         /// </summary>
         public AbilityModifiers abilityModifiers;
