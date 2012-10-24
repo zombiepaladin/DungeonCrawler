@@ -61,6 +61,8 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.Gameplay;
 
+        public static DungeonCrawlerGame game;
+
         public static LevelManager LevelManager;
 
         /// <summary>
@@ -109,6 +111,7 @@ namespace DungeonCrawler
         public BulletComponent BulletComponent;
         public PlayerInfoComponent PlayerInfoComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
+        public StatsComponent StatsComponent;
         #endregion
 
         #region Game Systems
@@ -128,6 +131,7 @@ namespace DungeonCrawler
         /// </summary>
         public DungeonCrawlerGame()
         {
+            game = this;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -168,6 +172,7 @@ namespace DungeonCrawler
             BulletComponent = new BulletComponent();
             PlayerInfoComponent = new PlayerInfoComponent();
             WeaponSpriteComponent = new WeaponSpriteComponent();
+            StatsComponent = new StatsComponent();
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);

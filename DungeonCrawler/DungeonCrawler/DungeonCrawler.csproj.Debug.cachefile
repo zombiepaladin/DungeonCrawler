@@ -37,9 +37,15 @@ Content\Spritesheets\selectInv.xnb
 Content\Spritesheets\charSelectCultist.xnb
 Content\Spritesheets\Cultist.xnb
 Content\Spritesheets\Earthian2x.xnb
+Content\Spritesheets\HealthPsi.xnb
+Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonY-BW.xnb
+Content\Spritesheets\charSelectEarthian.xnb
+Content\Spritesheets\Skill_Icons.xnb
 Content\Spritesheets\StandardGun.xnb
 Content\Spritesheets\StandardSword.xnb
-Content\Spritesheets\charSelectEarthian.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Tilemaps\TestDungeon1.xnb
