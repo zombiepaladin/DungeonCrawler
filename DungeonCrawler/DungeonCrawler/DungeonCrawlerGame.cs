@@ -99,6 +99,7 @@ namespace DungeonCrawler
         public HUDComponent HUDComponent;
         public InventoryComponent InventoryComponent;
         public InventorySpriteComponent InventorySpriteComponent;
+        public StatsComponent StatsComponent;
         #endregion
 
         #region Game Systems
@@ -152,6 +153,7 @@ namespace DungeonCrawler
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
+            StatsComponent = new StatsComponent();
 
             LevelManager = new LevelManager(this);
 

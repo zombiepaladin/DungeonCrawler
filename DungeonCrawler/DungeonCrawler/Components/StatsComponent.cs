@@ -20,7 +20,7 @@ namespace DungeonCrawler.Components
     /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
-    public struct Player
+    public struct Stats
     {
         /// <summary>
         /// The entity this Player component belongs to
@@ -28,15 +28,36 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// The PlayerIndex of this entity's player
+        /// This aggregate's strength stat
         /// </summary>
-        public PlayerIndex PlayerIndex;
+        public int Strength;
+
+        /// <summary>
+        /// This aggregate's stamina stat
+        /// </summary>
+        public int Stamina;
+
+        /// <summary>
+        /// This aggregate's agility stat
+        /// </summary>
+        public int Agility;
+
+        /// <summary>
+        /// This aggregate's intelligence stat
+        /// </summary>
+        public int Intelligence;
+
+        /// <summary>
+        /// This aggregate's defense stat
+        /// </summary>
+        public int Defense;
+
     }
 
     /// <summary>
     /// The player components for all entities in a game world
     /// </summary>
-    public class PlayerComponent : GameComponent<Player>
+    public class StatsComponent : GameComponent<Stats>
     {
 
     }

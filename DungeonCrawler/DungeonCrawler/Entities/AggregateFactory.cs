@@ -41,18 +41,9 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
+            Stats stats;
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
-
-            //I've defined these stats here more for convention really, this way
-            //all changeable code is at the top of each aggregate and the 
-            //implementation is afterwards. The wind fae is an example of how to 
-            //implement them, just define and use them to construct the player var.
-            int strength;
-            int stamina;
-            int agility;
-            int intelligence;
-            int defense;
 
             switch (aggregate)
             {
@@ -60,14 +51,6 @@ namespace DungeonCrawler.Entities
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
                     spriteSheet.Name = "Spritesheets/wind_fae";
-
-                    //So here we just define our base values. Total sum is 50
-                    //The Earthian shoudl probably have base stats of 10 across the board
-                    strength = 4;
-                    stamina = 13;
-                    agility = 15;
-                    intelligence = 10;
-                    defense = 8;
 
                     position = new Position()
                     {
@@ -101,15 +84,25 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 4,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 16,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
-                        PlayerIndex = playerIndex,
-                        Strength = strength,
-                        Stamina = stamina,
-                        Agility = agility,
-                        Intelligence = intelligence,
-                        Defense = defense
+                        PlayerIndex = playerIndex
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -119,12 +112,6 @@ namespace DungeonCrawler.Entities
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
                     spriteSheet.Name = "Spritesheets/Cultist";
-                    
-                    strength = 4;
-                    stamina = 10;
-                    agility = 10;
-                    intelligence = 16;
-                    defense = 10;
 
                     position = new Position()
                     {
@@ -155,16 +142,26 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 4,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 16,
+                        Defense = 10
+                    };
+
                     player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
-                        Strength = strength,
-                        Stamina = stamina,
-                        Agility = agility,
-                        Intelligence = intelligence,
-                        Defense = defense
                     };
+
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -209,6 +206,21 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
+
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
 
                     player = new Player()
                     {
@@ -255,6 +267,21 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
+
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
 
                     player = new Player()
                     {
@@ -305,6 +332,21 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
@@ -354,6 +396,21 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
@@ -402,6 +459,21 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
+
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
 
                     player = new Player()
                     {
