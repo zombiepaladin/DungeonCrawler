@@ -284,7 +284,7 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-                    //NetworkSystem.Update(elapsedTime);
+                    NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
