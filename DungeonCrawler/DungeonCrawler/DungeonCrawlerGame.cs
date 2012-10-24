@@ -110,6 +110,7 @@ namespace DungeonCrawler
         public WeaponComponent WeaponComponent;
         public BulletComponent BulletComponent;
         public PlayerInfoComponent PlayerInfoComponent;
+        public EnemyAIComponent EnemyAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         #endregion
@@ -122,6 +123,7 @@ namespace DungeonCrawler
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
+        EnemyAISystem EnemyAISystem;
 
         #endregion
 
@@ -173,7 +175,7 @@ namespace DungeonCrawler
             PlayerInfoComponent = new PlayerInfoComponent();
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
-
+            EnemyAIComponent = new EnemyAIComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
@@ -195,6 +197,7 @@ namespace DungeonCrawler
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
             WeaponSystem = new WeaponSystem(this);
+            EnemyAISystem = new EnemyAISystem(this);
 
             CharacterSelectionScreen.LoadContent();
             // Testing code
