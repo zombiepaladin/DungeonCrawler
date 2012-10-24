@@ -29,18 +29,22 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// The ID of the first room the door is attached to
+        /// The ID of the room the door leads to
         /// </summary>
-        public uint Room1;
+        public string DestinationRoom;
 
         /// <summary>
-        /// The ID of the second room the door is attached to
+        /// The name of the spawn in the destination room to place the player
         /// </summary>
-        public uint Room2;
+        public string DestinationSpawnName;
     }
 
     public class DoorComponent : GameComponent<Door>
     {
+        public void HandleTrigger(uint entityID, string type)
+        {
+
+        }
 
     }
 }

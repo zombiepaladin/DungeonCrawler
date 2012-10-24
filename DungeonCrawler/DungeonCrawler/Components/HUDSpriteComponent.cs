@@ -24,6 +24,8 @@ namespace DungeonCrawler.Components
         public Texture2D SpriteSheet;
         public Rectangle SpriteBounds;
         public bool isSeen;
+        public bool isStatus;
+        public PlayerIndex PlayerIndex;
     }
     public class HUDSpriteComponent : GameComponent<HUDSprite>
     {

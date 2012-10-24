@@ -1,8 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// RoomComponent.cs 
+// LocalComponent.cs 
 //
-// Author: Nicholas Strub
+// Author: Nathan Bean
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -11,7 +11,6 @@
 #endregion
 
 #region Using Statements
-using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 #endregion
@@ -19,32 +18,46 @@ using Microsoft.Xna.Framework;
 namespace DungeonCrawler.Components
 {
     /// <summary>
-    /// A struct representing a Room Component
+    /// A structure indicating the local nature of an entity
     /// </summary>
-    public struct Room
+    public struct Stats
     {
         /// <summary>
-        /// The ID of the entity this room belongs to
+        /// The entity this Player component belongs to
         /// </summary>
         public uint EntityID;
 
         /// <summary>
-        /// The name of the tilemap for the room
+        /// This aggregate's strength stat
         /// </summary>
-        public string Tilemap;
+        public int Strength;
 
         /// <summary>
-        /// EntityIDs of objects, keys are strings indicated on the map editor, stored in trigger's targetID.
+        /// This aggregate's stamina stat
         /// </summary>
-        public Dictionary<string, uint> idMap;
+        public int Stamina;
 
         /// <summary>
-        /// Type of object of the target, keys are strings indicated on the map editor, stored in trigger's targetID.
+        /// This aggregate's agility stat
         /// </summary>
-        public Dictionary<string, string> targetTypeMap ;
+        public int Agility;
+
+        /// <summary>
+        /// This aggregate's intelligence stat
+        /// </summary>
+        public int Intelligence;
+
+        /// <summary>
+        /// This aggregate's defense stat
+        /// </summary>
+        public int Defense;
+
     }
 
-    public class RoomComponent : GameComponent<Room>
+    /// <summary>
+    /// The player components for all entities in a game world
+    /// </summary>
+    public class StatsComponent : GameComponent<Stats>
     {
 
     }

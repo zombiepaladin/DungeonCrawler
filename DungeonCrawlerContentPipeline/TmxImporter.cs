@@ -398,12 +398,12 @@ namespace DungeonCrawlerContentPipeline
                     {
                         case "object":
                             GameObjectData go = new GameObjectData();
+                            
                             go.Category = reader.GetAttribute("name");
                             go.Type = reader.GetAttribute("type");
-
                             go.Position.X = int.Parse(reader.GetAttribute("x"));
                             go.Position.Y = int.Parse(reader.GetAttribute("y"));
-
+                            go.properties = LoadProperties(reader);
                             // By default, Tiled sets objects to tile width and height - if
                             // there is no change to these, then it does not add a width
                             // and height attribute to the object XML - so we'll check

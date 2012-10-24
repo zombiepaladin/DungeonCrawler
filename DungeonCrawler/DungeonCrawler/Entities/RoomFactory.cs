@@ -27,7 +27,7 @@ namespace DungeonCrawler.Entities
             this.game = game;
         }
 
-        public void CreateRoom(string TilemapName)
+        public uint CreateRoom(string TilemapName)
         {
             uint entityID = Entity.NextEntity();
 
@@ -54,7 +54,11 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Tilemap = TilemapName,
             };
+            room.idMap = new Dictionary<string,uint>();
+            room.targetTypeMap= new Dictionary<string, string>();
             game.RoomComponent[entityID] = room;
+
+            return entityID;
         }
     }
 }
