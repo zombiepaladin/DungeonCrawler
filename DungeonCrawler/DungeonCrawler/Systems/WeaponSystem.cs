@@ -38,19 +38,23 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
-                if (_game.PlayerInfoComponent[player.EntityID].State != PlayerState.Attacking)
-                    continue;
-
                 Equipment equipment = _game.EquipmentComponent[player.EntityID];
+                bool attacking = _game.PlayerInfoComponent[player.EntityID].State == PlayerState.Attacking;
 
-                if(_game.WeaponSpriteComponent.Contains(player.EntityID))
-                    spriteRemoved = UpdateWeaponSprite(_game.WeaponSpriteComponent[player.EntityID]);
-                else
+                //Handle sprites
+                if (_game.WeaponSpriteComponent.Contains(player.EntityID))
+                {
+                    //If the player has a weapon sprite update it
+                    UpdateWeaponSprite(_game.WeaponSpriteComponent[player.EntityID]);
+                }
+                else if (attacking)
+                {
+                    //Otherwise create a new sprite.
                     CreateWeaponSprite(equipment);
+                }   
 
-                //Add a timer condition here.
                 Weapon weapon = _game.WeaponComponent[equipment.WeaponID];
-                if (weapon.AttackType == WeaponAttackType.Ranged)
+                if (attacking && weapon.AttackType == WeaponAttackType.Ranged)
                 {
                     _bulletTimer += elapsedTime;
                     if (_bulletTimer >= weapon.Speed)
@@ -60,12 +64,12 @@ namespace DungeonCrawler.Systems
                     }
                 }
 
-                if(spriteRemoved)
+                /*if(spriteRemoved)
                 {
                     PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
                     info.State = PlayerState.Default;
                     _game.PlayerInfoComponent[player.EntityID] = info;
-                }
+                }*/
             }
         }
 

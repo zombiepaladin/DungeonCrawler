@@ -89,12 +89,15 @@ namespace DungeonCrawler.Systems
                     movement.Direction.Normalize();
                 game.MovementComponent[player.EntityID] = movement;
 
+                PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
+                info.State = PlayerState.Default;
+
                 if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
                 {
-                    PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
                     info.State = PlayerState.Attacking;
-                    game.PlayerInfoComponent[player.EntityID] = info;
                 }
+
+                game.PlayerInfoComponent[player.EntityID] = info;
 
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
