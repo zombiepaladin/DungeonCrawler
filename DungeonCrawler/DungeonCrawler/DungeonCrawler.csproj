@@ -107,9 +107,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\EnemyAIComponent.cs" />
+    <Compile Include="Components\WeaponSpriteComponent.cs" />
+    <Compile Include="Entities\WeaponFactory.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="LevelManager.cs" />
+    <Compile Include="DungeonCrawlerGame.cs" />
     <Compile Include="CharacterSelection\CharacterSelectionScreen.cs" />
     <Compile Include="CharacterSelection\ImageSprite.cs" />
     <Compile Include="CharacterSelection\TextSprite.cs" />
+    <Compile Include="CharacterSelection\CharSelectPlayer.cs" />
+    <Compile Include="CharacterSelection\Sprite.cs" />
+    <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\DoorComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\InventorySpriteComponent.cs" />
@@ -118,12 +127,15 @@
     <Compile Include="Components\PositionComponent.cs" />
     <Compile Include="Components\RemoteComponent.cs" />
     <Compile Include="Components\RoomComponent.cs" />
-    <Compile Include="Components\SpriteComponent.cs" />
     <Compile Include="Components\HUDComponent.cs" />
     <Compile Include="Components\HUDSpriteComponent.cs" />
     <Compile Include="Components\MovementComponent.cs" />
     <Compile Include="Components\MovementSpriteComponent.cs" />
     <Compile Include="Components\GameComponent.cs" />
+    <Compile Include="Components\SpriteComponent.cs" />
+    <Compile Include="Components\WeaponComponent.cs" />
+    <Compile Include="Components\StatsComponent.cs" />
+    <Compile Include="Components\TriggerComponent.cs" />
     <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />
@@ -131,17 +143,14 @@
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\InvAggregateFactory.cs" />
     <Compile Include="Entities\RoomFactory.cs" />
-    <Compile Include="CharacterSelection\CharSelectPlayer.cs" />
-    <Compile Include="LevelManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="DungeonCrawlerGame.cs" />
-    <Compile Include="CharacterSelection\Sprite.cs" />
+    <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
     <Compile Include="Systems\PacketTypes.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
+    <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

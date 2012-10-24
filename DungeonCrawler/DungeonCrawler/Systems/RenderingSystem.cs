@@ -86,6 +86,7 @@ namespace DungeonCrawler.Systems
             // Draw all MovementSprites
             foreach (MovementSprite sprite in game.MovementSpriteComponent.All)
             {
+                
                 Position position = game.PositionComponent[sprite.EntityID];
                 spriteBatch.Draw(sprite.SpriteSheet,
                                 position.Center,
@@ -97,18 +98,57 @@ namespace DungeonCrawler.Systems
                                 SpriteEffects.None,
                                 0);
             }
+
+            //Draw Weapon animations
+            foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
+            {
+                Position position = game.PositionComponent[sprite.EntityID];
+                position.Center += new Vector2(10); //Offset the weapon a bit;
+                spriteBatch.Draw(sprite.SpriteSheet,
+                                position.Center,
+                                sprite.SpriteBounds,
+                                Color.White,
+                                0f,
+                                new Vector2(position.Radius),
+                                1f,
+                                SpriteEffects.None,
+                                0);
+            }
+
             //Draw HUD
             foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
             {
+                Color playerColor;
+                PlayerIndex playerDex = sprite.PlayerIndex;
+                switch (playerDex)
+                {
+                    case PlayerIndex.One:
+                        playerColor = Color.Red;
+                        break;
+                    case PlayerIndex.Two:
+                        playerColor = Color.Blue;
+                        break;
+                    case PlayerIndex.Three:
+                        playerColor = Color.Green;
+                        break;
+                    case PlayerIndex.Four:
+                        playerColor = Color.Magenta;
+                        break;
+                    default:
+                        playerColor = Color.White;
+                        break;
+                }
+                
                 if (sprite.isSeen) //A,B,X,Y, and Dpad are temp on screen
                 {
+                    
                     Position position = game.PositionComponent[sprite.EntityID];
                     spriteBatch.Draw(sprite.SpriteSheet,
                                     position.Center,
                                     sprite.SpriteBounds,
-                                    Color.White,
+                                    playerColor,
                                     0f,                                             // rotation
-                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    new Vector2(position.Radius,position.Radius),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
                                     0);

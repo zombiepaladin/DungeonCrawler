@@ -7,4 +7,5 @@ TestResults
 
 # Solution user options
 *.suo
+*.Debug.cachefile
 DungeonCrawler/DungeonCrawler/DungeonCrawler.csproj.Debug.cachefile

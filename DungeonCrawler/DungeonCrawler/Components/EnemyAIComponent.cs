@@ -1,8 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// HUDSpriteComponent.cs 
+// EnemyAIComponent.cs 
 //
-// Author: Nick Stanley
+// Author: Brett Barger
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -11,23 +11,36 @@
 #endregion
 
 #region Using Statements
+using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 #endregion
 
 namespace DungeonCrawler.Components
 {
-
-    public struct HUDSprite
+    public struct EnemyAI
     {
+        // <summary>
+        /// The ID of the entity this AI belongs to
+        /// </summary>
         public uint EntityID;
-        public Texture2D SpriteSheet;
-        public Rectangle SpriteBounds;
-        public bool isSeen;
-        public bool isStatus;
-        public PlayerIndex PlayerIndex;
+
+        // <summary>
+        /// The ID of the Enemy this entity belongs to
+        /// </summary>
+        public byte EnemyID;
     }
-    public class HUDSpriteComponent : GameComponent<HUDSprite>
+
+    public class EnemyAIComponent : GameComponent<EnemyAI>
     {
+        public void Scan()
+        {
+
+        }
+
+        public void Attack()
+        {
+
+        }
     }
 }

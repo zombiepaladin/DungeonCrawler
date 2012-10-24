@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
+using DungeonCrawler.Components;
 
 
 namespace DungeonCrawler
@@ -22,6 +23,7 @@ namespace DungeonCrawler
         SpriteBatch spriteBatch;
         BasicEffect basicEffect;
 
+        public uint currentRoomID;
 
         public bool Loading = true;
         public bool Paused = false;
@@ -66,6 +68,7 @@ namespace DungeonCrawler
         public void LoadLevel(string level)
         {
             Loading = true;
+            DungeonCrawlerGame game = (DungeonCrawlerGame)this.game;
 
             ThreadStart threadStarter = delegate
             {
@@ -73,14 +76,18 @@ namespace DungeonCrawler
                 CurrentMap.LoadContent(game.Content);
 
                 // Load the background music
-                //////////if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
-                //////////{
-                //////////    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
-                //////////}
-                //////////else
-                //////////{
-                //////////    CurrentSong = null;
-                //////////}
+                //if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
+                //{
+                //    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
+                //}
+                //else
+                //{
+                //    CurrentSong = null;
+                //}
+                currentRoomID = game.RoomFactory.CreateRoom(level);
+                Room room = game.RoomComponent[currentRoomID];
+                
+
 
                 for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
                 {
@@ -88,6 +95,9 @@ namespace DungeonCrawler
                     {
                         GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
                         Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
+
+                        uint entityID = uint.MaxValue;
+
 
                         switch (goData.Category)
                         {
@@ -98,12 +108,28 @@ namespace DungeonCrawler
                                 //goData.Type
                                 break;
                             case "Trigger":
-                                //goData.Type
-                                break;
+                                switch (goData.Type)
+                                {
+                                    case "Door":
+                                        entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
+                                        
+                                        
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            break;
 
                         }
+                            if (goData.properties.Keys.Contains("id"))
+                            {
+                                room.idMap.Add(goData.properties["id"], entityID);
+                                room.targetTypeMap.Add(goData.properties["id"], goData.Type);
+                            }
+
                     }
                 }
+
 
 
                 //// Load the game objects
@@ -289,6 +315,11 @@ namespace DungeonCrawler
 
             spriteBatch.End();
 
+        }
+
+        public Room getCurrentRoom()
+        {
+            return ((DungeonCrawlerGame)game).RoomComponent[currentRoomID];
         }
     }
 }
