@@ -32,7 +32,9 @@ namespace DungeonCrawlerContentPipeline
                     case "Music":
                         input.MusicTitle = input.Properties[property];
                         break;
-
+                    case "WallWidth":
+                        input.WallWidth = Convert.ToInt32(input.Properties[property]);
+                        break;
                     default:
                         ParamArrayAttribute[] attrs = new ParamArrayAttribute[0];
                         context.Logger.LogMessage("Unknown property " + property + " in tilemap", attrs);

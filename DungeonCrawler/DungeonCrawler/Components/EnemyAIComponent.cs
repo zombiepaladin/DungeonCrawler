@@ -24,23 +24,10 @@ namespace DungeonCrawler.Components
         /// The ID of the entity this AI belongs to
         /// </summary>
         public uint EntityID;
-
-        // <summary>
-        /// The ID of the Enemy this entity belongs to
-        /// </summary>
-        public byte EnemyID;
     }
 
     public class EnemyAIComponent : GameComponent<EnemyAI>
     {
-        public void Scan()
-        {
 
-        }
-
-        public void Attack()
-        {
-
-        }
     }
 }

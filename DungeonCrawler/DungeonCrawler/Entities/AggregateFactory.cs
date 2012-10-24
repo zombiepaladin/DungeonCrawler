@@ -43,6 +43,7 @@ namespace DungeonCrawler.Entities
             Player player;
             PlayerInfo info;
             Stats stats = new Stats();
+
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
 
@@ -59,6 +60,9 @@ namespace DungeonCrawler.Entities
 
             switch (aggregate)
             {
+                /****************************************
+                 * Fairy
+                 * *************************************/
                 case Aggregate.FairyPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
@@ -115,6 +119,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        PlayerRace = aggregate,
                         abilityModifiers = new AbilityModifiers()
                         {
                             meleeDamageReduction = miscMeleeDef + (int)((stats.Defense-10)/2),
@@ -135,9 +140,13 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     break;
 
+                /****************************************
+                * Cultist
+                * *************************************/
                 case Aggregate.CultistPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
@@ -190,6 +199,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        PlayerRace = aggregate,
                         abilityModifiers = new AbilityModifiers()
                         {
                             meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),
@@ -210,6 +220,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
@@ -219,6 +230,9 @@ namespace DungeonCrawler.Entities
 
                     break;
 
+                /****************************************
+                * Cyborg
+                * *************************************/
                 case Aggregate.CyborgPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/cyborg");
@@ -275,6 +289,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        PlayerRace = aggregate,
 
                     };
 
@@ -284,6 +299,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //create HUD
@@ -292,6 +308,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
                     break;
 
+                /****************************************
+                * Earthian
+                * *************************************/
                 case Aggregate.EarthianPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
@@ -345,6 +364,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        PlayerRace = aggregate,
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -362,6 +382,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
                     break;
 
+                /****************************************
+                * Gargranian
+                * *************************************/
                 case Aggregate.GargranianPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
@@ -418,6 +441,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        PlayerRace = aggregate,
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -435,6 +459,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
                     break;
 
+                /****************************************
+                * Space Pirate
+                * *************************************/
                 case Aggregate.SpacePiratePlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
@@ -491,6 +518,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        PlayerRace = aggregate,
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -508,6 +536,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
                     break;
 
+                /****************************************
+                * Zombie
+                * *************************************/
                 case Aggregate.ZombiePlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
@@ -570,6 +601,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        PlayerRace = aggregate,
                         abilityModifiers = new AbilityModifiers()
                         {
                             meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),

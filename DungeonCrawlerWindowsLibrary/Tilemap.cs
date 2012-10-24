@@ -36,6 +36,11 @@ namespace DungeonCrawlerWindowsLibrary
         public int TileHeight;
 
         /// <summary>
+        /// The width of the walls, in tiles
+        /// </summary>
+        public int WallWidth;
+
+        /// <summary>
         /// The texture names used in this tilemap
         /// </summary>
         public string[] ImagePaths;

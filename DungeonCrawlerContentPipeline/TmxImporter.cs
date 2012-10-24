@@ -124,6 +124,8 @@ namespace DungeonCrawlerContentPipeline
             output.Layers = layers.ToArray();
             output.GameObjectGroupCount = objectGroups.Count;
             output.GameObjectGroups = objectGroups.ToArray();
+            // Initializes the Wall Width to 0 just in case it is not specified in the tilemap
+            output.WallWidth = 0;
             
             return output;
         }
