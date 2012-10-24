@@ -110,6 +110,7 @@ namespace DungeonCrawler
         public WeaponComponent WeaponComponent;
         public BulletComponent BulletComponent;
         public PlayerInfoComponent PlayerInfoComponent;
+        public EnemyAIComponent EnemyAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         #endregion
@@ -122,6 +123,7 @@ namespace DungeonCrawler
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
+        EnemyAISystem EnemyAISystem;
 
         #endregion
 
@@ -173,7 +175,7 @@ namespace DungeonCrawler
             PlayerInfoComponent = new PlayerInfoComponent();
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
-
+            EnemyAIComponent = new EnemyAIComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
@@ -195,15 +197,10 @@ namespace DungeonCrawler
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
             WeaponSystem = new WeaponSystem(this);
+            EnemyAISystem = new EnemyAISystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            // Testing code
-            Equipment e = new Equipment()
-            {
-                EntityID = AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One),
-                WeaponID = WeaponFactory.CreateWeapon(WeaponType.StandardSword),
-            };
-            EquipmentComponent.Add(e.EntityID, e);
+            // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
             //End Testing Code
