@@ -116,14 +116,14 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                         abilityModifiers = new AbilityModifiers()
                         {
-                            meleeDamageReduction = miscMeleeDef + (int)((defense-10)/2),
-                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
-                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
-                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
-                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
-                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
-                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
-                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                            meleeDamageReduction = miscMeleeDef + (int)((stats.Defense-10)/2),
+                            rangedDamageReduction = miscRangedDef + (int)((stats.Defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((stats.Strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((stats.Agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((stats.Strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((stats.Agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
                         }
                     };
                     game.PlayerComponent[entityID] = player;
@@ -184,14 +184,14 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                         abilityModifiers = new AbilityModifiers()
                         {
-                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
-                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
-                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
-                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
-                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
-                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
-                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
-                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                            meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((stats.Defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((stats.Strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((stats.Agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((stats.Strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((stats.Agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
                         }
 
                     };
@@ -468,11 +468,11 @@ namespace DungeonCrawler.Entities
                     miscMeleeDef = 5;
                     miscRangedDef = -5;
 
-                    strength = 16;
-                    stamina = 5;
-                    agility = 5;
-                    intelligence = 10;
-                    defense = 14;
+                    stats.Strength = 16;
+                    stats.Stamina = 5;
+                    stats.Agility = 5;
+                    stats.Intelligence = 10;
+                    stats.Defense = 14;
 
                     position = new Position()
                     {
@@ -528,14 +528,14 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = PlayerIndex.One,
                         abilityModifiers = new AbilityModifiers()
                         {
-                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
-                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
-                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
-                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
-                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
-                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
-                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
-                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                            meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((stats.Defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((stats.Strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((stats.Agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((stats.Strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((stats.Agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
                         }
                     };
 
