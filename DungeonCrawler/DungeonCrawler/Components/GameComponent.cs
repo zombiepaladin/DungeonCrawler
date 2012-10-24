@@ -78,7 +78,6 @@ namespace DungeonCrawler.Components
             get { return elements.Values; }
         }
 
-
         /// <summary>
         /// Adds the supplied component to the specified entity
         /// </summary>
