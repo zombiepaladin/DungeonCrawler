@@ -367,7 +367,14 @@ namespace DungeonCrawler
             foreach (CharSelectPlayer player in players)
             {
                 if (player.connected && player.selected)
-                    game.AggregateFactory.CreateFromAggregate(buttonAggregates[player.yPos, player.xPos], player.playerIndex);
+                {
+                    Equipment e = new Equipment()
+                    {
+                        EntityID = game.AggregateFactory.CreateFromAggregate(buttonAggregates[player.yPos, player.xPos], player.playerIndex),
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                    };
+                    game.EquipmentComponent.Add(e.EntityID, e);
+                }
             }
             game.GameState = GameState.NetworkSetup;
         }

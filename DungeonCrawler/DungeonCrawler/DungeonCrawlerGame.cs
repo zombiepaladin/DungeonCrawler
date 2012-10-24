@@ -59,7 +59,7 @@ namespace DungeonCrawler
         /// The current GameState
         /// TODO: Change initial state to SplashScreen
         /// </summary>
-        public GameState GameState = GameState.Gameplay;
+        public GameState GameState = GameState.SignIn;
 
         public static DungeonCrawlerGame game;
 
@@ -197,13 +197,7 @@ namespace DungeonCrawler
             WeaponSystem = new WeaponSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            // Testing code
-            Equipment e = new Equipment()
-            {
-                EntityID = AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One),
-                WeaponID = WeaponFactory.CreateWeapon(WeaponType.StandardSword),
-            };
-            EquipmentComponent.Add(e.EntityID, e);
+            // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
             //End Testing Code
