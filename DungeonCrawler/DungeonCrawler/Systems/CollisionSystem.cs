@@ -40,7 +40,7 @@ namespace DungeonCrawler.Systems
 
                 foreach (Position position in positionsInRoom)
                 {
-                    IEnumerable<Position> collisions = positionsInRoom.InRegion(position.Center, position.Radius)
+                    IEnumerable<Position> collisions = positionsInRoom.InRegion(position.Center, position.Radius);
                     if(collisions.Count() > 0)
                     {
                         foreach(Position collidingPosition in collisions)
