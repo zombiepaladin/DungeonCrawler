@@ -42,6 +42,31 @@ namespace DungeonCrawler.Components
         /// Type of object of the target, keys are strings indicated on the map editor, stored in trigger's targetID.
         /// </summary>
         public Dictionary<string, string> targetTypeMap ;
+
+        /// <summary>
+        /// The tilemap's width, in tiles
+        /// </summary>
+        public int Width;
+
+        /// <summary>
+        /// The tilemap's height, in tiles
+        /// </summary>
+        public int Height;
+
+        /// <summary>
+        /// The width of the tilemap's tiles
+        /// </summary>
+        public int TileWidth;
+
+        /// <summary>
+        /// The height of the tilemap's tiles
+        /// </summary>
+        public int TileHeight;
+
+        /// <summary>
+        /// The width of the walls, in tiles
+        /// </summary>
+        public int WallWidth;
     }
 
     public class RoomComponent : GameComponent<Room>
