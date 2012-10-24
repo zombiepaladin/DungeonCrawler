@@ -61,6 +61,8 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
+        public static DungeonCrawlerGame game;
+
         public static LevelManager LevelManager;
 
         /// <summary>
@@ -118,6 +120,7 @@ namespace DungeonCrawler
         /// </summary>
         public DungeonCrawlerGame()
         {
+            game = this;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -176,7 +179,6 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-            AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 

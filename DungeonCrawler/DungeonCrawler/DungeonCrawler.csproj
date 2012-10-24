@@ -125,6 +125,7 @@
     <Compile Include="Components\MovementSpriteComponent.cs" />
     <Compile Include="Components\GameComponent.cs" />
     <Compile Include="Components\StatsComponent.cs" />
+    <Compile Include="Components\TriggerComponent.cs" />
     <Compile Include="Entities\HUDAggregateFactory.cs" />
     <Compile Include="Entities\Aggregate.cs" />
     <Compile Include="Entities\AggregateFactory.cs" />

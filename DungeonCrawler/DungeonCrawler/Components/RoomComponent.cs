@@ -32,6 +32,16 @@ namespace DungeonCrawler.Components
         /// The name of the tilemap for the room
         /// </summary>
         public string Tilemap;
+
+        /// <summary>
+        /// EntityIDs of objects, keys are strings indicated on the map editor, stored in trigger's targetID.
+        /// </summary>
+        public Dictionary<string, uint> idMap;
+
+        /// <summary>
+        /// Type of object of the target, keys are strings indicated on the map editor, stored in trigger's targetID.
+        /// </summary>
+        public Dictionary<string, string> targetTypeMap ;
     }
 
     public class RoomComponent : GameComponent<Room>
