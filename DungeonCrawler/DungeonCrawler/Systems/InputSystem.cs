@@ -71,7 +71,7 @@ namespace DungeonCrawler.Systems
             foreach (Player player in game.PlayerComponent.All)
             {
                 // Grab input for the player
-                KeyboardState keyboardState = Keyboard.GetState();
+                KeyboardState keyboardState = Keyboard.GetState(player.PlayerIndex);
                 GamePadState gamePadState = GamePad.GetState(player.PlayerIndex);
 
                 // Update the player's movement component
