@@ -371,7 +371,7 @@ namespace DungeonCrawler
                     Equipment e = new Equipment()
                     {
                         EntityID = game.AggregateFactory.CreateFromAggregate(buttonAggregates[player.yPos, player.xPos], player.playerIndex),
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardGun),
                     };
                     game.EquipmentComponent.Add(e.EntityID, e);
                 }

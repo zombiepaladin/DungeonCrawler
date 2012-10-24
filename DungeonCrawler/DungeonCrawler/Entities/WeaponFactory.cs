@@ -51,7 +51,7 @@ namespace DungeonCrawler.Entities
             Damage = 1,
             Effect = WeaponEffect.None,
             Range = 1,
-            Speed = 1f,
+            Speed = .1f,
             AttackType = WeaponAttackType.Ranged,
         };
 
@@ -131,6 +131,8 @@ namespace DungeonCrawler.Entities
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
+            position.Center.X += 32;
+            position.Center.Y += 32;
 
             switch (type)
             {
@@ -141,13 +143,13 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = eid,
                         Direction = direction,
-                        Speed = 1,
+                        Speed = 300,
                     };
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheet/StandardBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 5, 5),
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
                     break;
                 default:

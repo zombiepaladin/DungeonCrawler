@@ -52,4 +52,7 @@ Content\Tilemaps\TestDungeon1.xnb
 Content\Tilemaps\TestDungeon2.xnb
 Content\Tilemaps\TestDungeon3.xnb
 Content\SpriteFonts\Pescadero.xnb
-Content\Spritesheets\HealthFatigue.xnb
+Content\Spritesheets\BlueBullet.xnb
+Content\Sounds\8bit_gunloop_explosion.xnb
+Content\Sounds\melee sound.xnb
+Content\Sounds\sword sound.xnb

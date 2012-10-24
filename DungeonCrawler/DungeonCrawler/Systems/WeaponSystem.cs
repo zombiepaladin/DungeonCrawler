@@ -16,6 +16,7 @@ namespace DungeonCrawler.Systems
 
         //The timer will be used to determine when to update and create sprites and objects.
         private float _timer = 0;
+        private float _bulletTimer = 0;
 
         /// <summary>
         /// Creates this system.
@@ -40,10 +41,24 @@ namespace DungeonCrawler.Systems
                 if (_game.PlayerInfoComponent[player.EntityID].State != PlayerState.Attacking)
                     continue;
 
+                Equipment equipment = _game.EquipmentComponent[player.EntityID];
+
                 if(_game.WeaponSpriteComponent.Contains(player.EntityID))
                     spriteRemoved = UpdateWeaponSprite(_game.WeaponSpriteComponent[player.EntityID]);
                 else
-                    CreateWeaponSprite(_game.EquipmentComponent[player.EntityID]);
+                    CreateWeaponSprite(equipment);
+
+                //Add a timer condition here.
+                Weapon weapon = _game.WeaponComponent[equipment.WeaponID];
+                if (weapon.AttackType == WeaponAttackType.Ranged)
+                {
+                    _bulletTimer += elapsedTime;
+                    if (_bulletTimer >= weapon.Speed)
+                    {
+                        CreateBulletAndSprite(_game.EquipmentComponent[player.EntityID]);
+                        _bulletTimer = 0;
+                    }
+                }
 
                 if(spriteRemoved)
                 {
@@ -75,7 +90,7 @@ namespace DungeonCrawler.Systems
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.StandardGun:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardGun");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }
@@ -86,7 +101,7 @@ namespace DungeonCrawler.Systems
         private void CreateBulletAndSprite(Equipment equipment)
         {
             Position position = _game.PositionComponent[equipment.EntityID];
-            Vector2 direction = _game.MovementComponent[equipment.EntityID].Direction;
+            Vector2 direction = getDirectionFromFacing(_game.MovementSpriteComponent[equipment.EntityID].Facing);
             switch (_game.WeaponComponent[equipment.WeaponID].Type)
             {
                 case WeaponType.StandardGun:
@@ -119,6 +134,28 @@ namespace DungeonCrawler.Systems
             }
 
             return removed;
+        }
+
+        private Vector2 getDirectionFromFacing(Facing facing)
+        {
+            Vector2 direction = new Vector2(0);
+
+            switch (facing)
+            {
+                case Facing.North:
+                    direction.Y = -1;
+                    break;
+                case Facing.East:
+                    direction.X = 1;
+                    break;
+                case Facing.South:
+                    direction.Y = 1;
+                    break;
+                case Facing.West:
+                    direction.X = -1;
+                    break;
+            }
+            return direction;
         }
     }
 }
