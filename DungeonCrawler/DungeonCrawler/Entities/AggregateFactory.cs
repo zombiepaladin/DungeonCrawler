@@ -263,11 +263,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 10,
+                        Strength = 12,
                         Stamina = 10,
-                        Agility = 10,
-                        Intelligence = 10,
-                        Defense = 10
+                        Agility = 12,
+                        Intelligence = 4,
+                        Defense = 12
                     };
                     game.StatsComponent[entityID] = stats;
 
