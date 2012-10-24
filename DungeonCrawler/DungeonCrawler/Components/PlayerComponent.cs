@@ -13,6 +13,7 @@
 #region Using Statements
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -32,6 +33,11 @@ namespace DungeonCrawler.Components
         /// The PlayerIndex of this entity's player
         /// </summary>
         public PlayerIndex PlayerIndex;
+
+        /// <summary>
+        /// The race this player is playing as
+        /// </summary>
+        public Aggregate PlayerRace;
 
         /// <summary>
         /// A struct containing all the player's ability modifiers
