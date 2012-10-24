@@ -41,8 +41,21 @@ namespace DungeonCrawler.Entities
             MovementSprite movementSprite;
             Local local;
             Player player;
+            Stats stats;
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
+
+            //Miscelaneous modifyers for the potential ability modifiers
+            //Placeholders for racial/class bonuses and item bonuses.
+            int miscMeleeAttack=0;
+            int miscRangedAttack = 0;
+            int miscMeleeSpeed=0;
+            int miscAccuracy=0;
+            int miscMeleeDef=0;
+            int miscRangedDef=0;
+            int miscSpell=0;
+            int miscHealth=0;
+
             switch (aggregate)
             {
                 case Aggregate.FairyPlayer:
@@ -82,10 +95,36 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 4,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 16,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense-10)/2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -95,7 +134,7 @@ namespace DungeonCrawler.Entities
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
                     spriteSheet.Name = "Spritesheets/Cultist";
-                    
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -125,11 +164,38 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 4,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 16,
+                        Defense = 10
+                    };
+
                     player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
+
                     };
+
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -175,10 +241,26 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+
                     };
                     game.PlayerComponent[entityID] = player;
                     //create HUD
@@ -220,6 +302,21 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                     };
                     game.LocalComponent[entityID] = local;
+
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
 
                     player = new Player()
                     {
@@ -270,6 +367,21 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
@@ -319,6 +431,21 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
@@ -336,12 +463,24 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
                     spriteSheet.Name = "Spritesheets/MzombieBx2";
 
+                    //Placeholder values
+                    miscMeleeAttack = 5;
+                    miscMeleeDef = 5;
+                    miscRangedDef = -5;
+
+                    strength = 16;
+                    stamina = 5;
+                    agility = 5;
+                    intelligence = 10;
+                    defense = 14;
+
                     position = new Position()
                     {
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
                     };
+
                     game.PositionComponent[entityID] = position;
 
                     movement = new Movement()
@@ -368,11 +507,38 @@ namespace DungeonCrawler.Entities
                     };
                     game.LocalComponent[entityID] = local;
 
+                    //This will add a stats section for the player in the stats component
+                    stats = new Stats()
+                    {
+                        EntityID = entityID,
+
+                        //So here we just define our base values. Total sum is 50
+                        //The base stats are 10 across the board
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
+                        Intelligence = 10,
+                        Defense = 10
+                    };
+                    game.StatsComponent[entityID] = stats;
+
                     player = new Player()
                     {
                         EntityID = entityID,
                         PlayerIndex = PlayerIndex.One,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stamina - 10) / 2),
+                        }
                     };
+
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     hudagg.CreateHUD(player);

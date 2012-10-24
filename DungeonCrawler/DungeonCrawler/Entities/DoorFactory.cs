@@ -25,9 +25,11 @@ namespace DungeonCrawler.Entities
         public DoorFactory(DungeonCrawlerGame game)
         {
             this.game = game;
+
+            
         }
 
-        public void CreateDoor(uint room1, uint room2)
+        public uint CreateDoor(string destinationRoom, string destinationSpawn)
         {
             uint entityID = Entity.NextEntity();
 
@@ -63,10 +65,12 @@ namespace DungeonCrawler.Entities
             Door door = new Door()
             {
                 EntityID = entityID,
-                Room1 = room1,
-                Room2 = room2,
+                DestinationRoom = destinationRoom,
+                DestinationSpawnName = destinationSpawn,
             };
             game.DoorComponent[entityID] = door;
+
+            return entityID;
         }
     }
 }

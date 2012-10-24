@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace DungeonCrawlerWindowsLibrary
 {
@@ -27,5 +28,7 @@ namespace DungeonCrawlerWindowsLibrary
         /// The position of the game object instance within the game world
         /// </summary>
         public Rectangle Position;
+
+        public Dictionary<string, string> properties;
     }
 }
