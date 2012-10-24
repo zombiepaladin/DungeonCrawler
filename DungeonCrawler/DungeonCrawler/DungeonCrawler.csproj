@@ -110,7 +110,6 @@
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
-    <Compile Include="MethodInvoker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />

@@ -37,8 +37,6 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
-
-
                 if (_game.PlayerInfoComponent[player.EntityID].State != PlayerState.Attacking)
                     continue;
 

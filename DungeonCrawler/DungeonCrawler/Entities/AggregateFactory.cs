@@ -43,6 +43,7 @@ namespace DungeonCrawler.Entities
             Player player;
             PlayerInfo info;
             Stats stats = new Stats();
+
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
 
@@ -135,6 +136,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     break;
 
@@ -210,6 +212,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
@@ -284,6 +287,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //create HUD
