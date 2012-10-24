@@ -377,8 +377,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritesheets\HealthFatigue.png">
-      <Name>HealthFatigue</Name>
+    <Compile Include="Spritesheets\StandardGun.png">
+      <Name>StandardGun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\StandardSword.png">
+      <Name>StandardSword</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

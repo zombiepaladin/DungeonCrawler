@@ -20,6 +20,17 @@ namespace DungeonCrawler.Components
 {
 
     /// <summary>
+    /// The states of a player. This can help us determine what needs to be rendered.
+    /// </summary>
+    public enum PlayerState
+    {
+        Default,
+        Dead,
+        Attacking,
+        Inactive,
+    }
+
+    /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
     public struct Player
@@ -98,5 +109,39 @@ namespace DungeonCrawler.Components
     public class PlayerComponent : GameComponent<Player>
     {
 
+    }
+
+    ///<summary>
+    ///Contains current information for the player.
+    ///</summary>
+    public struct PlayerInfo
+    {
+        ///<summary>
+        ///The entity the player information belongs to.
+        ///</summary>
+        public uint EntityID;
+
+        /// <summary>
+        /// Current amount of health the player has.
+        /// </summary>
+        public int Health;
+
+        /// <summary>
+        /// Current amount of psi the player has.
+        /// </summary>
+        public int Psi;
+
+        ///<summary>
+        ///The current state of the player.
+        ///</summary>
+        public PlayerState State;
+    }
+
+    ///<summary>
+    ///The player information components.
+    ///</summary>
+    public class PlayerInfoComponent : GameComponent<PlayerInfo>
+    {
+        
     }
 }

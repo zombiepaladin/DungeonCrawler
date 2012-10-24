@@ -84,7 +84,7 @@ namespace DungeonCrawler
                 //{
                 //    CurrentSong = null;
                 //}
-                currentRoomID = game.RoomFactory.CreateRoom(level);
+                currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
                 Room room = game.RoomComponent[currentRoomID];
                 
 
@@ -103,17 +103,13 @@ namespace DungeonCrawler
                         {
                             case "PlayerSpawn":
                                 break;
-
                             case "Enemy":
-                                //goData.Type
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
                                 {
                                     case "Door":
                                         entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
-                                        
-                                        
                                         break;
                                     default:
                                         break;

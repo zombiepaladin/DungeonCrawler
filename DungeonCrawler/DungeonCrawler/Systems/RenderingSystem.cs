@@ -98,6 +98,23 @@ namespace DungeonCrawler.Systems
                                 SpriteEffects.None,
                                 0);
             }
+
+            //Draw Weapon animations
+            foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
+            {
+                Position position = game.PositionComponent[sprite.EntityID];
+                position.Center += new Vector2(10); //Offset the weapon a bit;
+                spriteBatch.Draw(sprite.SpriteSheet,
+                                position.Center,
+                                sprite.SpriteBounds,
+                                Color.White,
+                                0f,
+                                new Vector2(position.Radius),
+                                1f,
+                                SpriteEffects.None,
+                                0);
+            }
+
             //Draw HUD
             foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
             {

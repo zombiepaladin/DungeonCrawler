@@ -72,6 +72,11 @@ namespace DungeonCrawler
         public AggregateFactory AggregateFactory;
 
         /// <summary>
+        /// A factory for creating weapons and bullets.
+        /// </summary>
+        public WeaponFactory WeaponFactory;
+        
+        /// <summary>
         /// A DoorFactory for creating doors
         /// </summary>
         public DoorFactory DoorFactory;
@@ -101,6 +106,11 @@ namespace DungeonCrawler
         public HUDComponent HUDComponent;
         public InventoryComponent InventoryComponent;
         public InventorySpriteComponent InventorySpriteComponent;
+        public EquipmentComponent EquipmentComponent;
+        public WeaponComponent WeaponComponent;
+        public BulletComponent BulletComponent;
+        public PlayerInfoComponent PlayerInfoComponent;
+        public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         #endregion
 
@@ -111,6 +121,7 @@ namespace DungeonCrawler
         NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
+        WeaponSystem WeaponSystem;
 
         #endregion
 
@@ -138,6 +149,7 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            WeaponFactory = new WeaponFactory(this);
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
 
@@ -155,9 +167,14 @@ namespace DungeonCrawler
             HUDComponent = new HUDComponent();
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
-            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
+            EquipmentComponent = new EquipmentComponent();
+            WeaponComponent = new WeaponComponent();
+            BulletComponent = new BulletComponent();
+            PlayerInfoComponent = new PlayerInfoComponent();
+            WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
 
+            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
             base.Initialize();
@@ -177,10 +194,19 @@ namespace DungeonCrawler
             NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
+            WeaponSystem = new WeaponSystem(this);
 
             CharacterSelectionScreen.LoadContent();
+            // Testing code
+            Equipment e = new Equipment()
+            {
+                EntityID = AggregateFactory.CreateFromAggregate(Aggregate.ZombiePlayer, PlayerIndex.One),
+                WeaponID = WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+            };
+            EquipmentComponent.Add(e.EntityID, e);
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
+            //End Testing Code
 
         }
 
@@ -258,10 +284,9 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-
                     NetworkSystem.Update(elapsedTime);
-
                     MovementSystem.Update(elapsedTime);
+                    WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     break;
 
@@ -269,7 +294,6 @@ namespace DungeonCrawler
                     // TODO: Update credits
                     break;
             }
-
 
             base.Update(gameTime);
         }
