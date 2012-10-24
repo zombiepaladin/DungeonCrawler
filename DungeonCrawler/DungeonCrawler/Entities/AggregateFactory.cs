@@ -468,12 +468,6 @@ namespace DungeonCrawler.Entities
                     miscMeleeDef = 5;
                     miscRangedDef = -5;
 
-                    stats.Strength = 16;
-                    stats.Stamina = 5;
-                    stats.Agility = 5;
-                    stats.Intelligence = 10;
-                    stats.Defense = 14;
-
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -514,11 +508,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 10,
-                        Stamina = 10,
-                        Agility = 10,
+                        Strength = 16,
+                        Stamina = 5,
+                        Agility = 5,
                         Intelligence = 10,
-                        Defense = 10
+                        Defense = 14
                     };
                     game.StatsComponent[entityID] = stats;
 
