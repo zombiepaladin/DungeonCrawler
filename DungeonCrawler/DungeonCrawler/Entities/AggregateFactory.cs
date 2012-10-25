@@ -43,6 +43,7 @@ namespace DungeonCrawler.Entities
             Player player;
             PlayerInfo info;
             Stats stats = new Stats();
+
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
 
@@ -139,6 +140,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     break;
 
@@ -218,6 +220,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
@@ -296,6 +299,7 @@ namespace DungeonCrawler.Entities
                         Psi = 100,
                         State = PlayerState.Default,
                     };
+                    game.PlayerInfoComponent[entityID] = info;
 
                     game.PlayerComponent[entityID] = player;
                     //create HUD
@@ -361,6 +365,18 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
+                        abilityModifiers = new AbilityModifiers()
+                        {
+                            meleeDamageReduction = miscMeleeDef + (int)((stats.Defense - 10) / 2),
+                            rangedDamageReduction = miscRangedDef + (int)((stats.Defense - 10) / 2),
+                            meleeAttackBonus = miscMeleeAttack + (int)((stats.Strength - 10) / 2),
+                            RangedAttackBonus = miscRangedAttack + (int)((stats.Agility - 10) / 2),
+                            MeleeAttackSpeed = miscMeleeSpeed + (int)((stats.Strength - 10) / 2),
+                            Accuracy = miscAccuracy + (int)((stats.Agility - 10) / 2),
+                            SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
+                            HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
+                        }
+
                     };
                     game.PlayerComponent[entityID] = player;
 
@@ -502,11 +518,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 5,
-                        Stamina = 5,
-                        Agility = 25,
+                        Strength = 10,
+                        Stamina = 10,
+                        Agility = 10,
                         Intelligence = 10,
-                        Defense = 5
+                        Defense = 10
                     };
                     game.StatsComponent[entityID] = stats;
 
