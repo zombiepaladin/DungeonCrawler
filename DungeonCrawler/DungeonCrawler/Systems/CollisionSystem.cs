@@ -54,9 +54,16 @@ namespace DungeonCrawler.Systems
 
                 foreach (Position position in positionsInRoom)
                 {
+                    if (!position.Collideable) continue;
+
                     IEnumerable<Position> collisions = positionsInRoom.InRegion(position.Center, position.Radius);
                     foreach(Position collidingPosition in collisions)
                     {
+                        if (!collidingPosition.Collideable) continue;
+
+                        //Uh...... Optimize later
+                        if (position.EntityID == collidingPosition.EntityID) continue;
+
                         CollisionType type = getCollisionType(position.EntityID, collidingPosition.EntityID);
                         switch (type)
                         {
@@ -92,41 +99,93 @@ namespace DungeonCrawler.Systems
 
         private void BulletStaticCollision(uint p, uint p_2)
         {
-            throw new NotImplementedException();
+            //Remove the bullet
+
+            uint bulletId;
+            if (_game.BulletComponent.Contains(p))
+                bulletId = p;
+            else
+                bulletId = p_2;
+
+            _game.RemoveEntityFromComponents(bulletId);
         }
 
         private void EnemyStaticCollision(uint p, uint p_2)
         {
+            //Set enemy against object
+
             throw new NotImplementedException();
         }
 
         private void EnemyBulletCollision(uint p, uint p_2)
         {
+            //Remove the bullet, calculate damage/knockback?
+
             throw new NotImplementedException();
         }
 
         private void EnemyEnemyCollision(uint p, uint p_2)
         {
+            //Set enemies against each other
+
             throw new NotImplementedException();
         }
 
         private void PlayerStaticCollision(uint p, uint p_2)
         {
+            //Stop player movement.
+
             throw new NotImplementedException();
         }
 
         private void PlayerBulletCollision(uint p, uint p_2)
         {
-            throw new NotImplementedException();
+            //Delete bullet, calculate damage.
+
+            uint bulletId, playerId;
+            if (_game.BulletComponent.Contains(p))
+            {
+                bulletId = p;
+                playerId = p_2;
+            }
+            else
+            {
+                playerId = p;
+                bulletId = p_2;
+            }
+
+            _game.RemoveEntityFromComponents(bulletId);
+
+            Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
+                _game.PositionComponent[playerId].Center);
+            if (directionOfKnockback == Vector2.Zero) directionOfKnockback = new Vector2(1, 0);
+
+            directionOfKnockback.Normalize();
+
+
+            //knockback
+            Position newLocation = _game.PositionComponent[playerId];
+            newLocation.Center -= directionOfKnockback * 10;
+
+            _game.PositionComponent[playerId] = newLocation; 
         }
 
         private void PlayerEnemyCollision(uint p, uint p_2)
         {
+            //Damage player, knockback?
+
             throw new NotImplementedException();
         }
 
         private void PlayerPlayerCollision(uint p, uint p_2)
         {
+            //Put up against each other
+
+            //Find the direction, set to 1,0 if nothing, Normalize,
+            // Find the radii - distance, divide by 2, set away
+
+            
+
             throw new NotImplementedException();
         }
 
@@ -143,11 +202,11 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Static;
 
             CollisionType obj2 = CollisionType.None;
-            if (_game.PlayerComponent.Contains(p))
+            if (_game.PlayerComponent.Contains(p_2))
                 obj2 = CollisionType.Player;
             else if (false) //Enemy
                 obj2 = CollisionType.Enemy;
-            else if (_game.BulletComponent.Contains(p))
+            else if (_game.BulletComponent.Contains(p_2))
                 obj2 = CollisionType.Bullet;
             else if (false) //Static
                 obj2 = CollisionType.Static;

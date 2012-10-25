@@ -73,6 +73,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -157,6 +158,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
                     
@@ -243,6 +245,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -321,6 +324,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
                     
@@ -395,6 +399,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -472,6 +477,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -554,6 +560,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
 
                     game.PositionComponent[entityID] = position;

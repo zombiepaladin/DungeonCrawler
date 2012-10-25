@@ -65,10 +65,34 @@ namespace DungeonCrawler.Systems
                 position.Center += elapsedTime * movement.Speed * movement.Direction;
                 // Player clamping based on the size of the walls, the tile sizes, and the room dimensions.
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();
-                if (position.Center.X - position.Radius < currentRoom.WallWidth * currentRoom.TileWidth) position.Center.X = (currentRoom.WallWidth * currentRoom.TileWidth) + position.Radius;
-                if (position.Center.Y - position.Radius < currentRoom.WallWidth * currentRoom.TileHeight) position.Center.Y = (currentRoom.WallWidth * currentRoom.TileHeight) + position.Radius;
-                if (position.Center.X + position.Radius > (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth) position.Center.X = (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth - position.Radius;
-                if (position.Center.Y + position.Radius > (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight) position.Center.Y = (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight - position.Radius;
+
+                bool clamped = false;
+
+                if (position.Center.X - position.Radius < currentRoom.WallWidth * currentRoom.TileWidth)
+                {
+                    position.Center.X = (currentRoom.WallWidth * currentRoom.TileWidth) + position.Radius;
+                    clamped = true;
+                }
+                if (position.Center.Y - position.Radius < currentRoom.WallWidth * currentRoom.TileHeight)
+                {
+                    position.Center.Y = (currentRoom.WallWidth * currentRoom.TileHeight) + position.Radius;
+                    clamped = true;
+                }
+                if (position.Center.X + position.Radius > (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth)
+                {
+                    position.Center.X = (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth - position.Radius;
+                    clamped = true;
+                }
+                if (position.Center.Y + position.Radius > (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight)
+                {
+                    position.Center.Y = (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight - position.Radius;
+                    clamped = true;
+                }
+
+                //Remove if it's a bullet. (Took out for collision test demonstration)
+               //if (clamped && game.BulletComponent.Contains(position.EntityID))
+                   // game.RemoveEntityFromComponents(position.EntityID);
+
                 game.PositionComponent[movement.EntityID] = position;
                 
                 // Update the entity's movement sprite

@@ -30,6 +30,7 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(0,0),
                 Radius = 0f,
+                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
             Background = new InventorySprite()
@@ -48,6 +49,7 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(100, 100),
                 Radius = 0f,
+                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
             Selector = new InventorySprite()

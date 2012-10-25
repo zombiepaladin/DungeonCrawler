@@ -131,8 +131,8 @@ namespace DungeonCrawler.Entities
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
-            position.Center.X += 32;
-            position.Center.Y += 32;
+            position.Center += direction * 70;
+
 
             switch (type)
             {
@@ -151,6 +151,7 @@ namespace DungeonCrawler.Entities
                         SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
+                    position.Radius = 5;
                     break;
                 default:
                     throw new Exception("Unknown BulletType");
