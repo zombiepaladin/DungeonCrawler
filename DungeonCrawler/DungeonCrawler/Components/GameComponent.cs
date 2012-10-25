@@ -12,6 +12,7 @@
 
 #region Using Statements
 using System.Collections.Generic;
+using System;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -112,6 +113,10 @@ namespace DungeonCrawler.Components
             return elements.ContainsKey(entityID);
         }
 
+        public virtual void HandleTrigger(uint entityID, string type)
+        {
+            throw new Exception("Handle Trigger is not implemented");
+        }
         #endregion
     }
 }

@@ -46,13 +46,6 @@ Content\Spritesheets\charSelectEarthian.xnb
 Content\Spritesheets\Skill_Icons.xnb
 Content\Spritesheets\StandardGun.xnb
 Content\Spritesheets\StandardSword.xnb
-Content\Sounds\MenuSelect.xnb
-Content\Audio\BClick_Menu.xnb
-Content\Tilemaps\TestDungeon1.xnb
-Content\Tilemaps\TestDungeon2.xnb
-Content\Tilemaps\TestDungeon3.xnb
-Content\SpriteFonts\Pescadero.xnb
-Content\Spritesheets\HealthFatigue.xnb
 Content\Spritesheets\BlueBullet.xnb
 Content\Spritesheets\LockPick.xnb
 Content\Spritesheets\Steal.xnb
@@ -63,7 +56,14 @@ Content\Spritesheets\Heavy Drinker.xnb
 Content\Spritesheets\Mug.xnb
 Content\Spritesheets\Power shot.xnb
 Content\Spritesheets\Trick Shot Real.xnb
+Content\Spritesheets\HealthFatigue.xnb
+Content\Spritesheets\EarthianSkillz.xnb
+Content\Sounds\MenuSelect.xnb
+Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
 Content\Sounds\melee sound.xnb
 Content\Sounds\sword sound.xnb
-Content\Spritesheets\EarthianSkillz.xnb
+Content\Tilemaps\TestDungeon1.xnb
+Content\Tilemaps\TestDungeon2.xnb
+Content\Tilemaps\TestDungeon3.xnb
+Content\SpriteFonts\Pescadero.xnb

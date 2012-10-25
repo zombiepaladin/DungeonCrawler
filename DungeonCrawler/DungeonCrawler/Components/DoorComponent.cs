@@ -37,11 +37,21 @@ namespace DungeonCrawler.Components
         /// The name of the spawn in the destination room to place the player
         /// </summary>
         public string DestinationSpawnName;
+
+        /// <summary>
+        /// Indicates whether the door is (un)locked
+        /// </summary>
+        public bool Locked;
+
+        /// <summary>
+        /// Indicates whether the door is closed/opened
+        /// </summary>
+        public bool Closed;
     }
 
     public class DoorComponent : GameComponent<Door>
     {
-        public void HandleTrigger(uint entityID, string type)
+        public override void HandleTrigger(uint entityID, string type)
         {
 
         }
