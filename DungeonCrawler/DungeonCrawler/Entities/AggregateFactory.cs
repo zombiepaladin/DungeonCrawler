@@ -478,6 +478,7 @@ namespace DungeonCrawler.Entities
 
                 /****************************************
                 * Space Pirate
+                * Done by Austin Murphy and I also have posted the 9 sprites for my skills that are listed in the design document.
                 * *************************************/
                 case Aggregate.SpacePiratePlayer:
                     entityID = Entity.NextEntity();
