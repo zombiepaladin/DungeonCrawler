@@ -58,6 +58,7 @@ namespace DungeonCrawler.Components
 
     /// <summary>
     /// A struct containing modifiers based off of the stats
+    /// added by Matthew Hart
     /// </summary>
     public struct AbilityModifiers
     {

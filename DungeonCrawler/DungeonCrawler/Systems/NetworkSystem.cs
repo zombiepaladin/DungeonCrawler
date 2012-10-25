@@ -811,6 +811,7 @@ namespace DungeonCrawler.Systems
                                 EntityID = entityID,
                                 Center = packetReader.ReadVector2(),
                                 Radius = packetReader.ReadSingle(),
+                                Collideable = false,
                             };
                             game.PositionComponent[entityID] = position;
                             break;

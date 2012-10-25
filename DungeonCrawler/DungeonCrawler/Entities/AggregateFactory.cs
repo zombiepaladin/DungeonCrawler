@@ -73,6 +73,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -157,6 +158,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
                     
@@ -243,6 +245,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -321,6 +324,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
                     
@@ -407,6 +411,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -441,11 +446,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 10,
+                        Strength = 4,
                         Stamina = 10,
                         Agility = 10,
-                        Intelligence = 10,
-                        Defense = 10
+                        Intelligence = 14,
+                        Defense = 12
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -473,6 +478,7 @@ namespace DungeonCrawler.Entities
 
                 /****************************************
                 * Space Pirate
+                * Done by Austin Murphy and I also have posted the 9 sprites for my skills that are listed in the design document.
                 * *************************************/
                 case Aggregate.SpacePiratePlayer:
                     entityID = Entity.NextEntity();
@@ -484,6 +490,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
 
@@ -550,6 +557,7 @@ namespace DungeonCrawler.Entities
 
                 /****************************************
                 * Zombie
+                 * written by Matthew Hart
                 * *************************************/
                 case Aggregate.ZombiePlayer:
                     entityID = Entity.NextEntity();
@@ -566,6 +574,7 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
+                        Collideable = true,
                     };
 
                     game.PositionComponent[entityID] = position;
