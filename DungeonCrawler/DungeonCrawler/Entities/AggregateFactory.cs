@@ -557,6 +557,7 @@ namespace DungeonCrawler.Entities
 
                 /****************************************
                 * Zombie
+                 * written by Matthew Hart
                 * *************************************/
                 case Aggregate.ZombiePlayer:
                     entityID = Entity.NextEntity();
