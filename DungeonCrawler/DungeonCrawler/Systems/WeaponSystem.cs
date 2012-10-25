@@ -63,13 +63,6 @@ namespace DungeonCrawler.Systems
                         _bulletTimer = 0;
                     }
                 }
-
-                /*if(spriteRemoved)
-                {
-                    PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
-                    info.State = PlayerState.Default;
-                    _game.PlayerInfoComponent[player.EntityID] = info;
-                }*/
             }
         }
 

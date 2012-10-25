@@ -42,6 +42,7 @@ namespace DungeonCrawler.Entities
                 // Center and Radius TBD Later
                 Center = new Vector2(0, 0),
                 Radius = 32f,
+                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
