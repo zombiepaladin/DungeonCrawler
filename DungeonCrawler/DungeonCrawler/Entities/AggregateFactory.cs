@@ -325,9 +325,10 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
                     break;
 
-                /****************************************
+                /*******************************************************************************
                 * Earthian
-                * *************************************/
+                * Done by Andrew Bellinder. I added the character's sprite and his skill sprites
+                * ******************************************************************************/
                 case Aggregate.EarthianPlayer:
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
