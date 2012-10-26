@@ -107,6 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bounds\Bounds.cs" />
+    <Compile Include="Bounds\CircleBounds.cs" />
+    <Compile Include="Bounds\RectangleBounds.cs" />
+    <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
