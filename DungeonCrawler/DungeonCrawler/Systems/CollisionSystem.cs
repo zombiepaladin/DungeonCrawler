@@ -107,7 +107,7 @@ namespace DungeonCrawler.Systems
             else
                 bulletId = p_2;
 
-            _game.RemoveEntityFromComponents(bulletId);
+            _game.Garbageman.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
         }
 
         private void EnemyStaticCollision(uint p, uint p_2)
@@ -154,7 +154,7 @@ namespace DungeonCrawler.Systems
                 bulletId = p_2;
             }
 
-            _game.RemoveEntityFromComponents(bulletId);
+            _game.Garbageman.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
             Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
                 _game.PositionComponent[playerId].Center);
