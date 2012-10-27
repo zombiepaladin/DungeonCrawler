@@ -92,8 +92,8 @@ namespace DungeonCrawler.Systems
                 }
 
                 //Remove if it's a bullet. (Took out for collision test demonstration)
-               //if (clamped && game.BulletComponent.Contains(position.EntityID))
-                   // game.RemoveEntityFromComponents(position.EntityID);
+                //if (clamped && game.BulletComponent.Contains(position.EntityID))
+                    //_game.GarbagemanSystem.ScheduleVisit(position.EntityID, GarbagemanSystem.ComponentType.Bullet);
 
                 game.PositionComponent[movement.EntityID] = position;
                 
