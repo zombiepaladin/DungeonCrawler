@@ -107,8 +107,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
+    <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="LevelManager.cs" />

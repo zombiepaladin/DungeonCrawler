@@ -30,9 +30,11 @@ namespace DungeonCrawler.Systems
             Player = 0x2,
             Enemy = 0x4,
             Bullet = 0x8,
+            Collectible = 0x10,
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
             PlayerStatic = 0x3,
+            PlayerCollectible = 0x12,
             EnemyBullet = 0xC,
             EnemyStatic = 0x5,
             BulletStatic = 0x9,
@@ -93,6 +95,9 @@ namespace DungeonCrawler.Systems
                             case CollisionType.PlayerStatic:
                                 PlayerStaticCollision(position.EntityID, collidingPosition.EntityID);
                                 break;
+                            case CollisionType.PlayerCollectible:
+                                PlayerCollectibleCollision(position.EntityID, collidingPosition.EntityID);
+                                break;
                             case CollisionType.Enemy:
                                 EnemyEnemyCollision(position.EntityID, collidingPosition.EntityID);
                                 break;
@@ -111,6 +116,26 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        private void PlayerCollectibleCollision(uint p, uint p_2)
+        {
+            //pick up the collectible, kill it
+            uint playerID, collectibleID;
+            if (_game.PlayerComponent.Contains(p))
+            {
+                playerID = p;
+                collectibleID = p_2;
+            }
+            else
+            {
+                collectibleID = p;
+                playerID = p_2;
+            }
+
+            //Handle the collectible adding type
+
+            _game.GarbagemanSystem.ScheduleVisit(collectibleID, GarbagemanSystem.ComponentType.Collectible);
+        }
+
         private void BulletStaticCollision(uint p, uint p_2)
         {
             //Remove the bullet
@@ -121,7 +146,7 @@ namespace DungeonCrawler.Systems
             else
                 bulletId = p_2;
 
-            _game.RemoveEntityFromComponents(bulletId);
+            _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
         }
 
         private void EnemyStaticCollision(uint p, uint p_2)
@@ -168,7 +193,7 @@ namespace DungeonCrawler.Systems
                 bulletId = p_2;
             }
 
-            _game.RemoveEntityFromComponents(bulletId);
+            _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
             Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
                 _game.PositionComponent[playerId].Center);
@@ -212,6 +237,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p))
                 obj1 = CollisionType.Bullet;
+            else if (_game.CollectibleComponent.Contains(p))
+                obj1 = CollisionType.Collectible;
             else if (false) //Static
                 obj1 = CollisionType.Static;
 
@@ -222,6 +249,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p_2))
                 obj2 = CollisionType.Bullet;
+            else if (_game.CollectibleComponent.Contains(p_2))
+                obj2 = CollisionType.Collectible;
             else if (false) //Static
                 obj2 = CollisionType.Static;
 

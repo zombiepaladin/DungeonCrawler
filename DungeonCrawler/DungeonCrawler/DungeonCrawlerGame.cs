@@ -87,6 +87,11 @@ namespace DungeonCrawler
         /// </summary>
         public RoomFactory RoomFactory;
 
+        /// <summary>
+        /// A CollectibleFactory for creating (surprise) collectibles
+        /// </summary>
+        public CollectibleFactory CollectableFactory;
+
         public CharacterSelectionScreen CharacterSelectionScreen;
 
         #endregion
@@ -114,6 +119,7 @@ namespace DungeonCrawler
         public EnemyAIComponent EnemyAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
+        public CollectibleComponent CollectibleComponent;
         #endregion
 
         #region Game Systems
@@ -125,8 +131,9 @@ namespace DungeonCrawler
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
-        GarbagemanSystem GarbagemanSystem;
         CollisionSystem CollisionSystem;
+
+        public GarbagemanSystem GarbagemanSystem;
 
         #endregion
 
@@ -157,6 +164,7 @@ namespace DungeonCrawler
             WeaponFactory = new WeaponFactory(this);
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
+            CollectableFactory = new CollectibleFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -179,6 +187,7 @@ namespace DungeonCrawler
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
+            CollectibleComponent = new CollectibleComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
@@ -322,15 +331,5 @@ namespace DungeonCrawler
             base.Draw(gameTime);
         }
 
-        /// <summary>
-        /// Well, this is what happens when you don't realize that Game Systems
-        /// aren't meant to interact with one another. Basically a way for the
-        /// various systems to access the GarbagemanSystem.
-        /// </summary>
-        /// <param name="eid">Entity ID for entity to be removed.</param>
-        public void RemoveEntityFromComponents(uint eid)
-        {
-            GarbagemanSystem.ScheduleVisit(eid);
-        }
     }
 }
