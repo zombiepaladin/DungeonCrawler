@@ -86,6 +86,11 @@ namespace DungeonCrawler
         /// </summary>
         public RoomFactory RoomFactory;
 
+        /// <summary>
+        /// A CollectibleFactory for creating (surprise) collectibles
+        /// </summary>
+        public CollectibleFactory CollectableFactory;
+
         public CharacterSelectionScreen CharacterSelectionScreen;
 
         #endregion
@@ -113,6 +118,7 @@ namespace DungeonCrawler
         public EnemyAIComponent EnemyAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
+        public CollectibleComponent CollectibleComponent;
         #endregion
 
         #region Game Systems
@@ -156,6 +162,7 @@ namespace DungeonCrawler
             WeaponFactory = new WeaponFactory(this);
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
+            CollectableFactory = new CollectibleFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -178,6 +185,7 @@ namespace DungeonCrawler
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
+            CollectibleComponent = new CollectibleComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 

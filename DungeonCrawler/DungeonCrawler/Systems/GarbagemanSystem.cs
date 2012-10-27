@@ -42,6 +42,7 @@ namespace DungeonCrawler.Systems
             Player,
             Enemy,
             Bullet,
+            Collectible,
             //Needs more in the future!
         }
 
@@ -100,6 +101,12 @@ namespace DungeonCrawler.Systems
                         game.SpriteComponent.Remove(keyValue.Key);
                         game.MovementComponent.Remove(keyValue.Key);
                         break;
+                    case ComponentType.Collectible:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollectibleComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        //game.MovementComponent.Remove(keyValue.Key);
+                        break;
                 }
             }
         }
@@ -113,6 +120,8 @@ namespace DungeonCrawler.Systems
             //    cType = ComponentType.Enemy;
             else if (game.BulletComponent.Contains(eid))
                 cType = ComponentType.Bullet;
+            else if (game.CollectibleComponent.Contains(eid))
+                cType = ComponentType.Collectible;
             else
                 return; //It's something not supported
 
