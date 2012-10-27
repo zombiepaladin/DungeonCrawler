@@ -131,8 +131,9 @@ namespace DungeonCrawler
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
-        GarbagemanSystem GarbagemanSystem;
         CollisionSystem CollisionSystem;
+
+        public GarbagemanSystem GarbagemanSystem;
 
         #endregion
 
@@ -330,15 +331,5 @@ namespace DungeonCrawler
             base.Draw(gameTime);
         }
 
-        /// <summary>
-        /// Well, this is what happens when you don't realize that Game Systems
-        /// aren't meant to interact with one another. Basically a way for the
-        /// various systems to access the GarbagemanSystem.
-        /// </summary>
-        /// <param name="eid">Entity ID for entity to be removed.</param>
-        public void RemoveEntityFromComponents(uint eid)
-        {
-            GarbagemanSystem.ScheduleVisit(eid);
-        }
     }
 }

@@ -4,6 +4,18 @@
 //
 // Author: Matthew McHaney
 //
+// Note  : If you want to test this, add this code right before 
+//         Loading is set to false in LoadLevel in LevelManager.
+/*              game.CollectableFactory.CreateCollectible(
+                    Entities.CollectibleType.money1, new Position
+                    {
+                        Center = new Vector2(300, 300),
+                        Radius = 16,
+                        Collideable = true,
+                        RoomID = room.EntityID,
+                        EntityID = 0
+                    });*/
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -90,7 +102,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/TestMiscIcons1"),
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/MiscIcons1"),
                         SpriteBounds = new Rectangle(204, 46, 32, 32),
                     };
                     break;
