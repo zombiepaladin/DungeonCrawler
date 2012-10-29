@@ -1,4 +1,12 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------------
+//Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
+// Author: Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
+using DungeonCrawler.Components;
 
 
 namespace DungeonCrawler
@@ -22,6 +31,7 @@ namespace DungeonCrawler
         SpriteBatch spriteBatch;
         BasicEffect basicEffect;
 
+        public uint currentRoomID;
 
         public bool Loading = true;
         public bool Paused = false;
@@ -66,6 +76,7 @@ namespace DungeonCrawler
         public void LoadLevel(string level)
         {
             Loading = true;
+            DungeonCrawlerGame game = (DungeonCrawlerGame)this.game;
 
             ThreadStart threadStarter = delegate
             {
@@ -73,14 +84,18 @@ namespace DungeonCrawler
                 CurrentMap.LoadContent(game.Content);
 
                 // Load the background music
-                //////////if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
-                //////////{
-                //////////    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
-                //////////}
-                //////////else
-                //////////{
-                //////////    CurrentSong = null;
-                //////////}
+                //if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
+                //{
+                //    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
+                //}
+                //else
+                //{
+                //    CurrentSong = null;
+                //}
+                currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                Room room = game.RoomComponent[currentRoomID];
+                
+
 
                 for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
                 {
@@ -89,21 +104,36 @@ namespace DungeonCrawler
                         GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
                         Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
 
+                        uint entityID = uint.MaxValue;
+
+
                         switch (goData.Category)
                         {
                             case "PlayerSpawn":
                                 break;
-
                             case "Enemy":
-                                //goData.Type
                                 break;
                             case "Trigger":
-                                //goData.Type
-                                break;
-                           
+                                switch (goData.Type)
+                                {
+                                    case "Door":
+                                        entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            break;
+
                         }
+                            if (goData.properties.Keys.Contains("id"))
+                            {
+                                room.idMap.Add(goData.properties["id"], entityID);
+                                room.targetTypeMap.Add(goData.properties["id"], goData.Type);
+                            }
+
                     }
                 }
+
 
 
                 //// Load the game objects
@@ -149,7 +179,7 @@ namespace DungeonCrawler
                 //    }
                 //}
 
-              
+
 
                 // Mark level as loaded
                 Loading = false;
@@ -172,49 +202,49 @@ namespace DungeonCrawler
             }
             //else
             //{
-                // Update the scrolling distance - the distance
-                // the screen has scrolled past the Player
-                //if (Scrolling)
-                //{
+            // Update the scrolling distance - the distance
+            // the screen has scrolled past the Player
+            //if (Scrolling)
+            //{
 
-                //    float scrollDelta = elapsedTime * (CurrentMap.Layers[CurrentMap.PlayerLayer].ScrollingSpeed);
-                //    scrollDistance += scrollDelta;
-                //    ScrollingShooterGame.Game.Player.Position -= new Vector2(0, scrollDelta / 2);
+            //    float scrollDelta = elapsedTime * (CurrentMap.Layers[CurrentMap.PlayerLayer].ScrollingSpeed);
+            //    scrollDistance += scrollDelta;
+            //    ScrollingShooterGame.Game.Player.Position -= new Vector2(0, scrollDelta / 2);
 
-                //    // Scroll all the tile layers
-                //    for (int i = 0; i < CurrentMap.LayerCount; i++)
-                //    {
-                //        CurrentMap.Layers[i].ScrollOffset += elapsedTime * CurrentMap.Layers[i].ScrollingSpeed;
-                //    }
-                //    // Scrolls objects with the map
-                //    foreach (uint goID in ScrollingShooterGame.GameObjectManager.scrollingObjects)
-                //    {
-                //        GameObject go = ScrollingShooterGame.GameObjectManager.GetObject(goID);
-                //        go.ScrollWithMap(elapsedTime);
-                //        ScrollingShooterGame.GameObjectManager.UpdateGameObject(goID);
-                //    }
+            //    // Scroll all the tile layers
+            //    for (int i = 0; i < CurrentMap.LayerCount; i++)
+            //    {
+            //        CurrentMap.Layers[i].ScrollOffset += elapsedTime * CurrentMap.Layers[i].ScrollingSpeed;
+            //    }
+            //    // Scrolls objects with the map
+            //    foreach (uint goID in ScrollingShooterGame.GameObjectManager.scrollingObjects)
+            //    {
+            //        GameObject go = ScrollingShooterGame.GameObjectManager.GetObject(goID);
+            //        go.ScrollWithMap(elapsedTime);
+            //        ScrollingShooterGame.GameObjectManager.UpdateGameObject(goID);
+            //    }
 
-                //}
-                // Update only the game objects that appear near our scrolling region
-                //Rectangle bounds = new Rectangle(0,
-                //    (int)(-scrollDistance / 2) - 100,
-                //    CurrentMap.Width * CurrentMap.TileWidth,
-                //    16 * CurrentMap.TileHeight + 100);
-                //foreach (uint goID in ScrollingShooterGame.GameObjectManager.QueryRegion(bounds))
-                //{
-                //    GameObject go = ScrollingShooterGame.GameObjectManager.GetObject(goID);
-                //    go.Update(elapsedTime);
-                //    ScrollingShooterGame.GameObjectManager.UpdateGameObject(goID);
-                //}
-                //// Remove objects that we have passed
-                //Rectangle deleteBounds = new Rectangle(0,
-                //    (int)(-scrollDistance / 2) + (16 * CurrentMap.TileHeight + 50),
-                //    CurrentMap.Width * CurrentMap.TileWidth,
-                //    4480 - ((int)(-scrollDistance / 2) + (16 * CurrentMap.TileHeight + 50)));
-                //foreach (uint goID in ScrollingShooterGame.GameObjectManager.QueryRegion(deleteBounds))
-                //{
-                //    ScrollingShooterGame.GameObjectManager.DestroyObject(goID);
-                //}
+            //}
+            // Update only the game objects that appear near our scrolling region
+            //Rectangle bounds = new Rectangle(0,
+            //    (int)(-scrollDistance / 2) - 100,
+            //    CurrentMap.Width * CurrentMap.TileWidth,
+            //    16 * CurrentMap.TileHeight + 100);
+            //foreach (uint goID in ScrollingShooterGame.GameObjectManager.QueryRegion(bounds))
+            //{
+            //    GameObject go = ScrollingShooterGame.GameObjectManager.GetObject(goID);
+            //    go.Update(elapsedTime);
+            //    ScrollingShooterGame.GameObjectManager.UpdateGameObject(goID);
+            //}
+            //// Remove objects that we have passed
+            //Rectangle deleteBounds = new Rectangle(0,
+            //    (int)(-scrollDistance / 2) + (16 * CurrentMap.TileHeight + 50),
+            //    CurrentMap.Width * CurrentMap.TileWidth,
+            //    4480 - ((int)(-scrollDistance / 2) + (16 * CurrentMap.TileHeight + 50)));
+            //foreach (uint goID in ScrollingShooterGame.GameObjectManager.QueryRegion(deleteBounds))
+            //{
+            //    ScrollingShooterGame.GameObjectManager.DestroyObject(goID);
+            //}
             //}
         }
 
@@ -238,34 +268,37 @@ namespace DungeonCrawler
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
-            for (int i = 0; i < CurrentMap.LayerCount; i++)
+            if (CurrentMap != null)
             {
-                // To minimize drawn tiles, we limit ourselves to those onscreen
-                int miny = 0;
-                    //(int)((-scrollDistance - 2 * CurrentMap.Layers[i].ScrollOffset) / (CurrentMap.TileHeight * 2));
-                int maxy = CurrentMap.Height;
-
-                // And those that exist
-                //if (miny < 0) miny = 0;
-              //  if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
-
-                for (int y = miny; y < maxy; y++)
+                for (int i = 0; i < CurrentMap.LayerCount; i++)
                 {
-                    // Since our maps are only as wide as our rendering area, 
-                    // no need for optimizaiton here
-                    for (int x = 0; x < CurrentMap.Width; x++)
+                    // To minimize drawn tiles, we limit ourselves to those onscreen
+                    int miny = 0;
+                    //(int)((-scrollDistance - 2 * CurrentMap.Layers[i].ScrollOffset) / (CurrentMap.TileHeight * 2));
+                    int maxy = CurrentMap.Height;
+
+                    // And those that exist
+                    //if (miny < 0) miny = 0;
+                    //  if (maxy > CurrentMap.Height) maxy = CurrentMap.Height;
+
+                    for (int y = miny; y < maxy; y++)
                     {
-                        int index = x + y * CurrentMap.Width;
-                        TileData tileData = CurrentMap.Layers[i].TileData[index];
-                        if (tileData.TileID != 0)
+                        // Since our maps are only as wide as our rendering area, 
+                        // no need for optimizaiton here
+                        for (int x = 0; x < CurrentMap.Width; x++)
                         {
-                            Tile tile = CurrentMap.Tiles[tileData.TileID - 1];
-                            Rectangle onScreen = new Rectangle(
-                                x * CurrentMap.TileWidth,
-                                (int)(y * CurrentMap.TileHeight),
-                                CurrentMap.TileWidth,
-                                CurrentMap.TileHeight);
-                            spriteBatch.Draw(CurrentMap.Textures[tile.TextureID], onScreen, tile.Source, Color.White, 0f, new Vector2(CurrentMap.TileWidth / 2, CurrentMap.TileHeight / 2), tileData.SpriteEffects, CurrentMap.Layers[i].LayerDepth);
+                            int index = x + y * CurrentMap.Width;
+                            TileData tileData = CurrentMap.Layers[i].TileData[index];
+                            if (tileData.TileID != 0)
+                            {
+                                Tile tile = CurrentMap.Tiles[tileData.TileID - 1];
+                                Rectangle onScreen = new Rectangle(
+                                    x * CurrentMap.TileWidth,
+                                    (int)(y * CurrentMap.TileHeight),
+                                    CurrentMap.TileWidth,
+                                    CurrentMap.TileHeight);
+                                spriteBatch.Draw(CurrentMap.Textures[tile.TextureID], onScreen, tile.Source, Color.White, 0f, new Vector2(CurrentMap.TileWidth / 2, CurrentMap.TileHeight / 2), tileData.SpriteEffects, CurrentMap.Layers[i].LayerDepth);
+                            }
                         }
                     }
                 }
@@ -287,6 +320,10 @@ namespace DungeonCrawler
             spriteBatch.End();
 
         }
+
+        public Room getCurrentRoom()
+        {
+            return ((DungeonCrawlerGame)game).RoomComponent[currentRoomID];
+        }
     }
 }
-

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="23" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="WallWidth" value="2"/>
+ </properties>
  <tileset firstgid="1" name="Z18-TileA1" tilewidth="32" tileheight="32">
   <image source="../Tilesets/Z18-TileA1.png" width="512" height="384"/>
  </tileset>
@@ -22,16 +25,20 @@
   <object x="1214" y="65" width="66" height="607"/>
   <object x="1" y="672" width="1279" height="64"/>
  </objectgroup>
- <objectgroup name="Entities" width="40" height="23"/>
- <objectgroup name="Triggers" width="40" height="23">
-  <object name="Trigger" type="MapChange" x="-3" y="321" width="65" height="69">
+ <objectgroup name="Entities" width="40" height="23">
+  <object name="Door" x="-3" y="321" width="65" height="69">
    <properties>
-    <property name="destination" value="TestDungeon1"/>
-    <property name="direction" value="left"/>
+    <property name="DestinationRoom" value="TestDungeon1"/>
+    <property name="DestinationSpawnName" value="2"/>
    </properties>
   </object>
  </objectgroup>
+ <objectgroup name="Triggers" width="40" height="23"/>
  <objectgroup name="PlayerSpawns" width="40" height="23">
-  <object name="PlayerSpawn" type="left" x="83" y="323" width="59" height="59"/>
+  <object name="PlayerSpawn" x="96" y="351" width="25" height="26">
+   <properties>
+    <property name="SpawnName" value="1"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

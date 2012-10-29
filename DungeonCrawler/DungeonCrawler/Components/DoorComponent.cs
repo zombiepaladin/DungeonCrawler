@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------
 // DoorComponent.cs 
 //
-// Author: Nicholas Strub
+// Author: Nicholas Strub (Assignment 6)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -29,18 +29,32 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// The ID of the first room the door is attached to
+        /// The ID of the room the door leads to
         /// </summary>
-        public uint Room1;
+        public string DestinationRoom;
 
         /// <summary>
-        /// The ID of the second room the door is attached to
+        /// The name of the spawn in the destination room to place the player
         /// </summary>
-        public uint Room2;
+        public string DestinationSpawnName;
+
+        /// <summary>
+        /// Indicates whether the door is (un)locked
+        /// </summary>
+        public bool Locked;
+
+        /// <summary>
+        /// Indicates whether the door is closed/opened
+        /// </summary>
+        public bool Closed;
     }
 
     public class DoorComponent : GameComponent<Door>
     {
+        public override void HandleTrigger(uint entityID, string type)
+        {
+
+        }
 
     }
 }

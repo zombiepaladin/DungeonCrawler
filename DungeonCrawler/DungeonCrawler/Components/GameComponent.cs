@@ -12,6 +12,7 @@
 
 #region Using Statements
 using System.Collections.Generic;
+using System;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -78,7 +79,6 @@ namespace DungeonCrawler.Components
             get { return elements.Values; }
         }
 
-
         /// <summary>
         /// Adds the supplied component to the specified entity
         /// </summary>
@@ -113,6 +113,10 @@ namespace DungeonCrawler.Components
             return elements.ContainsKey(entityID);
         }
 
+        public virtual void HandleTrigger(uint entityID, string type)
+        {
+            throw new Exception("Handle Trigger is not implemented");
+        }
         #endregion
     }
 }

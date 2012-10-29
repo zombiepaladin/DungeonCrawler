@@ -1,10 +1,23 @@
-﻿using System;
+﻿#region File Description
+//-----------------------------------------------------------------------------
+// DoorComponent.cs 
+//
+// Author: Nicholas Strub (Assignment 6)
+//
+// Modified By: Nicholas Strub - Added information about the size of the room (Assignment 7)
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+#endregion
+
+#region Using Statements
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Components;
+#endregion
 
 namespace DungeonCrawler.Entities
 {
@@ -27,12 +40,9 @@ namespace DungeonCrawler.Entities
             this.game = game;
         }
 
-        public void CreateRoom(string TilemapName)
+        public uint CreateRoom(string TilemapName, int width, int height, int tileWidth, int tileHeight, int wallWidth)
         {
             uint entityID = Entity.NextEntity();
-
-            /*Texture2D spriteSheet = game.Content.Load<Texture2D>("");
-            spriteSheet.Name = "";*/
 
             Position position = new Position()
             {
@@ -40,6 +50,7 @@ namespace DungeonCrawler.Entities
                 // Center and Radius TBD Later
                 Center = new Vector2(0, 0),
                 Radius = 32f,
+                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
@@ -53,8 +64,17 @@ namespace DungeonCrawler.Entities
             {
                 EntityID = entityID,
                 Tilemap = TilemapName,
+                Width = width,
+                Height = height,
+                TileWidth = tileWidth,
+                TileHeight = tileHeight,
+                WallWidth = wallWidth,
             };
+            room.idMap = new Dictionary<string,uint>();
+            room.targetTypeMap= new Dictionary<string, string>();
             game.RoomComponent[entityID] = room;
+
+            return entityID;
         }
     }
 }
