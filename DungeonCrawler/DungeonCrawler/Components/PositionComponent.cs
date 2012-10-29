@@ -42,11 +42,6 @@ namespace DungeonCrawler.Components
         public float Radius;
 
         /// <summary>
-        /// If the entity can collide with other entities
-        /// </summary>
-        public bool Collideable;
-
-        /// <summary>
         /// Identifies what room the object is in.
         /// </summary>
         public uint RoomID;

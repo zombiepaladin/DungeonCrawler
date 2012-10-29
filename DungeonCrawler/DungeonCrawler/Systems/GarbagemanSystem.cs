@@ -91,6 +91,7 @@ namespace DungeonCrawler.Systems
                         game.StatsComponent.Remove(keyValue.Key);
                         game.PlayerComponent.Remove(keyValue.Key);
                         game.PlayerInfoComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:
                         //No enemies yet, will need to be added
@@ -100,11 +101,13 @@ namespace DungeonCrawler.Systems
                         game.BulletComponent.Remove(keyValue.Key);
                         game.SpriteComponent.Remove(keyValue.Key);
                         game.MovementComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Collectible:
                         game.PositionComponent.Remove(keyValue.Key);
                         game.CollectibleComponent.Remove(keyValue.Key);
                         game.SpriteComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         //game.MovementComponent.Remove(keyValue.Key);
                         break;
                 }

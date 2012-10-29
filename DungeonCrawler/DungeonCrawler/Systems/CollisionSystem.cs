@@ -31,6 +31,8 @@ namespace DungeonCrawler.Systems
             Enemy = 0x4,
             Bullet = 0x8,
             Collectible = 0x10,
+            //Door =  0x20, To Be Implemented
+            //Wall = 0x40, To Be Implemented
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
             PlayerStatic = 0x3,
@@ -68,47 +70,52 @@ namespace DungeonCrawler.Systems
                 roomID = _game.PositionComponent[player.EntityID].RoomID;
                 IEnumerable<Position> positionsInRoom = _game.PositionComponent.InRoom(roomID);
 
+                List<Collideable> collideablesInRoom = new List<Collideable>();
+
                 foreach (Position position in positionsInRoom)
                 {
-                    if (!position.Collideable) continue;
+                    if (_game.CollisionComponent.Contains(position.EntityID))
+                        collideablesInRoom.Add(_game.CollisionComponent[position.EntityID]);
+                }
 
-                    IEnumerable<Position> collisions = positionsInRoom.InRegion(position.Center, position.Radius);
-                    foreach(Position collidingPosition in collisions)
+                for (int i = 0; i < collideablesInRoom.Count; i++)
+                {
+                    for (int j = i + 1; j < collideablesInRoom.Count; j++)
                     {
-                        if (!collidingPosition.Collideable) continue;
-
                         //Uh...... Optimize later
-                        if (position.EntityID == collidingPosition.EntityID) continue;
 
-                        CollisionType type = getCollisionType(position.EntityID, collidingPosition.EntityID);
+                        if (!collideablesInRoom[i].Bounds.Intersect(collideablesInRoom[j].Bounds))
+                            continue;
+
+                        CollisionType type = getCollisionType(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                         switch (type)
                         {
                             case CollisionType.Player:
-                                PlayerPlayerCollision(position.EntityID, collidingPosition.EntityID);
+                                PlayerPlayerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.PlayerEnemy:
-                                PlayerEnemyCollision(position.EntityID, collidingPosition.EntityID);
+                                PlayerEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.PlayerBullet:
-                                PlayerBulletCollision(position.EntityID, collidingPosition.EntityID);
+                                PlayerBulletCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.PlayerStatic:
-                                PlayerStaticCollision(position.EntityID, collidingPosition.EntityID);
+                                PlayerStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.PlayerCollectible:
-                                PlayerCollectibleCollision(position.EntityID, collidingPosition.EntityID);
+                                PlayerCollectibleCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.Enemy:
-                                EnemyEnemyCollision(position.EntityID, collidingPosition.EntityID);
+                                EnemyEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.EnemyBullet:
-                                EnemyBulletCollision(position.EntityID, collidingPosition.EntityID);
+                                EnemyBulletCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.EnemyStatic:
-                                EnemyStaticCollision(position.EntityID, collidingPosition.EntityID);
+                                EnemyStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.BulletStatic:
-                                BulletStaticCollision(position.EntityID, collidingPosition.EntityID);
+                                BulletStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                         }
                     }
