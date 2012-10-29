@@ -5,6 +5,7 @@
 // Author: 
 //
 // Modified: Devin Kelly-Collins, Factory methods return eid, 10/24/2012
+// Modified: Adam Clark- added cyborg class and stats
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -260,7 +261,7 @@ namespace DungeonCrawler.Entities
                     break;
 
                 /****************************************
-                * Cyborg
+                * Cyborg - Added by adam Clark
                 * *************************************/
                 case Aggregate.CyborgPlayer:
                     entityID = Entity.NextEntity();
@@ -313,11 +314,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 10,
-                        Stamina = 10,
-                        Agility = 10,
-                        Intelligence = 10,
-                        Defense = 10
+                        Strength = 13,
+                        Stamina = 12,
+                        Agility = 13,
+                        Intelligence = 0,
+                        Defense = 12
                     };
                     game.StatsComponent[entityID] = stats;
 
