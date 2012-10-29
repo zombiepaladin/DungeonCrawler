@@ -53,6 +53,7 @@ namespace DungeonCrawler.Entities
             Position position;
             Movement movement;
             MovementSprite movementSprite;
+            Collideable collideable;
             Local local;
             Player player;
             PlayerInfo info;
@@ -87,9 +88,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -172,9 +179,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
                     
                     movement = new Movement() {
                         EntityID = entityID,
@@ -259,9 +272,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -339,9 +358,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
                     
                     movement = new Movement() {
                         EntityID = entityID,
@@ -426,9 +451,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -505,9 +536,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -589,10 +626,16 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
 
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {

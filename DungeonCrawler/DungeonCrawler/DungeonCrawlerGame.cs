@@ -120,6 +120,7 @@ namespace DungeonCrawler
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         public CollectibleComponent CollectibleComponent;
+        public CollisionComponent CollisionComponent;
         #endregion
 
         #region Game Systems
@@ -188,6 +189,8 @@ namespace DungeonCrawler
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
             CollectibleComponent = new CollectibleComponent();
+            CollisionComponent = new CollisionComponent();
+
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 

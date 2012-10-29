@@ -137,6 +137,13 @@ namespace DungeonCrawler.Systems
                     // Apply our updates
                     game.MovementSpriteComponent[movement.EntityID] = movementSprite;
                 }
+
+                //Update the collision bounds if it has one
+                if (game.CollisionComponent.Contains(movement.EntityID))
+                {
+                    game.CollisionComponent[movement.EntityID].Bounds.UpdatePosition(
+                        game.PositionComponent[movement.EntityID].Center);
+                }
             }
         }
 
