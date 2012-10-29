@@ -5,6 +5,7 @@
 // Author: 
 //
 // Modified: Devin Kelly-Collins, Factory methods return eid, 10/24/2012
+// Modified: Adam Clark- added cyborg class and stats
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
