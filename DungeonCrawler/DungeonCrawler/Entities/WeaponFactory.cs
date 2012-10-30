@@ -140,6 +140,7 @@ namespace DungeonCrawler.Entities
             Bullet bullet;
             Movement movement;
             Sprite sprite;
+            Collideable collideable;
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
@@ -169,10 +170,17 @@ namespace DungeonCrawler.Entities
                     throw new Exception("Unknown BulletType");
             }
 
+            collideable = new Collideable()
+            {
+                EntityID = eid,
+                Bounds = new CircleBounds(position.Center, position.Radius),
+            };
+
             _game.BulletComponent.Add(eid, bullet);
             _game.MovementComponent.Add(eid, movement);
             _game.PositionComponent.Add(eid, position);
             _game.SpriteComponent.Add(eid, sprite);
+            _game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
     }

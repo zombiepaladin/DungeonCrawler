@@ -52,7 +52,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(960,440),
                 Radius = 40f,
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
             AButtonSprite = new HUDSprite()
@@ -74,7 +73,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(1040,360),
                 Radius = 40f,
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
@@ -98,7 +96,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(880,360),
                 Radius = 40f,
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
@@ -122,7 +119,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(960,280),
                 Radius = 40f,
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
@@ -146,7 +142,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = new Vector2(320,360),
                 Radius = 93f,
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
 
@@ -201,7 +196,6 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 Center = corner,
                 Radius = 0f,//its a rectangle, so no radius for proper drawing
-                Collideable = false,
             };
             game.PositionComponent[entityID] = position;
             HeatlhPsiStatusSprite = new HUDSprite()

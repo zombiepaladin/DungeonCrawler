@@ -5,6 +5,7 @@
 // Author: 
 //
 // Modified: Devin Kelly-Collins, Factory methods return eid, 10/24/2012
+// Modified: Adam Clark- added cyborg class and stats
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -53,6 +54,7 @@ namespace DungeonCrawler.Entities
             Position position;
             Movement movement;
             MovementSprite movementSprite;
+            Collideable collideable;
             Local local;
             Player player;
             PlayerInfo info;
@@ -87,9 +89,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -172,9 +180,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
                     
                     movement = new Movement() {
                         EntityID = entityID,
@@ -247,7 +261,7 @@ namespace DungeonCrawler.Entities
                     break;
 
                 /****************************************
-                * Cyborg
+                * Cyborg - Added by adam Clark
                 * *************************************/
                 case Aggregate.CyborgPlayer:
                     entityID = Entity.NextEntity();
@@ -259,9 +273,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -294,11 +314,11 @@ namespace DungeonCrawler.Entities
 
                         //So here we just define our base values. Total sum is 50
                         //The base stats are 10 across the board
-                        Strength = 10,
-                        Stamina = 10,
-                        Agility = 10,
-                        Intelligence = 10,
-                        Defense = 10
+                        Strength = 13,
+                        Stamina = 12,
+                        Agility = 13,
+                        Intelligence = 0,
+                        Defense = 12
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -339,9 +359,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
                     
                     movement = new Movement() {
                         EntityID = entityID,
@@ -426,9 +452,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -505,9 +537,15 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {
@@ -589,10 +627,16 @@ namespace DungeonCrawler.Entities
                         EntityID = entityID,
                         Center = new Vector2(400, 50),
                         Radius = 32f,
-                        Collideable = true,
                     };
 
                     game.PositionComponent[entityID] = position;
+
+                    collideable = new Collideable()
+                    {
+                        EntityID = entityID,
+                        Bounds = new CircleBounds(position.Center, position.Radius)
+                    };
+                    game.CollisionComponent[entityID] = collideable;
 
                     movement = new Movement()
                     {

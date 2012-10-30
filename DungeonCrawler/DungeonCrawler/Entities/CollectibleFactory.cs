@@ -74,6 +74,7 @@ namespace DungeonCrawler.Entities
             uint eid = Entity.NextEntity();
             Collectible collectible;
             Sprite sprite;
+            Collideable collideable;
 
             /*
             Locations for the sprites:
@@ -146,9 +147,15 @@ namespace DungeonCrawler.Entities
             }
 
             collectible.EntityID = eid;
-            position.Collideable = true;
             position.EntityID = eid;
 
+            collideable = new Collideable()
+            {
+                EntityID = eid,
+                Bounds = new CircleBounds(position.Center, position.Radius)
+            };
+            _game.CollisionComponent[eid] = collideable;
+            
             _game.CollectibleComponent.Add(eid, collectible);
             //_game.MovementComponent.Add(eid, movement); //Eventually do a sin wave y emulation to do the wave effect
             _game.PositionComponent.Add(eid, position);
