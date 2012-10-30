@@ -440,9 +440,9 @@ namespace DungeonCrawler.Components
         /// Recursively searches for and removes an
         /// BinaryNode from the BST.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
+        /// <param name="id">Id of the element to be removed.</param>
+        /// <param name="t">BinaryNode to test.</param>
+        /// <returns>BinaryNode to be removed.</returns>
         private BinaryNode Remove(uint id, BinaryNode t)
         {
             if (t == null) return t; //not found
