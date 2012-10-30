@@ -28,7 +28,7 @@ namespace DungeonCrawler.Components
     {
         public void Trigger(uint entityID)
         {
-            Trigger trigger = elements[entityID];
+            Trigger trigger = this[entityID];
 
             Room room = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 

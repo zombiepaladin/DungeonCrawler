@@ -55,7 +55,7 @@ namespace DungeonCrawler.Components
         /// <returns>The local entity ID</returns>
         public uint FindRemoteEntity(byte remoteGamerID, uint remoteEntityID)
         {
-            foreach (Remote remote in elements.Values)
+            foreach (Remote remote in arrayList)
             {
                 if (remote.RemoteGamerID == remoteGamerID && remote.RemoteEntityID == remoteEntityID)
                     return remote.EntityID;

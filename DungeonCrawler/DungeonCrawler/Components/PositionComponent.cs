@@ -70,11 +70,11 @@ namespace DungeonCrawler.Components
         {
             List<Position> results = new List<Position>();
 
-            foreach (KeyValuePair<uint, Position> position in elements)
+            foreach (Position position in arrayList)
             {
-                if (Vector2.DistanceSquared(center, position.Value.Center) < Math.Pow(radius + position.Value.Radius, 2))
+                if (Vector2.DistanceSquared(center, position.Center) < Math.Pow(radius + position.Radius, 2))
                 {
-                    results.Add(position.Value);
+                    results.Add(position);
                 }
             }
 
@@ -89,7 +89,7 @@ namespace DungeonCrawler.Components
         public IEnumerable<Position> InRoom(uint roomID)
         {
             List<Position> returnList = new List<Position>();
-            foreach (Position position in elements.Values)
+            foreach (Position position in arrayList)
             {
                 if (position.RoomID == roomID)
                 {
