@@ -47,6 +47,8 @@ namespace DungeonCrawler.Components
         public uint RoomID;
     }
 
+    #region BinaryTreeArrayImplementation
+    /*
     /// <summary>
     /// The PositionComponents for all entities in a game world
     /// TODO: Provide an optimized spatial representation
@@ -96,6 +98,60 @@ namespace DungeonCrawler.Components
 
         #endregion
     }
+    */
+    #endregion
+
+    #region DictionaryImplementation
+    /// <summary>
+    /// The PositionComponents for all entities in a game world
+    /// TODO: Provide an optimized spatial representation
+    /// </summary>
+    public class PositionComponent : GameComponent<Position>
+    {
+        #region Public Methods
+
+        /// <summary>
+        /// Returns all Position components within the specfied circular region
+        /// </summary>
+        /// <param name="center">The center of the region</param>
+        /// <param name="radius">The radius of the region</param>
+        /// <returns>The Position components found in the region</returns>
+        public IEnumerable<Position> InRegion(Vector2 center, float radius)
+        {
+            List<Position> results = new List<Position>();
+
+            foreach (KeyValuePair<uint, Position> position in elements)
+            {
+                if (Vector2.DistanceSquared(center, position.Value.Center) < Math.Pow(radius + position.Value.Radius, 2))
+                {
+                    results.Add(position.Value);
+                }
+            }
+
+            return results;
+        }
+
+        /// <summary>
+        /// Returns Position components within a certian room.
+        /// </summary>
+        /// <param name="roomID"></param>
+        /// <returns></returns>
+        public IEnumerable<Position> InRoom(uint roomID)
+        {
+            List<Position> returnList = new List<Position>();
+            foreach (Position position in elements.Values)
+            {
+                if (position.RoomID == roomID)
+                {
+                    returnList.Add(position);
+                }
+            }
+            return returnList;
+        }
+
+        #endregion
+    }
+    #endregion
 
     public static class PositionExtensions
     {
