@@ -1,4 +1,4 @@
-﻿#region File Description
+﻿﻿#region File Description
 //-----------------------------------------------------------------------------
 // KeyboardBindings.cs 
 //
