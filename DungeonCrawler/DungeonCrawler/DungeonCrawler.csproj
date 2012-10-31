@@ -116,6 +116,7 @@
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
+    <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
     <Compile Include="KeyboardBindings.cs" />
     <Compile Include="Program.cs" />

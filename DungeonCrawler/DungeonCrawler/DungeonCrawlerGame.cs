@@ -83,6 +83,11 @@ namespace DungeonCrawler
         public DoorFactory DoorFactory;
 
         /// <summary>
+        /// A RoomFactory for creating walls
+        /// </summary>
+        public WallFactory WallFactory;
+
+        /// <summary>
         /// A RoomFactory for creating rooms
         /// </summary>
         public RoomFactory RoomFactory;
@@ -166,6 +171,7 @@ namespace DungeonCrawler
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
             CollectableFactory = new CollectibleFactory(this);
+            WallFactory = new WallFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();

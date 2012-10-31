@@ -39,6 +39,8 @@ namespace DungeonCrawler.Components
         public uint RemoteEntityID;
     }
 
+    #region BinaryTreeArrayImplementation
+    /*
     /// <summary>
     /// The remote components for all entities in a game world
     /// TODO: Provide an optimized way for finding remote entities
@@ -74,4 +76,44 @@ namespace DungeonCrawler.Components
             return entityID;
         }
     }
+    */
+    #endregion
+
+    #region DictionaryImplementation
+    /// <summary>
+    /// The remote components for all entities in a game world
+    /// TODO: Provide an optimized way for finding remote entities
+    /// by thier remote gamer ID & remote entity ID
+    /// </summary>
+    public class RemoteComponent : GameComponent<Remote>
+    {
+        /// <summary>
+        /// Finds the local entity ID for the remote entity, identified by
+        /// the remote gamer id and remote entity id
+        /// </summary>
+        /// <param name="remoteGamerID">The ID of the remote gamer with authority over the entity</param>
+        /// <param name="remoteEntityID">The ID of the remote entity</param>
+        /// <returns>The local entity ID</returns>
+        public uint FindRemoteEntity(byte remoteGamerID, uint remoteEntityID)
+        {
+            foreach (Remote remote in elements.Values)
+            {
+                if (remote.RemoteGamerID == remoteGamerID && remote.RemoteEntityID == remoteEntityID)
+                    return remote.EntityID;
+            }
+
+            // If the remote entity was not found, create one
+            uint entityID = Entity.NextEntity();
+            Remote newRemote = new Remote()
+            {
+                EntityID = entityID,
+                RemoteGamerID = remoteGamerID,
+                RemoteEntityID = remoteEntityID,
+            };
+            Add(entityID, newRemote);
+
+            return entityID;
+        }
+    }
+    #endregion
 }
