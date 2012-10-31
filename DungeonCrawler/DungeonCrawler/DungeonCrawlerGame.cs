@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+// Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -64,6 +65,8 @@ namespace DungeonCrawler
         /// </summary>
         public GameState GameState = GameState.SignIn;
 
+        public static DungeonCrawlerGame game;
+
         public static LevelManager LevelManager;
 
         /// <summary>
@@ -73,14 +76,29 @@ namespace DungeonCrawler
         public AggregateFactory AggregateFactory;
 
         /// <summary>
+        /// A factory for creating weapons and bullets.
+        /// </summary>
+        public WeaponFactory WeaponFactory;
+        
+        /// <summary>
         /// A DoorFactory for creating doors
         /// </summary>
         public DoorFactory DoorFactory;
 
         /// <summary>
+        /// A RoomFactory for creating walls
+        /// </summary>
+        public WallFactory WallFactory;
+
+        /// <summary>
         /// A RoomFactory for creating rooms
         /// </summary>
         public RoomFactory RoomFactory;
+
+        /// <summary>
+        /// A CollectibleFactory for creating (surprise) collectibles
+        /// </summary>
+        public CollectibleFactory CollectableFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
@@ -103,6 +121,15 @@ namespace DungeonCrawler
         public HUDComponent HUDComponent;
         public InventoryComponent InventoryComponent;
         public InventorySpriteComponent InventorySpriteComponent;
+        public EquipmentComponent EquipmentComponent;
+        public WeaponComponent WeaponComponent;
+        public BulletComponent BulletComponent;
+        public PlayerInfoComponent PlayerInfoComponent;
+        public EnemyAIComponent EnemyAIComponent;
+        public WeaponSpriteComponent WeaponSpriteComponent;
+        public StatsComponent StatsComponent;
+        public CollectibleComponent CollectibleComponent;
+        public CollisionComponent CollisionComponent;
         #endregion
 
         #region Game Systems
@@ -112,6 +139,11 @@ namespace DungeonCrawler
         NetworkSystem NetworkSystem;
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
+        WeaponSystem WeaponSystem;
+        EnemyAISystem EnemyAISystem;
+        CollisionSystem CollisionSystem;
+
+        public GarbagemanSystem GarbagemanSystem;
 
         #endregion
 
@@ -121,6 +153,7 @@ namespace DungeonCrawler
         /// </summary>
         public DungeonCrawlerGame()
         {
+            game = this;
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 720;
@@ -137,8 +170,11 @@ namespace DungeonCrawler
         protected override void Initialize()
         {
             AggregateFactory = new AggregateFactory(this);
+            WeaponFactory = new WeaponFactory(this);
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
+            CollectableFactory = new CollectibleFactory(this);
+            WallFactory = new WallFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -154,9 +190,22 @@ namespace DungeonCrawler
             HUDComponent = new HUDComponent();
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
+<<<<<<< HEAD
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             ContinueNewGameScreen = new ContinueNewGameScreen(graphics, this);
+=======
+            EquipmentComponent = new EquipmentComponent();
+            WeaponComponent = new WeaponComponent();
+            BulletComponent = new BulletComponent();
+            PlayerInfoComponent = new PlayerInfoComponent();
+            WeaponSpriteComponent = new WeaponSpriteComponent();
+            StatsComponent = new StatsComponent();
+            EnemyAIComponent = new EnemyAIComponent();
+            CollectibleComponent = new CollectibleComponent();
+            CollisionComponent = new CollisionComponent();
+>>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
 
+            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
             base.Initialize();
@@ -176,11 +225,20 @@ namespace DungeonCrawler
             NetworkSystem = new NetworkSystem(this);
             RenderingSystem = new RenderingSystem(this);
             MovementSystem = new MovementSystem(this);
+            WeaponSystem = new WeaponSystem(this);
+            EnemyAISystem = new EnemyAISystem(this);
+            GarbagemanSystem = new GarbagemanSystem(this);
+            CollisionSystem = new Systems.CollisionSystem(this);
 
             CharacterSelectionScreen.LoadContent();
+<<<<<<< HEAD
             ContinueNewGameScreen.LoadContent();
+=======
+            // Testing code.
+>>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
+            //End Testing Code
 
         }
 
@@ -269,18 +327,18 @@ namespace DungeonCrawler
                 case GameState.Gameplay:
                     // Update game systems
                     InputSystem.Update(elapsedTime);
-
                     NetworkSystem.Update(elapsedTime);
-
                     MovementSystem.Update(elapsedTime);
+                    WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
+                    CollisionSystem.Update(elapsedTime);
+                    GarbagemanSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
                     // TODO: Update credits
                     break;
             }
-
 
             base.Update(gameTime);
         }
@@ -306,6 +364,7 @@ namespace DungeonCrawler
             base.Draw(gameTime);
         }
 
+<<<<<<< HEAD
 
         #region Game Saving
         /// <summary>
@@ -542,5 +601,7 @@ namespace DungeonCrawler
             device = StorageDevice.EndShowSelector(result);
         }
         #endregion
+=======
+>>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
     }
 }

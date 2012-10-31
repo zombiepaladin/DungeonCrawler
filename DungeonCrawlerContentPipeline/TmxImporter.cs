@@ -1,3 +1,11 @@
+//-----------------------------------------------------------------------------
+//Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
+// Author: Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
 using System;
 using System.IO;
 using System.Xml;
@@ -124,6 +132,8 @@ namespace DungeonCrawlerContentPipeline
             output.Layers = layers.ToArray();
             output.GameObjectGroupCount = objectGroups.Count;
             output.GameObjectGroups = objectGroups.ToArray();
+            // Initializes the Wall Width to 0 just in case it is not specified in the tilemap
+            output.WallWidth = 0;
             
             return output;
         }
@@ -398,12 +408,12 @@ namespace DungeonCrawlerContentPipeline
                     {
                         case "object":
                             GameObjectData go = new GameObjectData();
+                            
                             go.Category = reader.GetAttribute("name");
                             go.Type = reader.GetAttribute("type");
-
                             go.Position.X = int.Parse(reader.GetAttribute("x"));
                             go.Position.Y = int.Parse(reader.GetAttribute("y"));
-
+                            
                             // By default, Tiled sets objects to tile width and height - if
                             // there is no change to these, then it does not add a width
                             // and height attribute to the object XML - so we'll check
@@ -424,6 +434,13 @@ namespace DungeonCrawlerContentPipeline
                             {
                                 go.Position.Width = tileheight;
                             }
+
+                            using (var st = reader.ReadSubtree())
+                            {
+                                st.Read();
+                                go.properties = LoadProperties(st);
+                            }
+
                             gameObjects.Add(go);
                             break;
 

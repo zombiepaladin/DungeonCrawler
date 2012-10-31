@@ -1,3 +1,11 @@
+//-----------------------------------------------------------------------------
+//Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
+// Author: Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -32,7 +40,9 @@ namespace DungeonCrawlerContentPipeline
                     case "Music":
                         input.MusicTitle = input.Properties[property];
                         break;
-
+                    case "WallWidth":
+                        input.WallWidth = Convert.ToInt32(input.Properties[property]);
+                        break;
                     default:
                         ParamArrayAttribute[] attrs = new ParamArrayAttribute[0];
                         context.Logger.LogMessage("Unknown property " + property + " in tilemap", attrs);

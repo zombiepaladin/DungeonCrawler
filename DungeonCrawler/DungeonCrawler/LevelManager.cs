@@ -1,4 +1,12 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------------
+//Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
+// Author: Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+using System;
 using System.Threading;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +16,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
+using DungeonCrawler.Components;
 
 
 namespace DungeonCrawler
@@ -22,6 +31,7 @@ namespace DungeonCrawler
         SpriteBatch spriteBatch;
         BasicEffect basicEffect;
 
+        public uint currentRoomID;
 
         public bool Loading = true;
         public bool Paused = false;
@@ -66,6 +76,7 @@ namespace DungeonCrawler
         public void LoadLevel(string level)
         {
             Loading = true;
+            DungeonCrawlerGame game = (DungeonCrawlerGame)this.game;
 
             ThreadStart threadStarter = delegate
             {
@@ -81,6 +92,10 @@ namespace DungeonCrawler
                 //{
                 //    CurrentSong = null;
                 //}
+                currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                Room room = game.RoomComponent[currentRoomID];
+                
+
 
                 for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
                 {
@@ -89,18 +104,23 @@ namespace DungeonCrawler
                         GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
                         Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
 
+                        uint entityID = uint.MaxValue;
+
+
                         switch (goData.Category)
                         {
                             case "PlayerSpawn":
                                 break;
-
                             case "Enemy":
-                                //goData.Type
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
                                 {
                                     case "Door":
+                                        entityID = game.DoorFactory.CreateDoor(currentRoomID, goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"], goData.Position);
+                                        break;
+                                    case "Wall":
+                                        entityID = game.WallFactory.CreateWall(currentRoomID, goData.Position);
                                         break;
                                     default:
                                         break;
@@ -108,8 +128,15 @@ namespace DungeonCrawler
                             break;
 
                         }
+                            if (goData.properties.Keys.Contains("id"))
+                            {
+                                room.idMap.Add(goData.properties["id"], entityID);
+                                room.targetTypeMap.Add(goData.properties["id"], goData.Type);
+                            }
+
                     }
                 }
+
 
 
                 //// Load the game objects
@@ -295,6 +322,11 @@ namespace DungeonCrawler
 
             spriteBatch.End();
 
+        }
+
+        public Room getCurrentRoom()
+        {
+            return ((DungeonCrawlerGame)game).RoomComponent[currentRoomID];
         }
     }
 }
