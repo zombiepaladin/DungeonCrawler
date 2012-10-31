@@ -108,9 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterSelection\CharacterSelectionScreen.cs" />
+    <Compile Include="CharacterSelection\ContinueNewGameScreen.cs" />
+    <Compile Include="CharacterSelection\CharSelectPreview.cs" />
     <Compile Include="CharacterSelection\ImageSprite.cs" />
     <Compile Include="CharacterSelection\TextSprite.cs" />
     <Compile Include="Components\DoorComponent.cs" />
+    <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\InventorySpriteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />

@@ -16,6 +16,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -23,6 +25,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
@@ -80,6 +83,7 @@ namespace DungeonCrawler
         public RoomFactory RoomFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
+        public ContinueNewGameScreen ContinueNewGameScreen;
 
         #endregion
 
@@ -123,8 +127,7 @@ namespace DungeonCrawler
             Content.RootDirectory = "Content";
             Components.Add(new GamerServicesComponent(this));
         }
-
-
+        
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -152,6 +155,7 @@ namespace DungeonCrawler
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
+            ContinueNewGameScreen = new ContinueNewGameScreen(graphics, this);
 
             LevelManager = new LevelManager(this);
 
@@ -174,6 +178,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
 
             CharacterSelectionScreen.LoadContent();
+            ContinueNewGameScreen.LoadContent();
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
 
@@ -209,6 +214,11 @@ namespace DungeonCrawler
                 else
                 {
                     GameState = GameState.CharacterSelection;
+                    if (!ContinueNewGameScreen.isConnected)
+                    {
+                        ContinueNewGameScreen.isConnected = true;
+                        ContinueNewGameScreen.loadGameSaves();
+                    }
                 }
             }
 
@@ -229,12 +239,18 @@ namespace DungeonCrawler
                     else
                     {
                         GameState = GameState.CharacterSelection;
+                        if (!ContinueNewGameScreen.isConnected)
+                        {
+                            ContinueNewGameScreen.isConnected = true;
+                            ContinueNewGameScreen.loadGameSaves();
+                        }
                     }
                     break;
 
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
-                    CharacterSelectionScreen.Update(gameTime);
+                    //CharacterSelectionScreen.Update(gameTime);
+                    ContinueNewGameScreen.Update(gameTime);
                     break;
 
                 case GameState.NetworkSetup:
@@ -278,7 +294,8 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            CharacterSelectionScreen.Draw(elapsedTime);
+            //CharacterSelectionScreen.Draw(elapsedTime);
+            ContinueNewGameScreen.Draw(elapsedTime);
             if (GameState != GameState.CharacterSelection)
             {
                 LevelManager.Draw(elapsedTime);
@@ -288,5 +305,242 @@ namespace DungeonCrawler
            
             base.Draw(gameTime);
         }
+
+
+        #region Game Saving
+        /// <summary>
+        /// The filename of the master save file
+        /// </summary>
+        public const string masterFileName = "master.sav";
+        public IAsyncResult result;
+        public Object stateobj;
+
+        /// <summary>
+        /// Serializable for the master save file, which holds the previews for the actual saved files
+        /// </summary>
+        [Serializable]
+        public struct MasterSaveFile
+        {
+            public List<CharacterSaveFilePreview> charFiles;
+        }
+
+        /// <summary>
+        /// A preview of the actual saved file, including the real filename, character sprite, and level
+        /// </summary>
+        [Serializable]
+        public struct CharacterSaveFilePreview
+        {
+            public string CharacterSaveFile;
+            public string characterType;
+            public string charSprite;
+            public int Level;
+        }
+
+        /// <summary>
+        /// The actual saved character file, which stores the character type, level, stats, skills, and items
+        /// </summary>
+        [Serializable]
+        public struct CharacterSaveFile
+        {
+            public string fileName;
+            public string charSprite;
+            public string characterType;
+            public int Level;
+            // Other skills/stats
+        }
+        
+        /// <summary>
+        /// This method serializes a data object into
+        /// the StorageContainer for this game.
+        /// </summary>
+        /// <param name="device"></param>
+        public static void DoSaveGame(StorageDevice device, CharacterSaveFile gameData)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Create the BinaryFormatter here in-case we have to create a new save
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            Stream stream;
+            // Use this to tell us if this is a new save
+            bool fileExists = false;
+            // Check to see whether the save exists.
+            if (container.FileExists(gameData.fileName))
+            {
+                // Delete it so that we can create one fresh.
+                container.DeleteFile(gameData.fileName);
+                fileExists = true;
+            }
+
+            // Create/Update the charPreview to reflect the current player's level
+            CharacterSaveFilePreview charPreview;
+            MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
+            if (fileExists)
+            {
+                charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
+                masterSaveFile.charFiles.Remove(charPreview);
+            }
+            else
+            {
+                charPreview = new CharacterSaveFilePreview();
+                charPreview.CharacterSaveFile = gameData.fileName;
+                charPreview.charSprite = gameData.charSprite;
+                charPreview.characterType = gameData.characterType;
+            }
+            charPreview.Level = gameData.Level;
+
+            masterSaveFile.charFiles.Add(charPreview);
+
+            // Create the file.
+            stream = container.CreateFile(gameData.fileName);
+
+            // Convert the file to binary and save it
+            binaryFormatter.Serialize(stream, gameData);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container, to commit changes.
+            container.Dispose();
+        }
+
+        /// <summary>
+        /// This method loads a serialized data object
+        /// from the StorageContainer for this game.
+        /// </summary>
+        /// <param name="device"></param>
+        public static CharacterSaveFile DoLoadGame(StorageDevice device, string fileName)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Check to see whether the save exists.
+            if (!container.FileExists(fileName))
+            {
+                // If not, dispose of the container and return.
+                container.Dispose();
+                return new CharacterSaveFile();
+            }
+
+            // Open the file.
+            Stream stream = container.OpenFile(fileName, FileMode.Open);
+
+            // Read the data from the file.
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            CharacterSaveFile characterSaveData = (CharacterSaveFile)binaryFormatter.Deserialize(stream);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container.
+            container.Dispose();
+
+            return characterSaveData;
+        }
+
+        /// <summary>
+        /// This method loads a serialized data object
+        /// from the StorageContainer for this game.
+        /// </summary>
+        /// <param name="device"></param>
+        public static MasterSaveFile GetMasterSaveFile(StorageDevice device)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Check to see whether the save exists.
+            if (!container.FileExists(masterFileName))
+            {
+                // If not, dispose of the container and return a new MasterSaveFile.
+                container.Dispose();
+                return new MasterSaveFile();
+            }
+
+            // Open the file.
+            Stream stream = container.OpenFile(masterFileName, FileMode.Open);
+
+            // Read the data from the file.
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            MasterSaveFile masterSaveFile = (MasterSaveFile)binaryFormatter.Deserialize(stream);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container.
+            container.Dispose();
+
+            return masterSaveFile;
+        }
+
+        /// <summary>
+        /// This method serializes a data object into
+        /// the StorageContainer for this game.
+        /// </summary>
+        /// <param name="device"></param>
+        public static void SaveMasterFile(StorageDevice device, MasterSaveFile masterSaveFile)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Check to see whether the save exists.
+            if (container.FileExists(masterFileName))
+            {
+                // Delete it so that we can create one fresh.
+                container.DeleteFile(masterFileName);
+            }
+
+            // Create the file.
+            Stream stream = container.CreateFile(masterFileName);
+
+            // Create the BinaryFormatter 
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            // Convert the file to binary and save it
+            binaryFormatter.Serialize(stream, masterSaveFile);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container, to commit changes.
+            container.Dispose();
+        }
+
+
+        public void GetDevice(IAsyncResult result, StorageDevice device)
+        {
+            device = StorageDevice.EndShowSelector(result);
+        }
+        #endregion
     }
 }
