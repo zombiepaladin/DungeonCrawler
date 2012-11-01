@@ -4,7 +4,7 @@
 //
 // Author: Devin Kelly-Collins, Matthew McHaney
 //
-// Modified: 
+// Modified: Nicholas Strub - Added Room Transitioning ability based on player/door collisions 10/31/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -321,7 +321,7 @@ namespace DungeonCrawler.Systems
             }
             else //is unlocked
             {
-                //Not implemented yet
+                _game.RoomChangingSystem.ChangeRoom(_game.DoorComponent[doorId].DestinationRoom);
             }
 
         }

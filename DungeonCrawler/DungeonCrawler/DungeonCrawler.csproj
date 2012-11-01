@@ -165,6 +165,7 @@
     <Compile Include="Systems\NetworkSystem.cs" />
     <Compile Include="Systems\PacketTypes.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
+    <Compile Include="Systems\RoomChangingSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

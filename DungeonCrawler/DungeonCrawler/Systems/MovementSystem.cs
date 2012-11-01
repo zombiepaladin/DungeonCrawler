@@ -4,7 +4,7 @@
 //
 // Author: Nathan Bean
 //
-// Modified By: Nicholas Strub - Added Player Clamping (Assignment 7)
+// Modified By: Nicholas Strub - Added Player Clamping (Assignment 7). Also fixed player clamping 10/31/12
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.

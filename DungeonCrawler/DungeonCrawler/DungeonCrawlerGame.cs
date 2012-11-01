@@ -7,6 +7,7 @@
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
+// Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -44,6 +45,7 @@ namespace DungeonCrawler
         Gameplay,
         GameMenu,
         Credits,
+        RoomChange,
     }
 
     /// <summary>
@@ -143,6 +145,7 @@ namespace DungeonCrawler
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
+        public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
 
@@ -225,6 +228,7 @@ namespace DungeonCrawler
             EnemyAISystem = new EnemyAISystem(this);
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
+            RoomChangingSystem = new RoomChangingSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
@@ -331,6 +335,11 @@ namespace DungeonCrawler
                 case GameState.Credits:
                     // TODO: Update credits
                     break;
+
+                case GameState.RoomChange:
+                    NetworkSystem.Update(elapsedTime);
+                    RoomChangingSystem.Update(elapsedTime);
+                    break;
             }
 
             base.Update(gameTime);
@@ -342,12 +351,12 @@ namespace DungeonCrawler
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             CharacterSelectionScreen.Draw(elapsedTime);
             //ContinueNewGameScreen.Draw(elapsedTime);
-            if (GameState != GameState.CharacterSelection)
+            if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);
