@@ -110,20 +110,21 @@ namespace DungeonCrawler
                         switch (goData.Category)
                         {
                             case "PlayerSpawn":
+
                                 break;
                             case "Enemy":
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
                                 {
-                                    case "Door":
-                                        entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
-                                        break;
+
                                     default:
                                         break;
                                 }
-                            break;
-
+                                break;
+                            case "Door":
+                                entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
+                                break;
                         }
                             if (goData.properties.Keys.Contains("id"))
                             {

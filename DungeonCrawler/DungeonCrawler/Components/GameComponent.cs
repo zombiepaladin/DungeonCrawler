@@ -8,6 +8,9 @@
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
 //-----------------------------------------------------------------------------
+
+//Samuel Fike and Jiri Malina: Created a virtual HandleTrigger method
+
 #endregion
 
 #region Using Statements
