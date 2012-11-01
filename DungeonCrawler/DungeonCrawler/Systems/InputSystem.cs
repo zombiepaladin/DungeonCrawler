@@ -6,6 +6,7 @@
 //
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
+// Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.

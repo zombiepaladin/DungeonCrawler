@@ -107,9 +107,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bounds\Bounds.cs" />
+    <Compile Include="Bounds\CircleBounds.cs" />
+    <Compile Include="Bounds\RectangleBounds.cs" />
+    <Compile Include="Components\CollisionComponent.cs" />
+    <Compile Include="Components\CollectibleComponent.cs" />
+    <Compile Include="Components\DamageReductionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
+    <Compile Include="Components\HealComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
+    <Compile Include="Entities\CollectibleFactory.cs" />
+    <Compile Include="ControllerBindings.cs" />
+    <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
+    <Compile Include="KeyboardBindings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />

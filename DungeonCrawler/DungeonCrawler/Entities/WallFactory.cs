@@ -1,10 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// DoorComponent.cs 
+// WallFactory.cs 
 //
-// Author: Nicholas Strub (Assignment 6)
-//
-// Modified By: Nicholas Strub - Added information about the size of the room (Assignment 7)
+// Author: Matthew McHaney
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -22,12 +20,12 @@ using DungeonCrawler.Components;
 namespace DungeonCrawler.Entities
 {
     /// <summary>
-    /// A class for creating new rooms
+    /// A class for creating new Wall
     /// </summary>
-    public class RoomFactory
+    public class WallFactory
     {
         /// <summary>
-        /// The game this AggregateFactory belongs to
+        /// The game this WallFactory belongs to
         /// </summary>
         DungeonCrawlerGame game;
 
@@ -35,43 +33,46 @@ namespace DungeonCrawler.Entities
         /// Creates a new RoomFactory instance
         /// </summary>
         /// <param name="game"></param>
-        public RoomFactory(DungeonCrawlerGame game)
+        public WallFactory(DungeonCrawlerGame game)
         {
             this.game = game;
+
+            
         }
 
-        public uint CreateRoom(string TilemapName, int width, int height, int tileWidth, int tileHeight, int wallWidth)
+        public uint CreateWall(uint roomId, Rectangle bounds)
         {
             uint entityID = Entity.NextEntity();
+
+            /*Texture2D spriteSheet = game.Content.Load<Texture2D>("");
+            spriteSheet.Name = "";*/
+
+            //It's assumed in collisions that anything in position/collideable but not in other
+            // components is a static object (like a wall)
 
             Position position = new Position()
             {
                 EntityID = entityID,
                 // Center and Radius TBD Later
-                Center = new Vector2(0, 0),
-                Radius = 32f,
+                Center = new Vector2(bounds.Left, bounds.Top),
+                Radius = 1,
+                RoomID = roomId,
             };
             game.PositionComponent[entityID] = position;
+
+            Collideable collideable = new Collideable()
+            {
+                EntityID = entityID,
+                Bounds = new RectangleBounds(bounds.Left,bounds.Top, bounds.Width, bounds.Height),
+                // Center and Radius TBD Later
+            };
+            game.CollisionComponent[entityID] = collideable;
 
             Local local = new Local()
             {
                 EntityID = entityID,
             };
             game.LocalComponent[entityID] = local;
-
-            Room room = new Room()
-            {
-                EntityID = entityID,
-                Tilemap = TilemapName,
-                Width = width,
-                Height = height,
-                TileWidth = tileWidth,
-                TileHeight = tileHeight,
-                WallWidth = wallWidth,
-            };
-            room.idMap = new Dictionary<string,uint>();
-            room.targetTypeMap= new Dictionary<string, string>();
-            game.RoomComponent[entityID] = room;
 
             return entityID;
         }

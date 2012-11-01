@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+// Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -85,9 +86,19 @@ namespace DungeonCrawler
         public DoorFactory DoorFactory;
 
         /// <summary>
+        /// A RoomFactory for creating walls
+        /// </summary>
+        public WallFactory WallFactory;
+
+        /// <summary>
         /// A RoomFactory for creating rooms
         /// </summary>
         public RoomFactory RoomFactory;
+
+        /// <summary>
+        /// A CollectibleFactory for creating (surprise) collectibles
+        /// </summary>
+        public CollectibleFactory CollectableFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
 
@@ -116,6 +127,8 @@ namespace DungeonCrawler
         public EnemyAIComponent EnemyAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
+        public CollectibleComponent CollectibleComponent;
+        public CollisionComponent CollisionComponent;
         #endregion
 
         #region Game Systems
@@ -127,8 +140,9 @@ namespace DungeonCrawler
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
-        GarbagemanSystem GarbagemanSystem;
         CollisionSystem CollisionSystem;
+
+        public GarbagemanSystem GarbagemanSystem;
 
         #endregion
 
@@ -159,6 +173,8 @@ namespace DungeonCrawler
             WeaponFactory = new WeaponFactory(this);
             DoorFactory = new DoorFactory(this);
             RoomFactory = new RoomFactory(this);
+            CollectableFactory = new CollectibleFactory(this);
+            WallFactory = new WallFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -181,6 +197,9 @@ namespace DungeonCrawler
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
+            CollectibleComponent = new CollectibleComponent();
+            CollisionComponent = new CollisionComponent();
+
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
@@ -324,15 +343,5 @@ namespace DungeonCrawler
             base.Draw(gameTime);
         }
 
-        /// <summary>
-        /// Well, this is what happens when you don't realize that Game Systems
-        /// aren't meant to interact with one another. Basically a way for the
-        /// various systems to access the GarbagemanSystem.
-        /// </summary>
-        /// <param name="eid">Entity ID for entity to be removed.</param>
-        public void RemoveEntityFromComponents(uint eid)
-        {
-            GarbagemanSystem.ScheduleVisit(eid);
-        }
     }
 }

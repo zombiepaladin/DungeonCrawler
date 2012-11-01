@@ -117,7 +117,12 @@ namespace DungeonCrawler
                             case "Trigger":
                                 switch (goData.Type)
                                 {
-
+                                    case "Door":
+                                        entityID = game.DoorFactory.CreateDoor(currentRoomID, goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"], goData.Position);
+                                        break;
+                                    case "Wall":
+                                        entityID = game.WallFactory.CreateWall(currentRoomID, goData.Position);
+                                        break;
                                     default:
                                         break;
                                 }

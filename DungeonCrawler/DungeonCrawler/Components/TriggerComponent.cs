@@ -39,7 +39,13 @@ namespace DungeonCrawler.Components
     {
         public void Trigger(uint entityID)
         {
+            #region BinaryTreeArrayImplementation
+            //Trigger trigger = this[entityID];
+            #endregion
+
+            #region DictionaryImplementation
             Trigger trigger = elements[entityID];
+            #endregion
 
             Room room = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 

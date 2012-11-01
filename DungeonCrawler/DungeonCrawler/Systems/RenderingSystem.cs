@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+// Modified: Devin Kelly-Collins added WeaponSprite rendering, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
