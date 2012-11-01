@@ -1,10 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// DoorComponent.cs 
+// RoomComponent.cs 
 //
-// Author: Nicholas Strub (Assignment 6)
-//
-// Modified By: Nicholas Strub - Added information about size of the room (Assignment 7)
+// Author: Nicholas Strub
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
