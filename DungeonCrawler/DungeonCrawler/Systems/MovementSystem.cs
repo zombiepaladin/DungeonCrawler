@@ -69,27 +69,26 @@ namespace DungeonCrawler.Systems
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 
                 bool clamped = false;
-                if (position.Center.X + position.Radius < 0)//currentRoom.WallWidth * currentRoom.TileWidth)
+                if (position.Center.X - position.Radius < 0)
                 {
-                    position.Center.X = -position.Radius;
+                    position.Center.X = position.Radius;
                     clamped = true;
                 }
-                if (position.Center.Y + position.Radius < currentRoom.WallWidth * currentRoom.TileHeight)
+                if (position.Center.Y - position.Radius < 0)
                 {
-                    position.Center.Y = -position.Radius;
+                    position.Center.Y = position.Radius;
                     clamped = true;
                 }
-                if (position.Center.X - position.Radius > currentRoom.Width * currentRoom.TileWidth)
+                if (position.Center.X + position.Radius > currentRoom.Width * currentRoom.TileWidth)
                 {
-                    position.Center.X = currentRoom.Width * currentRoom.TileWidth + position.Radius;
+                    position.Center.X = (currentRoom.Width * currentRoom.TileWidth) - position.Radius;
                     clamped = true;
                 }
-                if (position.Center.Y - position.Radius > currentRoom.Height * currentRoom.TileHeight)
+                if (position.Center.Y + position.Radius > currentRoom.Height * currentRoom.TileHeight)
                 {
-                    position.Center.Y = currentRoom.Height * currentRoom.TileHeight + position.Radius;
+                    position.Center.Y = (currentRoom.Height * currentRoom.TileHeight) - position.Radius;
                     clamped = true;
                 }
-
                 //Remove if it's a bullet. (Took out for collision test demonstration)
                 if (clamped && game.BulletComponent.Contains(position.EntityID))
                     game.GarbagemanSystem.ScheduleVisit(position.EntityID, GarbagemanSystem.ComponentType.Bullet);
