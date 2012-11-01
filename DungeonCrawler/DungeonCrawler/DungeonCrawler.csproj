@@ -112,7 +112,9 @@
     <Compile Include="Bounds\RectangleBounds.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
+    <Compile Include="Components\DamageReductionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
+    <Compile Include="Components\HealComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
