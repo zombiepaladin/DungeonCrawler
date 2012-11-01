@@ -12,11 +12,11 @@ namespace DungeonCrawler.Entities
     public enum Aggregate
     {
         FairyPlayer,
-        CultistPlayer,
-        EarthianPlayer,
-        CyborgPlayer,
-        GargranianPlayer,
-        SpacePiratePlayer,
-        ZombiePlayer,
+        CultistPlayer = 1,
+        EarthianPlayer = 2,
+        CyborgPlayer = 3,
+        GargranianPlayer = 4,
+        SpacePiratePlayer = 5,
+        ZombiePlayer = 6,
     }
 }

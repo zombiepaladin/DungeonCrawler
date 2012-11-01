@@ -112,9 +112,12 @@
     <Compile Include="Bounds\RectangleBounds.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Components\DamageReductionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\HealComponent.cs" />
+>>>>>>> 89f0b7c2c039cb66bb31a14ec4909269382066b5
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
@@ -125,12 +128,15 @@
     <Compile Include="LevelManager.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
     <Compile Include="CharacterSelection\CharacterSelectionScreen.cs" />
+    <Compile Include="CharacterSelection\ContinueNewGameScreen.cs" />
+    <Compile Include="CharacterSelection\CharSelectPreview.cs" />
     <Compile Include="CharacterSelection\ImageSprite.cs" />
     <Compile Include="CharacterSelection\TextSprite.cs" />
     <Compile Include="CharacterSelection\CharSelectPlayer.cs" />
     <Compile Include="CharacterSelection\Sprite.cs" />
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\DoorComponent.cs" />
+    <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
     <Compile Include="Components\InventorySpriteComponent.cs" />
     <Compile Include="Components\LocalComponent.cs" />

@@ -128,7 +128,7 @@ namespace DungeonCrawler
                                 }
                                 break;
                             case "Door":
-                                entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
+                               // entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
                                 break;
                         }
                             if (goData.properties.Keys.Contains("id"))
