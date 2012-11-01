@@ -6,6 +6,7 @@
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
+// Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -190,10 +191,8 @@ namespace DungeonCrawler
             HUDComponent = new HUDComponent();
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
-<<<<<<< HEAD
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             ContinueNewGameScreen = new ContinueNewGameScreen(graphics, this);
-=======
             EquipmentComponent = new EquipmentComponent();
             WeaponComponent = new WeaponComponent();
             BulletComponent = new BulletComponent();
@@ -203,9 +202,6 @@ namespace DungeonCrawler
             EnemyAIComponent = new EnemyAIComponent();
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
->>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
-
-            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             LevelManager = new LevelManager(this);
 
             base.Initialize();
@@ -231,11 +227,8 @@ namespace DungeonCrawler
             CollisionSystem = new Systems.CollisionSystem(this);
 
             CharacterSelectionScreen.LoadContent();
-<<<<<<< HEAD
             ContinueNewGameScreen.LoadContent();
-=======
             // Testing code.
->>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
             //End Testing Code
@@ -272,11 +265,11 @@ namespace DungeonCrawler
                 else
                 {
                     GameState = GameState.CharacterSelection;
-                    if (!ContinueNewGameScreen.isConnected)
-                    {
-                        ContinueNewGameScreen.isConnected = true;
-                        ContinueNewGameScreen.loadGameSaves();
-                    }
+                    //if (!ContinueNewGameScreen.isConnected)
+                    //{
+                    //    ContinueNewGameScreen.isConnected = true;
+                    //    ContinueNewGameScreen.loadGameSaves();
+                    //}
                 }
             }
 
@@ -297,18 +290,18 @@ namespace DungeonCrawler
                     else
                     {
                         GameState = GameState.CharacterSelection;
-                        if (!ContinueNewGameScreen.isConnected)
-                        {
-                            ContinueNewGameScreen.isConnected = true;
-                            ContinueNewGameScreen.loadGameSaves();
-                        }
+                        //if (!ContinueNewGameScreen.isConnected)
+                        //{
+                        //    ContinueNewGameScreen.isConnected = true;
+                        //    ContinueNewGameScreen.loadGameSaves();
+                        //}
                     }
                     break;
 
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
-                    //CharacterSelectionScreen.Update(gameTime);
-                    ContinueNewGameScreen.Update(gameTime);
+                    CharacterSelectionScreen.Update(gameTime);
+                    //ContinueNewGameScreen.Update(gameTime);
                     break;
 
                 case GameState.NetworkSetup:
@@ -352,8 +345,8 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            //CharacterSelectionScreen.Draw(elapsedTime);
-            ContinueNewGameScreen.Draw(elapsedTime);
+            CharacterSelectionScreen.Draw(elapsedTime);
+            //ContinueNewGameScreen.Draw(elapsedTime);
             if (GameState != GameState.CharacterSelection)
             {
                 LevelManager.Draw(elapsedTime);
@@ -363,8 +356,6 @@ namespace DungeonCrawler
            
             base.Draw(gameTime);
         }
-
-<<<<<<< HEAD
 
         #region Game Saving
         /// <summary>
@@ -601,7 +592,5 @@ namespace DungeonCrawler
             device = StorageDevice.EndShowSelector(result);
         }
         #endregion
-=======
->>>>>>> 30afa3d9ebe60ef520961450e86e414b105f2da6
     }
 }
