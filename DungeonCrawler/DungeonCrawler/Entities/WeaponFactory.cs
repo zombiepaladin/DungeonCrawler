@@ -1,4 +1,16 @@
-﻿using System;
+﻿#region File Description
+//-----------------------------------------------------------------------------
+// WeaponFactory.cs 
+//
+// Author: Devin Kelly-Collins
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -128,6 +140,7 @@ namespace DungeonCrawler.Entities
             Bullet bullet;
             Movement movement;
             Sprite sprite;
+            Collideable collideable;
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
@@ -157,10 +170,17 @@ namespace DungeonCrawler.Entities
                     throw new Exception("Unknown BulletType");
             }
 
+            collideable = new Collideable()
+            {
+                EntityID = eid,
+                Bounds = new CircleBounds(position.Center, position.Radius),
+            };
+
             _game.BulletComponent.Add(eid, bullet);
             _game.MovementComponent.Add(eid, movement);
             _game.PositionComponent.Add(eid, position);
             _game.SpriteComponent.Add(eid, sprite);
+            _game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
     }

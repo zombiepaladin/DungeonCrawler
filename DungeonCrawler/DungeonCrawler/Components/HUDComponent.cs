@@ -1,4 +1,5 @@
-﻿#region File Description
+﻿
+#region File Description
 //-----------------------------------------------------------------------------
 // HUDAggregateFactory.cs 
 //

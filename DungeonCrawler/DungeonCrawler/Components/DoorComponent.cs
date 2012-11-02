@@ -2,12 +2,15 @@
 //-----------------------------------------------------------------------------
 // DoorComponent.cs 
 //
-// Author: Nicholas Strub
+// Author: Nicholas Strub (Assignment 6)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
 //-----------------------------------------------------------------------------
+
+//Samuel Fike and Jiri Malina: Implemented HandleTrigger method
+
 #endregion
 
 #region Using Statements

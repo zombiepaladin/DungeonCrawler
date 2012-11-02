@@ -1,32 +1,30 @@
-﻿﻿#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
-// EnemyAIComponent.cs 
+// CollisionComponent.cs 
 //
-// Author: Brett Barger
+// Author: Devin Kelly-Collins & Matthew McHaney
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
-// Released under the Microsoft Permissive Licence 
+// Released under the Microsoft Permissive Licence
 //-----------------------------------------------------------------------------
 #endregion
 
-#region Using Statements
 using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-#endregion
+using System.Linq;
+using System.Text;
 
 namespace DungeonCrawler.Components
 {
-    public struct EnemyAI
+    public struct Collideable
     {
-        // <summary>
-        /// The ID of the entity this AI belongs to
-        /// </summary>
         public uint EntityID;
+
+        public Bounds Bounds;
     }
 
-    public class EnemyAIComponent : GameComponent<EnemyAI>
+    public class CollisionComponent : GameComponent<Collideable>
     {
 
     }

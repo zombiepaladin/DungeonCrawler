@@ -1,12 +1,12 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// WeaponSpriteCompoenent.cs 
+// Bounds.cs 
 //
-// Author: Devin Kelly-Collins
+// Author: Devin Kelly-Collins & Matthew McHaney
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
-// Released under the Microsoft Permissive Licence 
+// Released under the Microsoft Permissive Licence
 //-----------------------------------------------------------------------------
 #endregion
 
@@ -14,20 +14,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace DungeonCrawler.Components
+namespace DungeonCrawler
 {
-    public struct WeaponSprite
+    public interface Bounds
     {
-        public uint EntityID;
-        public Texture2D SpriteSheet;
-        public Rectangle SpriteBounds;
-    }
+        bool Intersect(Bounds obj);
 
-    public class WeaponSpriteComponent : GameComponent<WeaponSprite>
-    {
-        
+        void UpdatePosition(Vector2 location);
     }
 }

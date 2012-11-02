@@ -4,6 +4,8 @@
 //
 // Author: Matthew McHaney
 //
+// Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -42,6 +44,9 @@ namespace DungeonCrawler.Systems
             Player,
             Enemy,
             Bullet,
+            Collectible,
+            Door,
+            Room,
             //Needs more in the future!
         }
 
@@ -90,6 +95,7 @@ namespace DungeonCrawler.Systems
                         game.StatsComponent.Remove(keyValue.Key);
                         game.PlayerComponent.Remove(keyValue.Key);
                         game.PlayerInfoComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:
                         //No enemies yet, will need to be added
@@ -99,6 +105,26 @@ namespace DungeonCrawler.Systems
                         game.BulletComponent.Remove(keyValue.Key);
                         game.SpriteComponent.Remove(keyValue.Key);
                         game.MovementComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Collectible:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollectibleComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        //game.MovementComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Room:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.LocalComponent.Remove(keyValue.Key);
+                        game.RoomComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Door:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        game.LocalComponent.Remove(keyValue.Key);
+                        game.DoorComponent.Remove(keyValue.Key);
+                        //game.SpriteComponent.Remove(keyValue.Key);
                         break;
                 }
             }
@@ -113,6 +139,12 @@ namespace DungeonCrawler.Systems
             //    cType = ComponentType.Enemy;
             else if (game.BulletComponent.Contains(eid))
                 cType = ComponentType.Bullet;
+            else if (game.CollectibleComponent.Contains(eid))
+                cType = ComponentType.Collectible;
+            else if (game.DoorComponent.Contains(eid))
+                cType = ComponentType.Door;
+            else if (game.RoomComponent.Contains(eid))
+                cType = ComponentType.Room;
             else
                 return; //It's something not supported
 
