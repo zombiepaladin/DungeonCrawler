@@ -4,6 +4,8 @@
 //
 // Author: Matthew McHaney
 //
+// Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -43,6 +45,8 @@ namespace DungeonCrawler.Systems
             Enemy,
             Bullet,
             Collectible,
+            Door,
+            Room,
             //Needs more in the future!
         }
 
@@ -110,6 +114,18 @@ namespace DungeonCrawler.Systems
                         game.CollisionComponent.Remove(keyValue.Key);
                         //game.MovementComponent.Remove(keyValue.Key);
                         break;
+                    case ComponentType.Room:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.LocalComponent.Remove(keyValue.Key);
+                        game.RoomComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Door:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        game.LocalComponent.Remove(keyValue.Key);
+                        game.DoorComponent.Remove(keyValue.Key);
+                        //game.SpriteComponent.Remove(keyValue.Key);
+                        break;
                 }
             }
         }
@@ -125,6 +141,10 @@ namespace DungeonCrawler.Systems
                 cType = ComponentType.Bullet;
             else if (game.CollectibleComponent.Contains(eid))
                 cType = ComponentType.Collectible;
+            else if (game.DoorComponent.Contains(eid))
+                cType = ComponentType.Door;
+            else if (game.RoomComponent.Contains(eid))
+                cType = ComponentType.Room;
             else
                 return; //It's something not supported
 

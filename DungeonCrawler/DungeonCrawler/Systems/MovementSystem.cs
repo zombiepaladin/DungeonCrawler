@@ -4,7 +4,7 @@
 //
 // Author: Nathan Bean
 //
-// Modified By: Nicholas Strub - Added Player Clamping (Assignment 7)
+// Modified By: Nicholas Strub - Added Player Clamping (Assignment 7). Also fixed player clamping 10/31/12
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -69,31 +69,29 @@ namespace DungeonCrawler.Systems
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 
                 bool clamped = false;
-
-                if (position.Center.X - position.Radius < currentRoom.WallWidth * currentRoom.TileWidth)
+                if (position.Center.X - position.Radius < 0)
                 {
-                    position.Center.X = (currentRoom.WallWidth * currentRoom.TileWidth) + position.Radius;
+                    position.Center.X = position.Radius;
                     clamped = true;
                 }
-                if (position.Center.Y - position.Radius < currentRoom.WallWidth * currentRoom.TileHeight)
+                if (position.Center.Y - position.Radius < 0)
                 {
-                    position.Center.Y = (currentRoom.WallWidth * currentRoom.TileHeight) + position.Radius;
+                    position.Center.Y = position.Radius;
                     clamped = true;
                 }
-                if (position.Center.X + position.Radius > (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth)
+                if (position.Center.X + position.Radius > currentRoom.Width * currentRoom.TileWidth)
                 {
-                    position.Center.X = (currentRoom.Width - currentRoom.WallWidth) * currentRoom.TileWidth - position.Radius;
+                    position.Center.X = (currentRoom.Width * currentRoom.TileWidth) - position.Radius;
                     clamped = true;
                 }
-                if (position.Center.Y + position.Radius > (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight)
+                if (position.Center.Y + position.Radius > currentRoom.Height * currentRoom.TileHeight)
                 {
-                    position.Center.Y = (currentRoom.Height - currentRoom.WallWidth) * currentRoom.TileHeight - position.Radius;
+                    position.Center.Y = (currentRoom.Height * currentRoom.TileHeight) - position.Radius;
                     clamped = true;
                 }
-
                 //Remove if it's a bullet. (Took out for collision test demonstration)
-                //if (clamped && game.BulletComponent.Contains(position.EntityID))
-                    //_game.GarbagemanSystem.ScheduleVisit(position.EntityID, GarbagemanSystem.ComponentType.Bullet);
+                if (clamped && game.BulletComponent.Contains(position.EntityID))
+                    game.GarbagemanSystem.ScheduleVisit(position.EntityID, GarbagemanSystem.ComponentType.Bullet);
 
                 game.PositionComponent[movement.EntityID] = position;
                 

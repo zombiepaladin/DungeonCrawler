@@ -163,6 +163,7 @@
       <Name>TestDungeon3</Name>
       <Importer>TmxImporter</Importer>
       <Processor>TilemapProcessor</Processor>
+      <SubType>Designer</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -491,6 +492,13 @@
   <ItemGroup>
     <Compile Include="Spritesheets\MiscIcons1.png">
       <Name>MiscIcons1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\cyborgSkills2.png">
+      <Name>cyborgSkills2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
