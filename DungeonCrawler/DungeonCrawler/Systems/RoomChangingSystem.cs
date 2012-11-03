@@ -86,7 +86,7 @@ namespace DungeonCrawler.Systems
 
                 // Load the destination room
                 DungeonCrawlerGame.LevelManager.LoadLevel(door.DestinationRoom);
-
+                
                 // Don't proceed until the room has finished loading
                 // We wait for a certain time so that the screen doesn't flash black very quickly and then to the new room.
                 while (loadingTime < 0.25f || DungeonCrawlerGame.LevelManager.Loading)
