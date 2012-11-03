@@ -5,6 +5,7 @@
 // Author: Nicholas Strub (Assignment 6)
 //
 // Modified By: Nicholas Strub - Added information about the size of the room (Assignment 7)
+// Modified By: Nicholas Strub - Added initialization of playerSpawn dictionary (11/3/3012)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -71,6 +72,7 @@ namespace DungeonCrawler.Entities
             };
             room.idMap = new Dictionary<string,uint>();
             room.targetTypeMap= new Dictionary<string, string>();
+            room.playerSpawns = new Dictionary<string, Vector2>();
             game.RoomComponent[entityID] = room;
 
             return entityID;
