@@ -184,7 +184,15 @@ namespace DungeonCrawler
                 //    }
                 //}
 
-
+                game.EnemyFactory.CreateEnemy(
+                    EnemyType.StationaryTarget,
+                    new Position
+                    {
+                        Center = new Vector2(300, 300),
+                        Radius = 32,
+                        RoomID = room.EntityID,
+                        EntityID = 0
+                    });
 
                 // Mark level as loaded
                 Loading = false;
