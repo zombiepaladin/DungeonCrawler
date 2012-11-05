@@ -2,6 +2,8 @@
 //Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
 // Author: Jiri Malina
 //
+// Modified By: Nicholas Strub - Added handling for PlayerSpawns objects (11/3/2012)
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -110,7 +112,7 @@ namespace DungeonCrawler
                         switch (goData.Category)
                         {
                             case "PlayerSpawn":
-
+                                room.playerSpawns.Add(goData.properties["SpawnName"], new Vector2(goData.Position.X, goData.Position.Y));
                                 break;
                             case "Enemy":
                                 break;
@@ -127,9 +129,6 @@ namespace DungeonCrawler
                                         break;
                                 }
                                 break;
-                            case "Door":
-                               // entityID = game.DoorFactory.CreateDoor(goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"]);
-                                break;
                         }
                             if (goData.properties.Keys.Contains("id"))
                             {
@@ -140,7 +139,7 @@ namespace DungeonCrawler
                     }
                 }
 
-
+                game.RoomComponent[currentRoomID] = room;
 
                 //// Load the game objects
                 //for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)

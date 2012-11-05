@@ -4,6 +4,8 @@
 //
 // Author: Nicholas Strub
 //
+// Modified By: Nicholas Strub - Added dictionary of player spawn points (11/3/2012)
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -44,7 +46,12 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// Type of object of the target, keys are strings indicated on the map editor, stored in trigger's targetID.
         /// </summary>
-        public Dictionary<string, string> targetTypeMap ;
+        public Dictionary<string, string> targetTypeMap;
+
+        /// <summary>
+        /// Stores all of the playerSpawns within the rooms. Keys are the SpawnNames defined in the properties of the object on the tilemap and the values are the spawn positions in the form of a Vector2.
+        /// </summary>
+        public Dictionary<string, Vector2> playerSpawns;
 
         /// <summary>
         /// The tilemap's width, in tiles
