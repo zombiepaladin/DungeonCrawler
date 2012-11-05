@@ -56,6 +56,10 @@ namespace DungeonCrawler.Systems
             foreach(EnemyAI ai in game.EnemyAIComponent.All)
             {
                 Position pos = game.PositionComponent[ai.EntityID];
+
+                if (pos.RoomID != game.CurrentRoomEid)
+                    break;
+
                 IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
 
                 foreach (Position thing in HitList)
