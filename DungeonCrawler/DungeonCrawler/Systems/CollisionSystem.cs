@@ -435,7 +435,7 @@ namespace DungeonCrawler.Systems
             CollisionType obj1 = CollisionType.None;
             if (_game.PlayerComponent.Contains(p))
                 obj1 = CollisionType.Player;
-            else if (false) //Enemy
+            else if (_game.EnemyComponent.Contains(p))
                 obj1 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p))
                 obj1 = CollisionType.Bullet;
@@ -449,7 +449,7 @@ namespace DungeonCrawler.Systems
             CollisionType obj2 = CollisionType.None;
             if (_game.PlayerComponent.Contains(p_2))
                 obj2 = CollisionType.Player;
-            else if (false) //Enemy
+            else if (_game.EnemyComponent.Contains(p_2))
                 obj2 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p_2))
                 obj2 = CollisionType.Bullet;
