@@ -57,7 +57,14 @@ namespace DungeonCrawler.Components
     {
         public override void HandleTrigger(uint entityID, string type)
         {
+            #region BinaryTreeArrayImplementation
+            //Door door = this[entityID];
+            #endregion
+
+            #region DictionaryImplementation
             Door door = elements[entityID];
+            #endregion
+            
 
             switch (type)
             {
