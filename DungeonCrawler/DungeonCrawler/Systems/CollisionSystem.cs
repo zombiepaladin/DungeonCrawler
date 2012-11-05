@@ -33,12 +33,14 @@ namespace DungeonCrawler.Systems
             Bullet = 0x8,
             Collectible = 0x10,
             Door =  0x20,
+            Trigger = 0x40,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
             PlayerStatic = 0x3,
             PlayerCollectible = 0x12,
             PlayerDoor = 0x22,
+            PlayerTrigger = 0x42,
 
             EnemyBullet = 0xC,
             EnemyStatic = 0x5,
@@ -114,6 +116,9 @@ namespace DungeonCrawler.Systems
                                 break;
                             case CollisionType.PlayerCollectible:
                                 PlayerCollectibleCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
+                            case CollisionType.PlayerTrigger:
+                                PlayerTriggerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.Enemy:
                                 EnemyEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
@@ -430,6 +435,25 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        private void PlayerTriggerCollision(uint p, uint p_2)
+        {
+            uint playerId, triggerId;
+            if (_game.TriggerComponent.Contains(p))
+            {
+                triggerId = p;
+                playerId = p_2;
+            }
+            else
+            {
+                playerId = p;
+                triggerId = p_2;
+            }
+            
+            //Put your code here
+
+            throw new NotImplementedException();
+        }
+
         private CollisionType getCollisionType(uint p, uint p_2)
         {
             CollisionType obj1 = CollisionType.None;
@@ -443,6 +467,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Collectible;
             else if (_game.DoorComponent.Contains(p))
                 obj1 = CollisionType.Door;
+            else if (_game.TriggerComponent.Contains(p))
+                obj1 = CollisionType.Trigger;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -457,6 +483,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Collectible;
             else if (_game.DoorComponent.Contains(p_2))
                 obj2 = CollisionType.Door;
+            else if (_game.TriggerComponent.Contains(p_2))
+                obj2 = CollisionType.Trigger;
             else //Static
                 obj2 = CollisionType.Static;
 
