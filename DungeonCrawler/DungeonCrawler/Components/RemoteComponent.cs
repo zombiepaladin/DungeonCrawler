@@ -80,6 +80,7 @@ namespace DungeonCrawler.Components
     #endregion
 
     #region DictionaryImplementation
+    
     /// <summary>
     /// The remote components for all entities in a game world
     /// TODO: Provide an optimized way for finding remote entities
@@ -115,5 +116,6 @@ namespace DungeonCrawler.Components
             return entityID;
         }
     }
+    
     #endregion
 }

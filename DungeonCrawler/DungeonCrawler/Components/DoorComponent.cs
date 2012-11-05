@@ -10,6 +10,7 @@
 //-----------------------------------------------------------------------------
 
 //Samuel Fike and Jiri Malina: Implemented HandleTrigger method
+//Samuel Fike: Added Lock/Unlock triggers
 
 #endregion
 
@@ -56,8 +57,26 @@ namespace DungeonCrawler.Components
     {
         public override void HandleTrigger(uint entityID, string type)
         {
+            #region BinaryTreeArrayImplementation
+            //Door door = this[entityID];
+            #endregion
 
+            #region DictionaryImplementation
+            Door door = elements[entityID];
+            #endregion
+            
+
+            switch (type)
+            {
+                case "Lock":
+                    door.Locked = true;
+                    break;
+                case "Unlock":
+                    door.Locked = false;
+                    break;
+            }
         }
 
     }
+
 }
