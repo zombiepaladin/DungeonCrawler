@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 
 
 namespace DungeonCrawler
@@ -115,6 +116,19 @@ namespace DungeonCrawler
                                 room.playerSpawns.Add(goData.properties["SpawnName"], new Vector2(goData.Position.X, goData.Position.Y));
                                 break;
                             case "Enemy":
+                                switch (goData.Type)
+                                {
+                                    case "MovingTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
+                                        break;
+                                    case "StationaryTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
@@ -183,16 +197,6 @@ namespace DungeonCrawler
                 //        }
                 //    }
                 //}
-
-                game.EnemyFactory.CreateEnemy(
-                    EnemyType.StationaryTarget,
-                    new Position
-                    {
-                        Center = new Vector2(300, 300),
-                        Radius = 32,
-                        RoomID = room.EntityID,
-                        EntityID = 0
-                    });
 
                 // Mark level as loaded
                 Loading = false;

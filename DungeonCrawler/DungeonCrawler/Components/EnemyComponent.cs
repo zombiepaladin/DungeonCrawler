@@ -24,7 +24,7 @@ namespace DungeonCrawler.Components
     /// </summary>
     public enum EnemyType
     {
-        StationaryTarget,
+        Target,
     }
 
     /// <summary>

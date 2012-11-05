@@ -23,6 +23,12 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Entities
 {
+    public enum EnemyFactoryType
+    {
+        StationaryTarget,
+        MovingTarget,
+    }
+
     /// <summary>
     /// Handles creating enemies and adding them to the game.
     /// </summary>
@@ -46,7 +52,7 @@ namespace DungeonCrawler.Entities
         /// Creates a new enemy and adds it to the game. (No other components created)
         /// </summary>
         /// <param name="type">The type of enemy to create.</param>
-        public uint CreateEnemy(EnemyType type, Position position)
+        public uint CreateEnemy(EnemyFactoryType type, Position position)
         {
             uint eid = Entity.NextEntity();
             Enemy enemy;
@@ -55,7 +61,7 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
-                case EnemyType.StationaryTarget:
+                case EnemyFactoryType.StationaryTarget:
                     enemy .HurtOnTouch = false;
                     enemy.Health = 1;
 
@@ -66,11 +72,47 @@ namespace DungeonCrawler.Entities
                         SpriteBounds = new Rectangle(0, 0, 64, 64),
                     };
                     break;
+
+                case EnemyFactoryType.MovingTarget:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 1;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/target2"),
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                    };
+
+                    Movement move = new Movement()
+                    {
+                        EntityID = eid,
+                    };
+                    _game.MovementComponent.Add(eid, move);
+
+                    EnemyAI ai = new EnemyAI()
+                    {
+                        EntityID = eid,
+                    };
+                    _game.EnemyAIComponent.Add(eid, ai);
+                    break;
+
                 default:
                     throw new Exception("Unknown EnemyType");
             }
 
-            enemy.Type = type;
+            EnemyType enemyType;
+            switch (type)
+            {
+                case EnemyFactoryType.MovingTarget:
+                case EnemyFactoryType.StationaryTarget:
+                    enemyType = EnemyType.Target;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            enemy.Type = enemyType;
             enemy.EntityID = eid;
             position.EntityID = eid;
 
