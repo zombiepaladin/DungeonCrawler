@@ -61,6 +61,9 @@ namespace DungeonCrawler.Systems
             {
                 Position pos = game.PositionComponent[ai.EntityID];
 
+                if (pos.RoomID != game.CurrentRoomEid)
+                    break;
+
                 if (HasTarget == false)
                 {
                     IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);

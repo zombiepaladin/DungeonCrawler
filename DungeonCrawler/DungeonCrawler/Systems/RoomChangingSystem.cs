@@ -59,6 +59,24 @@ namespace DungeonCrawler.Systems
 
         #endregion
 
+        #region Private Methods
+        /// <summary>
+        /// Anything that needs to be cleaned up after switching rooms
+        /// </summary>
+        private void CleanupLastRoom(uint roomId)
+        {
+            //For now, we only need to clean up bullets. Maybe collectibles too.
+            foreach (Bullet bullet in game.BulletComponent.All)
+            {
+                if (game.PositionComponent[bullet.EntityID].RoomID == roomId)
+                {
+                    game.GarbagemanSystem.ScheduleVisit(bullet.EntityID);
+                }
+            }
+        }
+   
+        #endregion
+
         #region Public Methods
 
         /// <summary>
@@ -85,7 +103,11 @@ namespace DungeonCrawler.Systems
                 //}
 
                 // Load the destination room
+                uint lastRoomEid = game.CurrentRoomEid;
+
                 DungeonCrawlerGame.LevelManager.LoadLevel(door.DestinationRoom);
+
+                CleanupLastRoom(lastRoomEid);
 
                 // Don't proceed until the room has finished loading
                 // We wait for a certain time so that the screen doesn't flash black very quickly and then to the new room.
