@@ -81,6 +81,45 @@ namespace DungeonCrawler.Components
 
     public class RoomComponent : GameComponent<Room>
     {
+        /// <summary>
+        /// Finds a room that has the specified name.
+        /// </summary>
+        /// <param name="elements">The components to query</param>
+        /// <param name="name">The name of the room</param>
+        /// <returns>The room if it exists, or null if doesn't exist.</returns>
+        public Room FindRoom(string name)
+        {
+            foreach (KeyValuePair<uint, Room> room in elements)
+            {
+                if (room.Value.Tilemap == name)
+                {
+                    return room.Value;
+                }
+            }
 
+            return new Room() { Tilemap = "null" };
+        }
+    }
+
+    public static class RoomExtensions
+    {
+        /// <summary>
+        /// Finds a room that has the specified name.
+        /// </summary>
+        /// <param name="elements">The components to query</param>
+        /// <param name="name">The name of the room</param>
+        /// <returns>The room if it exists, or null if doesn't exist.</returns>
+        public static Room FindRoom(this IEnumerable<Room> elements, string name)
+        {
+            foreach (Room room in elements)
+            {
+                if (room.Tilemap == name)
+                {
+                    return room;
+                }
+            }
+
+            return new Room() { Tilemap = "null" };
+        }
     }
 }
