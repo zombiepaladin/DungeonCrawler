@@ -103,6 +103,11 @@ namespace DungeonCrawler
         /// </summary>
         public CollectibleFactory CollectableFactory;
 
+        /// <summary>
+        /// A EnemyFactory for creating enemies
+        /// </summary>
+        public EnemyFactory EnemyFactory;
+
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
 
@@ -134,6 +139,7 @@ namespace DungeonCrawler
         public CollectibleComponent CollectibleComponent;
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
+        public EnemyComponent EnemyComponent;
         #endregion
 
         #region Game Systems
@@ -180,6 +186,7 @@ namespace DungeonCrawler
             RoomFactory = new RoomFactory(this);
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
+            EnemyFactory = new EnemyFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -207,6 +214,7 @@ namespace DungeonCrawler
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
+            EnemyComponent = new EnemyComponent();
             LevelManager = new LevelManager(this);
 
             base.Initialize();
