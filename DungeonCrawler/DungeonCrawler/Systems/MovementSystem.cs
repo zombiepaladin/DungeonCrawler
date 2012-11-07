@@ -66,7 +66,7 @@ namespace DungeonCrawler.Systems
                 Position position = game.PositionComponent[movement.EntityID];
 
                 if (position.RoomID != game.CurrentRoomEid)
-                    break;
+                    continue;
 
                 position.Center += elapsedTime * movement.Speed * movement.Direction;
                 // Player clamping based on the size of the walls, the tile sizes, and the room dimensions.

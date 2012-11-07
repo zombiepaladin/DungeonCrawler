@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 
 
 namespace DungeonCrawler
@@ -115,27 +116,40 @@ namespace DungeonCrawler
                             uint entityID = uint.MaxValue;
 
 
-                            switch (goData.Category)
-                            {
-                                case "PlayerSpawn":
-                                    room.playerSpawns.Add(goData.properties["SpawnName"], new Vector2(goData.Position.X, goData.Position.Y));
-                                    break;
-                                case "Enemy":
-                                    break;
-                                case "Trigger":
-                                    switch (goData.Type)
-                                    {
-                                        case "Door":
-                                            entityID = game.DoorFactory.CreateDoor(currentRoomID, goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"], goData.Position);
-                                            break;
-                                        case "Wall":
-                                            entityID = game.WallFactory.CreateWall(currentRoomID, goData.Position);
-                                            break;
-                                        default:
-                                            break;
-                                    }
-                                    break;
-                            }
+                        switch (goData.Category)
+                        {
+                            case "PlayerSpawn":
+                                room.playerSpawns.Add(goData.properties["SpawnName"], new Vector2(goData.Position.X, goData.Position.Y));
+                                break;
+                            case "Enemy":
+                                switch (goData.Type)
+                                {
+                                    case "MovingTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
+                                        break;
+                                    case "StationaryTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                            case "Trigger":
+                                switch (goData.Type)
+                                {
+                                    case "Door":
+                                        entityID = game.DoorFactory.CreateDoor(currentRoomID, goData.properties["DestinationRoom"], goData.properties["DestinationSpawnName"], goData.Position);
+                                        break;
+                                    case "Wall":
+                                        entityID = game.WallFactory.CreateWall(currentRoomID, goData.Position);
+                                        break;
+                                    default:
+                                        break;
+                                }
+                                break;
+                        }
                             if (goData.properties.Keys.Contains("id"))
                             {
                                 room.idMap.Add(goData.properties["id"], entityID);
