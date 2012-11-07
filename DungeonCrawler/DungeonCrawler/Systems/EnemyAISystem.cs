@@ -29,6 +29,10 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private DungeonCrawlerGame game;
 
+        private Position Target;
+
+        private bool HasTarget = false;
+
         #endregion
 
         #region Constructors
@@ -60,16 +64,28 @@ namespace DungeonCrawler.Systems
                 if (pos.RoomID != game.CurrentRoomEid)
                     break;
 
-                IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
-
-                foreach (Position thing in HitList)
+                if (HasTarget == false)
                 {
-                    if (game.PlayerComponent.Contains(thing.EntityID))
+                    IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
+
+                    foreach (Position thing in HitList)
                     {
-                        Vector2 toPlayer = thing.Center - pos.Center;
-                        toPlayer.Normalize();
-                        pos.Center += toPlayer * elapsedTime * 50;
+                        if (game.PlayerComponent.Contains(thing.EntityID))
+                        {
+                            Target = thing;
+                            Vector2 toPlayer = Target.Center - pos.Center;
+                            toPlayer.Normalize();
+                            pos.Center += toPlayer * elapsedTime * 50;
+                            HasTarget = true;
+                            break;
+                        }
                     }
+                }
+                else
+                {
+                    Vector2 toPlayer = Target.Center - pos.Center;
+                    toPlayer.Normalize();
+                    pos.Center += toPlayer * elapsedTime * 50;
                 }
             }
         }

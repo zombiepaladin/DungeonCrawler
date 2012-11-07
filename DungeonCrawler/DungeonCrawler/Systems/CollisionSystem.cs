@@ -24,6 +24,16 @@ namespace DungeonCrawler.Systems
 {
     public class CollisionSystem
     {
+        /* To add in collision logic:
+         * To add collision logic between two components you only need to fill in the correct method. So if you wanted to implement the Player on Static collision you would fill in the PlayerStaticCollision method.
+         * Each of these methods take in the two colliding entity IDs. There is no guarantee on the type of the entity IDs, so you will need to determine this in your method.
+         * If you created a new object type to collide with you will need to add the proper types in CollisionType, update the switch statement in Update, and add the type to getCollisionType.
+         */
+
+        /// <summary>
+        /// Different collisions. The first group are individual components. We use bitmask to determine what the actual collision is in the end.
+        /// For example Player on Static collision == Player | Static or PlayerStatic.
+        /// </summary>
         private enum CollisionType
         {
             None = 0x0,
@@ -33,12 +43,14 @@ namespace DungeonCrawler.Systems
             Bullet = 0x8,
             Collectible = 0x10,
             Door =  0x20,
+            Trigger = 0x40,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
             PlayerStatic = 0x3,
             PlayerCollectible = 0x12,
             PlayerDoor = 0x22,
+            PlayerTrigger = 0x42,
 
             EnemyBullet = 0xC,
             EnemyStatic = 0x5,
@@ -115,6 +127,9 @@ namespace DungeonCrawler.Systems
                             case CollisionType.PlayerCollectible:
                                 PlayerCollectibleCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.PlayerTrigger:
+                                PlayerTriggerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
                             case CollisionType.Enemy:
                                 EnemyEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -139,6 +154,11 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        /// <summary>
+        /// Handles Player on Collectible collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void PlayerCollectibleCollision(uint p, uint p_2)
         {
             //pick up the collectible, kill it
@@ -159,6 +179,11 @@ namespace DungeonCrawler.Systems
             _game.GarbagemanSystem.ScheduleVisit(collectibleID, GarbagemanSystem.ComponentType.Collectible);
         }
 
+        /// <summary>
+        /// Handles Bullet/Door collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void BulletDoorCollision(uint p, uint p_2)
         {
             //Destroy the bullet if door is closed
@@ -178,6 +203,11 @@ namespace DungeonCrawler.Systems
                 _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
         }
 
+        /// <summary>
+        /// Handles Bullet/Static collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void BulletStaticCollision(uint p, uint p_2)
         {
             //Remove the bullet
@@ -191,6 +221,11 @@ namespace DungeonCrawler.Systems
             _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
         }
 
+        /// <summary>
+        /// Handles Enemy/Door collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void EnemyDoorCollision(uint p, uint p_2)
         {
             //Just block them
@@ -224,6 +259,11 @@ namespace DungeonCrawler.Systems
             _game.PositionComponent[enemyId] = enemyPos;
         }
 
+        /// <summary>
+        /// Handles Enemy/Static collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void EnemyStaticCollision(uint p, uint p_2)
         {
             //Get closest point on the rectangle, angle between player and point, and push back radius amount
@@ -273,6 +313,11 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        /// <summary>
+        /// Handles Enemy/Bullet collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void EnemyBulletCollision(uint p, uint p_2)
         {
             //Remove the bullet, calculate damage/knockback?
@@ -280,6 +325,11 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Handles Enemy collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void EnemyEnemyCollision(uint p, uint p_2)
         {
             //Set enemies against each other
@@ -287,6 +337,11 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Handles Player/Door collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void PlayerDoorCollision(uint p, uint p_2)
         {
             //Stop player movement.
@@ -327,6 +382,11 @@ namespace DungeonCrawler.Systems
 
         }
 
+        /// <summary>
+        /// Handles Player/Static collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void PlayerStaticCollision(uint p, uint p_2)
         {
             //Stop player movement.
@@ -379,6 +439,11 @@ namespace DungeonCrawler.Systems
 
         }
 
+        /// <summary>
+        /// Handles Player/Bullet collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void PlayerBulletCollision(uint p, uint p_2)
         {
             //Delete bullet, calculate damage.
@@ -411,6 +476,11 @@ namespace DungeonCrawler.Systems
             _game.PositionComponent[playerId] = newLocation; 
         }
 
+        /// <summary>
+        /// Handles Player/Enemy collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
         private void PlayerEnemyCollision(uint p, uint p_2)
         {
             //Damage player, knockback?
@@ -418,6 +488,7 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        
         private void PlayerPlayerCollision(uint p, uint p_2)
         {
             //Put up against each other
@@ -430,6 +501,36 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Handles Player/Trigger collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
+        private void PlayerTriggerCollision(uint p, uint p_2)
+        {
+            uint playerId, triggerId;
+            if (_game.TriggerComponent.Contains(p))
+            {
+                triggerId = p;
+                playerId = p_2;
+            }
+            else
+            {
+                playerId = p;
+                triggerId = p_2;
+            }
+            
+            //Put your code here
+
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Retrives the collision type between the two eids
+        /// </summary>
+        /// <param name="p">First eid</param>
+        /// <param name="p_2">Second eid</param>
+        /// <returns>The collision type.</returns>
         private CollisionType getCollisionType(uint p, uint p_2)
         {
             CollisionType obj1 = CollisionType.None;
@@ -443,6 +544,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Collectible;
             else if (_game.DoorComponent.Contains(p))
                 obj1 = CollisionType.Door;
+            else if (_game.TriggerComponent.Contains(p))
+                obj1 = CollisionType.Trigger;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -457,6 +560,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Collectible;
             else if (_game.DoorComponent.Contains(p_2))
                 obj2 = CollisionType.Door;
+            else if (_game.TriggerComponent.Contains(p_2))
+                obj2 = CollisionType.Trigger;
             else //Static
                 obj2 = CollisionType.Static;
 

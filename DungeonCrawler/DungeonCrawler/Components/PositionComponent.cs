@@ -56,7 +56,6 @@ namespace DungeonCrawler.Components
     public class PositionComponent : GameComponent<Position>
     {
         #region Public Methods
-
         /// <summary>
         /// Returns all Position components within the specfied circular region
         /// </summary>
@@ -102,6 +101,7 @@ namespace DungeonCrawler.Components
     #endregion
 
     #region DictionaryImplementation
+    
     /// <summary>
     /// The PositionComponents for all entities in a game world
     /// TODO: Provide an optimized spatial representation
@@ -151,6 +151,7 @@ namespace DungeonCrawler.Components
 
         #endregion
     }
+    
     #endregion
 
     public static class PositionExtensions

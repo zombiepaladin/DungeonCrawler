@@ -133,6 +133,7 @@ namespace DungeonCrawler
         public StatsComponent StatsComponent;
         public CollectibleComponent CollectibleComponent;
         public CollisionComponent CollisionComponent;
+        public TriggerComponent TriggerComponent;
         #endregion
 
         #region Game Systems
@@ -205,6 +206,7 @@ namespace DungeonCrawler
             EnemyAIComponent = new EnemyAIComponent();
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
+            TriggerComponent = new TriggerComponent();
             LevelManager = new LevelManager(this);
 
             base.Initialize();

@@ -30,7 +30,8 @@ namespace DungeonCrawler.Components
         public string TargetID;
 
         /// <summary>
-        /// The type of action to perform
+        /// The name of the trigger. Defined in the map editor and in the Component's HandleTrigger method.
+        /// An example is DoorComponent, which has "Lock", "Unlock", etc.
         /// </summary>
         public string TriggerType;
     }
@@ -38,8 +39,14 @@ namespace DungeonCrawler.Components
     public class TriggerComponent : GameComponent<Trigger>
     {
         public void Trigger(uint entityID)
-        {
+        { 
+            #region BinaryTreeArrayImplementation
+            //Trigger trigger = this[entityID];
+            #endregion
+
+            #region DictionaryImplementation
             Trigger trigger = elements[entityID];
+            #endregion
 
             Room room = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 
