@@ -68,52 +68,71 @@ namespace DungeonCrawler.Systems
         public void Draw(float elapsedTime)
         {
             spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, null, null, null);
+            uint roomId;
+            try
+            {
+                roomId = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
+            }
+            catch
+            {
+                roomId = uint.MaxValue;
+            }
 
             // Draw all Sprites
             foreach (Sprite sprite in game.SpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
-                spriteBatch.Draw(sprite.SpriteSheet, 
-                                position.Center, 
-                                sprite.SpriteBounds, 
-                                Color.White, 
-                                0f,                                             // rotation
-                                new Vector2(position.Radius, position.Radius),  // origin
-                                1f,                                             // scale
-                                SpriteEffects.None,
-                                1); 
+                if (position.RoomID == roomId)
+                {
+
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    1);
+                }
             }
 
             // Draw all MovementSprites
             foreach (MovementSprite sprite in game.MovementSpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
-                spriteBatch.Draw(sprite.SpriteSheet,
-                                position.Center,
-                                sprite.SpriteBounds,
-                                Color.White,
-                                0f,                                             // rotation
-                                new Vector2(position.Radius, position.Radius),  // origin
-                                1f,                                             // scale
-                                SpriteEffects.None,
-                                .8f);
+                if (position.RoomID == roomId)
+                {
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    .8f);
+                }
             }
 
             //Draw Weapon animations
             foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
-                Facing facing = game.MovementSpriteComponent[sprite.EntityID].Facing;
-                position.Center = applyFacingOffset(facing, position.Center);
-                spriteBatch.Draw(sprite.SpriteSheet,
-                                position.Center,
-                                sprite.SpriteBounds,
-                                Color.White,
-                                0f,
-                                new Vector2(position.Radius),
-                                1f,
-                                SpriteEffects.None,
-                                (facing == Facing.North) ? .9f : .7f);
+                if (position.RoomID == roomId)
+                {
+                    Facing facing = game.MovementSpriteComponent[sprite.EntityID].Facing;
+                    position.Center = applyFacingOffset(facing, position.Center);
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,
+                                    new Vector2(position.Radius),
+                                    1f,
+                                    SpriteEffects.None,
+                                    (facing == Facing.North) ? .9f : .7f);
+                }
             }
 
             //Draw HUD

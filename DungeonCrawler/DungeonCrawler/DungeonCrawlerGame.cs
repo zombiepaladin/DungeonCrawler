@@ -138,6 +138,7 @@ namespace DungeonCrawler
         public StatsComponent StatsComponent;
         public CollectibleComponent CollectibleComponent;
         public CollisionComponent CollisionComponent;
+        public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
         #endregion
 
@@ -212,6 +213,7 @@ namespace DungeonCrawler
             EnemyAIComponent = new EnemyAIComponent();
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
+            TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
             LevelManager = new LevelManager(this);
 
@@ -254,6 +256,11 @@ namespace DungeonCrawler
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+        }
+
+        public uint CurrentRoomEid
+        {
+            get { return LevelManager.currentRoomID; }
         }
 
         /// <summary>
