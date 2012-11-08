@@ -1,4 +1,13 @@
-﻿using System;
+﻿#region File Description
+//-----------------------------------------------------------------------------
+// AggregateFactory.cs 
+//
+// Modified by:Nick Boen
+//      Added Stat values to each of the players as well as a stat component
+//-----------------------------------------------------------------------------
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
