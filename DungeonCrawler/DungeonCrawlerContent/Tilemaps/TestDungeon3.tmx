@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="40" height="23" tilewidth="32" tileheight="32">
+ <properties>
+  <property name="WallWidth" value="2"/>
+ </properties>
  <tileset firstgid="1" name="Z18-TileA1" tilewidth="32" tileheight="32">
   <image source="../Tilesets/Z18-TileA1.png" width="512" height="384"/>
  </tileset>
@@ -17,18 +20,20 @@
   </data>
  </layer>
  <objectgroup name="Collisions" width="40" height="23">
-  <object x="0" y="0" width="1278" height="65"/>
-  <object x="0" y="65" width="62" height="606"/>
-  <object x="1214" y="65" width="66" height="607"/>
-  <object x="1" y="672" width="1279" height="64"/>
+  <object name="Trigger" type="Wall" x="0" y="0" width="1278" height="65"/>
+  <object name="Trigger" type="Wall" x="0" y="65" width="61" height="255"/>
+  <object name="Trigger" type="Wall" x="1214" y="65" width="66" height="607"/>
+  <object name="Trigger" type="Wall" x="1" y="672" width="1279" height="64"/>
+  <object name="Trigger" type="Wall" x="1" y="390" width="61" height="282"/>
  </objectgroup>
  <objectgroup name="Entities" width="40" height="23">
-  <object name="Door" x="-3" y="321" width="65" height="69">
+  <object name="Trigger" type="Door" x="-3" y="321" width="65" height="69">
    <properties>
     <property name="DestinationRoom" value="TestDungeon1"/>
     <property name="DestinationSpawnName" value="2"/>
    </properties>
   </object>
+  <object name="Enemy" type="MovingTarget" x="300" y="300" width="10" height="10"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23"/>
  <objectgroup name="PlayerSpawns" width="40" height="23">

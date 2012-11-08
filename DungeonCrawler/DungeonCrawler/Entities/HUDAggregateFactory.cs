@@ -156,9 +156,22 @@ namespace DungeonCrawler.Entities
             };
             game.HUDSpriteComponent[entityID] = DPadSprite;
             #endregion
-            //Health/Psi Status Bar
+            //Use a Health/Psi or Health/Fatigue Status Bar depending on the player's race
             entityID = Entity.NextEntity();
-            spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HealthPsi");
+            switch(player.PlayerRace)
+            {
+                case Aggregate.CultistPlayer:
+                case Aggregate.GargranianPlayer:
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HealthPsi");
+                    break;
+                case Aggregate.EarthianPlayer:
+                case Aggregate.CyborgPlayer:
+                case Aggregate.SpacePiratePlayer:
+                case Aggregate.ZombiePlayer:
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HealthFatigue");
+                break;
+            }
+            
             //Choose player corner
             switch (player.PlayerIndex)
             {

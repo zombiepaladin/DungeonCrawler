@@ -2,12 +2,16 @@
 //-----------------------------------------------------------------------------
 // DoorComponent.cs 
 //
-// Author: Nicholas Strub
+// Author: Nicholas Strub (Assignment 6)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
 //-----------------------------------------------------------------------------
+
+//Samuel Fike and Jiri Malina: Implemented HandleTrigger method
+//Samuel Fike: Added Lock/Unlock triggers
+
 #endregion
 
 #region Using Statements
@@ -37,14 +41,42 @@ namespace DungeonCrawler.Components
         /// The name of the spawn in the destination room to place the player
         /// </summary>
         public string DestinationSpawnName;
+
+        /// <summary>
+        /// Indicates whether the door is (un)locked
+        /// </summary>
+        public bool Locked;
+
+        /// <summary>
+        /// Indicates whether the door is closed/opened
+        /// </summary>
+        public bool Closed;
     }
 
     public class DoorComponent : GameComponent<Door>
     {
-        public void HandleTrigger(uint entityID, string type)
+        public override void HandleTrigger(uint entityID, string type)
         {
+            #region BinaryTreeArrayImplementation
+            //Door door = this[entityID];
+            #endregion
 
+            #region DictionaryImplementation
+            Door door = elements[entityID];
+            #endregion
+            
+
+            switch (type)
+            {
+                case "Lock":
+                    door.Locked = true;
+                    break;
+                case "Unlock":
+                    door.Locked = false;
+                    break;
+            }
         }
 
     }
+
 }
