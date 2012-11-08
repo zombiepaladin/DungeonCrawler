@@ -268,8 +268,7 @@ namespace DungeonCrawler.Systems
         {
             //Get closest point on the rectangle, angle between player and point, and push back radius amount
             uint staticId, enemyId;
-            //if (_game.EnemyComponent.Contains(p))
-            if(_game.EnemyAIComponent.Contains(p))
+            if(_game.EnemyComponent.Contains(p))
             {
                 enemyId = p;
                 staticId = p_2;
@@ -320,9 +319,38 @@ namespace DungeonCrawler.Systems
         /// <param name="p_2">Second entityID</param>
         private void EnemyBulletCollision(uint p, uint p_2)
         {
-            //Remove the bullet, calculate damage/knockback?
+            //Delete bullet, calculate damage.
 
-            throw new NotImplementedException();
+            uint bulletId, enemyId;
+            if (_game.BulletComponent.Contains(p))
+            {
+                bulletId = p;
+                enemyId = p_2;
+            }
+            else
+            {
+                enemyId = p;
+                bulletId = p_2;
+            }
+
+            _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
+
+            //Factor in damage
+
+            if (_game.MovementComponent.Contains(enemyId))
+            {
+                Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
+                    _game.PositionComponent[enemyId].Center);
+                if (directionOfKnockback == Vector2.Zero) directionOfKnockback = new Vector2(1, 0);
+
+                directionOfKnockback.Normalize();
+
+                //knockback
+                Position newLocation = _game.PositionComponent[enemyId];
+                newLocation.Center -= directionOfKnockback * 10;
+
+                _game.PositionComponent[enemyId] = newLocation;
+            }
         }
 
         /// <summary>
@@ -483,9 +511,112 @@ namespace DungeonCrawler.Systems
         /// <param name="p_2">Second entityID</param>
         private void PlayerEnemyCollision(uint p, uint p_2)
         {
-            //Damage player, knockback?
+            //Need to separate into 4 types: stationary&painless, stationary&painful, moving&painless, moving&painful
 
-            throw new NotImplementedException();
+            uint enemyId, playerId;
+            if (_game.EnemyComponent.Contains(p))
+            {
+                enemyId = p;
+                playerId = p_2;
+            }
+            else
+            {
+                playerId = p;
+                enemyId = p_2;
+            }
+
+            Enemy enemy = _game.EnemyComponent[enemyId];
+
+            bool moving = _game.MovementComponent.Contains(enemyId);
+
+            if (!enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painless
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
+            else if (enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painful
+                throw new NotImplementedException();
+            }
+            else if (!enemy.HurtOnTouch && moving)
+            {
+                //For now, let's have it just push the person around. But we need to make sure eventually that
+                //complicated nonviolent collisions is handled. That way pushing blocks/people walking into each other
+                //will be done properly.
+
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
+            else
+            {
+                //Moving & Painful
+                throw new NotImplementedException();
+            }
+
         }
 
         
@@ -536,7 +667,7 @@ namespace DungeonCrawler.Systems
             CollisionType obj1 = CollisionType.None;
             if (_game.PlayerComponent.Contains(p))
                 obj1 = CollisionType.Player;
-            else if (false) //Enemy
+            else if (_game.EnemyComponent.Contains(p))
                 obj1 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p))
                 obj1 = CollisionType.Bullet;
@@ -552,7 +683,7 @@ namespace DungeonCrawler.Systems
             CollisionType obj2 = CollisionType.None;
             if (_game.PlayerComponent.Contains(p_2))
                 obj2 = CollisionType.Player;
-            else if (false) //Enemy
+            else if (_game.EnemyComponent.Contains(p_2))
                 obj2 = CollisionType.Enemy;
             else if (_game.BulletComponent.Contains(p_2))
                 obj2 = CollisionType.Bullet;

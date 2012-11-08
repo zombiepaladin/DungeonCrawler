@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using DungeonCrawlerWindowsLibrary;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 
 
 namespace DungeonCrawler
@@ -41,6 +42,8 @@ namespace DungeonCrawler
         public Tilemap CurrentMap;
         public Song CurrentSong;
 
+        private Dictionary<string,Tilemap> LoadedTilemaps;
+
 
         /// <summary>
         /// Creates a new LevelManager
@@ -49,6 +52,8 @@ namespace DungeonCrawler
         public LevelManager(Game game)
         {
             this.game = game;
+
+            LoadedTilemaps = new Dictionary<string,Tilemap>();
         }
 
 
@@ -82,31 +87,33 @@ namespace DungeonCrawler
 
             ThreadStart threadStarter = delegate
             {
-                CurrentMap = game.Content.Load<Tilemap>("Tilemaps/" + level);
-                CurrentMap.LoadContent(game.Content);
-
-                // Load the background music
-                //if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
-                //{
-                //    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
-                //}
-                //else
-                //{
-                //    CurrentSong = null;
-                //}
-                currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
-                Room room = game.RoomComponent[currentRoomID];
-                
-
-
-                for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
+                if (!LoadedTilemaps.ContainsKey(level))
                 {
-                    for (int j = 0; j < CurrentMap.GameObjectGroups[i].GameObjectData.Count(); j++)
-                    {
-                        GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
-                        Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
+                    CurrentMap = game.Content.Load<Tilemap>("Tilemaps/" + level);
+                    CurrentMap.LoadContent(game.Content);
 
-                        uint entityID = uint.MaxValue;
+                    // Load the background music
+                    //if (CurrentMap.MusicTitle != null && CurrentMap.MusicTitle != "")
+                    //{
+                    //    CurrentSong = game.Content.Load<Song>("Music/" + CurrentMap.MusicTitle);
+                    //}
+                    //else
+                    //{
+                    //    CurrentSong = null;
+                    //}
+                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                    Room room = game.RoomComponent[currentRoomID];
+
+
+
+                    for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
+                    {
+                        for (int j = 0; j < CurrentMap.GameObjectGroups[i].GameObjectData.Count(); j++)
+                        {
+                            GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
+                            Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
+
+                            uint entityID = uint.MaxValue;
 
 
                         switch (goData.Category)
@@ -115,6 +122,19 @@ namespace DungeonCrawler
                                 room.playerSpawns.Add(goData.properties["SpawnName"], new Vector2(goData.Position.X, goData.Position.Y));
                                 break;
                             case "Enemy":
+                                switch (goData.Type)
+                                {
+                                    case "MovingTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
+                                        break;
+                                    case "StationaryTarget":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
@@ -136,54 +156,65 @@ namespace DungeonCrawler
                                 room.targetTypeMap.Add(goData.properties["id"], goData.Type);
                             }
 
+                        }
+                    }
+
+                    game.RoomComponent[currentRoomID] = room;
+
+                    //// Load the game objects
+                    //for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
+                    //{
+                    //    for (int j = 0; j < CurrentMap.GameObjectGroups[i].GameObjectData.Count(); j++)
+                    //    {
+                    //        GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
+                    //        Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
+                    //        GameObject go;
+
+                    //        switch (goData.Category)
+                    //        {
+                    //            case "PlayerStart":
+                    //                ScrollingShooterGame.Game.Player.Position = position;
+                    //                ScrollingShooterGame.Game.Player.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
+                    //                scrollDistance = -2 * position.Y + 300;
+                    //                break;
+
+                    //            case "LevelEnd":
+                    //                break;
+
+                    //            case "Powerup":
+                    //                go = ScrollingShooterGame.GameObjectManager.CreatePowerup((PowerupType)Enum.Parse(typeof(PowerupType), goData.Type), position);
+                    //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
+                    //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
+                    //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
+                    //                break;
+
+                    //            case "Enemy":
+                    //                go = ScrollingShooterGame.GameObjectManager.CreateEnemy((EnemyType)Enum.Parse(typeof(EnemyType), goData.Type), position);
+                    //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
+                    //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
+                    //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
+                    //                break;
+                    //            case "Boss":
+                    //                go = ScrollingShooterGame.GameObjectManager.CreateBoss((BossType)Enum.Parse(typeof(BossType), goData.Type), position);
+                    //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
+                    //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
+                    //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
+                    //                break;
+                    //        }
+                    //    }
+                    //}
+
+                    LoadedTilemaps.Add(level, CurrentMap);
+                }
+                else
+                {
+                    Room newRoom = game.RoomComponent.FindRoom(level);
+                    if(newRoom.Tilemap == level)
+                    {
+                        CurrentMap = LoadedTilemaps[level];
+                        currentRoomID = newRoom.EntityID;
                     }
                 }
-
-                game.RoomComponent[currentRoomID] = room;
-
-                //// Load the game objects
-                //for (int i = 0; i < CurrentMap.GameObjectGroupCount; i++)
-                //{
-                //    for (int j = 0; j < CurrentMap.GameObjectGroups[i].GameObjectData.Count(); j++)
-                //    {
-                //        GameObjectData goData = CurrentMap.GameObjectGroups[i].GameObjectData[j];
-                //        Vector2 position = new Vector2(goData.Position.Center.X, goData.Position.Center.Y);
-                //        GameObject go;
-
-                //        switch (goData.Category)
-                //        {
-                //            case "PlayerStart":
-                //                ScrollingShooterGame.Game.Player.Position = position;
-                //                ScrollingShooterGame.Game.Player.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
-                //                scrollDistance = -2 * position.Y + 300;
-                //                break;
-
-                //            case "LevelEnd":
-                //                break;
-
-                //            case "Powerup":
-                //                go = ScrollingShooterGame.GameObjectManager.CreatePowerup((PowerupType)Enum.Parse(typeof(PowerupType), goData.Type), position);
-                //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
-                //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
-                //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
-                //                break;
-
-                //            case "Enemy":
-                //                go = ScrollingShooterGame.GameObjectManager.CreateEnemy((EnemyType)Enum.Parse(typeof(EnemyType), goData.Type), position);
-                //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
-                //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
-                //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
-                //                break;
-                //            case "Boss":
-                //                go = ScrollingShooterGame.GameObjectManager.CreateBoss((BossType)Enum.Parse(typeof(BossType), goData.Type), position);
-                //                CurrentMap.GameObjectGroups[i].GameObjectData[j].ID = go.ID;
-                //                go.LayerDepth = CurrentMap.GameObjectGroups[i].LayerDepth;
-                //                go.ScrollingSpeed = CurrentMap.GameObjectGroups[i].ScrollingSpeed;
-                //                break;
-                //        }
-                //    }
-                //}
-
 
 
                 // Mark level as loaded
