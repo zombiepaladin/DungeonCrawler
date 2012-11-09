@@ -44,6 +44,7 @@ namespace DungeonCrawler.Systems
             Collectible = 0x10,
             Door =  0x20,
             Trigger = 0x40,
+            Weapon = 0x80,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
@@ -51,10 +52,12 @@ namespace DungeonCrawler.Systems
             PlayerCollectible = 0x12,
             PlayerDoor = 0x22,
             PlayerTrigger = 0x42,
+            PlayerWeapon = 0x82,
 
             EnemyBullet = 0xC,
             EnemyStatic = 0x5,
             EnemyDoor   = 0x24,
+            EnemyWeapon = 0x84,
 
             BulletStatic = 0x9,
             BulletDoor = 0x28,
@@ -130,6 +133,9 @@ namespace DungeonCrawler.Systems
                             case CollisionType.PlayerTrigger:
                                 PlayerTriggerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.PlayerWeapon:
+                                PlayerWeaponCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
                             case CollisionType.Enemy:
                                 EnemyEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -142,6 +148,9 @@ namespace DungeonCrawler.Systems
                             case CollisionType.EnemyDoor:
                                 EnemyDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.EnemyWeapon:
+                                EnemyWeaponCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
                             case CollisionType.BulletStatic:
                                 BulletStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -152,6 +161,16 @@ namespace DungeonCrawler.Systems
                     }
                 }
             }
+        }
+
+        private void PlayerWeaponCollision(uint p, uint p_2)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void EnemyWeaponCollision(uint p, uint p_2)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
