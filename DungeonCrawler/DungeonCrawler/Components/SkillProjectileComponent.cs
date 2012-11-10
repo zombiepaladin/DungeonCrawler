@@ -23,7 +23,7 @@ namespace DungeonCrawler.Components
     /// <summary>
     /// enum for skills with 
     /// </summary>
-    public enum skills
+    public enum Skills
     {
         energyShield,
         defribrillate,
@@ -79,6 +79,7 @@ namespace DungeonCrawler.Components
         steal
     }
 
+    #region SkillProjectiles
     public struct SkillProjectile
     {
         /// <summary>
@@ -89,7 +90,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// enum for the associated skill
         /// </summary>
-        public skills skill;
+        public Skills skill;
 
         /// <summary>
         /// Max range of the projectile
@@ -100,8 +101,9 @@ namespace DungeonCrawler.Components
     public class SkillProjectileComponent : GameComponent<SkillProjectile>
     {
     }
+    #endregion
 
-
+    #region SkillAoE
     public struct SkillAoE
     {
         /// <summary>
@@ -115,10 +117,12 @@ namespace DungeonCrawler.Components
         public int radius;
     }
 
-    public class SkillAoEComponent : GameComponent<SkillAoEComponent>
+    public class SkillAoEComponent : GameComponent<SkillAoE>
     {
     }
+    #endregion
 
+    #region SkillDeployable
     public struct SkillDeployable
     {
         /// <summary>
@@ -135,4 +139,5 @@ namespace DungeonCrawler.Components
     public class SkillDeployableComponent : GameComponent<SkillDeployable>
     {
     }
+    #endregion 
 }

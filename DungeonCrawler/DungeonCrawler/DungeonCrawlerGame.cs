@@ -140,6 +140,9 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public SkillProjectileComponent SkillProjectileComponent;
+        public SkillAoEComponent SkillAoEComponent;
+        public SkillDeployableComponent SkillDeployableComponent;
         #endregion
 
         #region Game Systems
@@ -216,6 +219,9 @@ namespace DungeonCrawler
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
             LevelManager = new LevelManager(this);
+            SkillProjectileComponent = new SkillProjectileComponent();
+            SkillAoEComponent = new SkillAoEComponent();
+            SkillDeployableComponent = new SkillDeployableComponent();
 
             base.Initialize();
         }

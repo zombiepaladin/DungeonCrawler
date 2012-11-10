@@ -121,6 +121,7 @@
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
     <Compile Include="Entities\EnemyFactory.cs" />
+    <Compile Include="Entities\SkillProjectileFactory.cs" />
     <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
     <Compile Include="KeyboardBindings.cs" />
