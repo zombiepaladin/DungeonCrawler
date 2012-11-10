@@ -140,6 +140,7 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public QuestComponent QuestComponent;
         #endregion
 
         #region Game Systems
@@ -215,6 +216,7 @@ namespace DungeonCrawler
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
+            QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
 
             base.Initialize();
