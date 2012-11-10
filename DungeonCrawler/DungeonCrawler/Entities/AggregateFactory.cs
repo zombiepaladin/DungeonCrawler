@@ -440,7 +440,7 @@ namespace DungeonCrawler.Entities
                     break;
 
                 /****************************************
-                * Gargranian
+                * Gargranian by Michael Fountain
                 * *************************************/
                 case Aggregate.GargranianPlayer:
                     entityID = Entity.NextEntity();
