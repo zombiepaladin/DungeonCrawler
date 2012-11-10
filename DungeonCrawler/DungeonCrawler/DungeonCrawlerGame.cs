@@ -8,6 +8,7 @@
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
+// Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem 
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -140,6 +141,7 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public SpriteAnimationComponent SpriteAnimationComponent;
         #endregion
 
         #region Game Systems
@@ -152,6 +154,7 @@ namespace DungeonCrawler
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
+        SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
@@ -216,6 +219,7 @@ namespace DungeonCrawler
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
             LevelManager = new LevelManager(this);
+            SpriteAnimationComponent = new SpriteAnimationComponent();
 
             base.Initialize();
         }
@@ -239,6 +243,7 @@ namespace DungeonCrawler
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
+            SpriteAnimationSystem = new SpriteAnimationSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
@@ -320,6 +325,7 @@ namespace DungeonCrawler
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
                     CharacterSelectionScreen.Update(gameTime);
+                    SpriteAnimationSystem.Update(elapsedTime);
                     //ContinueNewGameScreen.Update(gameTime);
                     break;
 
@@ -345,6 +351,7 @@ namespace DungeonCrawler
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
+                    SpriteAnimationSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:

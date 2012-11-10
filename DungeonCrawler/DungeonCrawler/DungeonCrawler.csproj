@@ -110,6 +110,7 @@
     <Compile Include="Bounds\Bounds.cs" />
     <Compile Include="Bounds\CircleBounds.cs" />
     <Compile Include="Bounds\RectangleBounds.cs" />
+    <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Systems\PacketTypes.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
+    <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

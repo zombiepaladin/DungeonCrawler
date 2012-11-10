@@ -6,6 +6,7 @@
 //
 // Modified: Devin Kelly-Collins, Factory methods return eid, 10/24/2012
 // Modified: Adam Clark- added cyborg class and stats
+// Modified by Samuel Fike and Jiri Malina: Removed use of MovementSprite and added code for SpriteAnimationComponent
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -53,7 +54,12 @@ namespace DungeonCrawler.Entities
             Texture2D spriteSheet;
             Position position;
             Movement movement;
-            MovementSprite movementSprite;
+
+            Sprite sprite;
+            SpriteAnimation spriteAnimation;
+            
+            
+            //MovementSprite movementSprite;
             Collideable collideable;
             Local local;
             Player player;
@@ -107,6 +113,8 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementComponent[entityID] = movement;
 
+
+                    /*
                     movementSprite = new MovementSprite()
                     {
                         EntityID = entityID,
@@ -116,6 +124,30 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
+                    */
+
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
+                    
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
 
                     local = new Local()
                     {
@@ -197,15 +229,41 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementComponent[entityID] = movement;
                     
-                    movementSprite = new MovementSprite() {
+                    //movementSprite = new MovementSprite() {
+                    //    EntityID = entityID,
+                    //    Facing = Facing.South,
+                    //    SpriteSheet = spriteSheet,
+                    //    SpriteBounds = new Rectangle(0, 0, 64, 64),
+                    //    Timer = 0f,
+                    //};
+                    //game.MovementSpriteComponent[entityID] = movementSprite;
+
+                    spriteAnimation = new SpriteAnimation()
+                    {
                         EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
                     };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
                     
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
+
+
+
+
                     local = new Local(){
                         EntityID = entityID,
                     };
@@ -291,7 +349,7 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementComponent[entityID] = movement;
 
-                    movementSprite = new MovementSprite()
+                    /*movementSprite = new MovementSprite()
                     {
                         EntityID = entityID,
                         Facing = Facing.South,
@@ -299,7 +357,30 @@ namespace DungeonCrawler.Entities
                         SpriteBounds = new Rectangle(0, 0, 64, 64),
                         Timer = 0f,
                     };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
+                    game.MovementSpriteComponent[entityID] = movementSprite;*/
+
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
+                    
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
 
                     local = new Local()
                     {
@@ -375,7 +456,7 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    
+                    /*
                     movementSprite = new MovementSprite() {
                         EntityID = entityID,
                         Facing = Facing.South,
@@ -384,7 +465,30 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
+                    */
+
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
                     
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
                     local = new Local(){
                         EntityID = entityID,
                     };
@@ -469,7 +573,7 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-
+                    /*
                     movementSprite = new MovementSprite()
                     {
                         EntityID = entityID,
@@ -479,7 +583,30 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
+                    */
 
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
+                    
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
                     local = new Local()
                     {
                         EntityID = entityID,
@@ -554,7 +681,7 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-
+                    /*
                     movementSprite = new MovementSprite()
                     {
                         EntityID = entityID,
@@ -564,7 +691,30 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
+                    */
 
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
+                    
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
                     local = new Local()
                     {
                         EntityID = entityID,
@@ -645,7 +795,7 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-
+                    /*
                     movementSprite = new MovementSprite()
                     {
                         EntityID = entityID,
@@ -655,7 +805,30 @@ namespace DungeonCrawler.Entities
                         Timer = 0f,
                     };
                     game.MovementSpriteComponent[entityID] = movementSprite;
+                    */
 
+                    spriteAnimation = new SpriteAnimation()
+                    {
+                        EntityID = entityID,
+                        FramesPerSecond = 10,
+                        IsLooping = true,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                        CurrentFrame = 0,
+                        CurrentAnimationRow = 0
+                        
+                    };
+                    
+
+                    game.SpriteAnimationComponent[entityID] = spriteAnimation;
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = entityID,
+                        SpriteBounds = new Rectangle(0, 0, 64, 64),
+                        SpriteSheet = spriteSheet
+                    };
+                    game.SpriteComponent[entityID]=sprite;
                     local = new Local()
                     {
                         EntityID = entityID,
