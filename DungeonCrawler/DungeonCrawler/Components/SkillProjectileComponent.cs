@@ -48,7 +48,6 @@ namespace DungeonCrawler.Components
         sacrifice,
         taint,
         rot,
-        push,
         lightning,
         malice,
         throwBlades,
