@@ -167,6 +167,7 @@
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
     <Compile Include="Systems\PacketTypes.cs" />
+    <Compile Include="Systems\QuestLogSystem.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />

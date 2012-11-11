@@ -101,7 +101,7 @@ namespace DungeonCrawler
                     //{
                     //    CurrentSong = null;
                     //}
-                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth, level);
                     Room room = game.RoomComponent[currentRoomID];
 
 

@@ -26,7 +26,7 @@ namespace DungeonCrawler.Components
     public enum QuestName
     {
         // Main/Story Quests
-        FirstQuest,
+        ReachNextRoom,
         SecondQuest,
         // Side Quests (if they exist)
     };
@@ -65,11 +65,6 @@ namespace DungeonCrawler.Components
         /// Contains strings that describe the goals of the quest
         /// </summary>
         public string[] questGoals;
-
-        /// <summary>
-        /// The index of the currentGoal. This will be used to get the goal from the array of quest goals.
-        /// </summary>
-        public int currentGoal;
     };
 
     public class QuestComponent : GameComponent<Quest>

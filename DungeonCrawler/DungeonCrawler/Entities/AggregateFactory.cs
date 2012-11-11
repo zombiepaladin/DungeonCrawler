@@ -715,6 +715,39 @@ namespace DungeonCrawler.Entities
                     throw new Exception("Unknown type.");
             }
 
+            string questString = "Proceed to the next room. This can be accomplished by walking through the doorway to your left.";
+            Quest newQuest = new Quest()
+            {
+                EntityID = entityID,
+                questName = QuestName.ReachNextRoom,
+                questStatus = QuestStatus.InProgress,
+                questGoals = new String[(int)Math.Ceiling(questString.Length / 33.0)],
+            };
+            string[] strings = questString.Split(' ');
+            string newstring = "";
+            int i = 0;
+            int j = 0;
+            while (j < newQuest.questGoals.Length)
+            {
+                if (i < strings.Length)
+                {
+                    newstring += strings[i] + " ";
+                    i++;
+                }
+                if (i >= strings.Length)
+                {
+                    newQuest.questGoals[j] = newstring;
+                    break;
+                }
+                if (newstring.Length + strings[i].Length >= 33 )
+                {
+                    newQuest.questGoals[j] = newstring;
+                    newstring = "";
+                    j++;
+                }
+            }
+            game.QuestComponent[entityID] = newQuest;
+
             return entityID;
         }
     }

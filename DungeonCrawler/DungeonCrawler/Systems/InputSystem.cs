@@ -98,6 +98,8 @@ namespace DungeonCrawler.Systems
                     info.State = PlayerState.Attacking;
                 }
 
+                if (keyboardState.IsKeyDown(Keys.L) && !oldKeyboardState.IsKeyDown(Keys.L)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
+
                 game.PlayerInfoComponent[player.EntityID] = info;
 
                 #region HUD Displays

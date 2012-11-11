@@ -153,6 +153,7 @@ namespace DungeonCrawler
         WeaponSystem WeaponSystem;
         EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
+        public QuestLogSystem QuestLogSystem;
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
@@ -241,6 +242,7 @@ namespace DungeonCrawler
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
+            QuestLogSystem = new QuestLogSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
@@ -347,6 +349,7 @@ namespace DungeonCrawler
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
+                    QuestLogSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -378,6 +381,7 @@ namespace DungeonCrawler
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);
                 RenderingSystem.Draw(elapsedTime);
+                QuestLogSystem.Draw();
             }
 
             base.Draw(gameTime);
