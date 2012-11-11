@@ -8,6 +8,8 @@
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
+// Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem
+// Modified by Nicholas Strub: Added QuestLog System
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -140,7 +142,11 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
-        public QuestComponent QuestComponent;
+        public SpriteAnimationComponent SpriteAnimationComponent;
+        public SkillProjectileComponent SkillProjectileComponent;
+        public SkillAoEComponent SkillAoEComponent;
+        public SkillDeployableComponent SkillDeployableComponent;
+	public QuestComponent QuestComponent;
         #endregion
 
         #region Game Systems
@@ -154,6 +160,7 @@ namespace DungeonCrawler
         EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
+	SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
@@ -219,6 +226,10 @@ namespace DungeonCrawler
             EnemyComponent = new EnemyComponent();
             QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
+            SpriteAnimationComponent = new SpriteAnimationComponent();
+            SkillProjectileComponent = new SkillProjectileComponent();
+            SkillAoEComponent = new SkillAoEComponent();
+            SkillDeployableComponent = new SkillDeployableComponent();
 
             base.Initialize();
         }
@@ -243,6 +254,7 @@ namespace DungeonCrawler
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
             QuestLogSystem = new QuestLogSystem(this);
+	    SpriteAnimationSystem = new SpriteAnimationSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
@@ -324,6 +336,7 @@ namespace DungeonCrawler
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
                     CharacterSelectionScreen.Update(gameTime);
+                    SpriteAnimationSystem.Update(elapsedTime);
                     //ContinueNewGameScreen.Update(gameTime);
                     break;
 
@@ -350,6 +363,7 @@ namespace DungeonCrawler
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
+		    SpriteAnimationSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
