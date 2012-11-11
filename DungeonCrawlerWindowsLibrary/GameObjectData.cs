@@ -1,4 +1,13 @@
-﻿using Microsoft.Xna.Framework;
+﻿//-----------------------------------------------------------------------------
+//Based on Nathan Bean's file from Scrolling Shooter Game(Copyright (C) CIS 580 Fall 2012 Class).
+// Author: Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 namespace DungeonCrawlerWindowsLibrary
 {
@@ -27,5 +36,7 @@ namespace DungeonCrawlerWindowsLibrary
         /// The position of the game object instance within the game world
         /// </summary>
         public Rectangle Position;
+
+        public Dictionary<string, string> properties;
     }
 }

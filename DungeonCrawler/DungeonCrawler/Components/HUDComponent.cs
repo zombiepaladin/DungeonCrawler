@@ -1,4 +1,5 @@
-﻿#region File Description
+﻿
+#region File Description
 //-----------------------------------------------------------------------------
 // HUDAggregateFactory.cs 
 //
@@ -27,10 +28,7 @@ namespace DungeonCrawler.Components
         public uint XButtonSpriteID;
         public uint YButtonSpriteID;
         public uint DPadSpriteID;
-        public uint HealthStatusSpriteID;
-        public uint ItemStatusSpriteID;
-        public uint SkillStatusSpriteID;
-        public uint PsiStatusSpriteID;
+        public uint HealthPsiStatusSpriteID;
     }
     public class HUDComponent : GameComponent<HUD>
     {

@@ -11,9 +11,11 @@
 #endregion
 
 #region Using Statements
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using DungeonCrawler.Entities;
+using Microsoft.Xna.Framework.Graphics;
+using DungeonCrawler.Components;
 #endregion
 
 namespace DungeonCrawler.Systems
@@ -26,6 +28,10 @@ namespace DungeonCrawler.Systems
         /// The game this system belongs to
         /// </summary>
         private DungeonCrawlerGame game;
+
+        private Position Target;
+
+        private bool HasTarget = false;
 
         #endregion
 
@@ -51,7 +57,37 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
-            
+            foreach(EnemyAI ai in game.EnemyAIComponent.All)
+            {
+                Position pos = game.PositionComponent[ai.EntityID];
+
+                if (pos.RoomID != game.CurrentRoomEid)
+                    break;
+
+                if (HasTarget == false)
+                {
+                    IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
+
+                    foreach (Position thing in HitList)
+                    {
+                        if (game.PlayerComponent.Contains(thing.EntityID))
+                        {
+                            Target = thing;
+                            Vector2 toPlayer = Target.Center - pos.Center;
+                            toPlayer.Normalize();
+                            pos.Center += toPlayer * elapsedTime * 50;
+                            HasTarget = true;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    Vector2 toPlayer = Target.Center - pos.Center;
+                    toPlayer.Normalize();
+                    pos.Center += toPlayer * elapsedTime * 50;
+                }
+            }
         }
 
         #endregion
