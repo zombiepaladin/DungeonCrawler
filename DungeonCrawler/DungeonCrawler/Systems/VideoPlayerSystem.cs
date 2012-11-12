@@ -41,6 +41,7 @@ namespace DungeonCrawler
             if (videoPlayer.State == MediaState.Stopped)
             {
                 videoPlayer.Play(cutscene);
+                //game.GameState = GameState.Gameplay;
             }
             
         }
