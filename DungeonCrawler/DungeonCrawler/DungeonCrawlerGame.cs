@@ -33,6 +33,7 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
 using DungeonCrawler.Components.CyborgSkills;
+using DungeonCrawler.Components.EarthianSkillComponents;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -155,6 +156,16 @@ namespace DungeonCrawler
         public AlloyBodyComponent AlloyBodyComponent;
         public CyberneticSlamComponent CyberneticSlamComponent;
         public ThrusterRushComponent ThrusterRushComponent;
+        public TurretComponent TurretComponent;
+        public TrapComponent TrapComponent;
+        public PortableShopComponent PortableShopComponent;
+        public PortableShieldComponent PortableShieldComponent;
+        public MotivateComponent MotivateComponent;
+        public FallbackComponent FallbackComponent;
+        public ChargeComponent ChargeComponent;
+        public HealingStationComponent HealingStationComponent;
+        public ExplodingDroidComponent ExplodingDroidComponent;
+
 	public QuestComponent QuestComponent;
         #endregion
 
@@ -238,6 +249,16 @@ namespace DungeonCrawler
             SkillProjectileComponent = new SkillProjectileComponent();
             SkillAoEComponent = new SkillAoEComponent();
             SkillDeployableComponent = new SkillDeployableComponent();
+
+            //TurretComponent = new TurretComponent();
+            //TrapComponent = new TrapComponent();
+            //PortableShopComponent = new PortableShopComponent();
+            //PortableShieldComponent = new PortableShieldComponent();
+            //MotivateComponent =  new MotivateComponent();
+            //FallbackComponent = new FallbackComponent();
+            //ChargeComponent = new ChargeComponent();
+            //HealingStationComponent = new HealingStationComponent();
+            //ExplodingDroidComponent = new ExplodingDroidComponent();
 
             base.Initialize();
         }

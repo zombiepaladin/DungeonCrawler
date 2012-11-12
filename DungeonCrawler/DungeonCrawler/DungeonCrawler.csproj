@@ -119,6 +119,15 @@
     <Compile Include="Components\CyborgSkillComponents\RepulsorArmComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\TargetingUpgradeComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\ThrusterRushComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\HealingStationComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\MotivateComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShieldComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
