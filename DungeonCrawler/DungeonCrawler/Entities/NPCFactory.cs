@@ -69,19 +69,7 @@ namespace DungeonCrawler.Entities
                             EntityID = eid,
                             SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/trollph"),
                             SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        };
-
-                        Movement move = new Movement()
-                        {
-                            EntityID = eid,
-                        };
-                        _game.MovementComponent.Add(eid, move);
-
-                        EnemyAI ai = new EnemyAI()
-                        {
-                            EntityID = eid,
-                        };
-                        _game.EnemyAIComponent.Add(eid, ai);
+                        };                       
                         break;
 
                     default:
@@ -97,10 +85,15 @@ namespace DungeonCrawler.Entities
                     EntityID = eid,
                     Bounds = new CircleBounds(position.Center, position.Radius)
                 };
-                _game.CollisionComponent[eid] = collideable;
 
-                _game.NPCComponent.Add(eid, npc);
-                //_game.MovementComponent.Add(eid, movement);
+                Movement move = new Movement()
+                {
+                    EntityID = eid,
+                };
+
+                _game.MovementComponent.Add(eid, move);
+                _game.CollisionComponent[eid] = collideable;
+                _game.NPCComponent.Add(eid, npc);    
                 _game.PositionComponent.Add(eid, position);
                 _game.SpriteComponent.Add(eid, sprite);
                 return eid;
