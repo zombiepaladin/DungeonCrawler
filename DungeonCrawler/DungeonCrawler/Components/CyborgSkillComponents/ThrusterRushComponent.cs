@@ -1,8 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// LocalComponent.cs 
+//ThrusterRushComponent.cs
 //
-// Author: Nathan Bean
+// Author: Adam Clark
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -10,22 +10,17 @@
 //-----------------------------------------------------------------------------
 #endregion
 
-#region Using Statements;
-using System;
+#region Using Statements
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 #endregion
 
-namespace DungeonCrawler.Components
+namespace DungeonCrawler.Components.CyborgSkills
 {
     /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
-    [Serializable]
-    public struct Stats
+    public struct ThrusterRush
     {
         /// <summary>
         /// The entity this Player component belongs to
@@ -33,37 +28,33 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// This aggregate's strength stat
+        /// The rank of the skill
         /// </summary>
-        public int Strength;
+        public int rank;
 
         /// <summary>
-        /// This aggregate's stamina stat
+        /// stun length in secs
         /// </summary>
-        public int Stamina;
+        public int Stun;
 
         /// <summary>
-        /// This aggregate's agility stat
+        /// Cooldown in secs
         /// </summary>
-        public int Agility;
+        public int Cooldown;
 
         /// <summary>
-        /// This aggregate's intelligence stat
+        /// Percentage of fatigue bar increase
         /// </summary>
-        public int Intelligence;
-
-        /// <summary>
-        /// This aggregate's defense stat
-        /// </summary>
-        public int Defense;
+        public int FatigueBarIncreasePercentage;
 
     }
 
     /// <summary>
     /// The player components for all entities in a game world
     /// </summary>
-    public class StatsComponent : GameComponent<Stats>
+    public class ThrusterRushComponent : GameComponent<ThrusterRush>
     {
 
     }
 }
+

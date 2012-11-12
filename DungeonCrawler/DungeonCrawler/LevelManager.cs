@@ -304,7 +304,7 @@ namespace DungeonCrawler
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
-            if (CurrentMap != null)
+            if (CurrentMap != null && Loading == false)
             {
                 for (int i = 0; i < CurrentMap.LayerCount; i++)
                 {
