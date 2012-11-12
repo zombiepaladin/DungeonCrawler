@@ -62,9 +62,9 @@ namespace DungeonCrawler.Systems
                 Position pos = game.PositionComponent[ai.EntityID];
 
                 if (pos.RoomID != game.CurrentRoomEid)
-                    break;
+                {}
 
-                if (HasTarget == false)
+                else if (HasTarget == false)
                 {
                     IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
 
@@ -81,12 +81,17 @@ namespace DungeonCrawler.Systems
                         }
                     }
                 }
-                else
+                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health > 0)
                 {
                     Vector2 toPlayer = Target.Center - pos.Center;
                     toPlayer.Normalize();
                     pos.Center += toPlayer * elapsedTime * 50;
                 }
+                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health <= 0)
+                {
+                    HasTarget = false;
+                }
+                game.PositionComponent[pos.EntityID] = pos;
             }
         }
 
