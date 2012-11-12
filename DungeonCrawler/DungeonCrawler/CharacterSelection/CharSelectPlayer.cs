@@ -23,6 +23,8 @@ namespace DungeonCrawler
 
         public PlayerIndex playerIndex;
 
+        public CharSelectPreview gameSave;
+
         public CharSelectPlayer(ImageSprite image, bool connected, PlayerIndex playerIndex)
         {
             cursor = image;
