@@ -138,6 +138,24 @@ namespace DungeonCrawler.Components
         ///The current state of the player.
         ///</summary>
         public PlayerState State;
+
+        public int PoisonResistance;
+
+        public int AttackMelee;
+
+        public int AttackRanged;
+
+        public int DefenseMelee;
+
+        public int DefenseRanged;
+
+        public int WeaponStrength;
+
+        public int WeaponAccuracy;
+
+        public int WeaponSpeed;
+
+        public int AttackSpeed;
     }
 
     ///<summary>

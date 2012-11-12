@@ -8,6 +8,7 @@
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
+// Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -140,6 +141,26 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+
+        #region Effect Components
+        public AgroDropComponent AgroDropComponent;
+        public AgroGainComponent AgroGainComponent;
+        public BuffComponent BuffComponent;
+        public ChanceToSucceedComponent ChanceToSucceedComponent;
+        public CoolDownComponent CoolDownComponent;
+        public DamageOverTimeComponent DamageOverTimeComponent;
+        public DirectDamageComponent DirectDamageComponent;
+        public DirectHealComponent DirectHealComponent;
+        public FearComponent FearComponent;
+        public HealOverTimeComponent HealOverTimeComponent;
+        public InstantEffectComponent InstantEffectComponent;
+        public KnockBackComponent KnockBackComponent;
+        public ReduceAgroRangeComponent ReduceAgroRangeComponent;
+        public ResurrectComponent ResurrectComponent;
+        public StunComponent StunComponent;
+        public TimedEffectComponent TimedEffectComponent;
+        #endregion
+
         #endregion
 
         #region Game Systems
@@ -150,9 +171,10 @@ namespace DungeonCrawler
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
-        EnemyAISystem EnemyAISystem;
+        public EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
         public RoomChangingSystem RoomChangingSystem;
+        public SkillSystem SkillSystem;
 
         public GarbagemanSystem GarbagemanSystem;
 
@@ -217,6 +239,25 @@ namespace DungeonCrawler
             EnemyComponent = new EnemyComponent();
             LevelManager = new LevelManager(this);
 
+            #region Initialize Effect Components
+            AgroDropComponent = new AgroDropComponent();
+            AgroGainComponent = new AgroGainComponent();
+            BuffComponent = new BuffComponent();
+            ChanceToSucceedComponent = new ChanceToSucceedComponent();
+            CoolDownComponent = new CoolDownComponent();
+            DamageOverTimeComponent = new DamageOverTimeComponent();
+            DirectDamageComponent = new DirectDamageComponent();
+            DirectHealComponent = new DirectHealComponent();
+            FearComponent = new FearComponent();
+            HealOverTimeComponent = new HealOverTimeComponent();
+            InstantEffectComponent = new InstantEffectComponent();
+            KnockBackComponent = new KnockBackComponent();
+            ReduceAgroRangeComponent = new ReduceAgroRangeComponent();
+            ResurrectComponent = new ResurrectComponent();
+            StunComponent = new StunComponent();
+            TimedEffectComponent = new TimedEffectComponent();
+            #endregion
+
             base.Initialize();
         }
 
@@ -239,6 +280,7 @@ namespace DungeonCrawler
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
+            SkillSystem = new SkillSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
@@ -342,6 +384,7 @@ namespace DungeonCrawler
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     WeaponSystem.Update(elapsedTime);
+                    SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);

@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 // Modified : Joshua Zavala
 //            BinaryNode & BinarySearchTree - Assignment 6 & 7
+// Modified: Nick Boen - Added call to get Key list, Sam Fike implemented this first
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -84,6 +85,11 @@ namespace DungeonCrawler.Components
         public IEnumerable<T> All
         {
             get { return elements.Values; }
+        }
+
+        public IEnumerable<uint> Keys
+        {
+            get { return elements.Keys; }
         }
 
         /// <summary>

@@ -52,6 +52,29 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int Defense;
 
+        public int PoisonResistanceBase;
+
+        public int AttackMeleeBase;
+
+        public int AttackRangedBase;
+
+        public int DefenseMeleeBase;
+
+        public int DefenseRangedBase;
+
+        public int WeaponStrengthBase;
+
+        public int WeaponAccuracyBase;
+
+        public int WeaponSpeedBase;
+
+        public int AttackSpeedBase;
+
+        public int HealthBase;
+
+        public int PsiBase;
+
+        public int FatigueBase;
     }
 
     /// <summary>
