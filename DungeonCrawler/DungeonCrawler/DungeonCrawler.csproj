@@ -110,6 +110,15 @@
     <Compile Include="Bounds\Bounds.cs" />
     <Compile Include="Bounds\CircleBounds.cs" />
     <Compile Include="Bounds\RectangleBounds.cs" />
+    <Compile Include="Components\CyborgSkillComponents\AlloyBodyComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\CyberneticSlamComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\DefibrillateComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\EnergyShieldComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\EnergyShotComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\NanobotsComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\RepulsorArmComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\TargetingUpgradeComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\ThrusterRushComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
@@ -217,6 +226,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

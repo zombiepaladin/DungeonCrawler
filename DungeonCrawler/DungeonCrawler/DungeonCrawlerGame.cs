@@ -32,6 +32,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
+using DungeonCrawler.Components.CyborgSkills;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -146,6 +147,15 @@ namespace DungeonCrawler
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
+        public DefibrillateComponent DefibrillateComponent;
+        public EnergyShieldComponent EnergyShieldComponent;
+        public NanobotsComponent NanobotsComponent;
+        public RepulsorArmComponent RepulsorArmComponent;
+        public TargetingUpgradeComponent TargetingUpgradeComponent;
+        public EnergyShotComponent EnergyShotComponent;
+        public AlloyBodyComponent AlloyBodyComponent;
+        public CyberneticSlamComponent CyberneticSlamComponent;
+        public ThrusterRushComponent ThrusterRushComponent;
 	public QuestComponent QuestComponent;
         #endregion
 
