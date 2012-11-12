@@ -22,7 +22,6 @@ Content\Spritesheets\charSelectGargranian.xnb
 Content\Spritesheets\charSelectPlayerOneCursor.xnb
 Content\Spritesheets\charSelectPlayerTwoCursor.xnb
 Content\Spritesheets\charSelectBackground.xnb
-Content\Spritesheets\charSelectPlayerFourCursor.xnb
 Content\Spritesheets\charSelectPlayerThreeCursor.xnb
 Content\Spritesheets\StatusBar.xnb
 Content\Spritesheets\cyborg.xnb
@@ -36,6 +35,7 @@ Content\Spritesheets\inventoryBackground.xnb
 Content\Spritesheets\selectInv.xnb
 Content\Spritesheets\charSelectCultist.xnb
 Content\Spritesheets\Cultist.xnb
+Content\Spritesheets\Earthian2x.xnb
 Content\Spritesheets\HealthPsi.xnb
 Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
@@ -60,6 +60,8 @@ Content\Spritesheets\EarthianSkillz.xnb
 Content\Spritesheets\cyborgskills.xnb
 Content\Spritesheets\MiscIcons1.xnb
 Content\Spritesheets\cyborgSkills2.xnb
+Content\Spritesheets\target2.xnb
+Content\Spritesheets\QuestLog.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
@@ -69,6 +71,8 @@ Content\Tilemaps\TestDungeon1.xnb
 Content\Tilemaps\TestDungeon2.xnb
 Content\Tilemaps\TestDungeon3.xnb
 Content\SpriteFonts\Pescadero.xnb
-Content\Spritesheets\Earthian2x.xnb
-Content\Spritesheets\target2.xnb
-Content\Spritesheets\QuestLog.xnb
+Content\Spritesheets\Default_Pistol.xnb
+Content\Spritesheets\EarthianSkills.xnb
+Content\Spritesheets\charSelectPlayerFourCursor.xnb
+Content\Spritesheets\charSelectNewGame.xnb
+Content\Spritesheets\charSelectControls2.xnb
