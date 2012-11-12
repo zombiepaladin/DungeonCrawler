@@ -67,6 +67,7 @@ namespace DungeonCrawler.Components
     /// <summary>
     /// A GameComponent representing entities' MovementSprites
     /// </summary>
+    
     public class MovementSpriteComponent : GameComponent<MovementSprite>
     {
 

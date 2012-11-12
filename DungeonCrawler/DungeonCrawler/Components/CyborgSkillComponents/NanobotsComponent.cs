@@ -1,8 +1,8 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// LocalComponent.cs 
+//NanobotsComponent.cs
 //
-// Author: Nathan Bean
+// Author: Adam Clark
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -10,22 +10,17 @@
 //-----------------------------------------------------------------------------
 #endregion
 
-#region Using Statements;
-using System;
+#region Using Statements
 using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 #endregion
 
-namespace DungeonCrawler.Components
+namespace DungeonCrawler.Components.CyborgSkills
 {
     /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
-    [Serializable]
-    public struct Stats
+    public struct Nanobots
     {
         /// <summary>
         /// The entity this Player component belongs to
@@ -33,37 +28,28 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// This aggregate's strength stat
+        /// The rank of the skill
         /// </summary>
-        public int Strength;
+        public int rank;
 
         /// <summary>
-        /// This aggregate's stamina stat
+        /// Percentage to heal
         /// </summary>
-        public int Stamina;
+        public int PercentageHeal;
 
         /// <summary>
-        /// This aggregate's agility stat
+        /// amount of damage to deal
         /// </summary>
-        public int Agility;
-
-        /// <summary>
-        /// This aggregate's intelligence stat
-        /// </summary>
-        public int Intelligence;
-
-        /// <summary>
-        /// This aggregate's defense stat
-        /// </summary>
-        public int Defense;
+        public int DamageDealt;
 
     }
 
     /// <summary>
     /// The player components for all entities in a game world
     /// </summary>
-    public class StatsComponent : GameComponent<Stats>
+    public class NanobotsComponent : GameComponent<Nanobots>
     {
 
     }
 }
+

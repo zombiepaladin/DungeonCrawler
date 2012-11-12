@@ -5,6 +5,7 @@
 // Author: Matthew McHaney
 //
 // Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
+// Modified by Samuel Fike and Jiri Malina: Added handling of SpriteAnimationComponents
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.

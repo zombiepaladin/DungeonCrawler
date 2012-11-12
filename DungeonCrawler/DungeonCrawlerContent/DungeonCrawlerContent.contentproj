@@ -42,6 +42,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Spritesheets\Default_Pistol.png">
+      <Name>Default_Pistol</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Spritesheets\wind_fae.png">
       <Name>wind_fae</Name>
       <Importer>TextureImporter</Importer>
@@ -222,11 +227,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritesheets\charSelectPlayerFourCursor.png">
-      <Name>charSelectPlayerFourCursor</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Spritesheets\charSelectPlayerThreeCursor.png">
       <Name>charSelectPlayerThreeCursor</Name>
       <Importer>TextureImporter</Importer>
@@ -288,8 +288,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritesheets\charSelectControls1.png">
-      <Name>charSelectControls1</Name>
+    <Compile Include="Spritesheets\charSelectControls2.png">
+      <Name>charSelectControls2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -506,6 +506,43 @@
   <ItemGroup>
     <Compile Include="Spritesheets\target2.png">
       <Name>target2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\QuestLog.png">
+      <Name>QuestLog</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>31, 31, 32, 255</ProcessorParameters_ColorKeyColor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\EarthianSkills.png">
+      <Name>EarthianSkills</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\charSelectPlayerFourCursor.png">
+      <Name>charSelectPlayerFourCursor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>255, 255, 255, 255</ProcessorParameters_ColorKeyColor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\charSelectNewGame.png">
+      <Name>charSelectNewGame</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Spritesheets\charSelectControls1.png">
+      <Name>charSelectControls1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

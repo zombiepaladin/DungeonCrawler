@@ -4,6 +4,8 @@
 //
 // Author: Devin Kelly-Collins
 //
+// Modified: Samuel Fike and Jiri Malina: Fixed errors due to removal of movementSprite for players
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -115,9 +117,10 @@ namespace DungeonCrawler.Systems
         //Handles Creating the WeaponSprite.
         private void CreateWeaponSprite(Equipment equipment)
         {
+           
             WeaponType type = _game.WeaponComponent[equipment.WeaponID].Type;
             Position position = _game.PositionComponent[equipment.EntityID];
-            int y = (int)_game.MovementSpriteComponent[equipment.EntityID].Facing * 64;
+            int y = (int)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow * 64; //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
 
             WeaponSprite sprite = new WeaponSprite()
             {
@@ -144,7 +147,8 @@ namespace DungeonCrawler.Systems
         private void CreateBulletAndSprite(Equipment equipment)
         {
             Position position = _game.PositionComponent[equipment.EntityID];
-            Vector2 direction = getDirectionFromFacing(_game.MovementSpriteComponent[equipment.EntityID].Facing);
+            Vector2 direction = getDirectionFromFacing((Facing)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow); //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
+
             switch (_game.WeaponComponent[equipment.WeaponID].Type)
             {
                 case WeaponType.StandardGun:
