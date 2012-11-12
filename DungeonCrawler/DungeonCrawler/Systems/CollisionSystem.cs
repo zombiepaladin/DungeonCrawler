@@ -6,6 +6,7 @@
 //
 // Modified: Nicholas Strub - Added Room Transitioning ability based on player/door collisions 10/31/2012
 // Modified: Nicholas Strub - Updated Player/Door Collisions (11/3/2012)
+// Modified: Matt McHaney   - Added debug textures
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DungeonCrawler.Systems
 {
@@ -67,12 +69,61 @@ namespace DungeonCrawler.Systems
         private DungeonCrawlerGame _game;
 
         /// <summary>
+        /// Spritebatch for drawing collision bounds.
+        /// </summary>
+        private SpriteBatch spriteBatch;
+
+        /// <summary>
+        /// Debug Texture for drawing collision bounds
+        /// </summary>
+        private Texture2D _debugTexture;
+
+        /// <summary>
         /// Creates a new collision system.
         /// </summary>
         /// <param name="game">The game this systems belongs to.</param>
         public CollisionSystem(DungeonCrawlerGame game)
         {
             _game = game;
+
+            _debugTexture = new Texture2D(_game.GraphicsDevice, 1, 1);
+            this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+
+            Color[] data = new Color[1];
+            for (int i = 0; i < data.Length; ++i) { data[i] = Color.Red; data[i].A /= 2; }
+            _debugTexture.SetData(data);
+        }
+
+        /// <summary>
+        /// Used to draw the collision bounds for test purposes
+        /// </summary>
+        /// <param name="elapsedTime">Elapsed Time.</param>
+        public void Draw(float elapsedTime)
+        {
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, null, null, null);
+            //Draw each one
+            uint roomID = _game.CurrentRoomEid;
+            IEnumerable<Position> positionsInRoom = _game.PositionComponent.InRoom(roomID);
+            List<Collideable> collideablesInRoom = new List<Collideable>();
+
+            foreach (Position position in positionsInRoom)
+            {
+                if (_game.CollisionComponent.Contains(position.EntityID))
+                    collideablesInRoom.Add(_game.CollisionComponent[position.EntityID]);
+            }
+
+            for (int i = 0; i < collideablesInRoom.Count; i++)
+            {
+                if(collideablesInRoom[i].Bounds is RectangleBounds)
+                    this.spriteBatch.Draw(_debugTexture, ((RectangleBounds)collideablesInRoom[i].Bounds).Rectangle, Color.Red);
+                else
+                {
+                    CircleBounds bounds = (CircleBounds) collideablesInRoom[i].Bounds;
+                    this.spriteBatch.Draw(_debugTexture, new Rectangle((int)(bounds.Center.X - bounds.Radius), (int)(bounds.Center.Y - bounds.Radius),
+                        (int)(bounds.Radius * 2), (int)(bounds.Radius * 2)), Color.Red);
+                }
+            }
+            spriteBatch.End();
         }
 
         /// <summary>

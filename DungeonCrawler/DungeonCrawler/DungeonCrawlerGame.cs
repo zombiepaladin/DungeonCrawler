@@ -422,6 +422,7 @@ namespace DungeonCrawler
                 NetworkSystem.Draw(elapsedTime);
                 RenderingSystem.Draw(elapsedTime);
                 QuestLogSystem.Draw();
+                //CollisionSystem.Draw(elapsedTime);  INLCUDE FOR COLLISION DEBUGGING
             }
             else
                 ContinueNewGameScreen.Draw(elapsedTime);
