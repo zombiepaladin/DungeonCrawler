@@ -132,6 +132,14 @@ namespace DungeonCrawler.Systems
 
                 game.PlayerInfoComponent[player.EntityID] = info;
 
+                #region Test Video Cutscene
+
+                //Activate cutscene via shift+M
+                if (keyboardState.IsKeyDown(Keys.M) && keyboardState.IsKeyDown(Keys.LeftShift))
+                {
+                    game.GameState = GameState.VideoCutscene;
+                }
+                #endregion
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];

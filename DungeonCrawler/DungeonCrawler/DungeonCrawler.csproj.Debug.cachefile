@@ -32,15 +32,45 @@ Content\Spritesheets\charSelectCyborg.xnb
 Content\Spritesheets\charSelectSpacePirate.xnb
 Content\Spritesheets\charSelectZombie.xnb
 Content\Spritesheets\charSelectControls1.xnb
-Content\Sounds\MenuSelect.xnb
-Content\Audio\BClick_Menu.xnb
-Content\Tilemaps\TestDungeon1.xnb
-Content\Tilemaps\TestDungeon2.xnb
-Content\Tilemaps\TestDungeon3.xnb
-Content\SpriteFonts\Pescadero.xnb
 Content\Spritesheets\inventoryBackground.xnb
 Content\Spritesheets\selectInv.xnb
 Content\Spritesheets\charSelectCultist.xnb
 Content\Spritesheets\Cultist.xnb
 Content\Spritesheets\Earthian2x.xnb
+Content\Spritesheets\HealthPsi.xnb
+Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
+Content\ControllerTGAs\xboxControllerButtonY-BW.xnb
 Content\Spritesheets\charSelectEarthian.xnb
+Content\Spritesheets\Skill_Icons.xnb
+Content\Spritesheets\StandardGun.xnb
+Content\Spritesheets\StandardSword.xnb
+Content\Spritesheets\BlueBullet.xnb
+Content\Spritesheets\LockPick.xnb
+Content\Spritesheets\Steal.xnb
+Content\Spritesheets\Eagle Eye.xnb
+Content\Spritesheets\AglilyB.xnb
+Content\Spritesheets\Dual Weild.xnb
+Content\Spritesheets\Heavy Drinker.xnb
+Content\Spritesheets\Mug.xnb
+Content\Spritesheets\Power shot.xnb
+Content\Spritesheets\Trick Shot Real.xnb
+Content\Spritesheets\HealthFatigue.xnb
+Content\Spritesheets\EarthianSkillz.xnb
+Content\Spritesheets\cyborgskills.xnb
+Content\Spritesheets\MiscIcons1.xnb
+Content\Spritesheets\cyborgSkills2.xnb
+Content\Spritesheets\target2.xnb
+Content\Spritesheets\QuestLog.xnb
+Content\Sounds\MenuSelect.xnb
+Content\Audio\BClick_Menu.xnb
+Content\Sounds\8bit_gunloop_explosion.xnb
+Content\Sounds\melee sound.xnb
+Content\Sounds\sword sound.xnb
+Content\Tilemaps\TestDungeon1.xnb
+Content\Tilemaps\TestDungeon2.xnb
+Content\Tilemaps\TestDungeon3.xnb
+Content\SpriteFonts\Pescadero.xnb
+Content\Cutscenes\Wildlife.xnb
+Content\Cutscenes\Wildlife.wmv

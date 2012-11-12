@@ -4,7 +4,9 @@
 //
 // Author: Nathan Bean
 //
-// Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+// Modified: Nick Stanley 
+//           - added HUDSpriteComponent, 10/15/2012
+//           - added Video Playing capability, 11/12/2012
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
@@ -48,6 +50,7 @@ namespace DungeonCrawler
         GameMenu,
         Credits,
         RoomChange,
+        VideoCutscene,
     }
 
     /// <summary>
@@ -113,6 +116,10 @@ namespace DungeonCrawler
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
 
+        //For cutscene testing
+        public Video triangleWaveCutscene;
+        public VideoPlayer videoPlayer;
+
         #endregion
 
         #region Game Components
@@ -165,6 +172,7 @@ namespace DungeonCrawler
 
         public GarbagemanSystem GarbagemanSystem;
 
+        public VideoPlayerSystem cutscener;
         #endregion
 
 
@@ -254,14 +262,19 @@ namespace DungeonCrawler
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
             QuestLogSystem = new QuestLogSystem(this);
-	    SpriteAnimationSystem = new SpriteAnimationSystem(this);
+	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
+
+            cutscener = new VideoPlayerSystem(this);
 
             CharacterSelectionScreen.LoadContent();
             ContinueNewGameScreen.LoadContent();
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
+
+            triangleWaveCutscene = Content.Load<Video>("Cutscenes/Wildlife");
             //End Testing Code
+
 
         }
 
@@ -363,7 +376,13 @@ namespace DungeonCrawler
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
-		    SpriteAnimationSystem.Update(elapsedTime);
+		            SpriteAnimationSystem.Update(elapsedTime);
+                    break;
+
+                case GameState.VideoCutscene:
+                    //TODO: Anything needed to be done during cutscenes
+                    cutscener.Update(elapsedTime, triangleWaveCutscene, videoPlayer);
+                    NetworkSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -390,7 +409,14 @@ namespace DungeonCrawler
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             CharacterSelectionScreen.Draw(elapsedTime);
             //ContinueNewGameScreen.Draw(elapsedTime);
-            if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
+
+            //test video cutscene
+            if (GameState == GameState.VideoCutscene)
+            {
+                cutscener.Draw(elapsedTime);
+            }
+
+            if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange && GameState != GameState.VideoCutscene)
             {
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);
