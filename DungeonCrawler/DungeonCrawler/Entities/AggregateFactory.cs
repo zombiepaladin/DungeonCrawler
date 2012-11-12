@@ -902,6 +902,7 @@ namespace DungeonCrawler.Entities
             gameSave.psi = 100;
             gameSave.stats = stats;
             gameSave.Level = 1;
+            gameSave.charAnimation = spriteSheet.Name;
             gameSave.fileName = fileName;
             info.FileName = fileName;
 
@@ -980,8 +981,8 @@ namespace DungeonCrawler.Entities
             // Create the player
             {
                 entityID = Entity.NextEntity();
-                spriteSheet = game.Content.Load<Texture2D>(gameSave.charSprite);
-                spriteSheet.Name = gameSave.charSprite;
+                spriteSheet = game.Content.Load<Texture2D>(gameSave.charAnimation);
+                spriteSheet.Name = gameSave.charAnimation;
 
                 position = new Position()
                 {
