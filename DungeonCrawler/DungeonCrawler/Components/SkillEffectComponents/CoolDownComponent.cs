@@ -22,6 +22,7 @@ namespace DungeonCrawler.Components
     public struct CoolDown
     {
         public uint EntityID;
+        public uint UserID;
 
         public SkillType Type;
         public float MaxTime;

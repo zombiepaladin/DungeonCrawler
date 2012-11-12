@@ -101,7 +101,14 @@ namespace DungeonCrawler.Systems
 
                 if (keyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
                 {
-                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1);
+                    uint thisPlayerKey = 0;
+                    foreach(Player p in game.PlayerComponent.All)
+                    {
+                        if(p.PlayerIndex == PlayerIndex.One)
+                            thisPlayerKey = p.EntityID;
+                    }
+
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;

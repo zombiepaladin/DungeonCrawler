@@ -75,6 +75,8 @@ namespace DungeonCrawler.Components
         public int PsiBase;
 
         public int FatigueBase;
+
+        public int AgroRangeBase;
     }
 
     /// <summary>

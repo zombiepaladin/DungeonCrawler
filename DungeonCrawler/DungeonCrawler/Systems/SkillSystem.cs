@@ -123,7 +123,7 @@ namespace DungeonCrawler.Systems
 
                 if (!effect.isTriggered)
                 {
-                    HandleInstantEffects(key);
+                    HandleEffects(key, elapsedTime);
                     effect.isTriggered = true;
                 }
                 else
@@ -145,11 +145,22 @@ namespace DungeonCrawler.Systems
             int x;
         }
 
-        public void UseSkill(Aggregate playerType, SkillType skillType, int rank)
+        public void UseSkill(Aggregate playerType, SkillType skillType, int rank, uint userID)
         {
             #region Global Variables
 
             uint eid;
+
+            #endregion
+
+            #region Check Cool Down
+
+            //make sure the user isn't cooling down from a previous use
+            foreach (CoolDown cd in _game.CoolDownComponent.All)
+            {
+                if (cd.Type == skillType && cd.UserID == userID)
+                    return;
+            }
 
             #endregion
 
@@ -3405,8 +3416,130 @@ namespace DungeonCrawler.Systems
             return 0;
         }
 
-        private void HandleInstantEffects(uint key)
+        private void HandleEffects(uint key, float elapsedTime)
         {
+            #region Chance To Succeed
+
+            if (_game.ChanceToSucceedComponent.Contains(key))
+            {
+                ChanceToSucceed chanceInstance = _game.ChanceToSucceedComponent[key];
+                Random rand = new Random();
+                double calculatedAmount = rand.NextDouble() * 100;
+
+                if (calculatedAmount > chanceInstance.SuccessRateAsPercentage)
+                {
+                    //Handle a failed skill use
+                    _game.GarbagemanSystem.ScheduleVisit(chanceInstance.EntityID, GarbagemanSystem.ComponentType.Effect);
+                    return;
+                }
+            }
+
+            #endregion
+
+            #region Damage Over Time
+
+            if (_game.DamageOverTimeComponent.Contains(key))
+            {
+                DamageOverTime dOT = _game.DamageOverTimeComponent[key];
+
+                dOT.CurrentTime -= elapsedTime;
+
+                if (dOT.CurrentTime <= 0)
+                {
+                    if (_game.EnemyComponent.Contains(dOT.TargetID))
+                    {
+                        Enemy enemy = _game.EnemyComponent[dOT.TargetID];
+                        enemy.Health -= (dOT.AmountPerTick * dOT.CurrentStack);
+                        _game.EnemyComponent[dOT.TargetID] = enemy;
+                    }
+                    else if (_game.PlayerComponent.Contains(dOT.TargetID))
+                    {
+                        PlayerInfo player = _game.PlayerInfoComponent[dOT.TargetID];
+                        player.Health -= (dOT.AmountPerTick * dOT.CurrentStack);
+                        _game.PlayerInfoComponent[dOT.TargetID] = player;
+                    }
+
+                    dOT.CurrentTime = dOT.TickTime;
+                }
+            }
+
+            #endregion
+
+            #region Direct Damage
+
+            if (_game.DirectDamageComponent.Contains(key))
+            {
+                DirectDamage dD = _game.DirectDamageComponent[key];
+
+                if (_game.EnemyComponent.Contains(dD.TargetID))
+                {
+                    Enemy enemy = _game.EnemyComponent[dD.TargetID];
+                    enemy.Health -= dD.Damage;
+                    _game.EnemyComponent[dD.TargetID] = enemy;
+                }
+                else if (_game.PlayerComponent.Contains(dD.TargetID))
+                {
+                    PlayerInfo player = _game.PlayerInfoComponent[dD.TargetID];
+                    player.Health -= dD.Damage;
+                    _game.PlayerInfoComponent[dD.TargetID] = player;
+                }
+            }
+
+            #endregion
+
+            #region Direct Heal
+
+            if (_game.DirectHealComponent.Contains(key))
+            {
+                DirectHeal dH = _game.DirectHealComponent[key];
+
+                if (_game.EnemyComponent.Contains(dH.TargetID))
+                {
+                    Enemy enemy = _game.EnemyComponent[dH.TargetID];
+                    enemy.Health += dH.Amount;
+                    _game.EnemyComponent[dH.TargetID] = enemy;
+                }
+                else if (_game.PlayerComponent.Contains(dH.TargetID))
+                {
+                    PlayerInfo player = _game.PlayerInfoComponent[dH.TargetID];
+                    player.Health += dH.Amount;
+                    _game.PlayerInfoComponent[dH.TargetID] = player;
+                }
+            }
+
+            #endregion
+
+            #region Heal Over Time
+
+            if (_game.HealOverTimeComponent.Contains(key))
+            {
+                HealOverTime hOT = _game.HealOverTimeComponent[key];
+
+                hOT.CurrentTime -= elapsedTime;
+
+                if (hOT.CurrentTime <= 0)
+                {
+                    if (_game.EnemyComponent.Contains(hOT.TargetID))
+                    {
+                        Enemy enemy = _game.EnemyComponent[hOT.TargetID];
+                        enemy.Health += (hOT.AmountPerTick * hOT.CurrentStack);
+                        _game.EnemyComponent[hOT.TargetID] = enemy;
+                    }
+                    else if (_game.PlayerComponent.Contains(hOT.TargetID))
+                    {
+                        PlayerInfo player = _game.PlayerInfoComponent[hOT.TargetID];
+                        player.Health += (hOT.AmountPerTick * hOT.CurrentStack);
+                        _game.PlayerInfoComponent[hOT.TargetID] = player;
+                    }
+
+                    hOT.CurrentTime = hOT.TickTime;
+                }
+            }
+
+            #endregion
+
+            #region KnockBack
+
             if (_game.KnockBackComponent.Contains(key))
             {
                 KnockBack knockbackInstance = _game.KnockBackComponent[key];
@@ -3432,6 +3565,18 @@ namespace DungeonCrawler.Systems
                     }
                 }
             }
+
+            #endregion
+
+            #region Resurrect
+
+            if (_game.ResurrectComponent.Contains(key))
+            {
+                //Don't know how to handle this just yet
+            }
+
+            #endregion
+
         }
 
         #endregion

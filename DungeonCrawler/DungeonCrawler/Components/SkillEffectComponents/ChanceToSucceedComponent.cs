@@ -21,7 +21,7 @@ namespace DungeonCrawler.Components
     {
         public uint EntityID;
 
-        public int AmountAsPercentage;
+        public int SuccessRateAsPercentage;
     }
 
     public class ChanceToSucceedComponent : GameComponent<ChanceToSucceed>
