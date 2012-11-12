@@ -549,6 +549,9 @@ namespace DungeonCrawler
             charPreview.characterType = gameData.characterType;
             charPreview.Level = gameData.Level;
 
+            if (masterSaveFile.charFiles == null)
+                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
+
             masterSaveFile.charFiles.Add(charPreview);
 
             // Sort the list by the file name and resave it
