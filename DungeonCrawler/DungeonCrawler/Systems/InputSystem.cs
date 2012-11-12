@@ -4,7 +4,9 @@
 //
 // Author: Nathan Bean
 //
-// Modified: Nick Stanley added Hud Controls, 10/15/2012
+// Modified: Nick Stanley 
+//           - added Hud Controls, 10/15/2012
+//           - added shift+m to switch to cutscene, 11/12/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 // Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
