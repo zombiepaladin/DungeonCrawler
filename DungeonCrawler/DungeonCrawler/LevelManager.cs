@@ -101,7 +101,7 @@ namespace DungeonCrawler
                     //{
                     //    CurrentSong = null;
                     //}
-                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth, level);
                     Room room = game.RoomComponent[currentRoomID];
 
 
@@ -308,7 +308,7 @@ namespace DungeonCrawler
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
-            if (CurrentMap != null)
+            if (CurrentMap != null && Loading == false)
             {
                 for (int i = 0; i < CurrentMap.LayerCount; i++)
                 {

@@ -77,6 +77,11 @@ namespace DungeonCrawler.Components
         /// The width of the walls, in tiles
         /// </summary>
         public int WallWidth;
+
+        /// <summary>
+        /// The name of the room
+        /// </summary>
+        public string roomName;
     }
 
     public class RoomComponent : GameComponent<Room>

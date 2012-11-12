@@ -6,11 +6,12 @@
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
 // Modified: Devin Kelly-Collins added WeaponSprite rendering, 10/24/2012
-//
+// Modified: Samuel Fike and Jiri Malina: Fixed errors due to removal of movementSprite for players
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
 //-----------------------------------------------------------------------------
+
 #endregion
 
 #region Using Statements
@@ -121,7 +122,8 @@ namespace DungeonCrawler.Systems
                 Position position = game.PositionComponent[sprite.EntityID];
                 if (position.RoomID == roomId)
                 {
-                    Facing facing = game.MovementSpriteComponent[sprite.EntityID].Facing;
+                    Facing facing = (Facing)game.SpriteAnimationComponent[sprite.EntityID].CurrentAnimationRow; //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
+
                     position.Center = applyFacingOffset(facing, position.Center);
                     spriteBatch.Draw(sprite.SpriteSheet,
                                     position.Center,

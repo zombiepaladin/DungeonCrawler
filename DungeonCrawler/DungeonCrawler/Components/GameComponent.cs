@@ -6,6 +6,8 @@
 // Modified : Joshua Zavala
 //            BinaryNode & BinarySearchTree - Assignment 6 & 7
 //
+// Modified by Samuel Fike and Jiri Malina: Added getter for element keys, useful for using a for each while also editing the elements
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -84,6 +86,11 @@ namespace DungeonCrawler.Components
         public IEnumerable<T> All
         {
             get { return elements.Values; }
+        }
+
+        public IEnumerable<uint> Keys
+        {
+            get { return elements.Keys; }
         }
 
         /// <summary>
