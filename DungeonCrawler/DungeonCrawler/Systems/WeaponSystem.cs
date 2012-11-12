@@ -52,6 +52,7 @@ namespace DungeonCrawler.Systems
             {
                 Equipment equipment = _game.EquipmentComponent[player.EntityID];
                 bool attacking = _game.PlayerInfoComponent[player.EntityID].State == PlayerState.Attacking;
+                WeaponAttackType wat = _game.WeaponComponent[equipment.WeaponID].AttackType;
 
                 //Handle sprites
                 if (_game.WeaponSpriteComponent.Contains(player.EntityID))
@@ -63,10 +64,12 @@ namespace DungeonCrawler.Systems
                 {
                     //Otherwise create a new sprite.
                     CreateWeaponSprite(equipment);
+                    if(wat == WeaponAttackType.Melee)
+                        CreateWeaponCollision(equipment);
                 }   
 
                 Weapon weapon = _game.WeaponComponent[equipment.WeaponID];
-                if (attacking && weapon.AttackType == WeaponAttackType.Ranged)
+                if (wat == WeaponAttackType.Ranged)
                 {
                     _bulletTimer += elapsedTime;
                     if (_bulletTimer >= weapon.Speed)
@@ -76,6 +79,37 @@ namespace DungeonCrawler.Systems
                     }
                 }
             }
+        }
+
+        private void CreateWeaponCollision(Equipment equipment)
+        {
+            if (_game.CollisionComponent.Contains(equipment.WeaponID))
+                return;
+
+            Collideable weaponCollision;
+            weaponCollision.EntityID = equipment.WeaponID;
+            Vector2 position = _game.PositionComponent[equipment.EntityID].Center;
+            Facing facing = _game.MovementSpriteComponent[equipment.EntityID].Facing;
+
+            switch(facing)
+            {
+                case Facing.North:
+                    position.Y -= 64;
+                    break;
+                case Facing.East:
+                    position.X += 64;
+                    break;
+                case Facing.South:
+                    position.Y += 64;
+                    break;
+                case Facing.West:
+                    position.X -= 64;
+                    break;
+            }
+
+            RectangleBounds rb = new RectangleBounds((int)position.X, (int)position.Y, 64, 64);
+            weaponCollision.Bounds = rb;
+            _game.CollisionComponent.Add(weaponCollision.EntityID, weaponCollision);
         }
 
         //Handles Creating the WeaponSprite.

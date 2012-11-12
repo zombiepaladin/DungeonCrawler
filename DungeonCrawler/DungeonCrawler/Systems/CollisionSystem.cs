@@ -165,12 +165,35 @@ namespace DungeonCrawler.Systems
 
         private void PlayerWeaponCollision(uint p, uint p_2)
         {
-            throw new NotImplementedException();
+            //Do nothing for now.
         }
 
         private void EnemyWeaponCollision(uint p, uint p_2)
         {
-            throw new NotImplementedException();
+            Enemy enemy;
+            Weapon weapon;
+            if (_game.WeaponComponent.Contains(p))
+            {
+                weapon = _game.WeaponComponent[p];
+                enemy = _game.EnemyComponent[p_2];
+            }
+            else
+            {
+                weapon = _game.WeaponComponent[p_2];
+                enemy = _game.EnemyComponent[p];
+            }
+
+            //Process attack.
+            enemy.Health -= weapon.Damage;
+            //enemy.Status |= weapon.Effect;
+
+            //Display some sort of damage indicator here.
+
+            //Update enemy info.
+            _game.EnemyComponent[enemy.EntityID] = enemy;
+
+            //Remove collision imiediatly.
+            _game.CollisionComponent.Remove(weapon.EntitiyID);
         }
 
         /// <summary>
@@ -696,6 +719,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p))
                 obj1 = CollisionType.Trigger;
+            else if (_game.WeaponComponent.Contains(p))
+                obj1 = CollisionType.Weapon;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -712,6 +737,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p_2))
                 obj2 = CollisionType.Trigger;
+            else if (_game.WeaponComponent.Contains(p_2))
+                obj2 = CollisionType.Weapon;
             else //Static
                 obj2 = CollisionType.Static;
 
