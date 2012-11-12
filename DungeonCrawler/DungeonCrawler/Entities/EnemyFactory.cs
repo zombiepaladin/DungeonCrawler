@@ -62,7 +62,7 @@ namespace DungeonCrawler.Entities
             switch (type)
             {
                 case EnemyFactoryType.StationaryTarget:
-                    enemy .HurtOnTouch = false;
+                    enemy.HurtOnTouch = false;
                     enemy.Health = 1;
 
                     sprite = new Sprite()

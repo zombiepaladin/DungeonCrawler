@@ -104,9 +104,14 @@ namespace DungeonCrawler
         public CollectibleFactory CollectableFactory;
 
         /// <summary>
-        /// A EnemyFactory for creating enemies
+        /// An EnemyFactory for creating enemies
         /// </summary>
         public EnemyFactory EnemyFactory;
+
+        /// <summary>
+        /// An NPC Factory for creating npcs
+        /// </summary>
+        public NPCFactory NPCFactory;
 
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
@@ -140,6 +145,7 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public NPCComponent NPCComponent;
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
@@ -190,6 +196,7 @@ namespace DungeonCrawler
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
             EnemyFactory = new EnemyFactory(this);
+            NPCFactory = new NPCFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -218,6 +225,7 @@ namespace DungeonCrawler
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
+            NPCComponent = new NPCComponent();
             LevelManager = new LevelManager(this);
             SkillProjectileComponent = new SkillProjectileComponent();
             SkillAoEComponent = new SkillAoEComponent();
