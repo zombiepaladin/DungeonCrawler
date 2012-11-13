@@ -27,6 +27,12 @@ namespace DungeonCrawler.Systems
     {
         //The parent game.
         private DungeonCrawlerGame _game;
+        //Components this Systems uses often.
+        private CollisionComponent _collisionComponent;
+        private EquipmentComponent _equipmentComponent;
+        private PlayerInfoComponent _playerInfoComponent;
+        private WeaponComponent _weaponComponent;
+        private WeaponSpriteComponent _weaponSpriteComponent;
 
         //The timer will be used to determine when to update and create sprites and objects.
         private float _timer = 0;
@@ -39,6 +45,11 @@ namespace DungeonCrawler.Systems
         public WeaponSystem(DungeonCrawlerGame game)
         {
             _game = game;
+            _collisionComponent = _game.CollisionComponent;
+            _equipmentComponent = _game.EquipmentComponent;
+            _playerInfoComponent = _game.PlayerInfoComponent;
+            _weaponComponent = _game.WeaponComponent;
+            _weaponSpriteComponent = _game.WeaponSpriteComponent;
         }
 
         /// <summary>
@@ -52,48 +63,62 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
-                Equipment equipment = _game.EquipmentComponent[player.EntityID];
-                bool attacking = _game.PlayerInfoComponent[player.EntityID].State == PlayerState.Attacking;
-                WeaponAttackType wat = _game.WeaponComponent[equipment.WeaponID].AttackType;
+                Equipment equipment = _equipmentComponent[player.EntityID];
+                bool attacking = _playerInfoComponent[player.EntityID].State == PlayerState.Attacking;
+                Weapon weapon = _weaponComponent[equipment.WeaponID];
 
                 //Handle sprites
-                if (_game.WeaponSpriteComponent.Contains(player.EntityID))
+                if (_weaponSpriteComponent.Contains(player.EntityID))
                 {
                     //If the player has a weapon sprite update it
-                    UpdateWeaponSprite(_game.WeaponSpriteComponent[player.EntityID]);
+                    spriteRemoved = UpdateWeaponSprite(_weaponSpriteComponent[player.EntityID]);
                 }
                 else if (attacking)
                 {
-                    //Otherwise create a new sprite.
-                    CreateWeaponSprite(equipment);
-                    if(wat == WeaponAttackType.Melee)
-                        CreateWeaponCollision(equipment);
+                    //Otherwise create a new sprite and sound.
+                    _game.WeaponFactory.CreateWeaponSprite(equipment.WeaponID, equipment.EntityID);
+                    PlayWeaponSound(equipment);
                 }   
 
-                Weapon weapon = _game.WeaponComponent[equipment.WeaponID];
-                if (wat == WeaponAttackType.Ranged)
+                //Handle more weapon logic.
+                if(attacking)
                 {
-                    _bulletTimer += elapsedTime;
-                    if (_bulletTimer >= weapon.Speed)
+                    if (weapon.AttackType == WeaponAttackType.Ranged)
                     {
-                        CreateBulletAndSprite(_game.EquipmentComponent[player.EntityID]);
-                        _bulletTimer = 0;
+                        _bulletTimer += elapsedTime;
+                        if (_bulletTimer >= weapon.Speed)
+                        {
+                            CreateBulletAndSprite(equipment);
+                            _bulletTimer = 0;
+                        }
+                    }
+                    else
+                    {
+                        CreateWeaponCollision(equipment);
                     }
                 }
+                if (spriteRemoved && _collisionComponent.Contains(equipment.WeaponID))
+                    _collisionComponent.Remove(equipment.WeaponID);
             }
+        }
+
+        private void PlayWeaponSound(Equipment equipment)
+        {
+            if (_game.SoundComponent.Contains(equipment.WeaponID))
+                _game.SoundComponent[equipment.WeaponID].SoundEffect.Play();
         }
 
         private void CreateWeaponCollision(Equipment equipment)
         {
-            if (_game.CollisionComponent.Contains(equipment.WeaponID))
+            if (_collisionComponent.Contains(equipment.WeaponID))
                 return;
 
             Collideable weaponCollision;
             weaponCollision.EntityID = equipment.WeaponID;
             Vector2 position = _game.PositionComponent[equipment.EntityID].Center;
-            Facing facing = _game.MovementSpriteComponent[equipment.EntityID].Facing;
+            Facing facing = (Facing)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow;
 
-            switch(facing)
+            switch (facing)
             {
                 case Facing.North:
                     position.Y -= 64;
@@ -111,36 +136,7 @@ namespace DungeonCrawler.Systems
 
             RectangleBounds rb = new RectangleBounds((int)position.X, (int)position.Y, 64, 64);
             weaponCollision.Bounds = rb;
-            _game.CollisionComponent.Add(weaponCollision.EntityID, weaponCollision);
-        }
-
-        //Handles Creating the WeaponSprite.
-        private void CreateWeaponSprite(Equipment equipment)
-        {
-           
-            WeaponType type = _game.WeaponComponent[equipment.WeaponID].Type;
-            Position position = _game.PositionComponent[equipment.EntityID];
-            int y = (int)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow * 64; //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
-
-            WeaponSprite sprite = new WeaponSprite()
-            {
-                EntityID = equipment.EntityID,
-            };
-
-            switch (type)
-            {
-                case WeaponType.WeakSword:
-                case WeaponType.StandardSword:
-                case WeaponType.StrongSword:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
-                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
-                    break;
-                case WeaponType.StandardGun:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
-                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
-                    break;
-            }
-            _game.WeaponSpriteComponent.Add(sprite.EntityID, sprite);
+            _collisionComponent.Add(weaponCollision.EntityID, weaponCollision);
         }
 
         //Handles creating the Bullet object and sprite.
@@ -148,15 +144,7 @@ namespace DungeonCrawler.Systems
         {
             Position position = _game.PositionComponent[equipment.EntityID];
             Vector2 direction = getDirectionFromFacing((Facing)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow); //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
-
-            switch (_game.WeaponComponent[equipment.WeaponID].Type)
-            {
-                case WeaponType.StandardGun:
-                    _game.WeaponFactory.CreateBullet(BulletType.StandardBullet, direction, position);
-                    break;
-                default:
-                    throw new Exception("Unknown weapon type.");
-            }
+            _game.WeaponFactory.CreateBullet(_weaponComponent[equipment.WeaponID].Type, direction, position);
         }
 
         //Handles updating already made weapon sprites. Returns if the sprite was removed.

@@ -305,7 +305,6 @@ namespace DungeonCrawler.Entities
                             SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
                             HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
                         }
-
                     };
 
                     info = new PlayerInfo()

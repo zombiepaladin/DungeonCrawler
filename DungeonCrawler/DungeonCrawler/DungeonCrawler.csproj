@@ -128,6 +128,7 @@
     <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
+    <Compile Include="Components\SoundComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />

@@ -188,6 +188,7 @@ namespace DungeonCrawler.Systems
             //enemy.Status |= weapon.Effect;
 
             //Display some sort of damage indicator here.
+            Position enemyPosition = _game.PositionComponent[enemy.EntityID];
 
             //Update enemy info.
             _game.EnemyComponent[enemy.EntityID] = enemy;

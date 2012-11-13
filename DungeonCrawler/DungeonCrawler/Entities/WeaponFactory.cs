@@ -17,6 +17,7 @@ using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 
 namespace DungeonCrawler.Entities
 {
@@ -95,7 +96,8 @@ namespace DungeonCrawler.Entities
         public uint CreateWeapon(WeaponType type)
         {
             uint eid = Entity.NextEntity();
-            Weapon weapon;
+            Weapon weapon = new Weapon { EntitiyID = eid };
+            Sound? sound = null;
 
             switch (type)
             {
@@ -103,16 +105,19 @@ namespace DungeonCrawler.Entities
                     weapon = _standardSword;
                     weapon.Critical *= .5f;
                     weapon.Damage *= .5f;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
                     break;
 
                 case WeaponType.StandardSword:
                     weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
                     break;
 
                 case WeaponType.StrongSword:
                     weapon = _standardSword;
                     weapon.Critical *= 2;
                     weapon.Damage *= 2;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
                     break;
 
                 case WeaponType.StandardGun:
@@ -123,10 +128,52 @@ namespace DungeonCrawler.Entities
                     throw new Exception("Unknown WeaponType");
             }
 
-            weapon.EntitiyID = eid;
             weapon.Type = type;
             _game.WeaponComponent.Add(eid, weapon);
+            if(sound != null)
+                _game.SoundComponent.Add(eid, (Sound)sound);
+
             return eid;
+        }
+
+        public void CreateWeaponSprite(uint weaponID, uint playerID)
+        {
+            WeaponType type = _game.WeaponComponent[weaponID].Type;
+            int y = (int)_game.SpriteAnimationComponent[playerID].CurrentAnimationRow * 64; //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
+
+            WeaponSprite sprite = new WeaponSprite()
+            {
+                EntityID = playerID,
+            };
+
+            switch (type)
+            {
+                case WeaponType.WeakSword:
+                case WeaponType.StandardSword:
+                case WeaponType.StrongSword:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.StandardGun:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+            }
+            _game.WeaponSpriteComponent.Add(sprite.EntityID, sprite);
+        }
+
+        public uint CreateBullet(WeaponType weaponType, Vector2 direction, Position position)
+        {
+            uint bulletId;
+            switch (weaponType)
+            {
+                case WeaponType.StandardGun:
+                    bulletId = CreateBullet(BulletType.StandardBullet, direction, position);
+                    break;
+                default:
+                    throw new Exception("Unknown weapon type.");
+            }
+            return bulletId;
         }
 
         /// <summary>

@@ -165,8 +165,9 @@ namespace DungeonCrawler
         public ChargeComponent ChargeComponent;
         public HealingStationComponent HealingStationComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
-
-	public QuestComponent QuestComponent;
+        public SoundComponent SoundComponent;
+        public QuestComponent QuestComponent;
+        
         #endregion
 
         #region Game Systems
@@ -249,6 +250,7 @@ namespace DungeonCrawler
             SkillProjectileComponent = new SkillProjectileComponent();
             SkillAoEComponent = new SkillAoEComponent();
             SkillDeployableComponent = new SkillDeployableComponent();
+            SoundComponent = new SoundComponent();
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();

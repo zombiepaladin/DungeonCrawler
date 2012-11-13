@@ -523,7 +523,7 @@ namespace DungeonCrawler
                 Equipment e = new Equipment()
                 {
                     EntityID = entityID,
-                    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardGun),
+                    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
                 };
                 game.EquipmentComponent.Add(e.EntityID, e);
                 game.GameState = GameState.NetworkSetup;
