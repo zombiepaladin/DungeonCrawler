@@ -145,6 +145,7 @@ namespace DungeonCrawler
         public BulletComponent BulletComponent;
         public PlayerInfoComponent PlayerInfoComponent;
         public EnemyAIComponent EnemyAIComponent;
+        public NpcAIComponent NpcAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         public CollectibleComponent CollectibleComponent;
@@ -156,7 +157,7 @@ namespace DungeonCrawler
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
-        /*public DefibrillateComponent DefibrillateComponent;
+        public DefibrillateComponent DefibrillateComponent;
         public EnergyShieldComponent EnergyShieldComponent;
         public NanobotsComponent NanobotsComponent;
         public RepulsorArmComponent RepulsorArmComponent;
@@ -173,7 +174,7 @@ namespace DungeonCrawler
         public FallbackComponent FallbackComponent;
         public ChargeComponent ChargeComponent;
         public HealingStationComponent HealingStationComponent;
-        public ExplodingDroidComponent ExplodingDroidComponent;*/
+        public ExplodingDroidComponent ExplodingDroidComponent;
 
 	public QuestComponent QuestComponent;
 
@@ -206,6 +207,7 @@ namespace DungeonCrawler
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
         public EnemyAISystem EnemyAISystem;
+        public NpcAISystem NpcAISystem;
         CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
 	    SpriteAnimationSystem SpriteAnimationSystem;
@@ -269,6 +271,8 @@ namespace DungeonCrawler
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
+            NpcAIComponent = new NpcAIComponent();
+      
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
@@ -329,6 +333,7 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
             WeaponSystem = new WeaponSystem(this);
             EnemyAISystem = new EnemyAISystem(this);
+            NpcAISystem = new NpcAISystem(this);
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
@@ -444,6 +449,7 @@ namespace DungeonCrawler
                     GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
+                    NpcAISystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:

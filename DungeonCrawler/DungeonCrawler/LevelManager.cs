@@ -137,7 +137,7 @@ namespace DungeonCrawler
                                 }
                                 break;
                             case "NPC":
-                                entityID = game.NPCFactory.CreateNPC((NPCType) Enum.Parse(typeof(NPCType), goData.Type), new Position 
+                                entityID = game.NPCFactory.CreateNPC((NPCName) Enum.Parse(typeof(NPCName), goData.Type), new Position 
                                             { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
                                 break;
                             case "Trigger":

@@ -22,9 +22,10 @@ namespace DungeonCrawler.Components
     /// <summary>
     /// An enum representing all the types of enemies
     /// </summary>
-    public enum NPCType
+    public enum NPCName
     {
         Trollph,
+        DarkRalph,
     }
 
     /// <summary>
@@ -40,7 +41,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// The type of the npc
         /// </summary>
-        public NPCType Type;
+        public NPCName Type;
 
     }
 
