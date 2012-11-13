@@ -5,6 +5,7 @@
 // Author: Brett Barger
 //
 // Modified: Nick Boen - added the Get and Set target methods, unimplemented for now
+//           Brett Barger - corrected functionalit of enemy moving towards the player it is targeting.
 //
 // TODO: 1. Should probably refactor the Update to use the TargetID from the EnemyAI Component
 //              rather than a local instance.
@@ -83,7 +84,7 @@ namespace DungeonCrawler.Systems
                             Target = thing;
                             Vector2 toPlayer = Target.Center - pos.Center;
                             toPlayer.Normalize();
-                            pos.Center += toPlayer * elapsedTime * 50;
+                            pos.Center += toPlayer * elapsedTime * 100;
                             HasTarget = true;
                             break;
                         }
@@ -93,7 +94,7 @@ namespace DungeonCrawler.Systems
                 {
                     Vector2 toPlayer = game.PositionComponent[Target.EntityID].Center - pos.Center;
                     toPlayer.Normalize();
-                    pos.Center += toPlayer * elapsedTime * 50;
+                    pos.Center += toPlayer * elapsedTime * 100;
                     
                 }
                 else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health <= 0)
