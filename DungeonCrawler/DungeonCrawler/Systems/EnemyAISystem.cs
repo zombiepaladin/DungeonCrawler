@@ -4,6 +4,13 @@
 //
 // Author: Brett Barger
 //
+// Modified: Nick Boen - added the Get and Set target methods, unimplemented for now
+//
+// TODO: 1. Should probably refactor the Update to use the TargetID from the EnemyAI Component
+//              rather than a local instance.
+//       2. May want to check if the AI should get a different target if its current one isn't allowed
+//              
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -47,6 +54,7 @@ namespace DungeonCrawler.Systems
         }
 
         #endregion
+        
         #region Public Methods
 
         /// <summary>
@@ -90,6 +98,21 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        public void GetDifferentTarget(uint enemyKey)
+        {
+
+        }
+
+        public void GetClosestTarget(uint enemyKey)
+        {
+
+        }
+
+        public void SetTarget(uint enemyKey, uint targetKey)
+        {
+
+        }
+        
         #endregion
     }
 }

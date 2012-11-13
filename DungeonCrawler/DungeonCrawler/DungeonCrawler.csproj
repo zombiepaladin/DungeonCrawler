@@ -129,14 +129,29 @@
     <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
-    <Compile Include="Components\CollisionComponent.cs" />
-    <Compile Include="Components\CollectibleComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\AgroDropComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\AgroGainComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\BuffComponent.cs" />
+    <Compile Include="Components\CollisionComponent.cs" />    <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\HealComponent.cs" />
     <Compile Include="Components\QuestComponent.cs" />
     <Compile Include="Components\SkillProjectileComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\ChanceToSucceedComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\CoolDownComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\DamageOverTimeComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\DirectDamageComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\DirectHealComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\FearComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\HealOverTimeComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\InstantEffectComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\KnockBackComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\ReduceAgroRangeComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\ResurrectComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\StunComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\TimedEffectComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
@@ -192,6 +207,7 @@
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
+    <Compile Include="Systems\SkillSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>
