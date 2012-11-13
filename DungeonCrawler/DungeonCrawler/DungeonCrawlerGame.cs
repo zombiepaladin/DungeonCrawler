@@ -450,6 +450,7 @@ namespace DungeonCrawler
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
                     NpcAISystem.Update(elapsedTime);
+                    EnemyAISystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
