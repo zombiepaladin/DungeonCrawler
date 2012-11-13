@@ -8,6 +8,8 @@
 // Modified: Devin Kelly-Collins added Weapon Components and Systems, 10/24/2012
 // Modified: Joseph Shaw added Game Saving Region and Methods/Structs, 10/31/2012
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
+// Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem
+// Modified by Nicholas Strub: Added QuestLog System
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -31,6 +33,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
+using DungeonCrawler.Components.CyborgSkills;
+using DungeonCrawler.Components.EarthianSkillComponents;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -109,7 +113,6 @@ namespace DungeonCrawler
         /// </summary>
         public EnemyFactory EnemyFactory;
 
-        public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
 
         #endregion
@@ -141,6 +144,30 @@ namespace DungeonCrawler
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public SpriteAnimationComponent SpriteAnimationComponent;
+        public SkillProjectileComponent SkillProjectileComponent;
+        public SkillAoEComponent SkillAoEComponent;
+        public SkillDeployableComponent SkillDeployableComponent;
+        public DefibrillateComponent DefibrillateComponent;
+        public EnergyShieldComponent EnergyShieldComponent;
+        public NanobotsComponent NanobotsComponent;
+        public RepulsorArmComponent RepulsorArmComponent;
+        public TargetingUpgradeComponent TargetingUpgradeComponent;
+        public EnergyShotComponent EnergyShotComponent;
+        public AlloyBodyComponent AlloyBodyComponent;
+        public CyberneticSlamComponent CyberneticSlamComponent;
+        public ThrusterRushComponent ThrusterRushComponent;
+        public TurretComponent TurretComponent;
+        public TrapComponent TrapComponent;
+        public PortableShopComponent PortableShopComponent;
+        public PortableShieldComponent PortableShieldComponent;
+        public MotivateComponent MotivateComponent;
+        public FallbackComponent FallbackComponent;
+        public ChargeComponent ChargeComponent;
+        public HealingStationComponent HealingStationComponent;
+        public ExplodingDroidComponent ExplodingDroidComponent;
+
+	public QuestComponent QuestComponent;
 
         #region Effect Components
         public AgroDropComponent AgroDropComponent;
@@ -160,7 +187,6 @@ namespace DungeonCrawler
         public StunComponent StunComponent;
         public TimedEffectComponent TimedEffectComponent;
         #endregion
-
         #endregion
 
         #region Game Systems
@@ -173,6 +199,8 @@ namespace DungeonCrawler
         WeaponSystem WeaponSystem;
         public EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
+        public QuestLogSystem QuestLogSystem;
+	SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
 
@@ -224,7 +252,6 @@ namespace DungeonCrawler
             HUDComponent = new HUDComponent();
             InventoryComponent = new InventoryComponent();
             InventorySpriteComponent = new InventorySpriteComponent();
-            CharacterSelectionScreen = new CharacterSelectionScreen(graphics, this);
             ContinueNewGameScreen = new ContinueNewGameScreen(graphics, this);
             EquipmentComponent = new EquipmentComponent();
             WeaponComponent = new WeaponComponent();
@@ -237,7 +264,22 @@ namespace DungeonCrawler
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
+            QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
+            SpriteAnimationComponent = new SpriteAnimationComponent();
+            SkillProjectileComponent = new SkillProjectileComponent();
+            SkillAoEComponent = new SkillAoEComponent();
+            SkillDeployableComponent = new SkillDeployableComponent();
+
+            //TurretComponent = new TurretComponent();
+            //TrapComponent = new TrapComponent();
+            //PortableShopComponent = new PortableShopComponent();
+            //PortableShieldComponent = new PortableShieldComponent();
+            //MotivateComponent =  new MotivateComponent();
+            //FallbackComponent = new FallbackComponent();
+            //ChargeComponent = new ChargeComponent();
+            //HealingStationComponent = new HealingStationComponent();
+            //ExplodingDroidComponent = new ExplodingDroidComponent();
 
             #region Initialize Effect Components
             AgroDropComponent = new AgroDropComponent();
@@ -280,10 +322,10 @@ namespace DungeonCrawler
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
+            QuestLogSystem = new QuestLogSystem(this);
+	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
 
-            CharacterSelectionScreen.LoadContent();
-            ContinueNewGameScreen.LoadContent();
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("TestDungeon3");
@@ -326,11 +368,12 @@ namespace DungeonCrawler
                 else
                 {
                     GameState = GameState.CharacterSelection;
-                    //if (!ContinueNewGameScreen.isConnected)
-                    //{
-                    //    ContinueNewGameScreen.isConnected = true;
-                    //    ContinueNewGameScreen.loadGameSaves();
-                    //}
+                    if (!ContinueNewGameScreen.isConnected)
+                    {
+                        ContinueNewGameScreen.LoadContent();
+                        ContinueNewGameScreen.isConnected = true;
+                        ContinueNewGameScreen.loadGameSaves();
+                    }
                 }
             }
 
@@ -351,18 +394,19 @@ namespace DungeonCrawler
                     else
                     {
                         GameState = GameState.CharacterSelection;
-                        //if (!ContinueNewGameScreen.isConnected)
-                        //{
-                        //    ContinueNewGameScreen.isConnected = true;
-                        //    ContinueNewGameScreen.loadGameSaves();
-                        //}
+                        if (!ContinueNewGameScreen.isConnected)
+                        {
+                            ContinueNewGameScreen.LoadContent();
+                            ContinueNewGameScreen.isConnected = true;
+                            ContinueNewGameScreen.loadGameSaves();
+                        }
                     }
                     break;
 
                 case GameState.CharacterSelection:
                     // TODO: Update character selection screen
-                    CharacterSelectionScreen.Update(gameTime);
-                    //ContinueNewGameScreen.Update(gameTime);
+                    SpriteAnimationSystem.Update(elapsedTime);
+                    ContinueNewGameScreen.Update(gameTime);
                     break;
 
                 case GameState.NetworkSetup:
@@ -388,6 +432,8 @@ namespace DungeonCrawler
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
+                    QuestLogSystem.Update(elapsedTime);
+		            SpriteAnimationSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -412,19 +458,20 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.Black);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            CharacterSelectionScreen.Draw(elapsedTime);
-            //ContinueNewGameScreen.Draw(elapsedTime);
             if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);
                 RenderingSystem.Draw(elapsedTime);
+                QuestLogSystem.Draw();
             }
+            else
+                ContinueNewGameScreen.Draw(elapsedTime);
 
             base.Draw(gameTime);
         }
 
-        #region Game Saving
+        #region Game Saving By: Joseph Shaw
         /// <summary>
         /// The filename of the master save file
         /// </summary>
@@ -462,8 +509,42 @@ namespace DungeonCrawler
             public string fileName;
             public string charSprite;
             public string characterType;
+            public string charAnimation;
+            public int aggregate;
             public int Level;
             // Other skills/stats
+            public Stats stats;
+            public int health;
+            public int psi;
+        }
+
+        /// <summary>
+        /// Go through the components and save the pertinent information for the entity id
+        /// Use this when saving the character in-game (possibly from a save menu or via autosaving)
+        /// </summary>
+        /// <param name="entityId">The entityID of the character we are saving</param>
+        public static void SavePlayer(uint entityId)
+        {
+            DungeonCrawlerGame.CharacterSaveFile gameSave;
+            PlayerInfo info = game.PlayerInfoComponent[entityId];
+
+            IAsyncResult result = StorageDevice.BeginShowSelector(PlayerIndex.One, null, null);
+            StorageDevice device = StorageDevice.EndShowSelector(result);
+
+            if (device != null && device.IsConnected)
+            {
+                // Load file for this entityID
+                gameSave = DoLoadGame(device, info.FileName);
+
+                // Redo save info
+                gameSave.stats = game.StatsComponent[entityId];
+                gameSave.health = info.Health;
+                gameSave.psi = info.Psi;
+                //gameSave.Level = ?
+
+                // Resave file
+                DungeonCrawlerGame.DoSaveGame(device, gameSave);
+            }
         }
 
         /// <summary>
@@ -505,16 +586,18 @@ namespace DungeonCrawler
                 charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
                 masterSaveFile.charFiles.Remove(charPreview);
             }
-            else
-            {
-                charPreview = new CharacterSaveFilePreview();
-                charPreview.CharacterSaveFile = gameData.fileName;
-                charPreview.charSprite = gameData.charSprite;
-                charPreview.characterType = gameData.characterType;
-            }
+            charPreview = new CharacterSaveFilePreview();
+            charPreview.CharacterSaveFile = gameData.fileName;
+            charPreview.charSprite = gameData.charSprite;
+            charPreview.characterType = gameData.characterType;
             charPreview.Level = gameData.Level;
 
+            if (masterSaveFile.charFiles == null) masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
             masterSaveFile.charFiles.Add(charPreview);
+
+            // Sort the list by the file name and resave it
+            masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
+            SaveMasterFile(device, masterSaveFile);
 
             // Create the file.
             stream = container.CreateFile(gameData.fileName);
@@ -651,12 +734,6 @@ namespace DungeonCrawler
 
             // Dispose the container, to commit changes.
             container.Dispose();
-        }
-
-
-        public void GetDevice(IAsyncResult result, StorageDevice device)
-        {
-            device = StorageDevice.EndShowSelector(result);
         }
         #endregion
     }

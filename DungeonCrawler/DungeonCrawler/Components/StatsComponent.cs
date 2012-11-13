@@ -10,8 +10,12 @@
 //-----------------------------------------------------------------------------
 #endregion
 
-#region Using Statements
+#region Using Statements;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 #endregion
 
@@ -20,6 +24,7 @@ namespace DungeonCrawler.Components
     /// <summary>
     /// A structure indicating the local nature of an entity
     /// </summary>
+    [Serializable]
     public struct Stats
     {
         /// <summary>

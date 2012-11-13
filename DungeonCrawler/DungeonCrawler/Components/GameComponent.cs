@@ -7,6 +7,8 @@
 //            BinaryNode & BinarySearchTree - Assignment 6 & 7
 // Modified: Nick Boen - Added call to get Key list, Sam Fike implemented this first
 //
+// Modified by Samuel Fike and Jiri Malina: Added getter for element keys, useful for using a for each while also editing the elements
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 

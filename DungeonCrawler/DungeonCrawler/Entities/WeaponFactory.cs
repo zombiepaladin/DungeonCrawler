@@ -176,6 +176,7 @@ namespace DungeonCrawler.Entities
                 Bounds = new CircleBounds(position.Center, position.Radius),
             };
 
+            
             _game.BulletComponent.Add(eid, bullet);
             _game.MovementComponent.Add(eid, movement);
             _game.PositionComponent.Add(eid, position);

@@ -139,6 +139,12 @@ namespace DungeonCrawler.Components
         ///</summary>
         public PlayerState State;
 
+        /// <summary>
+        /// The name of the game save file this player is associated with
+        /// </summary>
+        public string FileName;
+
+
         public int PoisonResistance;
 
         public int AttackMelee;
