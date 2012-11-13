@@ -73,3 +73,6 @@ Content\Tilemaps\TestDungeon1.xnb
 Content\Tilemaps\TestDungeon2.xnb
 Content\Tilemaps\TestDungeon3.xnb
 Content\SpriteFonts\Pescadero.xnb
+Content\Spritesheets\QuestLog.xnb
+Content\Spritesheets\charSelectNewGame.xnb
+Content\Spritesheets\charSelectControls2.xnb

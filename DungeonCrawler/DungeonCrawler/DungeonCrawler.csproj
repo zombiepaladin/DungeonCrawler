@@ -112,12 +112,32 @@
     <Compile Include="Bounds\RectangleBounds.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\AlloyBodyComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\CyberneticSlamComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\DefibrillateComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\EnergyShieldComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\EnergyShotComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\NanobotsComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\RepulsorArmComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\TargetingUpgradeComponent.cs" />
+    <Compile Include="Components\CyborgSkillComponents\ThrusterRushComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\HealingStationComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\MotivateComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShieldComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\HealComponent.cs" />
     <Compile Include="Components\NPCComponent.cs" />
+    <Compile Include="Components\QuestComponent.cs" />
     <Compile Include="Components\SkillProjectileComponent.cs" />
+    <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
@@ -170,8 +190,10 @@
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
     <Compile Include="Systems\PacketTypes.cs" />
+    <Compile Include="Systems\QuestLogSystem.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
+    <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

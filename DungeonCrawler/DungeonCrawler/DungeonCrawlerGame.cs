@@ -10,6 +10,7 @@
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
 // Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem
 // Modified by Nicholas Strub: Added QuestLog System
+// Modified by Michael Fountain:  Added NPCs
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -154,7 +155,7 @@ namespace DungeonCrawler
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
-        public DefibrillateComponent DefibrillateComponent;
+        /*public DefibrillateComponent DefibrillateComponent;
         public EnergyShieldComponent EnergyShieldComponent;
         public NanobotsComponent NanobotsComponent;
         public RepulsorArmComponent RepulsorArmComponent;
@@ -171,7 +172,7 @@ namespace DungeonCrawler
         public FallbackComponent FallbackComponent;
         public ChargeComponent ChargeComponent;
         public HealingStationComponent HealingStationComponent;
-        public ExplodingDroidComponent ExplodingDroidComponent;
+        public ExplodingDroidComponent ExplodingDroidComponent;*/
 
 	public QuestComponent QuestComponent;
         #endregion
@@ -187,7 +188,7 @@ namespace DungeonCrawler
         EnemyAISystem EnemyAISystem;
         CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
-	SpriteAnimationSystem SpriteAnimationSystem;
+	    SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
