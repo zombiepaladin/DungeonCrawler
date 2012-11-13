@@ -55,7 +55,7 @@ namespace DungeonCrawler.Entities
         public uint CreateEnemy(EnemyFactoryType type, Position position)
         {
             uint eid = Entity.NextEntity();
-            Enemy enemy;
+            Enemy enemy = new Enemy();
             Sprite sprite;
             Collideable collideable;
 
