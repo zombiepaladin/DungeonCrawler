@@ -83,9 +83,10 @@ namespace DungeonCrawler.Systems
                 }
                 else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health > 0)
                 {
-                    Vector2 toPlayer = Target.Center - pos.Center;
+                    Vector2 toPlayer = game.PositionComponent[Target.EntityID].Center - pos.Center;
                     toPlayer.Normalize();
                     pos.Center += toPlayer * elapsedTime * 50;
+                    
                 }
                 else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health <= 0)
                 {

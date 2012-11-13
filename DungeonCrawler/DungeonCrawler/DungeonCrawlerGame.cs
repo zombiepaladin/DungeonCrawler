@@ -392,6 +392,7 @@ namespace DungeonCrawler
                     GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
+                    EnemyAISystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
