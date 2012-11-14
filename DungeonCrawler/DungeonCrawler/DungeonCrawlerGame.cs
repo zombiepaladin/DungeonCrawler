@@ -114,6 +114,13 @@ namespace DungeonCrawler
 
         public ContinueNewGameScreen ContinueNewGameScreen;
 
+        /// <summary>
+        /// Factory fo the visual components of the skills
+        /// </summary>
+        public SkillProjectileFactory SkillProjectileFactory;
+        public SkillAoEFactory SkillAoEFactory;
+        public SkillDeployableFactory SkillDeployableFactory;
+
         #endregion
 
         #region Game Components
@@ -184,7 +191,6 @@ namespace DungeonCrawler
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
-
         #endregion
 
 
@@ -216,6 +222,7 @@ namespace DungeonCrawler
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
             EnemyFactory = new EnemyFactory(this);
+            SkillProjectileFactory = new SkillProjectileFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -284,6 +291,7 @@ namespace DungeonCrawler
             RoomChangingSystem = new RoomChangingSystem(this);
             QuestLogSystem = new QuestLogSystem(this);
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
+
 
             // Testing code.
             LevelManager.LoadContent();
@@ -392,6 +400,7 @@ namespace DungeonCrawler
                     GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
+                    
                     break;
 
                 case GameState.Credits:

@@ -49,6 +49,7 @@ namespace DungeonCrawler.Systems
             Door,
             Room,
             //Needs more in the future!
+            Skill,
         }
 
         private Stack<KeyValuePair<uint, ComponentType>> garbageSchedule;
@@ -136,6 +137,14 @@ namespace DungeonCrawler.Systems
                         game.LocalComponent.Remove(keyValue.Key);
                         game.DoorComponent.Remove(keyValue.Key);
                         //game.SpriteComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Skill:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        game.SkillProjectileComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.MovementComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         break;
                 }
             }
