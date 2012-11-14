@@ -529,6 +529,7 @@
       <Name>QuestLog</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ColorKeyColor>31, 31, 31, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
