@@ -692,7 +692,10 @@ namespace DungeonCrawler.Systems
                 skillId = p_2;
                 oId = p;
             }
-            _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
+            if (!(_game.SkillAoEComponent.Contains(skillId) || _game.SkillDeployableComponent.Contains(skillId)) )
+            {
+                _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
+            }
         }
 
         /// <summary>
@@ -716,7 +719,7 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p))
                 obj1 = CollisionType.Trigger;
-            else if (_game.SkillProjectileComponent.Contains(p))
+            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p)||_game.SkillDeployableComponent.Contains(p))
                 obj1 = CollisionType.Skill;
             else //Static
                 obj1 = CollisionType.Static;
@@ -734,7 +737,7 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p_2))
                 obj2 = CollisionType.Trigger;
-            else if(_game.SkillProjectileComponent.Contains(p_2))
+            else if(_game.SkillProjectileComponent.Contains(p_2) || _game.SkillAoEComponent.Contains(p_2)||_game.SkillDeployableComponent.Contains(p_2))
                 obj2 = CollisionType.Skill;
             else //Static
                 obj2 = CollisionType.Static;

@@ -23,7 +23,7 @@ using DungeonCrawler.Entities;
 
 namespace DungeonCrawler.Entities
 {
-    #region SkillProjectileFactory
+    
     public class SkillEntityFactory
     {
         /// <summary>
@@ -40,6 +40,8 @@ namespace DungeonCrawler.Entities
             this.game = game;
         }
 
+
+        #region SkillProjectile
         public uint CreateSkillProjectile(Skills skillP, Facing facing, Position position)
         {
             SkillProjectile skillProjectile;
@@ -91,10 +93,10 @@ namespace DungeonCrawler.Entities
             game.SpriteComponent.Add(eid, sprite);
             game.CollisionComponent.Add(eid, collideable);
             return eid;
-
         }
+#endregion
 
-       
+        #region SkillAoE
         public uint CreateSkillAoE(Skills skill, Position position)
         {
             SkillAoE skillAoE;
@@ -118,6 +120,7 @@ namespace DungeonCrawler.Entities
                         SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
+                    position.Radius = 5;
                     break;
                 default:
                     throw new Exception("Not a AoE skill");
@@ -135,8 +138,9 @@ namespace DungeonCrawler.Entities
             game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
+        #endregion
 
-
+        #region SkillDeployable
         public uint CreateSkillDeployable(Skills skill, Position position)
         {
             SkillDeployable skillDeployable;
@@ -148,8 +152,22 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
+                case Skills.healingStation:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                    };
+                    position.Radius = 5;
+                    break;
                 default:
-                    throw new Exception("Not a Deployableweqqw skill");
+                    throw new Exception("Not a Deployable skill");
             }
 
             collideable = new Collideable()
@@ -164,7 +182,9 @@ namespace DungeonCrawler.Entities
             game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
+        #endregion
 
+        #region getDriectionHelper
         private Vector2 getDirectionFromFacing(Facing facing)
         {
             Vector2 direction = new Vector2(0);
@@ -186,7 +206,7 @@ namespace DungeonCrawler.Entities
             }
             return direction;
         }
+        #endregion
 
     }
-    #endregion
 }
