@@ -2,10 +2,7 @@
 //-----------------------------------------------------------------------------
 // EnemyAIComponent.cs 
 //
-// Author: Brett Barger
-//
-// Modified: Nick Boen - Added the Target ID and a NoTargetList (or CantTargetList), 
-//                       figured this would be useful later and it's necessary for agro gain and drop
+// Author: Michael Fountain
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -21,19 +18,30 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Components
 {
-    public struct EnemyAI
+    public enum NPCType
+    {
+        Quest,
+        Shopkeeper,
+        Information,
+        Background
+    }
+
+    public struct NpcAI
     {
         // <summary>
         /// The ID of the entity this AI belongs to
         /// </summary>
         public uint EntityID;
 
-        public uint TargetID;
-        public List<uint> NoTargetList;
+        /// <summary>
+        /// Shows what type of NPC this is
+        /// </summary>
+        public NPCType Type;
+
     }
 
-    public class EnemyAIComponent : GameComponent<EnemyAI>
+    public class NpcAIComponent : GameComponent<NpcAI>
     {
-        
+
     }
 }
