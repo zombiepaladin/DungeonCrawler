@@ -110,8 +110,11 @@
     <Compile Include="Bounds\Bounds.cs" />
     <Compile Include="Bounds\CircleBounds.cs" />
     <Compile Include="Bounds\RectangleBounds.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
     <Compile Include="Components\CyborgSkillComponents\AlloyBodyComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\CyberneticSlamComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\DefibrillateComponent.cs" />
@@ -121,7 +124,10 @@
     <Compile Include="Components\CyborgSkillComponents\RepulsorArmComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\TargetingUpgradeComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\ThrusterRushComponent.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Components\DamageReductionComponent.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
     <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
@@ -131,6 +137,17 @@
     <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
     <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
+<<<<<<< HEAD
+    <Compile Include="Components\SpriteAnimationComponent.cs" />
+    <Compile Include="Components\CollisionComponent.cs" />
+    <Compile Include="Components\CollectibleComponent.cs" />
+    <Compile Include="Components\DamageReductionComponent.cs" />
+    <Compile Include="Components\EnemyAIComponent.cs" />
+    <Compile Include="Components\EnemyComponent.cs" />
+    <Compile Include="Components\HealComponent.cs" />
+    <Compile Include="Components\QuestComponent.cs" />
+    <Compile Include="Components\SkillProjectileComponent.cs" />
+=======
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\HealComponent.cs" />
@@ -155,12 +172,16 @@
     <Compile Include="Components\SkillEffectComponents\TimedEffectComponent.cs" />
     <Compile Include="Components\SkillProjectileComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
     <Compile Include="Entities\EnemyFactory.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Entities\NPCFactory.cs" />
-    <Compile Include="Entities\SkillEntityFactory.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
+    <Compile Include="Entities\SkillProjectileFactory.cs" />
     <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
     <Compile Include="KeyboardBindings.cs" />
@@ -206,12 +227,18 @@
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Systems\NpcAISystem.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
     <Compile Include="Systems\PacketTypes.cs" />
     <Compile Include="Systems\QuestLogSystem.cs" />
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Systems\SkillSystem.cs" />
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
@@ -256,6 +283,10 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup />
+=======
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--

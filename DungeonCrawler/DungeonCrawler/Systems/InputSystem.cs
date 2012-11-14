@@ -162,7 +162,7 @@ namespace DungeonCrawler.Systems
                     
                     //temp activate shot skill
                     //Test Skill buttons
-                    game.SkillProjectileFactory.CreateSkillProjectile(Skills.benignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID]);
+                    game.SkillEntityFactory.CreateSkillProjectile(Skills.benignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID]);
 
                 }
                 if (gamePadState.IsButtonDown(Buttons.B) || keyboardState.IsKeyDown(Keys.D2))
@@ -171,12 +171,14 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                     //TODO: Set skill
+                    game.SkillEntityFactory.CreateSkillAoE(Skills.detonate, game.PositionComponent[player.EntityID]);
                 }
                 if (gamePadState.IsButtonDown(Buttons.X) || keyboardState.IsKeyDown(Keys.D3))
                 {
                     hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
+                    game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, game.PositionComponent[player.EntityID]);
                     //TODO: Set skill
                 }
                 if (gamePadState.IsButtonDown(Buttons.Y) || keyboardState.IsKeyDown(Keys.D4))

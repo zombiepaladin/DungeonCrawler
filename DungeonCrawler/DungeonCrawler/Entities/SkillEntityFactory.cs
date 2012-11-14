@@ -24,7 +24,7 @@ using DungeonCrawler.Entities;
 namespace DungeonCrawler.Entities
 {
     #region SkillProjectileFactory
-    public class SkillProjectileFactory
+    public class SkillEntityFactory
     {
         /// <summary>
         /// The game this SkillProjectileFactory belongs to
@@ -35,7 +35,7 @@ namespace DungeonCrawler.Entities
         /// Constructors
         /// </summary>
         /// <param name="game"></param>
-        public SkillProjectileFactory(DungeonCrawlerGame game)
+        public SkillEntityFactory(DungeonCrawlerGame game)
         {
             this.game = game;
         }
@@ -50,16 +50,16 @@ namespace DungeonCrawler.Entities
             Vector2 direction = getDirectionFromFacing(facing);
 
             position.EntityID = eid;
-            //position.Center += direction * 70;
+            position.Center += direction * 70;
 
             switch (skillP)
             {
                 case Skills.benignParasite:
                     skillProjectile = new SkillProjectile()
                     {
-                        EntityID=eid,
-                        skill=skillP,
-                        maxRange=1,                       
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
                     };
                     movement = new Movement()
                     {
@@ -94,61 +94,31 @@ namespace DungeonCrawler.Entities
 
         }
 
-        private Vector2 getDirectionFromFacing(Facing facing)
-        {
-            Vector2 direction = new Vector2(0);
-
-            switch (facing)
-            {
-                case Facing.North:
-                    direction.Y = -1;
-                    break;
-                case Facing.East:
-                    direction.X = 1;
-                    break;
-                case Facing.South:
-                    direction.Y = 1;
-                    break;
-                case Facing.West:
-                    direction.X = -1;
-                    break;
-            }
-            return direction;
-        }
-    }
-    #endregion
-
-    #region SkillAoEFactory
-    public class SkillAoEFactory
-    {
-        /// <summary>
-        /// The game this SkillProjectileFactory belongs to
-        /// </summary>
-        DungeonCrawlerGame game;
-
-        /// <summary>
-        /// Constructors
-        /// </summary>
-        /// <param name="game"></param>
-        public SkillAoEFactory(DungeonCrawlerGame game)
-        {
-            this.game = game;
-        }
-
-        public uint CreateSkillAoE(Skills skill, Facing facing, Position position)
+       
+        public uint CreateSkillAoE(Skills skill, Position position)
         {
             SkillAoE skillAoE;
-            Movement movement;
             Sprite sprite;
             Collideable collideable;
-            Vector2 direction = getDirectionFromFacing(facing);
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
-            position.Center += direction * 70;
 
             switch (skill)
             {
+                case Skills.detonate:
+                    skillAoE = new SkillAoE()
+                    {
+                        EntityID = eid,
+                        radius = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                    };
+                    break;
                 default:
                     throw new Exception("Not a AoE skill");
             }
@@ -160,7 +130,6 @@ namespace DungeonCrawler.Entities
             };
 
             game.SkillAoEComponent.Add(eid, skillAoE);
-            game.MovementComponent.Add(eid, movement);
             game.PositionComponent.Add(eid, position);
             game.SpriteComponent.Add(eid, sprite);
             game.CollisionComponent.Add(eid, collideable);
@@ -168,58 +137,14 @@ namespace DungeonCrawler.Entities
         }
 
 
-        private Vector2 getDirectionFromFacing(Facing facing)
-        {
-            Vector2 direction = new Vector2(0);
-
-            switch (facing)
-            {
-                case Facing.North:
-                    direction.Y = -1;
-                    break;
-                case Facing.East:
-                    direction.X = 1;
-                    break;
-                case Facing.South:
-                    direction.Y = 1;
-                    break;
-                case Facing.West:
-                    direction.X = -1;
-                    break;
-            }
-            return direction;
-        }
-    }
-    #endregion
-
-    #region SkillDeployableFactory
-    public class SkillDeployableFactory
-    {
-        /// <summary>
-        /// The game this SkillProjectileFactory belongs to
-        /// </summary>
-        DungeonCrawlerGame game;
-
-        /// <summary>
-        /// Constructors
-        /// </summary>
-        /// <param name="game"></param>
-        public SkillDeployableFactory(DungeonCrawlerGame game)
-        {
-            this.game = game;
-        }
-
-        public uint CreateSkillDeployable(Skills skill, Facing facing, Position position)
+        public uint CreateSkillDeployable(Skills skill, Position position)
         {
             SkillDeployable skillDeployable;
-            Movement movement;
             Sprite sprite;
             Collideable collideable;
-            Vector2 direction = getDirectionFromFacing(facing);
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
-            position.Center += direction * 70;
 
             switch (skill)
             {
@@ -234,12 +159,10 @@ namespace DungeonCrawler.Entities
             };
 
             game.SkillDeployableComponent.Add(eid, skillDeployable);
-            game.MovementComponent.Add(eid, movement);
             game.PositionComponent.Add(eid, position);
             game.SpriteComponent.Add(eid, sprite);
             game.CollisionComponent.Add(eid, collideable);
             return eid;
-
         }
 
         private Vector2 getDirectionFromFacing(Facing facing)
@@ -263,8 +186,7 @@ namespace DungeonCrawler.Entities
             }
             return direction;
         }
+
     }
     #endregion
-
-  
 }

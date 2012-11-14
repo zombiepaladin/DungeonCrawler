@@ -39,6 +39,20 @@ namespace DungeonCrawler.Systems
         /// <summary>
         /// The game this system belongs to
         /// </summary>
+<<<<<<< HEAD
+        private DungeonCrawlerGame game;
+
+        public enum ComponentType
+        {
+            Player,
+            Enemy,
+            Bullet,
+            Collectible,
+            Door,
+            Room,
+            //Needs more in the future!
+            Skill,
+=======
         private DungeonCrawlerGame game;
 
         public enum ComponentType
@@ -51,7 +65,7 @@ namespace DungeonCrawler.Systems
             Room,
             Effect,
             //Needs more in the future!
-            Skill,
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
         }
 
         private Stack<KeyValuePair<uint, ComponentType>> garbageSchedule;
@@ -140,6 +154,15 @@ namespace DungeonCrawler.Systems
                         game.DoorComponent.Remove(keyValue.Key);
                         //game.SpriteComponent.Remove(keyValue.Key);
                         break;
+<<<<<<< HEAD
+                    case ComponentType.Skill:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+                        game.SkillProjectileComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.MovementComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
+=======
                     case ComponentType.Effect:
                         if (game.AgroDropComponent.Contains(keyValue.Key))        game.AgroDropComponent.Remove(keyValue.Key);
                         if (game.AgroGainComponent.Contains(keyValue.Key))        game.AgroGainComponent.Remove(keyValue.Key);
@@ -157,13 +180,7 @@ namespace DungeonCrawler.Systems
                         if (game.ResurrectComponent.Contains(keyValue.Key))       game.ResurrectComponent.Remove(keyValue.Key);
                         if (game.StunComponent.Contains(keyValue.Key))            game.StunComponent.Remove(keyValue.Key);
                         if (game.TimedEffectComponent.Contains(keyValue.Key))     game.TimedEffectComponent.Remove(keyValue.Key);
-                        break;
-                    case ComponentType.Skill:
-                        game.PositionComponent.Remove(keyValue.Key);
-                        game.SkillProjectileComponent.Remove(keyValue.Key);
-                        game.SpriteComponent.Remove(keyValue.Key);
-                        game.MovementComponent.Remove(keyValue.Key);
-                        game.CollisionComponent.Remove(keyValue.Key);
+>>>>>>> f95951884244a0246e7b7a052ef27b67a4de7951
                         break;
                 }
             }
