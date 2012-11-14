@@ -21,23 +21,11 @@ using Microsoft.Xna.Framework;
 namespace DungeonCrawler.Components
 {
     /// <summary>
-    /// A list of all the quest names
-    /// </summary>
-    public enum QuestName
-    {
-        // Main/Story Quests
-        ReachNextRoom,
-        SecondQuest,
-        // Side Quests (if they exist)
-    };
-
-    /// <summary>
     /// A list of all statuses for the quests
     /// </summary>
     public enum QuestStatus
     {
        InProgress,
-       NextGoal,
        Finished,
     };
 
@@ -52,19 +40,14 @@ namespace DungeonCrawler.Components
         public uint EntityID;
 
         /// <summary>
-        /// The name of the quest
+        /// The ID of the quest. It is used to retrieve the quest name and description from the Quest Log System
         /// </summary>
-        public QuestName questName;
+        public uint questID;
 
         /// <summary>
         /// The status of the quest. This may not be needed in the long run.
         /// </summary>
         public QuestStatus questStatus;
-
-        /// <summary>
-        /// Contains strings that describe the goals of the quest
-        /// </summary>
-        public string[] questGoals;
     };
 
     public class QuestComponent : GameComponent<Quest>

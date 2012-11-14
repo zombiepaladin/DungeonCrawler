@@ -105,7 +105,7 @@ namespace DungeonCrawler.Systems
                 // Load the destination room
                 uint lastRoomEid = game.CurrentRoomEid;
 
-                if (door.DestinationRoom == "TestDungeon1" && game.RoomComponent[lastRoomEid].roomName == "TestDungeon3" && game.QuestLogSystem.currentQuest.questName == QuestName.ReachNextRoom && game.QuestLogSystem.currentQuest.questStatus == QuestStatus.InProgress)
+                if (door.DestinationRoom == "TestDungeon1" && game.RoomComponent[lastRoomEid].roomName == "TestDungeon3" && game.QuestLogSystem.currentQuest.questID == 0 && game.QuestLogSystem.currentQuest.questStatus == QuestStatus.InProgress)
                 {
                     game.QuestLogSystem.currentQuest.questStatus = QuestStatus.Finished;
                     game.QuestComponent[game.QuestLogSystem.currentQuest.EntityID] = game.QuestLogSystem.currentQuest;
