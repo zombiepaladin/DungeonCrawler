@@ -738,5 +738,23 @@ namespace DungeonCrawler.Systems
 
             return obj1 | obj2;  
         }
+
+        //Applies damage and creates an actorText to show it.
+        private void DoDamage(Player player, int damage)
+        {
+            PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+            info.Health -= damage;
+            _game.PlayerInfoComponent[player.EntityID] = info;
+
+            _game.ActorTextComponent.Add(player.EntityID, damage.ToString());
+        }
+
+        //Applies damage and creates an actorText to show it.
+        private void DoDamage(Enemy enemy, int damage)
+        {
+            enemy.Health -= damage;
+
+            _game.ActorTextComponent.Add(enemy.EntityID, damage.ToString());
+        }
     }
 }

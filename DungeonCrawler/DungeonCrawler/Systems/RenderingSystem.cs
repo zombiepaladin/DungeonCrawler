@@ -128,6 +128,17 @@ namespace DungeonCrawler.Systems
                 }
             }
 
+            //Draw actor text
+            foreach (ActorText actorText in game.ActorTextComponent.All)
+            {
+                Position position = game.PositionComponent[actorText.EntityID];
+                if(position.RoomID == roomId)
+                {
+                    position.Center.Y -= actorText.Offset;
+                    spriteBatch.DrawString(_actorTextFont, actorText.Text, position, Color.White);
+                }
+            }
+
             //Draw Weapon animations
             foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
             {

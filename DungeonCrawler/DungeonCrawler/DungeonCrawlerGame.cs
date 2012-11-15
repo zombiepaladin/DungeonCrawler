@@ -167,6 +167,7 @@ namespace DungeonCrawler
         public ExplodingDroidComponent ExplodingDroidComponent;
         public SoundComponent SoundComponent;
         public QuestComponent QuestComponent;
+        public ActorTextComponent ActorTextComponent;
         
         #endregion
 
@@ -185,6 +186,7 @@ namespace DungeonCrawler
         public RoomChangingSystem RoomChangingSystem;
 
         public GarbagemanSystem GarbagemanSystem;
+        TextSystem TextSystem;
 
         #endregion
 
@@ -251,6 +253,7 @@ namespace DungeonCrawler
             SkillAoEComponent = new SkillAoEComponent();
             SkillDeployableComponent = new SkillDeployableComponent();
             SoundComponent = new SoundComponent();
+            ActorTextComponent = new ActorTextComponent();
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();
@@ -286,6 +289,7 @@ namespace DungeonCrawler
             RoomChangingSystem = new RoomChangingSystem(this);
             QuestLogSystem = new QuestLogSystem(this);
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
+            TextSystem = new TextSystem(this);
 
             // Testing code.
             LevelManager.LoadContent();
@@ -391,9 +395,11 @@ namespace DungeonCrawler
                     WeaponSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
-                    GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
+                    TextSystem.Update(elapsedTime);
+
+                    GarbagemanSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
