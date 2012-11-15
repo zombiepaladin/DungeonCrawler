@@ -5,6 +5,8 @@
 // Author: Matthew McHaney
 //
 // Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
+// Modified by Samuel Fike and Jiri Malina: Added handling of SpriteAnimationComponents
+// Modified By: Nick Boen - Added compatability with Effect Components
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -47,6 +49,7 @@ namespace DungeonCrawler.Systems
             Collectible,
             Door,
             Room,
+            Effect,
             //Needs more in the future!
         }
 
@@ -135,6 +138,24 @@ namespace DungeonCrawler.Systems
                         game.LocalComponent.Remove(keyValue.Key);
                         game.DoorComponent.Remove(keyValue.Key);
                         //game.SpriteComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Effect:
+                        if (game.AgroDropComponent.Contains(keyValue.Key))        game.AgroDropComponent.Remove(keyValue.Key);
+                        if (game.AgroGainComponent.Contains(keyValue.Key))        game.AgroGainComponent.Remove(keyValue.Key);
+                        if (game.BuffComponent.Contains(keyValue.Key))            game.BuffComponent.Remove(keyValue.Key);
+                        if (game.ChanceToSucceedComponent.Contains(keyValue.Key)) game.ChanceToSucceedComponent.Remove(keyValue.Key);
+                        if (game.CoolDownComponent.Contains(keyValue.Key))        game.CoolDownComponent.Remove(keyValue.Key);
+                        if (game.DamageOverTimeComponent.Contains(keyValue.Key))  game.DamageOverTimeComponent.Remove(keyValue.Key);
+                        if (game.DirectDamageComponent.Contains(keyValue.Key))    game.DirectDamageComponent.Remove(keyValue.Key);
+                        if (game.DirectHealComponent.Contains(keyValue.Key))      game.DirectHealComponent.Remove(keyValue.Key);
+                        if (game.FearComponent.Contains(keyValue.Key))            game.FearComponent.Remove(keyValue.Key);
+                        if (game.HealOverTimeComponent.Contains(keyValue.Key))    game.HealOverTimeComponent.Remove(keyValue.Key);
+                        if (game.InstantEffectComponent.Contains(keyValue.Key))   game.InstantEffectComponent.Remove(keyValue.Key);
+                        if (game.KnockBackComponent.Contains(keyValue.Key))       game.KnockBackComponent.Remove(keyValue.Key);
+                        if (game.ReduceAgroRangeComponent.Contains(keyValue.Key)) game.ReduceAgroRangeComponent.Remove(keyValue.Key);
+                        if (game.ResurrectComponent.Contains(keyValue.Key))       game.ResurrectComponent.Remove(keyValue.Key);
+                        if (game.StunComponent.Contains(keyValue.Key))            game.StunComponent.Remove(keyValue.Key);
+                        if (game.TimedEffectComponent.Contains(keyValue.Key))     game.TimedEffectComponent.Remove(keyValue.Key);
                         break;
                 }
             }

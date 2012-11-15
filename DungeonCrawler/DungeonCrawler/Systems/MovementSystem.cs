@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified By: Nicholas Strub - Added Player Clamping (Assignment 7). Also fixed player clamping 10/31/12
+// Modified by Samuel Fike and Jiri Malina: Removed MovementSprite code, now handled by SpriteAnimationSystem
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -64,6 +65,10 @@ namespace DungeonCrawler.Systems
             {
                 // Update the entity's position in the world
                 Position position = game.PositionComponent[movement.EntityID];
+                float speedScale = 1f;
+
+                //if (game.DefibrillateComponent.Contains(movement.EntityID))
+                 //   speedScale *= game.DefibrillateComponent[movement.EntityID].MovementSpeedIncrease;
 
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;
@@ -99,6 +104,7 @@ namespace DungeonCrawler.Systems
 
                 game.PositionComponent[movement.EntityID] = position;
                 
+                /*
                 // Update the entity's movement sprite
                 if(game.MovementSpriteComponent.Contains(movement.EntityID))
                 {
@@ -139,7 +145,8 @@ namespace DungeonCrawler.Systems
                     // Apply our updates
                     game.MovementSpriteComponent[movement.EntityID] = movementSprite;
                 }
-
+                */
+                  
                 //Update the collision bounds if it has one
                 if (game.CollisionComponent.Contains(movement.EntityID))
                 {

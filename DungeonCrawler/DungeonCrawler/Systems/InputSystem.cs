@@ -7,6 +7,8 @@
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
+// Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
+// Modified: Nick Boen - Added a test control for using a skill (buffs speed)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -78,16 +80,45 @@ namespace DungeonCrawler.Systems
                 // Update the player's movement component
                 Movement movement = game.MovementComponent[player.EntityID];
                 movement.Direction = gamePadState.ThumbSticks.Left;
+
+                SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[player.EntityID];
+
                 if (keyboardState.IsKeyDown(Keys.W))
+                {
+                    spriteAnimation.CurrentAnimationRow = (int) AnimationMovementDirection.Up;
                     movement.Direction.Y = -1;
-                if (keyboardState.IsKeyDown(Keys.A))
-                    movement.Direction.X = -1;
+                }
                 if (keyboardState.IsKeyDown(Keys.S))
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
                     movement.Direction.Y = 1;
+                }
+                if (keyboardState.IsKeyDown(Keys.A))
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
+                    movement.Direction.X = -1;
+                }
+                
                 if (keyboardState.IsKeyDown(Keys.D))
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
                     movement.Direction.X = 1;
-                if(movement.Direction != Vector2.Zero)
+                }
+                
+                if (movement.Direction != Vector2.Zero)
+                {
                     movement.Direction.Normalize();
+                    spriteAnimation.IsPlaying = true;
+                }
+                else
+                {
+                    spriteAnimation.IsPlaying = false;
+                    //spriteAnimation.CurrentFrame = 1;
+                    //TODO: idle frame
+                }
+
+                game.SpriteAnimationComponent[spriteAnimation.EntityID] = spriteAnimation;
+                    
                 game.MovementComponent[player.EntityID] = movement;
 
                 PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
@@ -96,6 +127,20 @@ namespace DungeonCrawler.Systems
                 if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
                 {
                     info.State = PlayerState.Attacking;
+                }
+
+                if (keyboardState.IsKeyDown(Keys.L) && !oldKeyboardState.IsKeyDown(Keys.L)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
+
+                if (keyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
+                {
+                    uint thisPlayerKey = 0;
+                    foreach(Player p in game.PlayerComponent.All)
+                    {
+                        if(p.PlayerIndex == PlayerIndex.One)
+                            thisPlayerKey = p.EntityID;
+                    }
+
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;

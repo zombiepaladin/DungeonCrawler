@@ -4,6 +4,8 @@
 //
 // Author: Matthew McHaney
 //
+// Modified: Nick Boen - Added the EnemyState enumeration, 11/12/2012
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -27,6 +29,14 @@ namespace DungeonCrawler.Components
         Target,
     }
 
+    public enum EnemyState
+    {
+        Dead = 0x0,
+        Stunned = 0x1,
+        Scared = 0x2, //for fear
+        Poisoned = 0x3,
+    }
+
     /// <summary>
     /// A struct representing an Enemy Component
     /// </summary>
@@ -43,6 +53,12 @@ namespace DungeonCrawler.Components
         public EnemyType Type;
 
         /// <summary>
+        /// The state of the enemy
+        /// </summary>
+        public EnemyState State;
+
+        /// <summary>
+
         /// Boolean for whether touching the objects hurts the player or not
         /// </summary>
         public bool HurtOnTouch;

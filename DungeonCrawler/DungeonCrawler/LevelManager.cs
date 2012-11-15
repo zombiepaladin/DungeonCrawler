@@ -101,7 +101,7 @@ namespace DungeonCrawler
                     //{
                     //    CurrentSong = null;
                     //}
-                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth);
+                    currentRoomID = game.RoomFactory.CreateRoom(level, CurrentMap.Width, CurrentMap.Height, CurrentMap.TileWidth, CurrentMap.TileHeight, CurrentMap.WallWidth, level);
                     Room room = game.RoomComponent[currentRoomID];
 
 
@@ -135,6 +135,10 @@ namespace DungeonCrawler
                                     default:
                                         break;
                                 }
+                                break;
+                            case "NPC":
+                                entityID = game.NPCFactory.CreateNPC((NPCName) Enum.Parse(typeof(NPCName), goData.Type), new Position 
+                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
                                 break;
                             case "Trigger":
                                 switch (goData.Type)
@@ -304,7 +308,7 @@ namespace DungeonCrawler
 
             spriteBatch.Begin(0, null, SamplerState.LinearClamp, null, null, basicEffect);
 
-            if (CurrentMap != null)
+            if (CurrentMap != null && Loading == false)
             {
                 for (int i = 0; i < CurrentMap.LayerCount; i++)
                 {

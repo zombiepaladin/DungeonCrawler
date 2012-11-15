@@ -21,6 +21,12 @@ namespace DungeonCrawler
 
         public String fileName;
 
+        public int fileNumber;
+
+        public int aggregate;
+
+        public bool newGame;
+
         public CharSelectPreview(Texture2D image, Vector2 pos, SpriteFont font, String charType, String level, Color color, String fileName)
         {
             this.fileName = fileName;
@@ -29,6 +35,11 @@ namespace DungeonCrawler
             this.level = new TextSprite(font, level, new Vector2(pos.X + 35, pos.Y + 12), color);
             position = pos;
             Color = color;
+            this.charType = new TextSprite(font, charType, new Vector2(pos.X + 25, pos.Y - 8), color);
+            this.level = new TextSprite(font, level, new Vector2(pos.X + 25, pos.Y + 12), color);
+            position = pos;
+            Color = color;
+            newGame = false;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -36,6 +47,9 @@ namespace DungeonCrawler
             spriteBatch.Draw(image.Image, image.Position, new Rectangle?(), Color, 0, image.Origin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(charType.Font, charType.Text, charType.Position, Color, 0, charType.Origin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(level.Font, level.Text, level.Position, Color, 0, level.Origin, 1, SpriteEffects.None, 1);
+
+            spriteBatch.DrawString(charType.Font, charType.Text, charType.Position, Color, 0, new Vector2(0, charType.Origin.Y), 1, SpriteEffects.None, 1);
+            spriteBatch.DrawString(level.Font, level.Text, level.Position, Color, 0, new Vector2(0, level.Origin.Y), 1, SpriteEffects.None, 1);
         }
 
         public void MoveByOffset(Vector2 offset)
@@ -44,5 +58,14 @@ namespace DungeonCrawler
             charType.Position += offset;
             level.Position += offset;
         }
+
+        public void SetPosition(Vector2 position)
+        {
+            image.X = (int)(position.X - image.Image.Width / 2);
+            image.Y = (int)position.Y;
+            charType.Position = new Vector2(position.X + 25, position.Y - 8);
+            level.Position = new Vector2(position.X + 25, position.Y + 12);
+        }
+
     }
 }
