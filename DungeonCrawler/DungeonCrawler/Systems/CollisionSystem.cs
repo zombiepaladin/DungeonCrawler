@@ -44,6 +44,7 @@ namespace DungeonCrawler.Systems
             Collectible = 0x10,
             Door =  0x20,
             Trigger = 0x40,
+            Skill = 0x80,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
@@ -58,6 +59,14 @@ namespace DungeonCrawler.Systems
 
             BulletStatic = 0x9,
             BulletDoor = 0x28,
+            
+            SkillStatic = 0x81,
+            SkillPlayer = 0x82,
+            SkillEnemy =0x84,
+            SkillBullet =0x88,
+            SkillCollectible=0x90,
+            SkillDoor=0xA0,
+            
            
         }
 
@@ -148,6 +157,17 @@ namespace DungeonCrawler.Systems
                             case CollisionType.BulletDoor:
                                 BulletDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.SkillBullet:
+                            case CollisionType.SkillCollectible:
+                            case CollisionType.SkillDoor:
+                            case CollisionType.SkillEnemy:
+                            case CollisionType.SkillStatic:
+                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
+                            case CollisionType.SkillPlayer:
+                                break;
+                                
+
                         }
                     }
                 }
@@ -658,6 +678,26 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
+        private void SkillCollision(uint p, uint p_2)
+        {  
+            //TODO: actuall skill collision
+            uint skillId, oId;
+            if (_game.SkillProjectileComponent.Contains(p))
+            {
+                skillId = p;
+                oId = p_2;
+            }
+            else
+            {
+                skillId = p_2;
+                oId = p;
+            }
+            if (!(_game.SkillAoEComponent.Contains(skillId) || _game.SkillDeployableComponent.Contains(skillId)) )
+            {
+                _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
+            }
+        }
+
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
@@ -679,6 +719,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p))
                 obj1 = CollisionType.Trigger;
+            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p)||_game.SkillDeployableComponent.Contains(p))
+                obj1 = CollisionType.Skill;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -695,6 +737,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p_2))
                 obj2 = CollisionType.Trigger;
+            else if(_game.SkillProjectileComponent.Contains(p_2) || _game.SkillAoEComponent.Contains(p_2)||_game.SkillDeployableComponent.Contains(p_2))
+                obj2 = CollisionType.Skill;
             else //Static
                 obj2 = CollisionType.Static;
 

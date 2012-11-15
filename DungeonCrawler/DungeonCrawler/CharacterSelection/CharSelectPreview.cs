@@ -31,10 +31,6 @@ namespace DungeonCrawler
         {
             this.fileName = fileName;
             this.image = new ImageSprite(image, (int)(pos.X - image.Width / 2), (int)pos.Y, color);
-            this.charType = new TextSprite(font, charType, new Vector2(pos.X + 35, pos.Y - 8), color);
-            this.level = new TextSprite(font, level, new Vector2(pos.X + 35, pos.Y + 12), color);
-            position = pos;
-            Color = color;
             this.charType = new TextSprite(font, charType, new Vector2(pos.X + 25, pos.Y - 8), color);
             this.level = new TextSprite(font, level, new Vector2(pos.X + 25, pos.Y + 12), color);
             position = pos;
@@ -45,9 +41,6 @@ namespace DungeonCrawler
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(image.Image, image.Position, new Rectangle?(), Color, 0, image.Origin, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(charType.Font, charType.Text, charType.Position, Color, 0, charType.Origin, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(level.Font, level.Text, level.Position, Color, 0, level.Origin, 1, SpriteEffects.None, 1);
-
             spriteBatch.DrawString(charType.Font, charType.Text, charType.Position, Color, 0, new Vector2(0, charType.Origin.Y), 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(level.Font, level.Text, level.Position, Color, 0, new Vector2(0, level.Origin.Y), 1, SpriteEffects.None, 1);
         }
@@ -66,6 +59,5 @@ namespace DungeonCrawler
             charType.Position = new Vector2(position.X + 25, position.Y - 8);
             level.Position = new Vector2(position.X + 25, position.Y + 12);
         }
-
     }
 }

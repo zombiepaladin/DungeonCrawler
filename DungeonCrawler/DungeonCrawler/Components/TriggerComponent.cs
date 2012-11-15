@@ -57,9 +57,6 @@ namespace DungeonCrawler.Components
                 case "Door":
                     DungeonCrawlerGame.game.DoorComponent.HandleTrigger(targetEntityID, trigger.TriggerType);
                     break;
-                case "Switch":
-
-                    break;
             }
         }
 

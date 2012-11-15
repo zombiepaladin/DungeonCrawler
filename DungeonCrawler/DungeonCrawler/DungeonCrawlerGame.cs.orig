@@ -12,6 +12,7 @@
 // Modified by Nicholas Strub: Added QuestLog System
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
+
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -110,6 +111,18 @@ namespace DungeonCrawler
         public CollectibleFactory CollectableFactory;
 
         /// <summary>
+        /// A EnemyFactory for creating enemies
+        /// </summary>
+        public EnemyFactory EnemyFactory;
+
+        public ContinueNewGameScreen ContinueNewGameScreen;
+
+        /// <summary>
+        /// Factory fo the visual components of the skills
+        /// </summary>
+        public SkillProjectileFactory SkillProjectileFactory;
+        public SkillAoEFactory SkillAoEFactory;
+        public SkillDeployableFactory SkillDeployableFactory;
         /// An EnemyFactory for creating enemies
         /// </summary>
         public EnemyFactory EnemyFactory;
@@ -121,12 +134,6 @@ namespace DungeonCrawler
 
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
-
-        /// <summary>
-        /// Factory fo the visual components of the skills
-        /// </summary>
-        public SkillEntityFactory SkillEntityFactory;
-
         #endregion
 
         #region Game Components
@@ -183,6 +190,7 @@ namespace DungeonCrawler
 
 	public QuestComponent QuestComponent;
 
+
         #region Effect Components
         public AgroDropComponent AgroDropComponent;
         public AgroGainComponent AgroGainComponent;
@@ -211,6 +219,13 @@ namespace DungeonCrawler
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
+        EnemyAISystem EnemyAISystem;
+        CollisionSystem CollisionSystem;
+        public QuestLogSystem QuestLogSystem;
+	SpriteAnimationSystem SpriteAnimationSystem;
+        public RoomChangingSystem RoomChangingSystem;
+
+        public GarbagemanSystem GarbagemanSystem;
         public EnemyAISystem EnemyAISystem;
         public NpcAISystem NpcAISystem;
         CollisionSystem CollisionSystem;
@@ -220,6 +235,7 @@ namespace DungeonCrawler
         public SkillSystem SkillSystem;
 
         public GarbagemanSystem GarbagemanSystem;
+
         #endregion
 
 
@@ -251,7 +267,7 @@ namespace DungeonCrawler
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
             EnemyFactory = new EnemyFactory(this);
-            SkillEntityFactory = new SkillEntityFactory(this);
+            SkillProjectileFactory = new SkillProjectileFactory(this);
             NPCFactory = new NPCFactory(this);
 
             // Initialize Components
@@ -346,10 +362,9 @@ namespace DungeonCrawler
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
 
-
             // Testing code.
             LevelManager.LoadContent();
-            LevelManager.LoadLevel("D01F01R01");
+            LevelManager.LoadLevel("TestDungeon3");
             //End Testing Code
 
         }

@@ -67,8 +67,13 @@ namespace DungeonCrawler.Systems
                 Position position = game.PositionComponent[movement.EntityID];
                 float speedScale = 1f;
 
+<<<<<<< HEAD
               /*  if (game.DefibrillateComponent.Contains(movement.EntityID))
                     speedScale *= game.DefibrillateComponent[movement.EntityID].MovementSpeedIncrease;*/
+=======
+                //if (game.DefibrillateComponent.Contains(movement.EntityID))
+                 //   speedScale *= game.DefibrillateComponent[movement.EntityID].MovementSpeedIncrease;
+>>>>>>> 54b53d16715c1c0c205f89d5e66809b85ced92f9
 
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;

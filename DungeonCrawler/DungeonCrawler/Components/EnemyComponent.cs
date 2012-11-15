@@ -58,7 +58,6 @@ namespace DungeonCrawler.Components
         public EnemyState State;
 
         /// <summary>
-
         /// Boolean for whether touching the objects hurts the player or not
         /// </summary>
         public bool HurtOnTouch;

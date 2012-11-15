@@ -41,8 +41,8 @@
  <objectgroup name="Entities" width="40" height="23">
   <object name="Trigger" type="Door" x="640" y="-3" width="64" height="32">
    <properties>
-    <property name="DestinationRoom" value="TestDungeon1"/>
-    <property name="DestinationSpawnName" value="1"/>
+    <property name="DestinationRoom" value="D01F01R03"/>
+    <property name="DestinationSpawnName" value="2"/>
    </properties>
   </object>
   <object name="Trigger" type="Door" x="1248" y="320" width="32" height="64">

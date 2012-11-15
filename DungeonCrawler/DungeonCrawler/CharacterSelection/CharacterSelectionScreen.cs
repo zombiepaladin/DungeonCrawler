@@ -298,23 +298,6 @@ namespace DungeonCrawler
             }
         }
 
-        public void GoToNetworking()
-        {
-            foreach (CharSelectPlayer player in players)
-            {
-                if (player.connected && player.selected)
-                {
-                    Equipment e = new Equipment()
-                    {
-                        EntityID = game.AggregateFactory.CreateFromAggregate(buttonAggregates[player.yPos, player.xPos], player.playerIndex),
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardGun),
-                    };
-                    game.EquipmentComponent.Add(e.EntityID, e);
-                }
-            }
-            game.GameState = GameState.NetworkSetup;
-        }
-
         /// <summary>
         /// Renders the character selection screen, when appropriate
         /// </summary>
