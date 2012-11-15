@@ -1,4 +1,16 @@
-﻿using System;
+﻿#region File Description
+//-----------------------------------------------------------------------------
+// WeaponFactory.cs 
+//
+// Author: Devin Kelly-Collins
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -51,7 +63,7 @@ namespace DungeonCrawler.Entities
             Damage = 1,
             Effect = WeaponEffect.None,
             Range = 1,
-            Speed = 1f,
+            Speed = .1f,
             AttackType = WeaponAttackType.Ranged,
         };
 
@@ -128,9 +140,12 @@ namespace DungeonCrawler.Entities
             Bullet bullet;
             Movement movement;
             Sprite sprite;
+            Collideable collideable;
             uint eid = Entity.NextEntity();
 
             position.EntityID = eid;
+            position.Center += direction * 70;
+
 
             switch (type)
             {
@@ -141,23 +156,31 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = eid,
                         Direction = direction,
-                        Speed = 1,
+                        Speed = 300,
                     };
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheet/StandardBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 5, 5),
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
+                    position.Radius = 5;
                     break;
                 default:
                     throw new Exception("Unknown BulletType");
             }
 
+            collideable = new Collideable()
+            {
+                EntityID = eid,
+                Bounds = new CircleBounds(position.Center, position.Radius),
+            };
+
             _game.BulletComponent.Add(eid, bullet);
             _game.MovementComponent.Add(eid, movement);
             _game.PositionComponent.Add(eid, position);
             _game.SpriteComponent.Add(eid, sprite);
+            _game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
     }

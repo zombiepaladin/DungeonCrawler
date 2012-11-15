@@ -1,4 +1,15 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------------
+// TriggerComponent.cs
+//
+// Author: Samuel Fike and Jiri Malina
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +30,8 @@ namespace DungeonCrawler.Components
         public string TargetID;
 
         /// <summary>
-        /// The type of action to perform
+        /// The name of the trigger. Defined in the map editor and in the Component's HandleTrigger method.
+        /// An example is DoorComponent, which has "Lock", "Unlock", etc.
         /// </summary>
         public string TriggerType;
     }
@@ -27,8 +39,14 @@ namespace DungeonCrawler.Components
     public class TriggerComponent : GameComponent<Trigger>
     {
         public void Trigger(uint entityID)
-        {
+        { 
+            #region BinaryTreeArrayImplementation
+            //Trigger trigger = this[entityID];
+            #endregion
+
+            #region DictionaryImplementation
             Trigger trigger = elements[entityID];
+            #endregion
 
             Room room = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 
@@ -38,6 +56,9 @@ namespace DungeonCrawler.Components
             {
                 case "Door":
                     DungeonCrawlerGame.game.DoorComponent.HandleTrigger(targetEntityID, trigger.TriggerType);
+                    break;
+                case "Switch":
+
                     break;
             }
         }

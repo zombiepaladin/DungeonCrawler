@@ -22,20 +22,19 @@
  <objectgroup name="Collisions" width="40" height="23">
   <object x="735" y="336" width="65" height="39"/>
   <object x="510" y="335" width="35" height="42"/>
-  <object x="0" y="0" width="1278" height="65"/>
-  <object x="0" y="65" width="62" height="606"/>
-  <object x="1214" y="65" width="66" height="607"/>
-  <object x="1" y="672" width="1279" height="64"/>
+  <object name="Trigger" type="Wall" x="0" y="0" width="1280" height="64"/>
+  <object name="Trigger" type="Wall" x="0" y="64" width="64" height="608"/>
+  <object name="Trigger" type="Wall" x="0" y="672" width="576" height="64"/>
  </objectgroup>
  <objectgroup name="Entities" width="40" height="23">
   <object name="Enemy" type="TestEnemy" x="978" y="214" width="56" height="65"/>
-  <object name="Door" x="1214" y="319" width="66" height="63">
+  <object name="Trigger" type="Door" x="1216" y="320" width="64" height="64">
    <properties>
     <property name="DestinationRoom" value="TestDungeon3"/>
     <property name="DestinationSpawnName" value="1"/>
    </properties>
   </object>
-  <object name="Door" x="575" y="671" width="65" height="69">
+  <object name="Trigger" type="Door" x="576" y="672" width="64" height="64">
    <properties>
     <property name="DestinationRoom" value="TestDungeon2"/>
     <property name="DestinationSpawnName" value="1"/>
@@ -49,6 +48,9 @@
     <property name="DestinationSpawnName" value="3"/>
    </properties>
   </object>
+  <object name="Trigger" type="Wall" x="1216" y="64" width="64" height="256"/>
+  <object name="Trigger" type="Wall" x="1216" y="384" width="64" height="288"/>
+  <object name="Trigger" type="Wall" x="640" y="672" width="640" height="64"/>
  </objectgroup>
  <objectgroup name="PlayerSpawns" width="40" height="23">
   <object name="PlayerSpawn" x="615" y="251" width="66" height="72">

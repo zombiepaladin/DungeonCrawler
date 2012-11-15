@@ -6,6 +6,7 @@
 //
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
+// Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -71,7 +72,7 @@ namespace DungeonCrawler.Systems
             foreach (Player player in game.PlayerComponent.All)
             {
                 // Grab input for the player
-                KeyboardState keyboardState = Keyboard.GetState();
+                KeyboardState keyboardState = Keyboard.GetState(player.PlayerIndex);
                 GamePadState gamePadState = GamePad.GetState(player.PlayerIndex);
 
                 // Update the player's movement component
@@ -89,12 +90,15 @@ namespace DungeonCrawler.Systems
                     movement.Direction.Normalize();
                 game.MovementComponent[player.EntityID] = movement;
 
+                PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
+                info.State = PlayerState.Default;
+
                 if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
                 {
-                    PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
                     info.State = PlayerState.Attacking;
-                    game.PlayerInfoComponent[player.EntityID] = info;
                 }
+
+                game.PlayerInfoComponent[player.EntityID] = info;
 
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)

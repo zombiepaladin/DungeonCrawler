@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
+// Modified: Devin Kelly-Collins added WeaponSprite rendering, 10/24/2012
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -66,53 +67,72 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Draw(float elapsedTime)
         {
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, null, SamplerState.PointClamp, null, null, null);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, null, null, null);
+            uint roomId;
+            try
+            {
+                roomId = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
+            }
+            catch
+            {
+                roomId = uint.MaxValue;
+            }
 
             // Draw all Sprites
             foreach (Sprite sprite in game.SpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
-                spriteBatch.Draw(sprite.SpriteSheet, 
-                                position.Center, 
-                                sprite.SpriteBounds, 
-                                Color.White, 
-                                0f,                                             // rotation
-                                new Vector2(position.Radius, position.Radius),  // origin
-                                1f,                                             // scale
-                                SpriteEffects.None,
-                                0); 
+                if (position.RoomID == roomId)
+                {
+
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    1);
+                }
             }
 
             // Draw all MovementSprites
             foreach (MovementSprite sprite in game.MovementSpriteComponent.All)
             {
-                
                 Position position = game.PositionComponent[sprite.EntityID];
-                spriteBatch.Draw(sprite.SpriteSheet,
-                                position.Center,
-                                sprite.SpriteBounds,
-                                Color.White,
-                                0f,                                             // rotation
-                                new Vector2(position.Radius, position.Radius),  // origin
-                                1f,                                             // scale
-                                SpriteEffects.None,
-                                0);
+                if (position.RoomID == roomId)
+                {
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,                                             // rotation
+                                    new Vector2(position.Radius, position.Radius),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    .8f);
+                }
             }
 
             //Draw Weapon animations
             foreach (WeaponSprite sprite in game.WeaponSpriteComponent.All)
             {
                 Position position = game.PositionComponent[sprite.EntityID];
-                position.Center += new Vector2(10); //Offset the weapon a bit;
-                spriteBatch.Draw(sprite.SpriteSheet,
-                                position.Center,
-                                sprite.SpriteBounds,
-                                Color.White,
-                                0f,
-                                new Vector2(position.Radius),
-                                1f,
-                                SpriteEffects.None,
-                                0);
+                if (position.RoomID == roomId)
+                {
+                    Facing facing = game.MovementSpriteComponent[sprite.EntityID].Facing;
+                    position.Center = applyFacingOffset(facing, position.Center);
+                    spriteBatch.Draw(sprite.SpriteSheet,
+                                    position.Center,
+                                    sprite.SpriteBounds,
+                                    Color.White,
+                                    0f,
+                                    new Vector2(position.Radius),
+                                    1f,
+                                    SpriteEffects.None,
+                                    (facing == Facing.North) ? .9f : .7f);
+                }
             }
 
             //Draw HUD
@@ -151,9 +171,10 @@ namespace DungeonCrawler.Systems
                                     new Vector2(position.Radius,position.Radius),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
-                                    0);
+                                    0.6f);
                 }
             }
+
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {
                 if (sprite.isSeen)
@@ -167,12 +188,36 @@ namespace DungeonCrawler.Systems
                                     new Vector2(position.Radius, position.Radius),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
-                                    0);
+                                    0.5f);
                 }
             }
+
             spriteBatch.End();
         }
-
+        
         #endregion
+
+        private Vector2 applyFacingOffset(Facing facing, Vector2 center)
+        {
+            int offset = 32;
+
+            switch (facing)
+            {
+                case Facing.North:
+                    center.Y -= offset;
+                    break;
+                case Facing.East:
+                    center.X += offset;
+                    break;
+                case Facing.South:
+                    center.Y += offset;
+                    break;
+                case Facing.West:
+                    center.X -= offset;
+                    break;
+            }
+
+            return center;
+        }
     }
 }
