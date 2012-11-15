@@ -60,6 +60,7 @@ namespace DungeonCrawler.Entities
             Collideable collideable = new Collideable()
             {
                 EntityID = entityID,
+                RoomID = position.RoomID,
                 Bounds = new RectangleBounds(rectangle.Left,rectangle.Top,rectangle.Width,rectangle.Height),
                 // Center and Radius TBD Later
             };

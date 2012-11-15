@@ -21,11 +21,24 @@ namespace DungeonCrawler.Components
     {
         public uint EntityID;
 
+        public uint RoomID;
+
         public Bounds Bounds;
     }
 
     public class CollisionComponent : GameComponent<Collideable>
     {
+        public List<Collideable> InRoom(uint roomID)
+        {
+            List<Collideable> collisions = new List<Collideable>();
 
+            foreach (Collideable collision in this.All)
+            {
+                if (collision.RoomID == roomID)
+                    collisions.Add(collision);
+            }
+
+            return collisions;
+        }
     }
 }

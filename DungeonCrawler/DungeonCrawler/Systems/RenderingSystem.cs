@@ -42,6 +42,10 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private SpriteBatch spriteBatch;
 
+#if DEBUG
+        private Texture2D _debugTexture;
+#endif
+
         #endregion
 
         #region Constructors
@@ -54,6 +58,14 @@ namespace DungeonCrawler.Systems
         {
             this.game = game;
             this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+
+#if DEBUG
+            _debugTexture = new Texture2D(game.GraphicsDevice, 1, 1);
+
+	        Color[] data = new Color[1];
+	        for (int i = 0; i < data.Length; ++i) { data[i] = Color.Red; data[i].A /= 2; }
+	        _debugTexture.SetData(data);
+#endif
         }
 
         #endregion
@@ -193,6 +205,24 @@ namespace DungeonCrawler.Systems
                                     0.5f);
                 }
             }
+
+#if DEBUG
+            //If we are in debug, draw the collision bounds.
+            uint roomID = game.CurrentRoomEid;
+
+            foreach (Collideable collision in game.CollisionComponent.InRoom(roomID))
+            {
+                if (collision.Bounds is RectangleBounds)
+                    spriteBatch.Draw(_debugTexture, ((RectangleBounds)collision.Bounds).Rectangle, Color.Red);
+                else
+                {
+                    //Might want to change this to a circle.
+                    CircleBounds bounds = (CircleBounds)collision.Bounds;
+                    spriteBatch.Draw(_debugTexture, new Rectangle((int)(bounds.Center.X - bounds.Radius), (int)(bounds.Center.Y - bounds.Radius),
+                        (int)(bounds.Radius * 2), (int)(bounds.Radius * 2)), Color.Red);
+                }
+            }
+#endif
 
             spriteBatch.End();
         }

@@ -19,6 +19,7 @@ using System.Linq;
 using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DungeonCrawler.Systems
 {
@@ -88,17 +89,9 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
-                //Get all positions in the room.
+                //Get all collisions in the room.
                 roomID = _game.PositionComponent[player.EntityID].RoomID;
-                IEnumerable<Position> positionsInRoom = _game.PositionComponent.InRoom(roomID);
-
-                List<Collideable> collideablesInRoom = new List<Collideable>();
-
-                foreach (Position position in positionsInRoom)
-                {
-                    if (_game.CollisionComponent.Contains(position.EntityID))
-                        collideablesInRoom.Add(_game.CollisionComponent[position.EntityID]);
-                }
+                List<Collideable> collideablesInRoom = _game.CollisionComponent.InRoom(roomID);
 
                 for (int i = 0; i < collideablesInRoom.Count; i++)
                 {
@@ -188,7 +181,7 @@ namespace DungeonCrawler.Systems
             //enemy.Status |= weapon.Effect;
 
             //Display some sort of damage indicator here.
-            Position enemyPosition = _game.PositionComponent[enemy.EntityID];
+            //Position enemyPosition = _game.PositionComponent[enemy.EntityID];
 
             //Update enemy info.
             _game.EnemyComponent[enemy.EntityID] = enemy;
