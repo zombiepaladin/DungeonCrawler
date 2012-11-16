@@ -6,6 +6,7 @@
 //
 // Modified: Nicholas Strub - Added Room Transitioning ability based on player/door collisions 10/31/2012
 // Modified: Nicholas Strub - Updated Player/Door Collisions (11/3/2012)
+// Modified: Devin Kelly-Collins - Added Weapon, PlayerWeapon, EnemyWeapon to CollisionType. Update switch statement in Update. Added PlayerWeaponCollision and EnemyWeaponCollision methods. Added DoDamage methods. (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DungeonCrawler.Systems
 {
@@ -44,7 +46,8 @@ namespace DungeonCrawler.Systems
             Collectible = 0x10,
             Door =  0x20,
             Trigger = 0x40,
-            Skill = 0x80,
+            Weapon = 0x80,
+            Skill = 0x100,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
@@ -52,20 +55,22 @@ namespace DungeonCrawler.Systems
             PlayerCollectible = 0x12,
             PlayerDoor = 0x22,
             PlayerTrigger = 0x42,
+            PlayerWeapon = 0x82,
 
             EnemyBullet = 0xC,
             EnemyStatic = 0x5,
             EnemyDoor   = 0x24,
+            EnemyWeapon = 0x84,
 
             BulletStatic = 0x9,
             BulletDoor = 0x28,
             
-            SkillStatic = 0x81,
-            SkillPlayer = 0x82,
-            SkillEnemy =0x84,
-            SkillBullet =0x88,
-            SkillCollectible=0x90,
-            SkillDoor=0xA0,
+            SkillStatic = 0x101,
+            SkillPlayer = 0x102,
+            SkillEnemy =0x104,
+            SkillBullet =0x108,
+            SkillCollectible=0x110,
+            SkillDoor=0x120,
             
            
         }
@@ -94,17 +99,9 @@ namespace DungeonCrawler.Systems
 
             foreach (Player player in _game.PlayerComponent.All)
             {
-                //Get all positions in the room.
+                //Get all collisions in the room.
                 roomID = _game.PositionComponent[player.EntityID].RoomID;
-                IEnumerable<Position> positionsInRoom = _game.PositionComponent.InRoom(roomID);
-
-                List<Collideable> collideablesInRoom = new List<Collideable>();
-
-                foreach (Position position in positionsInRoom)
-                {
-                    if (_game.CollisionComponent.Contains(position.EntityID))
-                        collideablesInRoom.Add(_game.CollisionComponent[position.EntityID]);
-                }
+                List<Collideable> collideablesInRoom = _game.CollisionComponent.InRoom(roomID);
 
                 for (int i = 0; i < collideablesInRoom.Count; i++)
                 {
@@ -139,6 +136,9 @@ namespace DungeonCrawler.Systems
                             case CollisionType.PlayerTrigger:
                                 PlayerTriggerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.PlayerWeapon:
+                                PlayerWeaponCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
                             case CollisionType.Enemy:
                                 EnemyEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -150,6 +150,9 @@ namespace DungeonCrawler.Systems
                                 break;
                             case CollisionType.EnemyDoor:
                                 EnemyDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
+                            case CollisionType.EnemyWeapon:
+                                EnemyWeaponCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.BulletStatic:
                                 BulletStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
@@ -172,6 +175,36 @@ namespace DungeonCrawler.Systems
                     }
                 }
             }
+        }
+
+        private void PlayerWeaponCollision(uint p, uint p_2)
+        {
+            //Do nothing for now.
+        }
+
+        private void EnemyWeaponCollision(uint p, uint p_2)
+        {
+            Enemy enemy;
+            Weapon weapon;
+            if (_game.WeaponComponent.Contains(p))
+            {
+                weapon = _game.WeaponComponent[p];
+                enemy = _game.EnemyComponent[p_2];
+            }
+            else
+            {
+                weapon = _game.WeaponComponent[p_2];
+                enemy = _game.EnemyComponent[p];
+            }
+
+            //Process attack.
+            DoDamage(enemy, weapon.Damage);
+
+            //Update enemy info.
+            _game.EnemyComponent[enemy.EntityID] = enemy;
+
+            //Remove collision imiediatly.
+            _game.CollisionComponent.Remove(weapon.EntitiyID);
         }
 
         /// <summary>
@@ -356,6 +389,8 @@ namespace DungeonCrawler.Systems
             _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
             //Factor in damage
+            Enemy enemy = _game.EnemyComponent[enemyId];
+            DoDamage(enemy, _game.BulletComponent[bulletId].Damage);
 
             if (_game.MovementComponent.Contains(enemyId))
             {
@@ -512,6 +547,8 @@ namespace DungeonCrawler.Systems
 
             _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
+            DoDamage(_game.PlayerComponent[playerId], _game.BulletComponent[bulletId].Damage);
+
             Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
                 _game.PositionComponent[playerId].Center);
             if (directionOfKnockback == Vector2.Zero) directionOfKnockback = new Vector2(1, 0);
@@ -591,7 +628,7 @@ namespace DungeonCrawler.Systems
             else if (enemy.HurtOnTouch && !moving)
             {
                 //Stationary & Painful
-                throw new NotImplementedException();
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
             }
             else if (!enemy.HurtOnTouch && moving)
             {
@@ -636,7 +673,7 @@ namespace DungeonCrawler.Systems
             else
             {
                 //Moving & Painful
-                throw new NotImplementedException();
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
             }
 
         }
@@ -721,6 +758,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Trigger;
             else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p)||_game.SkillDeployableComponent.Contains(p))
                 obj1 = CollisionType.Skill;
+            else if (_game.WeaponComponent.Contains(p))
+                obj1 = CollisionType.Weapon;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -739,10 +778,39 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Trigger;
             else if(_game.SkillProjectileComponent.Contains(p_2) || _game.SkillAoEComponent.Contains(p_2)||_game.SkillDeployableComponent.Contains(p_2))
                 obj2 = CollisionType.Skill;
+            else if (_game.WeaponComponent.Contains(p_2))
+                obj2 = CollisionType.Weapon;
             else //Static
                 obj2 = CollisionType.Static;
 
             return obj1 | obj2;  
+        }
+
+        /// <summary>
+        /// Applies damage and creates an actorText to show it.
+        /// </summary>
+        /// <param name="player">Player to deal damage to</param>
+        /// <param name="damage">Amount of damage to do.</param>
+        private void DoDamage(Player player, float damage)
+        {
+            PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+            info.Health -= (int)damage;
+            _game.PlayerInfoComponent[player.EntityID] = info;
+
+            _game.ActorTextComponent.Add(player.EntityID, damage.ToString());
+        }
+
+        /// <summary>
+        /// Applies damage and creates an actorText to show it.
+        /// </summary>
+        /// <param name="enemy">Enemy to apply damge to.</param>
+        /// <param name="damage">Damage to apply</param>
+        private void DoDamage(Enemy enemy, float damage)
+        {
+            enemy.Health -= damage;
+            _game.EnemyComponent[enemy.EntityID] = enemy;
+
+            _game.ActorTextComponent.Add(enemy.EntityID, damage.ToString());
         }
     }
 }
