@@ -10,6 +10,8 @@
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
 // Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem
 // Modified by Nicholas Strub: Added QuestLog System
+// Modified by Michael Fountain:  Added NPCs
+// Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 // Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -109,11 +111,22 @@ namespace DungeonCrawler
         public CollectibleFactory CollectableFactory;
 
         /// <summary>
-        /// A EnemyFactory for creating enemies
+        /// An EnemyFactory for creating enemies
         /// </summary>
         public EnemyFactory EnemyFactory;
 
+        /// <summary>
+        /// An NPC Factory for creating npcs
+        /// </summary>
+        public NPCFactory NPCFactory;
+
+        public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
+
+        /// <summary>
+        /// Factory fo the visual components of the skills
+        /// </summary>
+        public SkillEntityFactory SkillEntityFactory;
 
         #endregion
 
@@ -138,12 +151,14 @@ namespace DungeonCrawler
         public BulletComponent BulletComponent;
         public PlayerInfoComponent PlayerInfoComponent;
         public EnemyAIComponent EnemyAIComponent;
+        public NpcAIComponent NpcAIComponent;
         public WeaponSpriteComponent WeaponSpriteComponent;
         public StatsComponent StatsComponent;
         public CollectibleComponent CollectibleComponent;
         public CollisionComponent CollisionComponent;
         public TriggerComponent TriggerComponent;
         public EnemyComponent EnemyComponent;
+        public NPCComponent NPCComponent;
         public SpriteAnimationComponent SpriteAnimationComponent;
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
@@ -170,6 +185,25 @@ namespace DungeonCrawler
         public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
         
+
+        #region Effect Components
+        public AgroDropComponent AgroDropComponent;
+        public AgroGainComponent AgroGainComponent;
+        public BuffComponent BuffComponent;
+        public ChanceToSucceedComponent ChanceToSucceedComponent;
+        public CoolDownComponent CoolDownComponent;
+        public DamageOverTimeComponent DamageOverTimeComponent;
+        public DirectDamageComponent DirectDamageComponent;
+        public DirectHealComponent DirectHealComponent;
+        public FearComponent FearComponent;
+        public HealOverTimeComponent HealOverTimeComponent;
+        public InstantEffectComponent InstantEffectComponent;
+        public KnockBackComponent KnockBackComponent;
+        public ReduceAgroRangeComponent ReduceAgroRangeComponent;
+        public ResurrectComponent ResurrectComponent;
+        public StunComponent StunComponent;
+        public TimedEffectComponent TimedEffectComponent;
+        #endregion
         #endregion
 
         #region Game Systems
@@ -180,11 +214,13 @@ namespace DungeonCrawler
         RenderingSystem RenderingSystem;
         MovementSystem MovementSystem;
         WeaponSystem WeaponSystem;
-        EnemyAISystem EnemyAISystem;
+        public EnemyAISystem EnemyAISystem;
+        public NpcAISystem NpcAISystem;
         CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
-	SpriteAnimationSystem SpriteAnimationSystem;
+	    SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
+        public SkillSystem SkillSystem;
 
         public GarbagemanSystem GarbagemanSystem;
         TextSystem TextSystem;
@@ -220,6 +256,8 @@ namespace DungeonCrawler
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
             EnemyFactory = new EnemyFactory(this);
+            SkillEntityFactory = new SkillEntityFactory(this);
+            NPCFactory = new NPCFactory(this);
 
             // Initialize Components
             PlayerComponent = new PlayerComponent();
@@ -243,10 +281,13 @@ namespace DungeonCrawler
             WeaponSpriteComponent = new WeaponSpriteComponent();
             StatsComponent = new StatsComponent();
             EnemyAIComponent = new EnemyAIComponent();
+            NpcAIComponent = new NpcAIComponent();
+      
             CollectibleComponent = new CollectibleComponent();
             CollisionComponent = new CollisionComponent();
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
+            NPCComponent = new NPCComponent();
             QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
             SpriteAnimationComponent = new SpriteAnimationComponent();
@@ -265,6 +306,25 @@ namespace DungeonCrawler
             //ChargeComponent = new ChargeComponent();
             //HealingStationComponent = new HealingStationComponent();
             //ExplodingDroidComponent = new ExplodingDroidComponent();
+
+            #region Initialize Effect Components
+            AgroDropComponent = new AgroDropComponent();
+            AgroGainComponent = new AgroGainComponent();
+            BuffComponent = new BuffComponent();
+            ChanceToSucceedComponent = new ChanceToSucceedComponent();
+            CoolDownComponent = new CoolDownComponent();
+            DamageOverTimeComponent = new DamageOverTimeComponent();
+            DirectDamageComponent = new DirectDamageComponent();
+            DirectHealComponent = new DirectHealComponent();
+            FearComponent = new FearComponent();
+            HealOverTimeComponent = new HealOverTimeComponent();
+            InstantEffectComponent = new InstantEffectComponent();
+            KnockBackComponent = new KnockBackComponent();
+            ReduceAgroRangeComponent = new ReduceAgroRangeComponent();
+            ResurrectComponent = new ResurrectComponent();
+            StunComponent = new StunComponent();
+            TimedEffectComponent = new TimedEffectComponent();
+            #endregion
 
             base.Initialize();
         }
@@ -285,16 +345,19 @@ namespace DungeonCrawler
             MovementSystem = new MovementSystem(this);
             WeaponSystem = new WeaponSystem(this);
             EnemyAISystem = new EnemyAISystem(this);
+            NpcAISystem = new NpcAISystem(this);
             GarbagemanSystem = new GarbagemanSystem(this);
             CollisionSystem = new Systems.CollisionSystem(this);
             RoomChangingSystem = new RoomChangingSystem(this);
             QuestLogSystem = new QuestLogSystem(this);
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
+            SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
+
 
             // Testing code.
             LevelManager.LoadContent();
-            LevelManager.LoadLevel("TestDungeon3");
+            LevelManager.LoadLevel("D01F01R01");
             //End Testing Code
 
         }
@@ -394,10 +457,13 @@ namespace DungeonCrawler
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
                     WeaponSystem.Update(elapsedTime);
+                    SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
+                    NpcAISystem.Update(elapsedTime);
+                    EnemyAISystem.Update(elapsedTime);
                     TextSystem.Update(elapsedTime);
 
                     GarbagemanSystem.Update(elapsedTime);
@@ -558,6 +624,9 @@ namespace DungeonCrawler
             charPreview.charSprite = gameData.charSprite;
             charPreview.characterType = gameData.characterType;
             charPreview.Level = gameData.Level;
+
+            if (masterSaveFile.charFiles == null)
+                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
 
             if (masterSaveFile.charFiles == null) masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
             masterSaveFile.charFiles.Add(charPreview);

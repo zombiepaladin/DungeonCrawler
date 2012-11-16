@@ -7,6 +7,8 @@
 // Modified: Devin Kelly-Collins, Factory methods return eid, 10/24/2012
 // Modified: Adam Clark- added cyborg class and stats
 // Modified by Samuel Fike and Jiri Malina: Removed use of MovementSprite and added code for SpriteAnimationComponent
+// Modified by:Nick Boen
+//      Added Stat values to each of the players as well as a stat component
 // Modified: Devin Kelly-Collins - Added roomID to collisions (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game

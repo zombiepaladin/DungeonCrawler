@@ -5,7 +5,7 @@
 // Author: Devin Kelly-Collins
 //
 // Modified: Samuel Fike and Jiri Malina: Fixed errors due to removal of movementSprite for players
-// Modified: Devin Kelly-Collins; added weapon collisions and other required methods, added references to common coponents. Added logic to play weapon sounds. (11/15/12)
+// Modified: Devin Kelly-Collins; added weapon collisions and other required methods, added references to common coponents. Added logic to play weapon sounds. Moved sprite creation methods to WeaponFactory (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
