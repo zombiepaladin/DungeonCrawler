@@ -8,6 +8,7 @@
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 // Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
+// Modified: Nick Boen - Added a test control for using a skill (buffs speed)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -68,7 +69,6 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
-            
             // Update all entities that have a movement component
             foreach (Player player in game.PlayerComponent.All)
             {
@@ -127,8 +127,20 @@ namespace DungeonCrawler.Systems
                 {
                     info.State = PlayerState.Attacking;
                 }
-
+               
                 if (keyboardState.IsKeyDown(Keys.L) && !oldKeyboardState.IsKeyDown(Keys.L)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
+
+                if (keyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
+                {
+                    uint thisPlayerKey = 0;
+                    foreach(Player p in game.PlayerComponent.All)
+                    {
+                        if(p.PlayerIndex == PlayerIndex.One)
+                            thisPlayerKey = p.EntityID;
+                    }
+
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
+                }
 
                 game.PlayerInfoComponent[player.EntityID] = info;
 
@@ -147,6 +159,11 @@ namespace DungeonCrawler.Systems
                     game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
                     //TODO: Set skill
                     //      Show skill being set
+                    
+                    //temp activate shot skill
+                    //Test Skill buttons
+                    game.SkillEntityFactory.CreateSkillProjectile(Skills.benignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID]);
+
                 }
                 if (gamePadState.IsButtonDown(Buttons.B) || keyboardState.IsKeyDown(Keys.D2))
                 {
@@ -154,12 +171,14 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                     //TODO: Set skill
+                    game.SkillEntityFactory.CreateSkillAoE(Skills.detonate, game.PositionComponent[player.EntityID]);
                 }
                 if (gamePadState.IsButtonDown(Buttons.X) || keyboardState.IsKeyDown(Keys.D3))
                 {
                     hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
+                    game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, game.PositionComponent[player.EntityID]);
                     //TODO: Set skill
                 }
                 if (gamePadState.IsButtonDown(Buttons.Y) || keyboardState.IsKeyDown(Keys.D4))

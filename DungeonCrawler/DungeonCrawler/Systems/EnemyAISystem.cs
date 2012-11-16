@@ -4,6 +4,14 @@
 //
 // Author: Brett Barger
 //
+// Modified: Nick Boen - added the Get and Set target methods, unimplemented for now
+//           Brett Barger - corrected functionalit of enemy moving towards the player it is targeting.
+//
+// TODO: 1. Should probably refactor the Update to use the TargetID from the EnemyAI Component
+//              rather than a local instance.
+//       2. May want to check if the AI should get a different target if its current one isn't allowed
+//              
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -47,6 +55,7 @@ namespace DungeonCrawler.Systems
         }
 
         #endregion
+        
         #region Public Methods
 
         /// <summary>
@@ -62,9 +71,9 @@ namespace DungeonCrawler.Systems
                 Position pos = game.PositionComponent[ai.EntityID];
 
                 if (pos.RoomID != game.CurrentRoomEid)
-                    break;
+                {}
 
-                if (HasTarget == false)
+                else if (HasTarget == false)
                 {
                     IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
 
@@ -75,21 +84,42 @@ namespace DungeonCrawler.Systems
                             Target = thing;
                             Vector2 toPlayer = Target.Center - pos.Center;
                             toPlayer.Normalize();
-                            pos.Center += toPlayer * elapsedTime * 50;
+                            pos.Center += toPlayer * elapsedTime * 100;
                             HasTarget = true;
                             break;
                         }
                     }
                 }
-                else
+                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health > 0)
                 {
-                    Vector2 toPlayer = Target.Center - pos.Center;
+                    Vector2 toPlayer = game.PositionComponent[Target.EntityID].Center - pos.Center;
                     toPlayer.Normalize();
-                    pos.Center += toPlayer * elapsedTime * 50;
+                    pos.Center += toPlayer * elapsedTime * 100;
+                    
                 }
+                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health <= 0)
+                {
+                    HasTarget = false;
+                }
+                game.PositionComponent[pos.EntityID] = pos;
             }
         }
 
+        public void GetDifferentTarget(uint enemyKey)
+        {
+
+        }
+
+        public void GetClosestTarget(uint enemyKey)
+        {
+
+        }
+
+        public void SetTarget(uint enemyKey, uint targetKey)
+        {
+
+        }
+        
         #endregion
     }
 }

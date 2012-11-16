@@ -55,14 +55,14 @@ namespace DungeonCrawler.Entities
         public uint CreateEnemy(EnemyFactoryType type, Position position)
         {
             uint eid = Entity.NextEntity();
-            Enemy enemy;
+            Enemy enemy = new Enemy();
             Sprite sprite;
             Collideable collideable;
 
             switch (type)
             {
                 case EnemyFactoryType.StationaryTarget:
-                    enemy .HurtOnTouch = false;
+                    enemy.HurtOnTouch = false;
                     enemy.Health = 1;
 
                     sprite = new Sprite()
@@ -119,6 +119,7 @@ namespace DungeonCrawler.Entities
             collideable = new Collideable()
             {
                 EntityID = eid,
+                RoomID = position.RoomID,
                 Bounds = new CircleBounds(position.Center, position.Radius)
             };
             _game.CollisionComponent[eid] = collideable;

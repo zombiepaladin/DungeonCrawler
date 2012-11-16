@@ -127,7 +127,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// Current amount of health the player has.
         /// </summary>
-        public int Health;
+        public float Health;
 
         /// <summary>
         /// Current amount of psi the player has.
@@ -143,6 +143,25 @@ namespace DungeonCrawler.Components
         /// The name of the game save file this player is associated with
         /// </summary>
         public string FileName;
+
+
+        public int PoisonResistance;
+
+        public int AttackMelee;
+
+        public int AttackRanged;
+
+        public int DefenseMelee;
+
+        public int DefenseRanged;
+
+        public int WeaponStrength;
+
+        public int WeaponAccuracy;
+
+        public int WeaponSpeed;
+
+        public int AttackSpeed;
     }
 
     ///<summary>
