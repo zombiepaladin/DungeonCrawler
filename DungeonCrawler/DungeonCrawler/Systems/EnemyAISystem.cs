@@ -7,6 +7,8 @@
 // Modified: Nick Boen - added the Get and Set target methods, unimplemented for now
 //           Brett Barger - corrected functionalit of enemy moving towards the player it is targeting.
 //
+// Modified Samuel Fike and Jiri Malina: Reorganized, added behaviors and stuff
+//
 // TODO: 1. Should probably refactor the Update to use the TargetID from the EnemyAI Component
 //              rather than a local instance.
 //       2. May want to check if the AI should get a different target if its current one isn't allowed
@@ -20,6 +22,7 @@
 
 #region Using Statements
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,6 +31,7 @@ using DungeonCrawler.Components;
 
 namespace DungeonCrawler.Systems
 {
+
     public class EnemyAISystem
     {
         #region Private Members
@@ -36,10 +40,6 @@ namespace DungeonCrawler.Systems
         /// The game this system belongs to
         /// </summary>
         private DungeonCrawlerGame game;
-
-        private Position Target;
-
-        private bool HasTarget = false;
 
         #endregion
 
@@ -66,43 +66,82 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
-            foreach(EnemyAI ai in game.EnemyAIComponent.All)
+            List<uint> keyList = game.EnemyAIComponent.Keys.ToList<uint>();
+
+            foreach(uint key in keyList)
             {
-                Position pos = game.PositionComponent[ai.EntityID];
+                EnemyAI enemyAI = game.EnemyAIComponent[key];
+                AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
 
-                if (pos.RoomID != game.CurrentRoomEid)
-                {}
-
-                else if (HasTarget == false)
+                switch(AIBehavior)
                 {
-                    IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
+                    case AIBehaviorType.DefaultMelee:
+                        updateTargeting(key);
+                        MoveTowardTarget(key);
+                        break;
 
-                    foreach (Position thing in HitList)
+                    case AIBehaviorType.DefaultRanged:
+                        updateTargeting(key);
+                        MoveTowardTarget(key);
+                        break;
+
+                    case AIBehaviorType.Alien:
+                        updateTargeting(key);
+                        MoveTowardTarget(key);
+                        break;
+                }
+            }
+        }
+
+        private void updateTargeting(uint entityID)
+        {
+            Position pos = game.PositionComponent[entityID];
+            EnemyAI ai = game.EnemyAIComponent[entityID];
+
+            if (pos.RoomID != game.CurrentRoomEid)
+            {
+                return;
+            }
+
+            if (ai.HasTarget == false)
+            {
+                IEnumerable<Position> HitList = game.PositionComponent.InRegion(pos.Center, 500);
+
+                foreach (Position thing in HitList)
+                {
+                    if (game.PlayerComponent.Contains(thing.EntityID))
                     {
-                        if (game.PlayerComponent.Contains(thing.EntityID))
-                        {
-                            Target = thing;
-                            Vector2 toPlayer = Target.Center - pos.Center;
-                            toPlayer.Normalize();
-                            pos.Center += toPlayer * elapsedTime * 100;
-                            HasTarget = true;
-                            break;
-                        }
+                        ai.TargetID = thing.EntityID;
+                        ai.HasTarget = true;
+                        break;
                     }
                 }
-                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health > 0)
-                {
-                    Vector2 toPlayer = game.PositionComponent[Target.EntityID].Center - pos.Center;
-                    toPlayer.Normalize();
-                    pos.Center += toPlayer * elapsedTime * 100;
-                    
-                }
-                else if (HasTarget == true && game.PlayerInfoComponent[Target.EntityID].Health <= 0)
-                {
-                    HasTarget = false;
-                }
-                game.PositionComponent[pos.EntityID] = pos;
             }
+            else if (ai.HasTarget == true && game.PlayerInfoComponent[ai.TargetID].Health <= 0)
+            {
+                ai.HasTarget = false;
+            }
+
+            game.EnemyAIComponent[ai.EntityID] = ai;
+        }
+
+        private void MoveTowardTarget(uint entityID)
+        {
+            EnemyAI enemy = game.EnemyAIComponent[entityID];
+
+            if (!enemy.HasTarget)
+                return;
+
+            Position enemyPosition = game.PositionComponent[entityID];
+            Position targetPosition = game.PositionComponent[enemy.TargetID];
+
+            Vector2 toTarget = targetPosition.Center - enemyPosition.Center;
+            toTarget.Normalize();
+
+            Movement movement = game.MovementComponent[entityID];
+            movement.Direction = toTarget;
+
+            game.MovementComponent[movement.EntityID] = movement;
         }
 
         public void GetDifferentTarget(uint enemyKey)

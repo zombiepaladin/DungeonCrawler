@@ -3,7 +3,7 @@
 // EnemyFactory.cs 
 //
 // Author: Matthew McHaney
-//
+// Modified Samuel Fike and Jiri Malina: Added Alien and organized
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -23,12 +23,6 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Entities
 {
-    public enum EnemyFactoryType
-    {
-        StationaryTarget,
-        MovingTarget,
-    }
-
     /// <summary>
     /// Handles creating enemies and adding them to the game.
     /// </summary>
@@ -52,69 +46,59 @@ namespace DungeonCrawler.Entities
         /// Creates a new enemy and adds it to the game. (No other components created)
         /// </summary>
         /// <param name="type">The type of enemy to create.</param>
-        public uint CreateEnemy(EnemyFactoryType type, Position position)
+        public uint CreateEnemy(EnemyType type, Position position)
         {
             uint eid = Entity.NextEntity();
             Enemy enemy = new Enemy();
-            Sprite sprite;
+            Sprite sprite = new Sprite();
             Collideable collideable;
+            EnemyAI ai;
+            float moveSpeed = 100;
+
+            String spritesheet;
+            Rectangle spriteBounds = new Rectangle(0, 0, 64, 64); ;
 
             switch (type)
             {
-                case EnemyFactoryType.StationaryTarget:
+                case EnemyType.StationaryTarget:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 1;
-
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/target2"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                    };
+                    spritesheet = "Spritesheets/target2";
                     break;
 
-                case EnemyFactoryType.MovingTarget:
+                case EnemyType.MovingTarget:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 1;
+                    spritesheet = "Spritesheets/target2";
+                    break;
 
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/target2"),
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                    };
-
-                    Movement move = new Movement()
-                    {
-                        EntityID = eid,
-                    };
-                    _game.MovementComponent.Add(eid, move);
-
-                    EnemyAI ai = new EnemyAI()
-                    {
-                        EntityID = eid,
-                    };
-                    _game.EnemyAIComponent.Add(eid, ai);
+                case EnemyType.Alien:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 1;
+                    spritesheet = "Spritesheets/alien";
+                    spriteBounds = new Rectangle(0, 0, 32, 32);
                     break;
 
                 default:
                     throw new Exception("Unknown EnemyType");
             }
 
-            EnemyType enemyType;
-            switch (type)
+            ai = new EnemyAI()
             {
-                case EnemyFactoryType.MovingTarget:
-                case EnemyFactoryType.StationaryTarget:
-                    enemyType = EnemyType.Target;
-                    break;
-                default:
-                    throw new NotImplementedException();
-            }
+                EntityID = eid,
+            };
+            _game.EnemyAIComponent.Add(eid, ai);
 
-            enemy.Type = enemyType;
+            enemy.Type = type;
             enemy.EntityID = eid;
             position.EntityID = eid;
+
+            sprite = new Sprite()
+            {
+                EntityID = eid,
+                SpriteSheet = _game.Content.Load<Texture2D>(spritesheet),
+                SpriteBounds = spriteBounds
+            };
 
             collideable = new Collideable()
             {
@@ -122,12 +106,19 @@ namespace DungeonCrawler.Entities
                 RoomID = position.RoomID,
                 Bounds = new CircleBounds(position.Center, position.Radius)
             };
-            _game.CollisionComponent[eid] = collideable;
 
+            Movement move = new Movement()
+            {
+                EntityID = eid,
+                Speed = moveSpeed,
+            };
+
+            _game.CollisionComponent[eid] = collideable;
+            _game.MovementComponent.Add(eid, move);
             _game.EnemyComponent.Add(eid, enemy);
-            //_game.MovementComponent.Add(eid, movement);
             _game.PositionComponent.Add(eid, position);
             _game.SpriteComponent.Add(eid, sprite);
+           
             return eid;
         }
     }
