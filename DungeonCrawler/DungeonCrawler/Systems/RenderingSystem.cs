@@ -4,6 +4,8 @@
 //
 // Author: Nathan Bean
 //
+// Modified: Devin Kelly-Collins - Added debugTexture and logic to draw collisions in Draw. Added logic to draw actorText in draw. (11/15/12)
+//
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
 // Modified: Devin Kelly-Collins added WeaponSprite rendering, 10/24/2012
 // Modified: Samuel Fike and Jiri Malina: Fixed errors due to removal of movementSprite for players
@@ -42,6 +44,8 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private SpriteBatch spriteBatch;
 
+        private SpriteFont _actorTextFont;
+
 #if DEBUG
         private Texture2D _debugTexture;
 #endif
@@ -58,6 +62,7 @@ namespace DungeonCrawler.Systems
         {
             this.game = game;
             this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
+            this._actorTextFont = game.Content.Load<SpriteFont>("SpriteFonts/Pescadero");
 
 #if DEBUG
             _debugTexture = new Texture2D(game.GraphicsDevice, 1, 1);
@@ -135,7 +140,7 @@ namespace DungeonCrawler.Systems
                 if(position.RoomID == roomId)
                 {
                     position.Center.Y -= actorText.Offset;
-                    spriteBatch.DrawString(_actorTextFont, actorText.Text, position, Color.White);
+                    spriteBatch.DrawString(_actorTextFont, actorText.Text, position.Center, Color.White);
                 }
             }
 

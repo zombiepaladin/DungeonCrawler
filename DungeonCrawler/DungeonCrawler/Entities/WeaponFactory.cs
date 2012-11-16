@@ -4,6 +4,8 @@
 //
 // Author: Devin Kelly-Collins
 //
+// Modified: Devin Kelly-Collins - Moved Sprite creation method from WeaponSystem to here. (11/15/12)
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 

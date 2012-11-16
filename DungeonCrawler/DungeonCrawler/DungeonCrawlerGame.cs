@@ -10,6 +10,7 @@
 // Modified: Nicholas Strub added RoomChange Game State, 10/31/2012
 // Modified by Samuel Fike and Jiri Malina: Added code for SpriteAnimationComponent and SpriteSystem
 // Modified by Nicholas Strub: Added QuestLog System
+// Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -480,7 +481,7 @@ namespace DungeonCrawler
             public int Level;
             // Other skills/stats
             public Stats stats;
-            public int health;
+            public float health;
             public int psi;
         }
 

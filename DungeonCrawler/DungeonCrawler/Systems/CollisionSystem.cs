@@ -6,6 +6,7 @@
 //
 // Modified: Nicholas Strub - Added Room Transitioning ability based on player/door collisions 10/31/2012
 // Modified: Nicholas Strub - Updated Player/Door Collisions (11/3/2012)
+// Modified: Devin Kelly-Collins - Added Weapon, PlayerWeapon, EnemyWeapon to CollisionType. Update switch statement in Update. Added PlayerWeaponCollision and EnemyWeaponCollision methods. Added DoDamage methods. (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -177,11 +178,7 @@ namespace DungeonCrawler.Systems
             }
 
             //Process attack.
-            enemy.Health -= weapon.Damage;
-            //enemy.Status |= weapon.Effect;
-
-            //Display some sort of damage indicator here.
-            //Position enemyPosition = _game.PositionComponent[enemy.EntityID];
+            DoDamage(enemy, weapon.Damage);
 
             //Update enemy info.
             _game.EnemyComponent[enemy.EntityID] = enemy;
@@ -372,6 +369,9 @@ namespace DungeonCrawler.Systems
             _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
             //Factor in damage
+            Enemy enemy = _game.EnemyComponent[enemyId];
+            DoDamage(enemy, _game.BulletComponent[bulletId].Damage);
+            _game.EnemyComponent[enemyId] = enemy;
 
             if (_game.MovementComponent.Contains(enemyId))
             {
@@ -526,6 +526,8 @@ namespace DungeonCrawler.Systems
 
             _game.GarbagemanSystem.ScheduleVisit(bulletId, GarbagemanSystem.ComponentType.Bullet);
 
+            DoDamage(_game.PlayerComponent[playerId], _game.BulletComponent[bulletId].Damage);
+
             Vector2 directionOfKnockback = (_game.PositionComponent[bulletId].Center -
                 _game.PositionComponent[playerId].Center);
             if (directionOfKnockback == Vector2.Zero) directionOfKnockback = new Vector2(1, 0);
@@ -605,7 +607,7 @@ namespace DungeonCrawler.Systems
             else if (enemy.HurtOnTouch && !moving)
             {
                 //Stationary & Painful
-                throw new NotImplementedException();
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
             }
             else if (!enemy.HurtOnTouch && moving)
             {
@@ -650,7 +652,7 @@ namespace DungeonCrawler.Systems
             else
             {
                 //Moving & Painful
-                throw new NotImplementedException();
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
             }
 
         }
@@ -740,17 +742,17 @@ namespace DungeonCrawler.Systems
         }
 
         //Applies damage and creates an actorText to show it.
-        private void DoDamage(Player player, int damage)
+        private void DoDamage(Player player, float damage)
         {
             PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
-            info.Health -= damage;
+            info.Health -= (int)damage;
             _game.PlayerInfoComponent[player.EntityID] = info;
 
             _game.ActorTextComponent.Add(player.EntityID, damage.ToString());
         }
 
         //Applies damage and creates an actorText to show it.
-        private void DoDamage(Enemy enemy, int damage)
+        private void DoDamage(Enemy enemy, float damage)
         {
             enemy.Health -= damage;
 

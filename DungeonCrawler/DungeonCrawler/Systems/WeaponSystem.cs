@@ -5,6 +5,7 @@
 // Author: Devin Kelly-Collins
 //
 // Modified: Samuel Fike and Jiri Malina: Fixed errors due to removal of movementSprite for players
+// Modified: Devin Kelly-Collins; added weapon collisions and other required methods, added references to common coponents. Added logic to play weapon sounds. (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -87,7 +88,7 @@ namespace DungeonCrawler.Systems
                 {
                     //Otherwise create a new sprite and sound.
                     _game.WeaponFactory.CreateWeaponSprite(equipment.WeaponID, equipment.EntityID);
-                    PlayWeaponSound(equipment);
+                    PlayWeaponSound(equipment.WeaponID);
                 }   
 
                 //Handle more weapon logic.
@@ -98,16 +99,16 @@ namespace DungeonCrawler.Systems
                         _bulletTimer += elapsedTime;
                         if (_bulletTimer >= weapon.Speed)
                         {
-                            CreateBulletAndSprite(equipment);
+                            CreateBulletAndSprite(equipment.EntityID, equipment.WeaponID);
                             _bulletTimer = 0;
                         }
                     }
                     else
                     {
                         if (collisionCreated)
-                            UpdateWeaponCollision(equipment);
+                            UpdateWeaponCollision(equipment.EntityID, equipment.WeaponID);
                         else
-                            CreateWeaponCollision(equipment);
+                            CreateWeaponCollision(equipment.EntityID, equipment.WeaponID);
                     }
                 }
                 else if (collisionCreated) //Not attacking but the collision box is there.
@@ -117,11 +118,16 @@ namespace DungeonCrawler.Systems
             }
         }
 
-        //Updates weapon's collision box to the players position.
-        private void UpdateWeaponCollision(Equipment equipment)
+        /// <summary>
+        /// Updates weapon's collision box to the players position.
+        /// </summary>
+        /// <param name="playerID">Player's EntityID</param>
+        /// <param name="weaponID">Weapons's EntityID</param>
+        private void UpdateWeaponCollision(uint playerID, uint weaponID)
         {
-            Collideable collision = _collisionComponent[equipment.WeaponID];
-            Position playerPosition = _positionComponent[equipment.EntityID];
+            Collideable collision = _collisionComponent[weaponID];
+            Position playerPosition = _positionComponent[playerID];
+            Facing facing = (Facing)_game.SpriteAnimationComponent[playerID].CurrentAnimationRow;
 
             if (collision.Bounds is CircleBounds)
             {
@@ -129,59 +135,59 @@ namespace DungeonCrawler.Systems
             }
             else
             {
-                ((RectangleBounds)collision.Bounds).Rectangle.X = (int)playerPosition.Center.X;
-                ((RectangleBounds)collision.Bounds).Rectangle.Y = (int)playerPosition.Center.Y;
+                Vector2 newPos = updatePositionByFacing(playerPosition, facing, 32);
+                ((RectangleBounds)collision.Bounds).Rectangle.X = (int)newPos.X;
+                ((RectangleBounds)collision.Bounds).Rectangle.Y = (int)newPos.Y;
             }
 
-            _collisionComponent[equipment.WeaponID] = collision;
+            _collisionComponent[weaponID] = collision;
         }
 
-        //Plays the weapon's sound effect if there is one.
-        private void PlayWeaponSound(Equipment equipment)
+        /// <summary>
+        /// Plays the weapon's sound effect if there is one.
+        /// </summary>
+        /// <param name="weaponID">Weapon's EntityID</param>
+        private void PlayWeaponSound(uint weaponID)
         {
-            if (_game.SoundComponent.Contains(equipment.WeaponID))
-                _game.SoundComponent[equipment.WeaponID].SoundEffect.Play();
+            if (_game.SoundComponent.Contains(weaponID))
+                _game.SoundComponent[weaponID].SoundEffect.Play();
         }
 
-        //Handles creating the collision box for the weapon.
-        private void CreateWeaponCollision(Equipment equipment)
+        /// <summary>
+        /// Handles creating the collision box for the weapon.
+        /// </summary>
+        /// <param name="playerID">Player's EntityID</param>
+        /// <param name="weaponID">Weapon's EntityID</param>
+        private void CreateWeaponCollision(uint playerID, uint weaponID)
         {
-            uint weaponID = equipment.WeaponID;
-            uint roomID = _positionComponent[equipment.EntityID].RoomID;
+            uint roomID = _positionComponent[playerID].RoomID;
             Collideable weaponCollision = new Collideable { EntityID = weaponID, RoomID = roomID };
-            Vector2 position = _positionComponent[equipment.EntityID].Center;
-            Facing facing = (Facing)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow;
+            Facing facing = (Facing)_game.SpriteAnimationComponent[playerID].CurrentAnimationRow;
 
-            switch (facing)
-            {
-                case Facing.North:
-                    position.Y += 64;
-                    break;
-                case Facing.East:
-                    position.X -= 64;
-                    break;
-                case Facing.South:
-                    position.Y -= 64;
-                    break;
-                case Facing.West:
-                    position.X += 64;
-                    break;
-            }
+            Vector2 position = updatePositionByFacing(_positionComponent[playerID], facing, 32);
 
             RectangleBounds rb = new RectangleBounds((int)position.X, (int)position.Y, 64, 64);
             weaponCollision.Bounds = rb;
             _collisionComponent.Add(weaponCollision.EntityID, weaponCollision);
         }
 
-        //Handles creating the Bullet object and sprite.
-        private void CreateBulletAndSprite(Equipment equipment)
+        /// <summary>
+        /// Handles creating the Bullet object and sprite.
+        /// </summary>
+        /// <param name="playerID">Player's EntityID</param>
+        /// <param name="weaponID">Weapon's EntityID</param>
+        private void CreateBulletAndSprite(uint playerID, uint weaponID)
         {
-            Position position = _positionComponent[equipment.EntityID];
-            Vector2 direction = getDirectionFromFacing((Facing)_game.SpriteAnimationComponent[equipment.EntityID].CurrentAnimationRow); //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
-            _game.WeaponFactory.CreateBullet(_weaponComponent[equipment.WeaponID].Type, direction, position);
+            Position position = _positionComponent[playerID];
+            Vector2 direction = getDirectionFromFacing((Facing)_game.SpriteAnimationComponent[playerID].CurrentAnimationRow); //changed to get direction from spriteanimation instead of movementsprite, currentAnimationRow returns same values as facing for directions
+            _game.WeaponFactory.CreateBullet(_weaponComponent[weaponID].Type, direction, position);
         }
 
-        //Handles updating already made weapon sprites. Returns if the sprite was removed.
+        /// <summary>
+        /// Handles updating already made weapon sprites. Returns true if the sprite was removed.
+        /// </summary>
+        /// <param name="sprite">Weapon Sprite to update</param>
+        /// <returns>True if sprite is removed. False otherwise.</returns>
         private bool UpdateWeaponSprite(WeaponSprite sprite)
         {
             bool removed = false;
@@ -205,7 +211,11 @@ namespace DungeonCrawler.Systems
             return removed;
         }
 
-        //Get the direction the player is facing.
+        /// <summary>
+        /// Get the direction the player is facing.
+        /// </summary>
+        /// <param name="facing">Direction player is facing.</param>
+        /// <returns>Vecotr2 direction.</returns>
         private Vector2 getDirectionFromFacing(Facing facing)
         {
             Vector2 direction = new Vector2(0);
@@ -226,6 +236,38 @@ namespace DungeonCrawler.Systems
                     break;
             }
             return direction;
+        }
+
+        /// <summary>
+        /// Returns the position a rectangle should be depending on the direction the player is facing.
+        /// </summary>
+        /// <param name="position">Position of the player.</param>
+        /// <param name="facing">The direction the player is facing.</param>
+        /// <param name="offset">How much to offset the position by. Should be the player's redius generally.</param>
+        /// <returns>New position for the rectangle</returns>
+        private Vector2 updatePositionByFacing(Position position, Facing facing, int offset)
+        {
+            Vector2 retVal = position.Center;
+
+            switch (facing)
+            {
+                case Facing.North:
+                    retVal.Y -= 2*offset;
+                    retVal.X -= offset;
+                    break;
+                case Facing.East:
+                    retVal.Y -= offset;
+                    break;
+                case Facing.South:
+                    retVal.X -= offset;
+                    break;
+                case Facing.West:
+                    retVal.Y -= offset;
+                    retVal.X -= 2*offset;
+                    break;
+            }
+
+            return retVal;
         }
     }
 }
