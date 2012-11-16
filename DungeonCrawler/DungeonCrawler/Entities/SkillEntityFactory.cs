@@ -84,6 +84,7 @@ namespace DungeonCrawler.Entities
             collideable = new Collideable()
             {
                 EntityID = eid,
+                RoomID = position.RoomID,
                 Bounds = new CircleBounds(position.Center, position.Radius),
             };
 
@@ -129,6 +130,7 @@ namespace DungeonCrawler.Entities
             collideable = new Collideable()
             {
                 EntityID = eid,
+                RoomID = position.RoomID,
                 Bounds = new CircleBounds(position.Center, position.Radius),
             };
 
@@ -173,6 +175,7 @@ namespace DungeonCrawler.Entities
             collideable = new Collideable()
             {
                 EntityID = eid,
+                RoomID = position.RoomID,
                 Bounds = new CircleBounds(position.Center, position.Radius),
             };
 

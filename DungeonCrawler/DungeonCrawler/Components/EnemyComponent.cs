@@ -65,7 +65,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// Integer for health
         /// </summary>
-        public int Health;
+        public float Health;
 
     }
 

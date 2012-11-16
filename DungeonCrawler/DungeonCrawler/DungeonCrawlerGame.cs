@@ -12,6 +12,7 @@
 // Modified by Nicholas Strub: Added QuestLog System
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
+// Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -180,8 +181,10 @@ namespace DungeonCrawler
         public ChargeComponent ChargeComponent;
         public HealingStationComponent HealingStationComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
-
-	public QuestComponent QuestComponent;
+        public SoundComponent SoundComponent;
+        public QuestComponent QuestComponent;
+        public ActorTextComponent ActorTextComponent;
+        
 
         #region Effect Components
         public AgroDropComponent AgroDropComponent;
@@ -220,6 +223,8 @@ namespace DungeonCrawler
         public SkillSystem SkillSystem;
 
         public GarbagemanSystem GarbagemanSystem;
+        TextSystem TextSystem;
+
         #endregion
 
 
@@ -289,6 +294,8 @@ namespace DungeonCrawler
             SkillProjectileComponent = new SkillProjectileComponent();
             SkillAoEComponent = new SkillAoEComponent();
             SkillDeployableComponent = new SkillDeployableComponent();
+            SoundComponent = new SoundComponent();
+            ActorTextComponent = new ActorTextComponent();
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();
@@ -345,6 +352,7 @@ namespace DungeonCrawler
             QuestLogSystem = new QuestLogSystem(this);
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
+            TextSystem = new TextSystem(this);
 
 
             // Testing code.
@@ -452,11 +460,13 @@ namespace DungeonCrawler
                     SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
-                    GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
                     NpcAISystem.Update(elapsedTime);
                     EnemyAISystem.Update(elapsedTime);
+                    TextSystem.Update(elapsedTime);
+
+                    GarbagemanSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -537,7 +547,7 @@ namespace DungeonCrawler
             public int Level;
             // Other skills/stats
             public Stats stats;
-            public int health;
+            public float health;
             public int psi;
         }
 
