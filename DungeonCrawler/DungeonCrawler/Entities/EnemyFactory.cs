@@ -50,9 +50,12 @@ namespace DungeonCrawler.Entities
         {
             uint eid = Entity.NextEntity();
             Enemy enemy = new Enemy();
-            Sprite sprite = new Sprite();
+            Sprite sprite;
+            SpriteAnimation spriteAnimation = new SpriteAnimation(eid);
+
             Collideable collideable;
             EnemyAI ai;
+            AIBehaviorType aiBehaviorType = AIBehaviorType.None;
             float moveSpeed = 100;
 
             String spritesheet;
@@ -77,6 +80,7 @@ namespace DungeonCrawler.Entities
                     enemy.Health = 1;
                     spritesheet = "Spritesheets/alien";
                     spriteBounds = new Rectangle(0, 0, 32, 32);
+                    aiBehaviorType = AIBehaviorType.Alien;
                     break;
 
                 default:
@@ -86,6 +90,7 @@ namespace DungeonCrawler.Entities
             ai = new EnemyAI()
             {
                 EntityID = eid,
+                AIBehaviorType = aiBehaviorType,
             };
             _game.EnemyAIComponent.Add(eid, ai);
 
@@ -113,6 +118,7 @@ namespace DungeonCrawler.Entities
                 Speed = moveSpeed,
             };
 
+            _game.SpriteAnimationComponent[eid] = spriteAnimation;
             _game.CollisionComponent[eid] = collideable;
             _game.MovementComponent.Add(eid, move);
             _game.EnemyComponent.Add(eid, enemy);

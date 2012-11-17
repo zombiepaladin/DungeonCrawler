@@ -68,26 +68,30 @@ namespace DungeonCrawler.Systems
         {
             List<uint> keyList = game.EnemyAIComponent.Keys.ToList<uint>();
 
-            foreach(uint key in keyList)
+            foreach(uint id in keyList)
             {
-                EnemyAI enemyAI = game.EnemyAIComponent[key];
+                EnemyAI enemyAI = game.EnemyAIComponent[id];
                 AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
 
                 switch(AIBehavior)
                 {
                     case AIBehaviorType.DefaultMelee:
-                        updateTargeting(key);
-                        MoveTowardTarget(key);
+                        updateTargeting(id);
+                        MoveTowardTarget(id);
                         break;
 
                     case AIBehaviorType.DefaultRanged:
-                        updateTargeting(key);
-                        MoveTowardTarget(key);
+                        updateTargeting(id);
+                        MoveTowardTarget(id);
                         break;
 
                     case AIBehaviorType.Alien:
-                        updateTargeting(key);
-                        MoveTowardTarget(key);
+                        updateTargeting(id);
+                        MoveTowardTarget(id);
+                        ManageAnimation(id);
+                        break;
+
+                    default:
                         break;
                 }
             }
@@ -142,6 +146,37 @@ namespace DungeonCrawler.Systems
             movement.Direction = toTarget;
 
             game.MovementComponent[movement.EntityID] = movement;
+        }
+
+        /// <summary>
+        /// Changes the current animation playing for an enemy based on movement direction.
+        /// Default uses the 4 direction animations. Add your enemy to the switch statement for custom animation behavior.
+        /// Samuel Fike & Jiri Malina
+        /// </summary>
+        /// <param name="key"></param>
+        private void ManageAnimation(uint id)
+        {
+            Enemy enemy = game.EnemyComponent[id];
+            SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[id];
+            Movement movement = game.MovementComponent[id];
+
+            switch (enemy.Type)
+            {
+                default:
+                    if (movement.Direction.Length() == 0) //If not moving, stop animation
+                    {
+                        spriteAnimation.IsPlaying = false;
+                    }
+                    else
+                    {
+                        spriteAnimation.IsPlaying = true;
+                        spriteAnimation.CurrentAnimationRow = (int)game.MovementComponent.GetFacingFromDirection(id);
+                    }
+                    break;
+            }
+
+            game.SpriteAnimationComponent[id] = spriteAnimation;
+
         }
 
         public void GetDifferentTarget(uint enemyKey)

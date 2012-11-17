@@ -416,10 +416,104 @@ namespace DungeonCrawler.Systems
         private void EnemyEnemyCollision(uint p, uint p_2)
         {
             //Set enemies against each other
+            //Make them collide with eachother or else they will stack
 
+            //NOTE - copy pasted playerenemy collision for testing, fix sometime
+
+            uint enemyId, playerId;
+                enemyId = p;
+                playerId = p_2;
+            
+
+            Enemy enemy = _game.EnemyComponent[enemyId];
+
+            bool moving = _game.MovementComponent.Contains(enemyId);
+
+            if (!enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painless
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
+            else if (enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painful
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
+            }
+            else if (!enemy.HurtOnTouch && moving)
+            {
+                //For now, let's have it just push the person around. But we need to make sure eventually that
+                //complicated nonviolent collisions is handled. That way pushing blocks/people walking into each other
+                //will be done properly.
+
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
             
             
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>

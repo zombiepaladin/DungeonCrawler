@@ -23,6 +23,7 @@ namespace DungeonCrawler.Components
 {
     public enum AIBehaviorType
     {
+        None,
         DefaultRanged,
         DefaultMelee,
         Alien,
