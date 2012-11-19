@@ -110,6 +110,7 @@
     <Compile Include="Bounds\Bounds.cs" />
     <Compile Include="Bounds\CircleBounds.cs" />
     <Compile Include="Bounds\RectangleBounds.cs" />
+    <Compile Include="Components\ActorTextComponent.cs" />
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\AlloyBodyComponent.cs" />
@@ -154,13 +155,14 @@
     <Compile Include="Components\SkillEffectComponents\StunComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\TimedEffectComponent.cs" />
     <Compile Include="Components\SkillProjectileComponent.cs" />
+    <Compile Include="Components\SoundComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
     <Compile Include="Entities\EnemyFactory.cs" />
     <Compile Include="Entities\NPCFactory.cs" />
-    <Compile Include="Entities\SkillProjectileFactory.cs" />
+    <Compile Include="Entities\SkillEntityFactory.cs" />
     <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
     <Compile Include="KeyboardBindings.cs" />
@@ -213,6 +215,7 @@
     <Compile Include="Systems\RoomChangingSystem.cs" />
     <Compile Include="Systems\SkillSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
+    <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

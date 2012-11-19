@@ -9,6 +9,7 @@
 // Modified by Samuel Fike and Jiri Malina: Removed use of MovementSprite and added code for SpriteAnimationComponent
 // Modified by:Nick Boen
 //      Added Stat values to each of the players as well as a stat component
+// Modified: Devin Kelly-Collins - Added roomID to collisions (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -107,6 +108,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -224,6 +226,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -307,7 +310,6 @@ namespace DungeonCrawler.Entities
                             SpellBonus = miscSpell + (int)((stats.Intelligence - 10) / 2),
                             HealthBonus = miscHealth + (int)((stats.Stamina - 10) / 2),
                         }
-
                     };
 
                     info = new PlayerInfo()
@@ -345,6 +347,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -454,6 +457,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -572,6 +576,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -680,6 +685,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -794,6 +800,7 @@ namespace DungeonCrawler.Entities
                     collideable = new Collideable()
                     {
                         EntityID = entityID,
+                        RoomID = position.RoomID,
                         Bounds = new CircleBounds(position.Center, position.Radius)
                     };
                     game.CollisionComponent[entityID] = collideable;
@@ -972,6 +979,7 @@ namespace DungeonCrawler.Entities
                 collideable = new Collideable()
                 {
                     EntityID = entityID,
+                    RoomID = position.RoomID,
                     Bounds = new CircleBounds(position.Center, position.Radius)
                 };
                 game.CollisionComponent[entityID] = collideable;

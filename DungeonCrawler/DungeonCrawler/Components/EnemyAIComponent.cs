@@ -21,13 +21,22 @@ using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.Components
 {
+    public enum AIBehaviorType
+    {
+        None,
+        DefaultRanged,
+        DefaultMelee,
+        Alien,
+    }
+
     public struct EnemyAI
     {
         // <summary>
         /// The ID of the entity this AI belongs to
         /// </summary>
         public uint EntityID;
-
+        public AIBehaviorType AIBehaviorType;
+        public bool HasTarget;
         public uint TargetID;
         public List<uint> NoTargetList;
     }

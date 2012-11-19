@@ -36,12 +36,12 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// An animation timer
         /// </summary>
-        public float TimePassed ;
+        public float TimePassed;
 
         /// <summary>
         /// The displayed frame of this MovementSprite
         /// </summary>
-        public int CurrentFrame ;
+        public int CurrentFrame;
 
         /// <summary>
         /// The number of frames to play per second
@@ -62,6 +62,17 @@ namespace DungeonCrawler.Components
         /// Whether or not the animation should loop. If false, it will freeze on the last frame of the animation row.
         /// </summary>
         public bool IsLooping;
+
+        public SpriteAnimation(uint id)
+        {
+            EntityID = id;
+            TimePassed = 0;
+            CurrentFrame = 0;
+            FramesPerSecond = 10;
+            CurrentAnimationRow = 0;
+            IsPlaying = true;
+            IsLooping = true;
+        }
     }
 
     public class SpriteAnimationComponent : GameComponent<SpriteAnimation>

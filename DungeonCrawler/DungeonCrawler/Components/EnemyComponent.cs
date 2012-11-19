@@ -27,6 +27,9 @@ namespace DungeonCrawler.Components
     public enum EnemyType
     {
         Target,
+        StationaryTarget,
+        MovingTarget,
+        Alien,
     }
 
     public enum EnemyState
@@ -54,7 +57,7 @@ namespace DungeonCrawler.Components
 
         /// <summary>
         /// The state of the enemy
-        /// </summary>
+        /// <//summary>
         public EnemyState State;
 
         /// <summary>
@@ -65,7 +68,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// Integer for health
         /// </summary>
-        public int Health;
+        public float Health;
 
     }
 

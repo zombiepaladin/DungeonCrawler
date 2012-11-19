@@ -51,6 +51,7 @@ namespace DungeonCrawler.Systems
             Room,
             Effect,
             //Needs more in the future!
+            Skill,
         }
 
         private Stack<KeyValuePair<uint, ComponentType>> garbageSchedule;
@@ -156,6 +157,13 @@ namespace DungeonCrawler.Systems
                         if (game.ResurrectComponent.Contains(keyValue.Key))       game.ResurrectComponent.Remove(keyValue.Key);
                         if (game.StunComponent.Contains(keyValue.Key))            game.StunComponent.Remove(keyValue.Key);
                         if (game.TimedEffectComponent.Contains(keyValue.Key))     game.TimedEffectComponent.Remove(keyValue.Key);
+                        break;
+                    case ComponentType.Skill:
+                        game.PositionComponent.Remove(keyValue.Key);
+                        game.SkillProjectileComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.MovementComponent.Remove(keyValue.Key);
+                        game.CollisionComponent.Remove(keyValue.Key);
                         break;
                 }
             }

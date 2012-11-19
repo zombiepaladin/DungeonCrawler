@@ -129,6 +129,10 @@ namespace DungeonCrawler.Systems
                     position.Center = DungeonCrawlerGame.LevelManager.getCurrentRoom().playerSpawns[door.DestinationSpawnName];
                     position.RoomID = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
                     game.PositionComponent[player.EntityID] = position;
+
+                    Collideable collision = game.CollisionComponent[player.EntityID];
+                    collision.RoomID = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
+                    game.CollisionComponent[player.EntityID] = collision;
                 }
 
 

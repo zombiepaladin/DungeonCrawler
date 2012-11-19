@@ -12,6 +12,7 @@
 // Modified by Nicholas Strub: Added QuestLog System
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
+// Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -122,6 +123,11 @@ namespace DungeonCrawler
         public CharacterSelectionScreen CharacterSelectionScreen;
         public ContinueNewGameScreen ContinueNewGameScreen;
 
+        /// <summary>
+        /// Factory fo the visual components of the skills
+        /// </summary>
+        public SkillEntityFactory SkillEntityFactory;
+
         #endregion
 
         #region Game Components
@@ -175,8 +181,10 @@ namespace DungeonCrawler
         public ChargeComponent ChargeComponent;
         public HealingStationComponent HealingStationComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
-
-	public QuestComponent QuestComponent;
+        public SoundComponent SoundComponent;
+        public QuestComponent QuestComponent;
+        public ActorTextComponent ActorTextComponent;
+        
 
         #region Effect Components
         public AgroDropComponent AgroDropComponent;
@@ -215,6 +223,7 @@ namespace DungeonCrawler
         public SkillSystem SkillSystem;
 
         public GarbagemanSystem GarbagemanSystem;
+        TextSystem TextSystem;
 
         #endregion
 
@@ -247,6 +256,7 @@ namespace DungeonCrawler
             CollectableFactory = new CollectibleFactory(this);
             WallFactory = new WallFactory(this);
             EnemyFactory = new EnemyFactory(this);
+            SkillEntityFactory = new SkillEntityFactory(this);
             NPCFactory = new NPCFactory(this);
 
             // Initialize Components
@@ -284,6 +294,8 @@ namespace DungeonCrawler
             SkillProjectileComponent = new SkillProjectileComponent();
             SkillAoEComponent = new SkillAoEComponent();
             SkillDeployableComponent = new SkillDeployableComponent();
+            SoundComponent = new SoundComponent();
+            ActorTextComponent = new ActorTextComponent();
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();
@@ -340,10 +352,12 @@ namespace DungeonCrawler
             QuestLogSystem = new QuestLogSystem(this);
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
+            TextSystem = new TextSystem(this);
+
 
             // Testing code.
             LevelManager.LoadContent();
-            LevelManager.LoadLevel("TestDungeon3");
+            LevelManager.LoadLevel("D01F01R01");
             //End Testing Code
 
         }
@@ -446,11 +460,13 @@ namespace DungeonCrawler
                     SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
-                    GarbagemanSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
                     NpcAISystem.Update(elapsedTime);
                     EnemyAISystem.Update(elapsedTime);
+                    TextSystem.Update(elapsedTime);
+
+                    GarbagemanSystem.Update(elapsedTime);
                     break;
 
                 case GameState.Credits:
@@ -531,7 +547,7 @@ namespace DungeonCrawler
             public int Level;
             // Other skills/stats
             public Stats stats;
-            public int health;
+            public float health;
             public int psi;
         }
 
@@ -608,6 +624,9 @@ namespace DungeonCrawler
             charPreview.charSprite = gameData.charSprite;
             charPreview.characterType = gameData.characterType;
             charPreview.Level = gameData.Level;
+
+            if (masterSaveFile.charFiles == null)
+                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
 
             if (masterSaveFile.charFiles == null) masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
             masterSaveFile.charFiles.Add(charPreview);
