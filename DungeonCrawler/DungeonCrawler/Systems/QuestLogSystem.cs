@@ -66,12 +66,27 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private bool displayGoals;
 
-        private string[] questNames = { "Reach the next room." };
+        /// <summary>
+        /// Contains the names of the quests, sorted by their quest id
+        /// </summary>
+        private string[] questNames = { "Dungeon Extraordinaire" };
 
         /// <summary>
         /// Contains all of the descriptions for the quests, sorted by their quest id
         /// </summary>
-        private string[] questDescriptions = { "Proceed to the next room. This can be accomplished by walking through the doorway on the left side of the room." };
+        private string[] questDescriptions = { "Reach the end of the dungeon." };
+
+        /// <summary>
+        /// Contains the objective goal for each quest, sorted by their quest id. For a kill quest,
+        /// this would be the number of kills needed to complete the quest. For a non count quest, 
+        /// such as a quest to reach a certain room, this will just be 1
+        /// </summary>
+        private int[] objectiveGoalCount = { 1 };
+
+        /// <summary>
+        /// The useable width, in pixels, of the quest log gui
+        /// </summary>
+        private int questLogWidth = 275;
 
         #endregion
 
@@ -118,17 +133,26 @@ namespace DungeonCrawler.Systems
         /// <param name="elapsedTime">The elapsed time in seconds</param>
         public void Update(float elapsedTime)
         {
+            List<Quest> quests = new List<Quest>();
             // Sets the current quest to the first in progress quest
             foreach (Quest q in game.QuestComponent.All)
             {
                 if (q.questStatus == QuestStatus.InProgress)
                 {
                     currentQuest = q;
-                    displayGoals = true;
+                    if (currentQuest.objectiveCount >= objectiveGoalCount[currentQuest.questID])
+                    {
+                        currentQuest.objectiveCount = objectiveGoalCount[currentQuest.questID];
+                        currentQuest.questStatus = QuestStatus.Finished;
+                        displayGoals = false;
+                    }
+                    quests.Add(currentQuest);
                 }
             }
-            // If the quest is finished, do not display the goals for it
-            if (currentQuest.questStatus == QuestStatus.Finished) displayGoals = false;
+            foreach (Quest q in quests)
+            {
+                game.QuestComponent[q.EntityID] = q;
+            }
         }
 
         /// <summary>
@@ -138,16 +162,26 @@ namespace DungeonCrawler.Systems
         {
             spriteBatch.Begin();
 
-            if (displayLog)
+            if (displayGoals)
             {
-                spriteBatch.Draw(questLog, questLogLocation, Color.White);
-                if (displayGoals)
+                #region Draw Mini Quest Objectives
+
+                Vector2 location = descriptionFont.MeasureString("* " + questDescriptions[currentQuest.questID]);
+
+                spriteBatch.DrawString(descriptionFont, questNames[currentQuest.questID], new Vector2(1240 - location.X - 15, 160), Color.White);
+                spriteBatch.DrawString(descriptionFont, "*" + questDescriptions[currentQuest.questID], new Vector2(1240 - location.X, 180), Color.White);
+
+                #endregion
+
+                if (displayLog)
                 {
+                    spriteBatch.Draw(questLog, questLogLocation, Color.White);
+
                     #region Draw Quest Name
 
-                    //Computes the center of the line
-                    questLogTextLocation.X = ((((questLogLocation.X + 45) * 2) + 66) / 2) - (questNames[currentQuest.questID].Length / 2);
-                    questLogTextLocation.Y = questLogLocation.Y + 90;
+                    //Computes the center of the quest log
+                    questLogTextLocation.X = (((questLogLocation.X * 2) + 40 + questLogWidth) / 2) - (nameFont.MeasureString(questNames[currentQuest.questID]).X / 2);
+                    questLogTextLocation.Y = questLogLocation.Y + 75;
                     spriteBatch.DrawString(nameFont, questNames[currentQuest.questID], questLogTextLocation, Color.Black);
 
                     #endregion
@@ -155,11 +189,11 @@ namespace DungeonCrawler.Systems
                     #region Draw Quest Description
 
                     string[] strings = questDescriptions[currentQuest.questID].Split(' ');
-                    questLogTextLocation.X = questLogLocation.X + 45;
+                    questLogTextLocation.X = questLogLocation.X + 40;
                     string newstring = "";
                     int i = 0;
                     int j = 0;
-                    int length = (int)Math.Ceiling(questDescriptions[currentQuest.questID].Length / 33.0);
+                    int length = (int)Math.Ceiling(descriptionFont.MeasureString(questDescriptions[currentQuest.questID]).X / questLogWidth);
                     // Splits up the quest description into lines that fit into the quest log gui, then draws them
                     while (j <= length)
                     {
@@ -168,9 +202,9 @@ namespace DungeonCrawler.Systems
                             newstring += strings[i] + " ";
                             i++;
                         }
-                        if (i >= strings.Length || newstring.Length + strings[i].Length >= 33)
+                        if (i >= strings.Length || descriptionFont.MeasureString(newstring + strings[i]).X >= 275)
                         {
-                            questLogTextLocation.Y = questLogLocation.Y + 90 + ((j + 1) * 25);
+                            questLogTextLocation.Y = questLogLocation.Y + 75 + ((j + 1) * 25);
                             spriteBatch.DrawString(descriptionFont, newstring, questLogTextLocation, Color.Black);
                             newstring = "";
                             j++;
@@ -182,6 +216,58 @@ namespace DungeonCrawler.Systems
             }
 
             spriteBatch.End();
+        }
+
+        /// <summary>
+        /// Attempts to activate a quest. If successful, all players in the game will receive the quest.
+        /// This method will fail if any current player has a quest marked as InProgress
+        /// </summary>
+        /// <param name="QuestID">Quest ID of the quest to activate</param>
+        /// <returns>A boolean indicating whether the activation was a success or not. It will fail if a quest is already in progress</returns>
+        public Boolean ActivateQuest(uint QuestID)
+        {
+            foreach (Quest quest in game.QuestComponent.All)
+            {
+                if (quest.questStatus == QuestStatus.InProgress) return false;
+            }
+            if (QuestID >= this.questNames.Length) return false;
+            foreach (Player p in game.PlayerComponent.All)
+            {
+                Quest q = new Quest()
+                {
+                    EntityID = p.EntityID,
+                    questID = QuestID,
+                    questStatus = QuestStatus.InProgress,
+                    countingObjective = this.objectiveGoalCount[QuestID] > 1,
+                    objectiveCount = 0,
+                };
+                game.QuestComponent.Add(p.EntityID, q);
+            }
+            displayGoals = true;
+            return true;
+        }
+
+        /// <summary>
+        /// Increments the objective count for the specified quest
+        /// </summary>
+        /// <param name="QuestID">The quest to increment</param>
+        public void IncremementObjective(uint QuestID)
+        {
+            List<Quest> quests = new List<Quest>();
+            Quest quest = new Quest();
+            foreach (Quest q in game.QuestComponent.All)
+            {
+                quest = q;
+                if (quest.questID == QuestID && quest.questStatus == QuestStatus.InProgress)
+                {
+                    quest.objectiveCount++;
+                    quests.Add(quest);
+                }
+            }
+            foreach (Quest q in quests)
+            {
+                game.QuestComponent[quest.EntityID] = quest;
+            }
         }
 
         #endregion

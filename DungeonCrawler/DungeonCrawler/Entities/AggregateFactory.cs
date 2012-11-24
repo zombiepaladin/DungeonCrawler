@@ -915,13 +915,7 @@ namespace DungeonCrawler.Entities
             gameSave.fileName = fileName;
             info.FileName = fileName;
 
-            Quest newQuest = new Quest()
-            {
-                EntityID = entityID,
-                questID = 0,
-                questStatus = QuestStatus.InProgress,
-            };
-            game.QuestComponent[entityID] = newQuest;
+            game.QuestLogSystem.ActivateQuest(0);
 
             return entityID;
         }
@@ -1068,13 +1062,7 @@ namespace DungeonCrawler.Entities
                 invagg.CreateInv(player);
             }
 
-            Quest newQuest = new Quest()
-            {
-                EntityID = entityID,
-                questID = 0,
-                questStatus = QuestStatus.InProgress,
-            };
-            game.QuestComponent[entityID] = newQuest;
+            game.QuestLogSystem.ActivateQuest(0);
 
             return entityID;
         }

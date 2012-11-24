@@ -48,6 +48,17 @@ namespace DungeonCrawler.Components
         /// The status of the quest. This may not be needed in the long run.
         /// </summary>
         public QuestStatus questStatus;
+
+        /// <summary>
+        /// Indicates whether the quest is a quest with a counting object (kill X monsters, collect X things)
+        /// </summary>
+        public Boolean countingObjective;
+
+        /// <summary>
+        /// The count towards the current objective. If countingObjective is False, this will be treated as a
+        /// Boolean value, indicating whether the quest is finished or not
+        /// </summary>
+        public int objectiveCount;
     };
 
     public class QuestComponent : GameComponent<Quest>
