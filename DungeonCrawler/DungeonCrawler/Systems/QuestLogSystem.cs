@@ -162,21 +162,21 @@ namespace DungeonCrawler.Systems
         {
             spriteBatch.Begin();
 
+            if (displayLog) spriteBatch.Draw(questLog, questLogLocation, Color.White);
+
             if (displayGoals)
             {
                 #region Draw Mini Quest Objectives
 
-                Vector2 location = descriptionFont.MeasureString("* " + questDescriptions[currentQuest.questID]);
+                float xCoord = game.GraphicsDevice.Viewport.Width - descriptionFont.MeasureString("* " + questDescriptions[currentQuest.questID]).X - 10;
 
-                spriteBatch.DrawString(descriptionFont, questNames[currentQuest.questID], new Vector2(1240 - location.X - 15, 160), Color.White);
-                spriteBatch.DrawString(descriptionFont, "*" + questDescriptions[currentQuest.questID], new Vector2(1240 - location.X, 180), Color.White);
+                spriteBatch.DrawString(descriptionFont, questNames[currentQuest.questID], new Vector2(xCoord, 160), Color.Red);
+                spriteBatch.DrawString(descriptionFont, "*" + questDescriptions[currentQuest.questID], new Vector2(xCoord, 180), Color.White);
 
                 #endregion
 
                 if (displayLog)
                 {
-                    spriteBatch.Draw(questLog, questLogLocation, Color.White);
-
                     #region Draw Quest Name
 
                     //Computes the center of the quest log
