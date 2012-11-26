@@ -348,6 +348,10 @@ namespace DungeonCrawler
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("D01F01R01");
+            Song bg = Content.Load<Song>("Audio/Main_Loop");
+            MediaPlayer.Stop();
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(bg);
             //End Testing Code
 
         }
