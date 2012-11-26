@@ -86,7 +86,6 @@ namespace DungeonCrawler
 #if WINDOWS 
         KeyboardState _curKeyboardState;
         KeyboardState _oldKeyboardState;
-        bool _gamePadActive;
 #endif
 #if XBOX || WINDOWS
         GamePadState _curGamePadState;
@@ -117,8 +116,7 @@ namespace DungeonCrawler
             if(_disabled)
                 return;
 #if WINDOWS
-            if(_gamePadActive)
-                getGamePadState();
+            getGamePadState();
             getKeyboardState();
 #elif XBOX
             getGamePadState();
@@ -126,20 +124,34 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// Returns the direction the player is inputing.
+        /// Returns the direction the player is inputing. (With the left stick on the gamepad and the WASD keys on the keyboard)
         /// </summary>
         /// <returns></returns>
-        public Vector2 GetDirection()
+        public Vector2 GetLeftDirection()
         {
             if(_disabled)
                 return new Vector2(0);
 
 #if WINDOWS
-            if(_gamePadActive)
-                return getGamePadDirection();
-            return getKeyboardDirection();
+            if (_curGamePadState.IsConnected)
+                return getGamePadLeftStick();
+            return getKeyboardWASD();
 #elif XBOX
-            return getGamePadDirection();
+            return getGamePadLeftStick();
+#endif
+        }
+
+        public Vector2 GetRightDirection()
+        {
+            if (_disabled)
+                return new Vector2(0);
+
+#if WINDOWS
+            if(_curGamePadState.IsConnected)
+                return getGamePadRightStick();
+            return getKeyboardArrows();
+#elif XBOX
+            return getGamePadRightStick();
 #endif
         }
 
@@ -155,9 +167,9 @@ namespace DungeonCrawler
                 return false;
 
 #if WINDOWS
-            if(_gamePadActive)
+            if (_curGamePadState.IsConnected)
                 return isButtonPressed(button);
-            return isKeyPressed(key);
+            return isKeyPressed(key); //Only allow keyboard input for the first player.
 #elif XBOX
             return isButtonPressed((Buttons)button);
 #endif
@@ -175,7 +187,7 @@ namespace DungeonCrawler
                 return false;
 
 #if WINDOWS
-            if(_gamePadActive)
+            if (_curGamePadState.IsConnected)
                 return isButtonHeld(button);
             return isKeyHeld(key);
 #elif XBOX
@@ -186,11 +198,7 @@ namespace DungeonCrawler
 
         public bool IsGamePadConnected()
         {
-#if WINDOWS
-            return _gamePadActive;
-#elif XBOX
             return _curGamePadState.IsConnected;
-#endif
         }
 
         //Keyboard handlers
@@ -200,9 +208,7 @@ namespace DungeonCrawler
         {
             _curKeyboardState = Keyboard.GetState(_pIndex);
             _oldKeyboardState = _curKeyboardState;
-            _gamePadActive = GamePad.GetState(_pIndex).IsConnected;
-            if(_gamePadActive)
-                initGamePad();
+            initGamePad();
         }
 
         private void getKeyboardState()
@@ -211,7 +217,7 @@ namespace DungeonCrawler
             _curKeyboardState = Keyboard.GetState(_pIndex);
         }
 
-        private Vector2 getKeyboardDirection()
+        private Vector2 getKeyboardWASD()
         {
             Vector2 direction = new Vector2(0);
 
@@ -228,6 +234,30 @@ namespace DungeonCrawler
                 direction.X += -1;
             }
             if (_curKeyboardState.IsKeyDown(Keys.D))
+            {
+                direction.X += 1;
+            }
+
+            return direction;
+        }
+
+        private Vector2 getKeyboardArrows()
+        {
+            Vector2 direction = new Vector2(0);
+
+            if (_curKeyboardState.IsKeyDown(Keys.Down))
+            {
+                direction.Y += -1;
+            }
+            if (_curKeyboardState.IsKeyDown(Keys.Up))
+            {
+                direction.Y += 1;
+            }
+            if (_curKeyboardState.IsKeyDown(Keys.Left))
+            {
+                direction.X += -1;
+            }
+            if (_curKeyboardState.IsKeyDown(Keys.Right))
             {
                 direction.X += 1;
             }
@@ -260,14 +290,16 @@ namespace DungeonCrawler
         {
             _oldGamePadState = _curGamePadState;
             _curGamePadState = GamePad.GetState(_pIndex);
-#if WINDOWS
-            _gamePadActive = _curGamePadState.IsConnected;
-#endif
         }
 
-        private Vector2 getGamePadDirection()
+        private Vector2 getGamePadLeftStick()
         {
             return _curGamePadState.ThumbSticks.Left;
+        }
+
+        private Vector2 getGamePadRightStick()
+        {
+            return _curGamePadState.ThumbSticks.Right;
         }
 
         private bool isButtonPressed(Buttons button)

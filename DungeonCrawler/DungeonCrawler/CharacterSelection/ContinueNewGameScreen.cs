@@ -213,22 +213,26 @@ namespace DungeonCrawler
                     if (UserInput.GetInput(PlayerIndex.One).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerOne.connected = true;
-                        players.Add(playerOne);
+                        if(!players.Contains(playerOne))
+                            players.Add(playerOne);
                     }
                     if (UserInput.GetInput(PlayerIndex.Two).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerTwo.connected = true;
-                        players.Add(playerTwo);
+                        if(!players.Contains(playerTwo))
+                            players.Add(playerTwo);
                     }
                     if (UserInput.GetInput(PlayerIndex.Three).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerThree.connected = true;
-                        players.Add(playerThree);
+                        if(!players.Contains(playerThree))
+                            players.Add(playerThree);
                     }
                     if (UserInput.GetInput(PlayerIndex.Four).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerFour.connected = true;
-                        players.Add(playerFour);
+                        if(!players.Contains(playerFour))
+                            players.Add(playerFour);
                     }
 
 #if XBOX 
@@ -309,7 +313,7 @@ namespace DungeonCrawler
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
 
-                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Enter, Buttons.A))
+                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Space, Buttons.A))
                             {
                                 currentPlayer.timer = controllerDelay;
                                 if (selectedGameSave == 0)

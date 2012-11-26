@@ -471,6 +471,10 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.Black);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (GameState == GameState.SignIn)
+                return;
+
             if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);
