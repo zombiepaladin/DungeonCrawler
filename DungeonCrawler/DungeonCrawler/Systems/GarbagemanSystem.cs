@@ -102,6 +102,7 @@ namespace DungeonCrawler.Systems
                         game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:
+                        game.SpriteAnimationComponent.Remove(keyValue.Key);
                         game.EnemyComponent.Remove(keyValue.Key);
                         game.CollisionComponent.Remove(keyValue.Key);
                         game.PositionComponent.Remove(keyValue.Key);
@@ -174,8 +175,8 @@ namespace DungeonCrawler.Systems
             ComponentType cType;
             if (game.PlayerInfoComponent.Contains(eid))
                 cType = ComponentType.Player;
-            //else if (game.EnemyComponent.Contains(eid)) Not Implemented
-            //    cType = ComponentType.Enemy;
+            //else if (game.EnemyComponent.Contains(eid)) 
+              //  cType = ComponentType.Enemy;
             else if (game.BulletComponent.Contains(eid))
                 cType = ComponentType.Bullet;
             else if (game.CollectibleComponent.Contains(eid))

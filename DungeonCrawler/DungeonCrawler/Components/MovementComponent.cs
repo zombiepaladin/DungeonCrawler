@@ -12,10 +12,19 @@
 
 #region Using Statements
 using Microsoft.Xna.Framework;
+using System;
 #endregion
 
 namespace DungeonCrawler.Components
 {
+    public enum FacingDirection
+    {
+        South = 0,
+        West = 1,
+        East = 2,
+        North = 3,
+    }
+
     /// <summary>
     /// A struture representing the motion of a single entity
     /// in the game world
@@ -44,6 +53,18 @@ namespace DungeonCrawler.Components
     /// </summary>
     public class MovementComponent : GameComponent<Movement>
     {
+        public FacingDirection GetFacingFromDirection(uint id)
+        {
+            Vector2 direction = elements[id].Direction;
 
+            if (direction.X > 0 && direction.X > Math.Abs(direction.Y))
+                return FacingDirection.East;
+            else if (direction.X < 0 && Math.Abs(direction.X) > Math.Abs(direction.Y))
+                return FacingDirection.West;
+            else if (direction.Y < 0)
+                return FacingDirection.North;
+
+            return FacingDirection.South;
+        }
     }
 }

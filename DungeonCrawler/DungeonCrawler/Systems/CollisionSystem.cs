@@ -21,6 +21,7 @@ using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Systems
 {
@@ -81,61 +82,12 @@ namespace DungeonCrawler.Systems
         private DungeonCrawlerGame _game;
 
         /// <summary>
-        /// Spritebatch for drawing collision bounds.
-        /// </summary>
-        private SpriteBatch spriteBatch;
-
-        /// <summary>
-        /// Debug Texture for drawing collision bounds
-        /// </summary>
-        private Texture2D _debugTexture;
-
-        /// <summary>
         /// Creates a new collision system.
         /// </summary>
         /// <param name="game">The game this systems belongs to.</param>
         public CollisionSystem(DungeonCrawlerGame game)
         {
             _game = game;
-
-            _debugTexture = new Texture2D(_game.GraphicsDevice, 1, 1);
-            this.spriteBatch = new SpriteBatch(game.GraphicsDevice);
-
-            Color[] data = new Color[1];
-            for (int i = 0; i < data.Length; ++i) { data[i] = Color.Red; data[i].A /= 2; }
-            _debugTexture.SetData(data);
-        }
-
-        /// <summary>
-        /// Used to draw the collision bounds for test purposes
-        /// </summary>
-        /// <param name="elapsedTime">Elapsed Time.</param>
-        public void Draw(float elapsedTime)
-        {
-            spriteBatch.Begin(SpriteSortMode.BackToFront, null, SamplerState.PointClamp, null, null, null);
-            //Draw each one
-            uint roomID = _game.CurrentRoomEid;
-            IEnumerable<Position> positionsInRoom = _game.PositionComponent.InRoom(roomID);
-            List<Collideable> collideablesInRoom = new List<Collideable>();
-
-            foreach (Position position in positionsInRoom)
-            {
-                if (_game.CollisionComponent.Contains(position.EntityID))
-                    collideablesInRoom.Add(_game.CollisionComponent[position.EntityID]);
-            }
-
-            for (int i = 0; i < collideablesInRoom.Count; i++)
-            {
-                if(collideablesInRoom[i].Bounds is RectangleBounds)
-                    this.spriteBatch.Draw(_debugTexture, ((RectangleBounds)collideablesInRoom[i].Bounds).Rectangle, Color.Red);
-                else
-                {
-                    CircleBounds bounds = (CircleBounds) collideablesInRoom[i].Bounds;
-                    this.spriteBatch.Draw(_debugTexture, new Rectangle((int)(bounds.Center.X - bounds.Radius), (int)(bounds.Center.Y - bounds.Radius),
-                        (int)(bounds.Radius * 2), (int)(bounds.Radius * 2)), Color.Red);
-                }
-            }
-            spriteBatch.End();
         }
 
         /// <summary>
@@ -250,9 +202,9 @@ namespace DungeonCrawler.Systems
             DoDamage(enemy, weapon.Damage);
 
             //Update enemy info.
-            _game.EnemyComponent[enemy.EntityID] = enemy;
+            //_game.EnemyComponent[enemy.EntityID] = enemy;
 
-            //Remove collision imiediatly.
+            //Remove collision immediately.
             _game.CollisionComponent.Remove(weapon.EntitiyID);
         }
 
@@ -465,10 +417,104 @@ namespace DungeonCrawler.Systems
         private void EnemyEnemyCollision(uint p, uint p_2)
         {
             //Set enemies against each other
+            //Make them collide with eachother or else they will stack
 
+            //NOTE - copy pasted playerenemy collision for testing, fix sometime
+
+            uint enemyId, playerId;
+                enemyId = p;
+                playerId = p_2;
+            
+
+            Enemy enemy = _game.EnemyComponent[enemyId];
+
+            bool moving = _game.MovementComponent.Contains(enemyId);
+
+            if (!enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painless
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
+            else if (enemy.HurtOnTouch && !moving)
+            {
+                //Stationary & Painful
+                DoDamage(_game.PlayerComponent[playerId], 10); //Replace 10 with something dynamic.
+            }
+            else if (!enemy.HurtOnTouch && moving)
+            {
+                //For now, let's have it just push the person around. But we need to make sure eventually that
+                //complicated nonviolent collisions is handled. That way pushing blocks/people walking into each other
+                //will be done properly.
+
+                //Act like a static
+
+                Bounds b = _game.CollisionComponent[enemyId].Bounds;
+                Position playerPos = _game.PositionComponent[playerId];
+
+                if (b.GetType() == typeof(RectangleBounds))
+                {
+                    //Get the closest point on the rectangle
+                    Vector2 closestPos = ((RectangleBounds)b).GetClosestPoint(playerPos.Center);
+                    double angle = Math.Atan2(closestPos.Y - playerPos.Center.Y, closestPos.X - playerPos.Center.X);
+
+                    double x = closestPos.X - (Math.Cos(angle) * (playerPos.Radius));
+                    double y = closestPos.Y - (Math.Sin(angle) * (playerPos.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+                else //is circle
+                {
+                    //static won't move, so just place player out there
+
+                    CircleBounds circle = ((CircleBounds)b);
+                    double angle = Math.Atan2(circle.Center.Y - playerPos.Center.Y,
+                        circle.Center.X - playerPos.Center.X);
+
+                    double x = circle.Center.X - (Math.Cos(angle) * (playerPos.Radius + circle.Radius));
+                    double y = circle.Center.Y - (Math.Sin(angle) * (playerPos.Radius + circle.Radius));
+
+                    playerPos.Center = new Vector2((float)x, (float)y);
+
+                    _game.PositionComponent[playerId] = playerPos;
+                }
+            }
             
             
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         /// <summary>
@@ -784,6 +830,24 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        private void SkillProjectileCollision(uint p, uint p_2, bool friendly)
+        {
+            uint skillId, oId;
+            if (_game.SkillProjectileComponent.Contains(p))
+            {
+                skillId = p;
+                oId = p_2;
+            }
+            else
+            {
+                skillId = p_2;
+                oId = p;
+            }
+            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+        }
+        
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>

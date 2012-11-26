@@ -43,6 +43,40 @@
     <property name="Locked" value="true"/>
    </properties>
   </object>
+  <object name="Enemy" type="Alien" x="1192" y="586"/>
+  <object name="Enemy" type="Alien" x="1198" y="558"/>
+  <object name="Enemy" type="Alien" x="1169" y="557"/>
+  <object name="Enemy" type="Alien" x="1169" y="583"/>
+  <object name="Enemy" type="Alien" x="1164" y="610"/>
+  <object name="Enemy" type="Alien" x="236" y="544"/>
+  <object name="Enemy" type="Alien" x="191" y="543"/>
+  <object name="Enemy" type="Alien" x="183" y="578"/>
+  <object name="Enemy" type="Alien" x="229" y="584"/>
+  <object name="Enemy" type="Alien" x="143" y="551"/>
+  <object name="Enemy" type="Alien" x="147" y="315"/>
+  <object name="Enemy" type="Alien" x="139" y="288"/>
+  <object name="Enemy" type="Alien" x="175" y="285"/>
+  <object name="Enemy" type="Alien" x="175" y="309"/>
+  <object name="Enemy" type="Alien" x="1178" y="148"/>
+  <object name="Enemy" type="Alien" x="1132" y="142"/>
+  <object name="Enemy" type="Alien" x="1092" y="115"/>
+  <object name="Enemy" type="Alien" x="1185" y="108"/>
+  <object name="Enemy" type="Alien" x="1140" y="107"/>
+  <object name="Enemy" type="Alien" x="840" y="407"/>
+  <object name="Enemy" type="Alien" x="794" y="401"/>
+  <object name="Enemy" type="Alien" x="754" y="374"/>
+  <object name="Enemy" type="Alien" x="847" y="367"/>
+  <object name="Enemy" type="Alien" x="802" y="366"/>
+  <object name="Enemy" type="Alien" x="422" y="400"/>
+  <object name="Enemy" type="Alien" x="376" y="394"/>
+  <object name="Enemy" type="Alien" x="336" y="367"/>
+  <object name="Enemy" type="Alien" x="429" y="360"/>
+  <object name="Enemy" type="Alien" x="384" y="359"/>
+  <object name="Enemy" type="Alien" x="671" y="592"/>
+  <object name="Enemy" type="Alien" x="625" y="586"/>
+  <object name="Enemy" type="Alien" x="585" y="559"/>
+  <object name="Enemy" type="Alien" x="678" y="552"/>
+  <object name="Enemy" type="Alien" x="633" y="551"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23">
   <object name="Trigger" type="Wall" x="0" y="0" width="640" height="64"/>

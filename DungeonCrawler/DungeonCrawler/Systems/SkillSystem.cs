@@ -2,7 +2,8 @@
 //-----------------------------------------------------------------------------
 // SkillSystem.cs 
 //
-// Author: Nicholas Boen
+// Author: Nicholas Boen 
+// Contributers: Austin Murphy
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -152,7 +153,7 @@ namespace DungeonCrawler.Systems
             uint eid;
 
             #endregion
-
+            
             #region Check Cool Down
 
             //make sure the user isn't cooling down from a previous use
@@ -2601,7 +2602,7 @@ namespace DungeonCrawler.Systems
                         #region Motivate
 
                         case SkillType.Motivate:
-
+                            
                             #region Skill Variables
 
                             TimedEffect timedEffect;
@@ -3400,6 +3401,69 @@ namespace DungeonCrawler.Systems
                 #endregion
             }
         }
+
+        //public void TriggerSkill(Aggregate playerType, SkillType skillType, int rank, uint userID)
+        public void TriggerEffect(SkillType type, int rank, bool friendly, uint target)    
+        {
+            uint eid;
+            switch (type)
+            {
+                case SkillType.BenignParasite:
+                    TimedEffect timedEffect;
+                    float effectDuration;
+                    eid = Entity.NextEntity();
+                    HealOverTime HoT;
+                    switch (rank)
+                    {
+                        case 1:
+                            //apply hot to target
+                            effectDuration = 1;
+                            timedEffect = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TotalDuration = effectDuration,
+                                TimeLeft = effectDuration
+                            };
+                            _game.TimedEffectComponent.Add(eid, timedEffect);
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 1,
+                                CurrentStack = 1,
+                                CurrentTime = effectDuration,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid,HoT);
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        case 8:
+                            break;
+                        case 9:
+                            break;
+                        case 10:
+                            break;
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                default:
+                    throw new Exception("Unimplemented SKill");
+            }
+        }
+
 
         #endregion
 
