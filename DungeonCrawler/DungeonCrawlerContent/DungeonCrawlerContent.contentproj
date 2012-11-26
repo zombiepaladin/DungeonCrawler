@@ -670,8 +670,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Audio\512654_Video-Game-Selectio.mp3">
-      <Name>512654_Video-Game-Selectio</Name>
+    <Compile Include="Audio\Main_Loop.mp3">
+      <Name>Main_Loop</Name>
       <Importer>Mp3Importer</Importer>
       <Processor>SongProcessor</Processor>
     </Compile>

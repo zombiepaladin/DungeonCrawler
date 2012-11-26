@@ -13,6 +13,7 @@
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 // Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
