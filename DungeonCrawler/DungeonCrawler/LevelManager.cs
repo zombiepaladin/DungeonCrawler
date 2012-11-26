@@ -125,12 +125,13 @@ namespace DungeonCrawler
                                 switch (goData.Type)
                                 {
                                     case "MovingTarget":
-                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
-                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32});
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.MovingTarget, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
                                         break;
                                     case "StationaryTarget":
-                                        entityID = game.EnemyFactory.CreateEnemy(EnemyFactoryType.MovingTarget, new Position 
-                                            { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.MovingTarget, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    case "Alien":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Alien, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
                                         break;
                                     default:
                                         break;

@@ -90,25 +90,12 @@ namespace DungeonCrawler.Systems
 
             ThreadStart threadStarter = delegate
             {
-                // Delete all current doors in the game
-                //foreach (Door door in game.DoorComponent.All)
-                //{
-                //    game.GarbagemanSystem.ScheduleVisit(door.EntityID);
-                //}
-
-                // Delete all the current rooms in the game
-                //foreach (Room room in game.RoomComponent.All)
-                //{
-                //    game.GarbagemanSystem.ScheduleVisit(room.EntityID);
-                //}
-
                 // Load the destination room
                 uint lastRoomEid = game.CurrentRoomEid;
 
-                if (door.DestinationRoom == "TestDungeon1" && game.RoomComponent[lastRoomEid].roomName == "TestDungeon3" && game.QuestLogSystem.currentQuest.questName == QuestName.ReachNextRoom && game.QuestLogSystem.currentQuest.questStatus == QuestStatus.InProgress)
+                if (door.DestinationRoom == "D01F01R07" && game.RoomComponent[lastRoomEid].roomName == "D01F01R06" && game.QuestLogSystem.currentQuest.questID == 0 && game.QuestLogSystem.currentQuest.questStatus == QuestStatus.InProgress)
                 {
-                    game.QuestLogSystem.currentQuest.questStatus = QuestStatus.Finished;
-                    game.QuestComponent[game.QuestLogSystem.currentQuest.EntityID] = game.QuestLogSystem.currentQuest;
+                    game.QuestLogSystem.IncremementObjective(0);
                 }
 
                 DungeonCrawlerGame.LevelManager.LoadLevel(door.DestinationRoom);
@@ -129,6 +116,10 @@ namespace DungeonCrawler.Systems
                     position.Center = DungeonCrawlerGame.LevelManager.getCurrentRoom().playerSpawns[door.DestinationSpawnName];
                     position.RoomID = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
                     game.PositionComponent[player.EntityID] = position;
+
+                    Collideable collision = game.CollisionComponent[player.EntityID];
+                    collision.RoomID = DungeonCrawlerGame.LevelManager.getCurrentRoom().EntityID;
+                    game.CollisionComponent[player.EntityID] = collision;
                 }
 
 
