@@ -17,68 +17,10 @@ using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Components
 {
-    /// <summary>
-    /// enum for skills with 
-    /// </summary>
-    public enum Skills
-    {
-        energyShield,
-        defribrillate,
-        nanobots,
-        targetingUpgrade,
-        repulserArm,
-        energyShot,
-        alloyBody,
-        cyberneticSlam,
-        thrusterRush,
-        mindLock,
-        invisibility,
-        possess,
-        psionicSpear,
-        push,
-        detonate,
-        mentalBarrier,
-        wormOfGargranian,
-        soothe,
-        enslave,
-        fear,
-        sacrifice,
-        taint,
-        rot,
-        lightning,
-        malice,
-        throwBlades,
-        frenziedAttack,
-        causticWeapons,
-        meatShield,
-        hardenedBody,
-        graspingBlade,
-        benignParasite,
-        malicousParasite,
-        mindlessParasite,
-        trap,
-        explodingDroids,
-        turret,
-        healingStation,
-        portableShop,
-        portableShield,
-        charge,
-        fallBack,
-        motivate,
-        agilityBerserker,
-        dualWielding,
-        heavyDrinker,
-        powerShot,
-        eagleShot,
-        trickShot,
-        mug,
-        lockpicking,
-        steal
-    }
-
     #region SkillProjectiles
     public struct SkillProjectile
     {
@@ -86,16 +28,21 @@ namespace DungeonCrawler.Components
         /// Entity Id.
         /// </summary>
         public uint EntityID;
-
+        
         /// <summary>
         /// enum for the associated skill
         /// </summary>
-        public Skills skill;
+        public SkillType skill;
 
         /// <summary>
         /// Max range of the projectile
         /// </summary>
         public int maxRange;
+
+        /// <summary>
+        /// rank of the skill
+        /// </summary>
+        public int rank;
     }
     
     public class SkillProjectileComponent : GameComponent<SkillProjectile>
@@ -115,6 +62,11 @@ namespace DungeonCrawler.Components
         /// radius of the AoE
         /// </summary>
         public int radius;
+
+        /// <summary>
+        /// rank of the skill
+        /// </summary>
+        public int rank;
     }
 
     public class SkillAoEComponent : GameComponent<SkillAoE>
@@ -134,6 +86,11 @@ namespace DungeonCrawler.Components
         /// Duration of the AoE
         /// </summary>
         public int duration;
+
+        /// <summary>
+        /// rank of the skill
+        /// </summary>
+        public int rank;
     }
 
     public class SkillDeployableComponent : GameComponent<SkillDeployable>
