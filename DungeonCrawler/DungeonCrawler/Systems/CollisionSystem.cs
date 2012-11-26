@@ -201,9 +201,9 @@ namespace DungeonCrawler.Systems
             DoDamage(enemy, weapon.Damage);
 
             //Update enemy info.
-            _game.EnemyComponent[enemy.EntityID] = enemy;
+            //_game.EnemyComponent[enemy.EntityID] = enemy;
 
-            //Remove collision imiediatly.
+            //Remove collision immediately.
             _game.CollisionComponent.Remove(weapon.EntitiyID);
         }
 
