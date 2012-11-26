@@ -35,7 +35,9 @@ namespace DungeonCrawler
         /// <returns></returns>
         public static UserInput GetInput(PlayerIndex index)
         {
-            return _inputs[index];
+            UserInput input = _inputs[index];
+            input.updateState();
+            return input;
         }
 
         /// <summary>
@@ -110,7 +112,7 @@ namespace DungeonCrawler
         /// <summary>
         /// Saves the current state of the player's input. Call this before checking to get the most recent results.
         /// </summary>
-        public void GetState()
+        private void updateState()
         {
             if(_disabled)
                 return;
@@ -180,6 +182,15 @@ namespace DungeonCrawler
             return isButtonHeld((Buttons)button);
 #endif
 
+        }
+
+        public bool IsGamePadConnected()
+        {
+#if WINDOWS
+            return _gamePadActive;
+#elif XBOX
+            return _curGamePadState.IsConnected;
+#endif
         }
 
         //Keyboard handlers

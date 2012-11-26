@@ -197,7 +197,7 @@ namespace DungeonCrawler
                 if (!isNewGame)
                 {
                     // Allows the game to exit
-                    if ((GamePad.GetState(currentPlayer.playerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
+                    if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back) 
                         && currentPlayer.timer <= 0)
                     {
                         if (currentPlayerIndex == 0)
@@ -210,22 +210,22 @@ namespace DungeonCrawler
                             currentPlayer.selected = false;
                         }
                     }
-                    if ((GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter)) && !playerOne.connected)
+                    if (UserInput.GetInput(PlayerIndex.One).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerOne.connected = true;
                         players.Add(playerOne);
                     }
-                    if (GamePad.GetState(PlayerIndex.Two).Buttons.Start == ButtonState.Pressed && !playerTwo.connected)
+                    if (UserInput.GetInput(PlayerIndex.Two).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerTwo.connected = true;
                         players.Add(playerTwo);
                     }
-                    if (GamePad.GetState(PlayerIndex.Three).Buttons.Start == ButtonState.Pressed && !playerThree.connected)
+                    if (UserInput.GetInput(PlayerIndex.Three).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerThree.connected = true;
                         players.Add(playerThree);
                     }
-                    if (GamePad.GetState(PlayerIndex.Four).Buttons.Start == ButtonState.Pressed && !playerFour.connected)
+                    if (UserInput.GetInput(PlayerIndex.Four).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerFour.connected = true;
                         players.Add(playerFour);
@@ -233,24 +233,24 @@ namespace DungeonCrawler
 
 #if XBOX 
                 // If windows we don't want to disconnect the keyboard, which is player one
-                if (!GamePad.GetState(PlayerIndex.One).IsConnected) 
+                if (!UserInput.GetInput(PlayerIndex.One).IsGamePadConnected()) 
                 {
                     players.Remove(playerOne);
                     playerOne.connected = false;
                 }
 #endif
 
-                    if (!GamePad.GetState(PlayerIndex.Two).IsConnected)
+                    if (!UserInput.GetInput(PlayerIndex.Two).IsGamePadConnected())
                     {
                         players.Remove(playerTwo);
                         playerTwo.connected = false;
                     }
-                    if (!GamePad.GetState(PlayerIndex.Three).IsConnected)
+                    if (!UserInput.GetInput(PlayerIndex.Three).IsGamePadConnected())
                     {
                         players.Remove(playerThree);
                         playerThree.connected = false;
                     }
-                    if (!GamePad.GetState(PlayerIndex.Four).IsConnected)
+                    if (!UserInput.GetInput(PlayerIndex.Four).IsGamePadConnected())
                     {
                         players.Remove(playerFour);
                         playerFour.connected = false;
@@ -262,7 +262,7 @@ namespace DungeonCrawler
                         if (!currentPlayer.selected && currentPlayer.timer <= 0)
                         {
                             currentPlayer.timer = controllerDelay;
-                            if (GamePad.GetState(currentPlayer.playerIndex).DPad.Down == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Down))
+                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Down, Buttons.DPadDown))
                             {
                                 selectedGameSave++;
                                 if (selectedGameSave < gameSaves.Count)
@@ -285,7 +285,7 @@ namespace DungeonCrawler
                                 cursorMoved = true;
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
-                            if (GamePad.GetState(currentPlayer.playerIndex).DPad.Up == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up))
+                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Up, Buttons.DPadUp))
                             {
                                 selectedGameSave--;
                                 if (selectedGameSave >= 0)
@@ -309,7 +309,7 @@ namespace DungeonCrawler
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
 
-                            if (GamePad.GetState(currentPlayer.playerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
+                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Enter, Buttons.A))
                             {
                                 currentPlayer.timer = controllerDelay;
                                 if (selectedGameSave == 0)
@@ -341,7 +341,7 @@ namespace DungeonCrawler
                                     }
                                 }
                             }
-                            if (GamePad.GetState(currentPlayer.playerIndex).Buttons.B == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.B))
+                            if (UserInput.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back))
                             {
                                 //currentPlayer.selected = false;
                                 //currentPlayer.cursor.Color = Color.White;

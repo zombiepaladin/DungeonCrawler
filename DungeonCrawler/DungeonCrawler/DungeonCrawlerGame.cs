@@ -378,7 +378,7 @@ namespace DungeonCrawler
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (UserInput.GetInput(PlayerIndex.One).IsPressed(Keys.Escape, Buttons.Back))
                 this.Exit();
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -393,11 +393,16 @@ namespace DungeonCrawler
                     // Requires at least one player to sign in
                     if (Gamer.SignedInGamers.Count == 0)
                     {
-                        if (IsActive) Guide.ShowSignIn(4, false);
+                        if (IsActive)
+                        {
+                            Guide.ShowSignIn(4, false);
+                            UserInput.DisableAll();
+                        }
                     }
                     else
                     {
                         GameState = GameState.CharacterSelection;
+                        UserInput.EnableAll();
                         if (!ContinueNewGameScreen.isConnected)
                         {
                             ContinueNewGameScreen.LoadContent();

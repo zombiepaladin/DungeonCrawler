@@ -69,7 +69,6 @@ namespace DungeonCrawler.Systems
             {
                 // Grab input for the player
                 UserInput state = UserInput.GetInput(player.PlayerIndex);
-                state.GetState();
 
                 // Update the player's movement component
                 Movement movement = game.MovementComponent[player.EntityID];

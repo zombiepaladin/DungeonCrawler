@@ -231,7 +231,8 @@ namespace DungeonCrawler
         public void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(currentPlayer.playerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            UserInput state = UserInput.GetInput(currentPlayer.playerIndex);
+            if (state.IsPressed(Keys.Escape, Buttons.Back))
             {
                 currentPlayer.timer = controllerDelay;
                 selectionDone = true;
@@ -244,22 +245,21 @@ namespace DungeonCrawler
                 currentPlayer.timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
                 if (!currentPlayer.selected && currentPlayer.timer <= 0)
                 {
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Down == ButtonState.Pressed || GamePad.GetState(currentPlayer.playerIndex).DPad.Up == ButtonState.Pressed
-                        || (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
+                    if (state.IsPressed(Keys.Down, Buttons.DPadDown) || state.IsPressed(Keys.Up, Buttons.DPadUp))
                     {
                         currentPlayer.MoveUpDown();
                         currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
                         currentPlayer.timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Left == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Left))
+                    if (state.IsPressed(Keys.Left, Buttons.DPadLeft))
                     {
                         currentPlayer.MoveLeft();
                         currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
                         currentPlayer.timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Right == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Right))
+                    if (state.IsPressed(Keys.Right, Buttons.DPadRight))
                     {
                         currentPlayer.MoveRight();
                         currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
@@ -267,7 +267,7 @@ namespace DungeonCrawler
                         cursorMoved = true;
                     }
 
-                    if (GamePad.GetState(currentPlayer.playerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
+                    if (state.IsPressed(Keys.Enter, Buttons.A))
                     {
                         currentPlayer.selected = true;
                         currentPlayer.gameSave.aggregate = (int)buttonAggregates[currentPlayer.yPos, currentPlayer.xPos];
