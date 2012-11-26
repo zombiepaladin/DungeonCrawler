@@ -22,6 +22,7 @@ Content\Spritesheets\charSelectGargranian.xnb
 Content\Spritesheets\charSelectPlayerOneCursor.xnb
 Content\Spritesheets\charSelectPlayerTwoCursor.xnb
 Content\Spritesheets\charSelectBackground.xnb
+Content\Spritesheets\charSelectPlayerFourCursor.xnb
 Content\Spritesheets\charSelectPlayerThreeCursor.xnb
 Content\Spritesheets\StatusBar.xnb
 Content\Spritesheets\cyborg.xnb
@@ -61,6 +62,10 @@ Content\Spritesheets\cyborgskills.xnb
 Content\Spritesheets\MiscIcons1.xnb
 Content\Spritesheets\cyborgSkills2.xnb
 Content\Spritesheets\target2.xnb
+Content\Spritesheets\darkralph.xnb
+Content\Spritesheets\trollph.xnb
+Content\Spritesheets\charSelectNewGame.xnb
+Content\Spritesheets\charSelectControls2.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
@@ -70,12 +75,6 @@ Content\Tilemaps\TestDungeon1.xnb
 Content\Tilemaps\TestDungeon2.xnb
 Content\Tilemaps\TestDungeon3.xnb
 Content\SpriteFonts\Pescadero.xnb
-Content\SpriteFonts\BoldPescadero.xnb
-Content\Spritesheets\charSelectControls2.xnb
-Content\Spritesheets\charSelectNewGame.xnb
-Content\Spritesheets\charSelectPlayerFourCursor.xnb
-Content\Spritesheets\darkralph.xnb
-Content\Spritesheets\trollph.xnb
 Content\Spritesheets\QuestLog.xnb
 Content\Tilesets\misc.xnb
 Content\Tilesets\misc2.xnb
@@ -91,6 +90,7 @@ Content\Tilesets\terrain4.xnb
 Content\Tilesets\texture1.xnb
 Content\Tilesets\texture2.xnb
 Content\Tilesets\texture3.xnb
+Content\Spritesheets\alien.xnb
 Content\Tilemaps\D01F01R01.xnb
 Content\Tilemaps\D01F01R02.xnb
 Content\Tilemaps\D01F01R03.xnb
@@ -98,3 +98,5 @@ Content\Tilemaps\D01F01R04.xnb
 Content\Tilemaps\D01F01R05.xnb
 Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
+Content\SpriteFonts\BoldPescadero.xnb
+Content\Spritesheets\Turret.xnb

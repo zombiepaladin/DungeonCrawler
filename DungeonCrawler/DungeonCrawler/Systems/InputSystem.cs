@@ -139,7 +139,7 @@ namespace DungeonCrawler.Systems
                             thisPlayerKey = p.EntityID;
                     }
 
-                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.HealingStation, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;

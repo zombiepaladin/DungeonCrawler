@@ -163,8 +163,83 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                    };
+                    position.Radius = 5;
+                    break;
+
+                case Skills.explodingDroids:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                    };
+                    position.Radius = 5;
+                    break;
+
+                case Skills.trap:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                    };
+                    position.Radius = 5;
+                    break;
+
+                case Skills.turret:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                    };
+                    position.Radius = 5;
+                    break;
+
+                case Skills.portableShield:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                    };
+                    position.Radius = 5;
+                    break;
+
+                case Skills.portableShop:
+                    skillDeployable = new SkillDeployable()
+                    {
+                        EntityID = eid,
+                        duration = 1,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                        SpriteBounds = new Rectangle(0, 0, 38, 27),
                     };
                     position.Radius = 5;
                     break;

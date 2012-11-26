@@ -2247,57 +2247,171 @@ namespace DungeonCrawler.Systems
                         #region Turret
 
                         case SkillType.Turret:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -2306,57 +2420,172 @@ namespace DungeonCrawler.Systems
                         #region Trap
 
                         case SkillType.Trap:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 3;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -2365,57 +2594,172 @@ namespace DungeonCrawler.Systems
                         #region Exploding Droids
 
                         case SkillType.ExplodingDroids:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -2424,8 +2768,12 @@ namespace DungeonCrawler.Systems
                         #region Healing Station
 
                         case SkillType.HealingStation:
+                            {
 
                             #region Skill Variables
+
+                            TimedEffect timedEffect;
+                            float effectDuration;
 
                             #endregion
 
@@ -2433,48 +2781,159 @@ namespace DungeonCrawler.Systems
                             {
                                 #region Checking Rank
                                 case 1:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 2:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 3:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 4:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 5:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 6:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 7:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 8:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 9:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 case 10:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 5;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
                                     break;
 
                                 default:
                                     break;
                                 #endregion
+                            }
                             }
                             break;
 
@@ -2483,57 +2942,170 @@ namespace DungeonCrawler.Systems
                         #region Portable Shop
 
                         case SkillType.PortableShop:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 11;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 13;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 17;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 20;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -2542,57 +3114,170 @@ namespace DungeonCrawler.Systems
                         #region Portable Shield
 
                         case SkillType.PortableShield:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 10;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 10;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 12;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 10;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 12;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -2601,6 +3286,7 @@ namespace DungeonCrawler.Systems
                         #region Motivate
 
                         case SkillType.Motivate:
+                            {
 
                             #region Skill Variables
 
@@ -2627,7 +3313,23 @@ namespace DungeonCrawler.Systems
                                 #region Rank 1
 
                                 case 1:
-									eid = Entity.NextEntity();
+
+                                    List<Player> players = new List<Player>();
+                                    //for (int i = 0; i < _game.PlayerComponent.All.Count(); i++)
+                                    //{ }
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 10;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     effectDuration = 5;
                                     targetID = GetPlayerID();
                                     speedIncrease = 200;
@@ -2674,7 +3376,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 2
 
                                 case 2:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2682,7 +3384,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 3
 
                                 case 3:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2690,7 +3392,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 4
 
                                 case 4:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2698,7 +3400,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 5
 
                                 case 5:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2706,7 +3408,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 6
 
                                 case 6:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2714,7 +3416,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 7
 
                                 case 7:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2722,7 +3424,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 8
 
                                 case 8:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2730,7 +3432,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 9
 
                                 case 9:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2738,7 +3440,7 @@ namespace DungeonCrawler.Systems
                                 #region Rank 10
 
                                 case 10:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -2747,6 +3449,7 @@ namespace DungeonCrawler.Systems
                                     break;
                                 #endregion
                             }
+                            }
                             break;
 
                         #endregion
@@ -2754,57 +3457,76 @@ namespace DungeonCrawler.Systems
                         #region Fall Back
 
                         case SkillType.FallBack:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                Buff buffEffect;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 20;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
