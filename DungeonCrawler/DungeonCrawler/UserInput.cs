@@ -20,7 +20,7 @@ namespace DungeonCrawler
         /// <summary>
         /// Load inputs for up to four players.
         /// </summary>
-        public static void Load(int players)
+        public static void Load()
         {
             _inputs.Add(PlayerIndex.One, new UserInput(PlayerIndex.One));
             _inputs.Add(PlayerIndex.Two, new UserInput(PlayerIndex.Two));

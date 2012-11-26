@@ -344,6 +344,7 @@ namespace DungeonCrawler
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
 
+            UserInput.Load();
 
             // Testing code.
             LevelManager.LoadContent();
@@ -353,7 +354,6 @@ namespace DungeonCrawler
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(bg);
             //End Testing Code
-
         }
 
         /// <summary>
@@ -380,25 +380,6 @@ namespace DungeonCrawler
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            if (GameState == DungeonCrawler.GameState.SignIn)
-            {
-                // Requires at least one player to sign in
-                if (Gamer.SignedInGamers.Count == 0)
-                {
-                    if (IsActive) Guide.ShowSignIn(4, false);
-                }
-                else
-                {
-                    GameState = GameState.CharacterSelection;
-                    if (!ContinueNewGameScreen.isConnected)
-                    {
-                        ContinueNewGameScreen.LoadContent();
-                        ContinueNewGameScreen.isConnected = true;
-                        ContinueNewGameScreen.loadGameSaves();
-                    }
-                }
-            }
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
