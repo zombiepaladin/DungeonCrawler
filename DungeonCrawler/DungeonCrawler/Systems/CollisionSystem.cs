@@ -21,6 +21,7 @@ using System.Text;
 using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Systems
 {
@@ -829,6 +830,24 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        private void SkillProjectileCollision(uint p, uint p_2, bool friendly)
+        {
+            uint skillId, oId;
+            if (_game.SkillProjectileComponent.Contains(p))
+            {
+                skillId = p;
+                oId = p_2;
+            }
+            else
+            {
+                skillId = p_2;
+                oId = p;
+            }
+            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+        }
+        
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
