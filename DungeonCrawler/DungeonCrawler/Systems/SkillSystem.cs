@@ -76,6 +76,7 @@ namespace DungeonCrawler.Systems
         Theft,
         Mug,
         LockPicking,
+        DamagingPull,
     }
 
     public class SkillSystem
@@ -116,6 +117,20 @@ namespace DungeonCrawler.Systems
                     deleteList.Add(key);
             }
 
+            List<uint> cooldownKeyList = new List<uint>(_game.CoolDownComponent.Keys);
+
+            foreach (uint key in cooldownKeyList)
+            {
+                CoolDown coolDown = _game.CoolDownComponent[key];
+
+                coolDown.TimeLeft -= elapsedTime;
+
+                _game.CoolDownComponent[key] = coolDown;
+
+                if (coolDown.TimeLeft <= 0)
+                    deleteList.Add(key);
+            }
+
             List<uint> instantEffectKeyList = new List<uint>(_game.InstantEffectComponent.Keys);
 
             foreach (uint key in instantEffectKeyList)
@@ -142,8 +157,69 @@ namespace DungeonCrawler.Systems
             {
                 _game.GarbagemanSystem.ScheduleVisit(key, GarbagemanSystem.ComponentType.Effect);
             }
+        }
 
-            int x;
+        public void EnemyUseSkill(SkillType skillType, uint callerID, uint targetID)
+        {
+            foreach (CoolDown cd in _game.CoolDownComponent.All)
+            {
+                if (cd.Type == skillType && cd.UserID == callerID)
+                {
+                    return;
+                }
+            }
+           
+            uint eid = Entity.NextEntity();
+            uint eid_2 = Entity.NextEntity();
+            uint eid_3 = Entity.NextEntity();
+
+            switch (skillType) //add in any skills you need an enemy to use
+            {
+                case SkillType.DamagingPull:
+                    
+                    InstantEffect instantEffect = new InstantEffect()
+                    {
+                        EntityID = eid,
+                    };
+                    _game.InstantEffectComponent.Add(eid, instantEffect);
+
+                    TargetedKnockBack targetedKnockBack = new TargetedKnockBack()
+                    {
+                        TargetID = targetID,
+                        Origin = _game.PositionComponent[callerID].Center,
+                        Distance = -10,
+                    };
+                    _game.TargetedKnockBackComponent.Add(eid, targetedKnockBack);
+
+                    CoolDown coolDown = new CoolDown()
+                    {
+                        EntityID = eid_2,
+                        MaxTime = 5f,
+                        TimeLeft = 5f,
+                        Type = SkillType.DamagingPull,
+                        UserID = callerID,
+                    };
+                    _game.CoolDownComponent.Add(eid_2, coolDown);
+
+                    TimedEffect timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid_3,
+                        TimeLeft = 2f,
+                        TotalDuration = 2f,
+                    };
+                    _game.TimedEffectComponent.Add(eid_3, timedEffect);
+
+                    Buff buffEffect = new Buff()
+                    {
+                        EntityID = eid_3,
+                        TargetID = targetID,
+                        MovementSpeed = -30,
+                        isPercentMovementSpeed = true,
+                    };
+                    _game.BuffComponent.Add(eid_3, buffEffect);
+
+                    break;
+            }
         }
 
         public void UseSkill(Aggregate playerType, SkillType skillType, int rank, uint userID)
@@ -2641,7 +2717,7 @@ namespace DungeonCrawler.Systems
                                     {
                                         EntityID = eid,
                                         TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
+                                        TimeLeft = effectDuration,
                                     };
                                     _game.TimedEffectComponent.Add(eid, timedEffect);
 
@@ -3810,6 +3886,7 @@ namespace DungeonCrawler.Systems
 
                 #endregion
 
+
                 default:
                     break;
 
@@ -4043,6 +4120,28 @@ namespace DungeonCrawler.Systems
                         _game.PositionComponent[en.EntityID] = enemyPosition;
                     }
                 }
+            }
+
+            #endregion
+
+            #region TargetedKnockBack
+
+            if (_game.TargetedKnockBackComponent.Contains(key))
+            {
+                TargetedKnockBack targetedKnockBackInstance = _game.TargetedKnockBackComponent[key];
+                Position targetPosition;
+                Vector2 originToEnemy;
+                targetPosition = _game.PositionComponent[targetedKnockBackInstance.TargetID];
+
+                //Get a vector from the origin to the enemy
+                originToEnemy = targetPosition.Center - targetedKnockBackInstance.Origin;
+                //Then convert it to a unit vector
+                originToEnemy.Normalize();
+
+                //Finally, apply the knockback to the enemy
+                targetPosition.Center += (originToEnemy * targetedKnockBackInstance.Distance);
+                //And apply the change to the component list
+                _game.PositionComponent[targetPosition.EntityID] = targetPosition;
             }
 
             #endregion

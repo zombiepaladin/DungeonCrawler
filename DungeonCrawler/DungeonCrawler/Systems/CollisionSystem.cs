@@ -577,6 +577,8 @@ namespace DungeonCrawler.Systems
         private void PlayerEnemyCollision(uint p, uint p_2)
         {
             //Need to separate into 4 types: stationary&painless, stationary&painful, moving&painless, moving&painful
+            
+            return; //TODO: remove
 
             uint enemyId, playerId;
             if (_game.EnemyComponent.Contains(p))

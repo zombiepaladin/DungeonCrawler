@@ -98,6 +98,13 @@ namespace DungeonCrawler.Systems
                     case AIBehaviorType.Alien:
                         updateTargeting(id);
                         MoveTowardTarget(id);
+                        
+                        uint targetID = enemyAI.TargetID;
+                        float dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                        
+                        if(dist < 35)
+                            game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
+
                         ManageAnimation(id);
                         break;
 
