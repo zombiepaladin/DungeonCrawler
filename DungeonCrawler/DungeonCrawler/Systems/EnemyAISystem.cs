@@ -72,7 +72,17 @@ namespace DungeonCrawler.Systems
             {
                 EnemyAI enemyAI = game.EnemyAIComponent[id];
                 AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
+                Position pos = game.PositionComponent[id];
 
+                if (pos.RoomID != game.CurrentRoomEid)
+                {
+                    continue;
+                }
+
+                if (game.EnemyComponent[id].Health <= 0)
+                {
+                    game.GarbagemanSystem.ScheduleVisit(id);
+                }
                 switch(AIBehavior)
                 {
                     case AIBehaviorType.DefaultMelee:
@@ -88,6 +98,13 @@ namespace DungeonCrawler.Systems
                     case AIBehaviorType.Alien:
                         updateTargeting(id);
                         MoveTowardTarget(id);
+                        
+                        uint targetID = enemyAI.TargetID;
+                        float dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                        
+                        if(dist < 35)
+                            game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
+
                         ManageAnimation(id);
                         break;
 
@@ -101,11 +118,6 @@ namespace DungeonCrawler.Systems
         {
             Position pos = game.PositionComponent[entityID];
             EnemyAI ai = game.EnemyAIComponent[entityID];
-
-            if (pos.RoomID != game.CurrentRoomEid)
-            {
-                return;
-            }
 
             if (ai.HasTarget == false)
             {
