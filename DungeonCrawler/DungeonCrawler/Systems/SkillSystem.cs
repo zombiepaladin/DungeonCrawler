@@ -187,15 +187,15 @@ namespace DungeonCrawler.Systems
                     {
                         TargetID = targetID,
                         Origin = _game.PositionComponent[callerID].Center,
-                        Distance = -10,
+                        Distance = -15,
                     };
                     _game.TargetedKnockBackComponent.Add(eid, targetedKnockBack);
 
                     CoolDown coolDown = new CoolDown()
                     {
                         EntityID = eid_2,
-                        MaxTime = 5f,
-                        TimeLeft = 5f,
+                        MaxTime = 8f,
+                        TimeLeft = 8f,
                         Type = SkillType.DamagingPull,
                         UserID = callerID,
                     };
@@ -213,8 +213,7 @@ namespace DungeonCrawler.Systems
                     {
                         EntityID = eid_3,
                         TargetID = targetID,
-                        MovementSpeed = -30,
-                        isPercentMovementSpeed = true,
+                        MovementSpeed = -50,
                     };
                     _game.BuffComponent.Add(eid_3, buffEffect);
 
