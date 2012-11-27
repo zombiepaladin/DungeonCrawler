@@ -78,32 +78,55 @@ namespace DungeonCrawler.Systems
 
                 // Update the player's movement component
                 Movement movement = game.MovementComponent[player.EntityID];
-                movement.Direction = gamePadState.ThumbSticks.Left;
+                //movement.Direction = gamePadState.ThumbSticks.Left;
+                //Multiply set movement directions seperately and multiple the y direction by -1 to switch vertical movement.
+                //Daniel Rymph
+                movement.Direction.X = gamePadState.ThumbSticks.Left.X;
+                movement.Direction.Y = -1*(gamePadState.ThumbSticks.Left.Y);
 
                 SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[player.EntityID];
 
                 if (keyboardState.IsKeyDown(Keys.W))
                 {
-                    spriteAnimation.CurrentAnimationRow = (int) AnimationMovementDirection.Up;
+                    //spriteAnimation.CurrentAnimationRow = (int) AnimationMovementDirection.Up;
                     movement.Direction.Y = -1;
                 }
                 if (keyboardState.IsKeyDown(Keys.S))
                 {
-                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
+                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
                     movement.Direction.Y = 1;
                 }
                 if (keyboardState.IsKeyDown(Keys.A))
                 {
-                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
+                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
                     movement.Direction.X = -1;
                 }
-                
                 if (keyboardState.IsKeyDown(Keys.D))
                 {
-                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
+                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
                     movement.Direction.X = 1;
                 }
-                
+
+                //Check for movement direction and change animation accordingly.
+                //Daniel Rymph
+                if (movement.Direction.Y > 0.0)
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
+                }
+                else if (movement.Direction.Y < 0.0)
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Up;
+                }
+
+                if (movement.Direction.X > 0.0)
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
+                }
+                else if(movement.Direction.X < 0.0)
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
+                }
+
                 if (movement.Direction != Vector2.Zero)
                 {
                     movement.Direction.Normalize();
@@ -218,12 +241,17 @@ namespace DungeonCrawler.Systems
                 }
                 if (gamePadState.IsButtonDown(Buttons.LeftShoulder) || keyboardState.IsKeyDown(Keys.Tab))
                 {
+                    //Removed Code that would bring up the scrapped inventory screen.
+                    //The tab and left shoulder buttons can now be used for other fucntions
+                    //Daniel Rymph
+                    /*
                     isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
                     isb.isSeen = true;
                     game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
                     iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
                     iss.isSeen = true;
                     game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
+                    */
                 }
                 #endregion // end key down
                 #region key/Button UP
@@ -263,12 +291,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (gamePadState.IsButtonUp(Buttons.LeftShoulder) && keyboardState.IsKeyUp(Keys.Tab))
                 {
-                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
-                    isb.isSeen = false;
-                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
-                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
-                    iss.isSeen = false;
-                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
+                    //Removed Code that would close the scrapped inventory screen.
+                    //The tab and left shoulder buttons can now be used for other fucntions
+                    //Daniel Rymph
                 }
                 /*
                 if (gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left))
