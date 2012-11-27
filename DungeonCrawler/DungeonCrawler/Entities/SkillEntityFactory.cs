@@ -20,6 +20,7 @@ using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Entities
 {
@@ -41,8 +42,8 @@ namespace DungeonCrawler.Entities
         }
 
 
-        #region SkillProjectile
-        public uint CreateSkillProjectile(Skills skillP, Facing facing, Position position)
+#region SkillProjectile
+        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed)
         {
             SkillProjectile skillProjectile;
             Movement movement;
@@ -56,18 +57,19 @@ namespace DungeonCrawler.Entities
 
             switch (skillP)
             {
-                case Skills.benignParasite:
+                case SkillType.BenignParasite:
                     skillProjectile = new SkillProjectile()
                     {
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
+                        rank=rankP,
                     };
                     movement = new Movement()
                     {
                         EntityID = eid,
                         Direction = direction,
-                        Speed = 300,
+                        Speed = speed,
                     };
                     sprite = new Sprite()
                     {
@@ -98,7 +100,7 @@ namespace DungeonCrawler.Entities
 #endregion
 
         #region SkillAoE
-        public uint CreateSkillAoE(Skills skill, Position position)
+        public uint CreateSkillAoE(SkillType skill, Position position, int rankP)
         {
             SkillAoE skillAoE;
             Sprite sprite;
@@ -109,11 +111,12 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case Skills.detonate:
+                case SkillType.Detnate:
                     skillAoE = new SkillAoE()
                     {
                         EntityID = eid,
                         radius = 1,
+                        rank = rankP,
                     };
                     sprite = new Sprite()
                     {
@@ -143,7 +146,7 @@ namespace DungeonCrawler.Entities
         #endregion
 
         #region SkillDeployable
-        public uint CreateSkillDeployable(Skills skill, Position position)
+        public uint CreateSkillDeployable(SkillType skill, Position position, int rankP)
         {
             SkillDeployable skillDeployable;
             Sprite sprite;
@@ -154,11 +157,12 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case Skills.healingStation:
+                case SkillType.HealingStation:
                     skillDeployable = new SkillDeployable()
                     {
                         EntityID = eid,
                         duration = 1,
+                        rank = rankP,
                     };
                     sprite = new Sprite()
                     {
