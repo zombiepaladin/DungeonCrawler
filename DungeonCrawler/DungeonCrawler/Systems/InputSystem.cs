@@ -6,6 +6,7 @@
 //
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
+// Modified: Daniel Rymph: Fixed movement controls, and removed inventory controls, Assignment 9 11/27/2012
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 // Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
 // Modified: Nick Boen - Added a test control for using a skill (buffs speed)
