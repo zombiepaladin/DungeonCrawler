@@ -2880,7 +2880,7 @@ namespace DungeonCrawler.Systems
                 #endregion
 
                 #region Space Pirate
-
+                //This was the part contributed by Austin Murphy
                 case Aggregate.SpacePiratePlayer:
 
                     #region Race Variables
@@ -2891,10 +2891,17 @@ namespace DungeonCrawler.Systems
                     {
                         #region Checking Skill Type
 
+                        #region AgilityBerserker
                         case SkillType.AgilityBerserker:
 
                             #region Skill Variables
-
+                            TimedEffect te1, te2;
+                            int speedIncrease = 1000;
+                            int attackDecrease = -500;
+                            float duration, cd;
+                            uint targetID;
+                            Buff buffeffect;
+                            int afterS = -500;
                             #endregion
 
                             switch (rank)
@@ -2902,42 +2909,222 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    duration = 10;
+                                    cd = 55;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    duration = 15;
+                                    cd = 50;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 3:
-									eid = Entity.NextEntity();
+									eid = Entity.NextEntity();                                    
+                                    duration = 20;
+                                    cd = 45;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    duration = 25;
+                                    cd = 40;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    duration = 30;
+                                    cd = 35;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    duration = 35;
+                                    cd = 30;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    duration = 40;
+                                    cd = 25;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    duration = 45;
+                                    cd = 20;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    duration = 50;
+                                    cd = 15;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    duration = 55;
+                                    cd = 5;
+                                    targetID = GetPlayerID();
+                                    te1 = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+
+                                    _game.TimedEffectComponent.Add(eid, te1);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 default:
@@ -2945,11 +3132,13 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region DualWielding
                         case SkillType.DualWielding:
 
                             #region Skill Variables
-
+                            
                             #endregion
 
                             switch (rank)
@@ -3000,11 +3189,13 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region HeavyDrinker
                         case SkillType.HeavyDrinker:
 
                             #region Skill Variables
-
+                            int resistance;
                             #endregion
 
                             switch (rank)
@@ -3012,42 +3203,132 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    resistance = 5;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    resistance = 10;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    resistance = 20;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    resistance = 30;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    resistance = 40;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    resistance = 50;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    resistance = 60;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    resistance = 70;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    resistance = 80;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    resistance = 90;
+                                    targetID = GetPlayerID();
+
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        ResistPoison = resistance
+                                    };
                                     break;
 
                                 default:
@@ -3055,7 +3336,9 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region TrickShot
                         case SkillType.TrickShot:
 
                             #region Skill Variables
@@ -3110,11 +3393,13 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region PowerShot
                         case SkillType.PowerShot:
 
                             #region Skill Variables
-
+                            int PSDamageIncrease;
                             #endregion
 
                             switch (rank)
@@ -3165,7 +3450,9 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region EagleShot
                         case SkillType.EagleShot:
 
                             #region Skill Variables
@@ -3220,11 +3507,14 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region Theft
                         case SkillType.Theft:
-
+                           
                             #region Skill Variables
-
+                            ChanceToSucceed cts;
+                            int prob;
                             #endregion
 
                             switch (rank)
@@ -3232,42 +3522,102 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    prob = 5;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    prob = 10;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    prob = 20;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    prob = 30;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    prob = 40;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    prob = 50;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    prob = 60;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    prob = 70;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    prob = 80;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    prob = 90;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 default:
@@ -3275,7 +3625,9 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region Mug
                         case SkillType.Mug:
 
                             #region Skill Variables
@@ -3330,7 +3682,9 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
+                        #region LockPick
                         case SkillType.LockPicking:
 
                             #region Skill Variables
@@ -3341,43 +3695,103 @@ namespace DungeonCrawler.Systems
                             {
                                 #region Checking Rank
                                 case 1:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 5;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 2:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 10;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 3:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 20;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 4:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 30;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 5:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 40;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 6:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 50;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 7:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 60;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 8:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 70;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 9:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 80;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 case 10:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+                                    prob = 90;
+                                    cts = new ChanceToSucceed()
+                                    {
+                                        EntityID = eid,
+                                        SuccessRateAsPercentage = prob
+                                    };
                                     break;
 
                                 default:
@@ -3385,6 +3799,7 @@ namespace DungeonCrawler.Systems
                                 #endregion
                             }
                             break;
+                        #endregion
 
                         default:
                             break;
