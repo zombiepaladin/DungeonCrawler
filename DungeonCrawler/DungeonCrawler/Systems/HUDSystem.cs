@@ -66,13 +66,16 @@ namespace DungeonCrawler.Systems
             public Vector2 ExpPosition;
 
             public string Name;
+            public Vector2 NamePosition;
             public string Level;
+            public Vector2 LevelPosition;
         }
 
         //Constants for the status bars.
         private const int HEALTH_BAR_MAX_BOUNDS = 157;
         private const int PSI_BAR_MAX_BOUNDS = 157;
         private const int EXP_BAR_MAX_BOUNDS = 157;
+        private const string LEVEL_PREFIX = "Level: ";
 
         //Refernces to the game.
         private DungeonCrawlerGame _game;
@@ -164,6 +167,9 @@ namespace DungeonCrawler.Systems
             hud.ExpSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/ExpBar");
             hud.ExpBounds = new Rectangle(0, 0, EXP_BAR_MAX_BOUNDS, 7);
 
+            PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+            hud.Level = LEVEL_PREFIX + info.Level;
+
             //Load the right background and set all the positions based on the playerindex.
             switch (player.PlayerIndex)
             {
@@ -174,6 +180,7 @@ namespace DungeonCrawler.Systems
                     hud.HealthPosition = new Vector2(109, 4);
                     hud.PsiPosition = new Vector2(109, 26);
                     hud.ExpPosition = new Vector2(109, 48);
+                    hud.LevelPosition = new Vector2(20, 84);
 
                     _p1 = hud;
                     break;
@@ -184,6 +191,7 @@ namespace DungeonCrawler.Systems
                     hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 4);
                     hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 26);
                     hud.ExpPosition = new Vector2(925 - EXP_BAR_MAX_BOUNDS, 48);
+                    hud.LevelPosition = new Vector2(940, 84);
 
                     _p2 = hud;
                     break;
@@ -194,6 +202,7 @@ namespace DungeonCrawler.Systems
                     hud.HealthPosition = new Vector2(109, 635);
                     hud.PsiPosition = new Vector2(109, 613);
                     hud.ExpPosition = new Vector2(109, 591);
+                    hud.LevelPosition = new Vector2(20, 508);
 
                     _p3 = hud;
                     break;
@@ -204,6 +213,7 @@ namespace DungeonCrawler.Systems
                     hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 635);
                     hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 613);
                     hud.ExpPosition = new Vector2(109, 591);
+                    hud.LevelPosition = new Vector2(940, 508);
 
                     _p4 = hud;
                     break;
@@ -239,7 +249,7 @@ namespace DungeonCrawler.Systems
                 //Update icons
 
                 //Update level
-                
+                hud.Level = LEVEL_PREFIX + info.Level;
 
                 setHUDSprite(player.PlayerIndex, hud);
             }
@@ -363,6 +373,7 @@ namespace DungeonCrawler.Systems
             //Collection icon
 
             //Level
+            spriteBatch.DrawString(_font, hud.Level, hud.LevelPosition, Color.Black);
         }
     }
 }
