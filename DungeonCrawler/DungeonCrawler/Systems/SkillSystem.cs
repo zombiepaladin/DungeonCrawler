@@ -191,6 +191,14 @@ namespace DungeonCrawler.Systems
                     };
                     _game.TargetedKnockBackComponent.Add(eid, targetedKnockBack);
 
+                    DirectDamage directDamage = new DirectDamage()
+                    {
+                        TargetID = targetID,
+                        Damage = 1,
+                        EntityID = eid,
+                    };
+                    _game.DirectDamageComponent.Add(eid, directDamage);
+
                     CoolDown coolDown = new CoolDown()
                     {
                         EntityID = eid_2,

@@ -107,13 +107,15 @@ namespace DungeonCrawler.Systems
                         game.CollisionComponent.Remove(keyValue.Key);
                         game.PositionComponent.Remove(keyValue.Key);
                         if (game.EnemyAIComponent.Contains(keyValue.Key))
-                            game.EnemyComponent.Remove(keyValue.Key);
+                            game.EnemyAIComponent.Remove(keyValue.Key);
                         if (game.MovementComponent.Contains(keyValue.Key))
                             game.MovementComponent.Remove(keyValue.Key);
                         if (game.MovementSpriteComponent.Contains(keyValue.Key))
                             game.MovementSpriteComponent.Remove(keyValue.Key);
                         if (game.SpriteComponent.Contains(keyValue.Key))
                             game.SpriteComponent.Remove(keyValue.Key);
+                        if (game.ActorTextComponent.Contains(keyValue.Key))
+                            game.ActorTextComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Bullet:
                         game.PositionComponent.Remove(keyValue.Key);
