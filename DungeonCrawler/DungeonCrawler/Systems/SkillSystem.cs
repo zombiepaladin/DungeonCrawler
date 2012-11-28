@@ -4122,7 +4122,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4155,7 +4155,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4188,7 +4188,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4220,7 +4220,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4252,7 +4252,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4284,7 +4284,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4316,7 +4316,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4348,7 +4348,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4380,7 +4380,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4412,7 +4412,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4473,7 +4473,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4507,7 +4507,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4541,7 +4541,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4575,7 +4575,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4609,7 +4609,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4643,7 +4643,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4677,7 +4677,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4711,7 +4711,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4745,7 +4745,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4779,7 +4779,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4854,7 +4854,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4903,7 +4903,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -4952,7 +4952,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5001,7 +5001,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5050,7 +5050,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5099,7 +5099,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5148,7 +5148,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5197,7 +5197,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5246,7 +5246,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5295,7 +5295,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                                             SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5906,7 +5906,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5946,7 +5946,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -5987,7 +5987,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6028,7 +6028,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6069,7 +6069,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6110,7 +6110,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6151,7 +6151,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6192,7 +6192,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6233,7 +6233,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
@@ -6274,7 +6274,7 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
                                             SpriteBounds = new Rectangle(18, 34, 229, 136),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
