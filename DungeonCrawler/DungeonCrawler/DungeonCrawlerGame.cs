@@ -13,6 +13,7 @@
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 // Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -203,22 +204,23 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
-        InputSystem InputSystem;
-        NetworkSystem NetworkSystem;
-        RenderingSystem RenderingSystem;
-        MovementSystem MovementSystem;
-        WeaponSystem WeaponSystem;
+        public InputSystem InputSystem;
+        public NetworkSystem NetworkSystem;
+        public RenderingSystem RenderingSystem;
+        public MovementSystem MovementSystem;
+        public WeaponSystem WeaponSystem;
         public EnemyAISystem EnemyAISystem;
         public NpcAISystem NpcAISystem;
-        CollisionSystem CollisionSystem;
+        public CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
-	    SpriteAnimationSystem SpriteAnimationSystem;
+	    public SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
         public EngineeringOffenseSystem EngineeringOffenseSystem;
 
         public GarbagemanSystem GarbagemanSystem;
-        TextSystem TextSystem;
+        public TextSystem TextSystem;
+        public HUDSystem HUDSystem;
 
         #endregion
 
@@ -350,12 +352,19 @@ namespace DungeonCrawler
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
             EngineeringOffenseSystem = new EngineeringOffenseSystem(this);
+            HUDSystem = new HUDSystem(this);
+
+            InputHelper.Load();
+            HUDSystem.LoadContent();
 
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("D01F01R01");
+            //Song bg = Content.Load<Song>("Audio/Main_Loop");
+            //MediaPlayer.Stop();
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(bg);
             //End Testing Code
-
         }
 
         /// <summary>
@@ -380,27 +389,8 @@ namespace DungeonCrawler
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Escape, Buttons.Back))
                 this.Exit();
-
-            if (GameState == DungeonCrawler.GameState.SignIn)
-            {
-                // Requires at least one player to sign in
-                if (Gamer.SignedInGamers.Count == 0)
-                {
-                    if (IsActive) Guide.ShowSignIn(4, false);
-                }
-                else
-                {
-                    GameState = GameState.CharacterSelection;
-                    if (!ContinueNewGameScreen.isConnected)
-                    {
-                        ContinueNewGameScreen.LoadContent();
-                        ContinueNewGameScreen.isConnected = true;
-                        ContinueNewGameScreen.loadGameSaves();
-                    }
-                }
-            }
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -414,11 +404,16 @@ namespace DungeonCrawler
                     // Requires at least one player to sign in
                     if (Gamer.SignedInGamers.Count == 0)
                     {
-                        if (IsActive) Guide.ShowSignIn(4, false);
+                        if (IsActive)
+                        {
+                            Guide.ShowSignIn(4, false);
+                            InputHelper.DisableAll();
+                        }
                     }
                     else
                     {
                         GameState = GameState.CharacterSelection;
+                        InputHelper.EnableAll();
                         if (!ContinueNewGameScreen.isConnected)
                         {
                             ContinueNewGameScreen.LoadContent();
@@ -488,6 +483,10 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.Black);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (GameState == GameState.SignIn)
+                return;
+
             if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);

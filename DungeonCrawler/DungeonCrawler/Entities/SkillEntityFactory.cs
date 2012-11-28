@@ -189,7 +189,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Weapons/Bullets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
                     position.Radius = radius;

@@ -5,6 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified: Devin Kelly-Collins - Added debugTexture and logic to draw collisions in Draw. Added logic to draw actorText in draw. (11/15/12)
+// Modified: Devin Kelly-Collins - Replaced HUD component with HUDSystem. (11/29/12)
 //
 // Modified: Nick Stanley added HUDSpriteComponent, 10/15/2012
 // Modified: Devin Kelly-Collins added WeaponSprite rendering, 10/24/2012
@@ -93,7 +94,7 @@ namespace DungeonCrawler.Systems
             }
             catch
             {
-                roomId = uint.MaxValue;
+                roomId = uint.MaxValue; //should change this no room should not have an id
             }
 
             // Draw all Sprites
@@ -169,8 +170,8 @@ namespace DungeonCrawler.Systems
                 }
             }
 
-            //Draw HUD
-            foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
+            //Draw HUD - Moving this to the new HUDSystem.
+            /*foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
             {
                 Color playerColor;
                 PlayerIndex playerDex = sprite.PlayerIndex;
@@ -207,7 +208,9 @@ namespace DungeonCrawler.Systems
                                     SpriteEffects.None,
                                     0.6f);
                 }
-            }
+            }*/
+
+            game.HUDSystem.Draw(elapsedTime, spriteBatch);
 
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {
