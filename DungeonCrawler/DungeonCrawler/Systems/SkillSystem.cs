@@ -3893,68 +3893,373 @@ namespace DungeonCrawler.Systems
             }
         }
 
-        //public void TriggerSkill(Aggregate playerType, SkillType skillType, int rank, uint userID)
+        
         public void TriggerEffect(SkillType type, int rank, bool friendly, uint target)    
         {
-            uint eid;
             switch (type)
             {
-                case SkillType.BenignParasite:
-                    TimedEffect timedEffect;
-                    float effectDuration;
-                    eid = Entity.NextEntity();
-                    HealOverTime HoT;
+                #region Vermis Triggered SKills
+
+                #region ThrownBlade
+                case SkillType.ThrownBlades:
                     switch (rank)
                     {
+                        #region Rank 1
                         case 1:
-                            //apply hot to target
-                            effectDuration = 1;
-                            timedEffect = new TimedEffect()
-                            {
-                                EntityID = eid,
-                                TotalDuration = effectDuration,
-                                TimeLeft = effectDuration
-                            };
-                            _game.TimedEffectComponent.Add(eid, timedEffect);
-                            HoT = new HealOverTime()
-                            {
-                                AmountPerTick = 1,
-                                CurrentStack = 1,
-                                CurrentTime = effectDuration,
-                                EntityID = eid,
-                                MaxStack = 1,
-                                TargetID = target,
-                                TickTime = 1,
-                            };
-                            _game.HealOverTimeComponent.Add(eid,HoT);
                             break;
+                        #endregion
+
+                        #region Rank 2
                         case 2:
                             break;
+                        #endregion
+
+                        #region Rank 3
                         case 3:
                             break;
+                        #endregion
+
+                        #region Rank 4
                         case 4:
                             break;
+                        #endregion
+
+                        #region Rank 5
                         case 5:
                             break;
+                        #endregion
+
+                        #region Rank 6
                         case 6:
                             break;
+                        #endregion
+
+                        #region Rank 7
                         case 7:
                             break;
+                        #endregion
+
+                        #region Rank 8
                         case 8:
                             break;
+                        #endregion
+
+                        #region Rank 9
                         case 9:
                             break;
+                        #endregion
+
+                        #region Rank 10
                         case 10:
                             break;
+                        #endregion
                         default:
                             throw new Exception("Unimplemented Rank");
                     }
                     break;
+                #endregion
+
+                #region Caustic Weapons
+                case SkillType.CausticWeapons:
+                    switch (rank)
+                    {
+                        #region Rank 1
+                        case 1:
+                            break;
+                        #endregion
+
+                        #region Rank 2
+                        case 2:
+                            break;
+                        #endregion
+
+                        #region Rank 3
+                        case 3:
+                            break;
+                        #endregion
+
+                        #region Rank 4
+                        case 4:
+                            break;
+                        #endregion
+
+                        #region Rank 5
+                        case 5:
+                            break;
+                        #endregion
+
+                        #region Rank 6
+                        case 6:
+                            break;
+                        #endregion
+
+                        #region Rank 7
+                        case 7:
+                            break;
+                        #endregion
+
+                        #region Rank 8
+                        case 8:
+                            break;
+                        #endregion
+
+                        #region Rank 9
+                        case 9:
+                            break;
+                        #endregion
+
+                        #region Rank 10
+                        case 10:
+                            break;
+                        #endregion
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                #endregion
+
+                //May Change
+                #region GraspingBlade
+                case SkillType.GraspingBlade:
+                    switch (rank)
+                    {
+                        #region Rank 1
+                        case 1:
+                            break;
+                        #endregion
+
+                        #region Rank 2
+                        case 2:
+                            break;
+                        #endregion
+
+                        #region Rank 3
+                        case 3:
+                            break;
+                        #endregion
+
+                        #region Rank 4
+                        case 4:
+                            break;
+                        #endregion
+
+                        #region Rank 5
+                        case 5:
+                            break;
+                        #endregion
+
+                        #region Rank 6
+                        case 6:
+                            break;
+                        #endregion
+
+                        #region Rank 7
+                        case 7:
+                            break;
+                        #endregion
+
+                        #region Rank 8
+                        case 8:
+                            break;
+                        #endregion
+
+                        #region Rank 9
+                        case 9:
+                            break;
+                        #endregion
+
+                        #region Rank 10
+                        case 10:
+                            break;
+                        #endregion
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                #endregion
+
+                #region BenignParasite
+                case SkillType.BenignParasite:
+                    switch (rank)
+                    {
+                        #region Rank 1
+                        case 1:
+                            break;
+                        #endregion
+
+                        #region Rank 2
+                        case 2:
+                            break;
+                        #endregion
+
+                        #region Rank 3
+                        case 3:
+                            break;
+                        #endregion
+
+                        #region Rank 4
+                        case 4:
+                            break;
+                        #endregion
+
+                        #region Rank 5
+                        case 5:
+                            break;
+                        #endregion
+
+                        #region Rank 6
+                        case 6:
+                            break;
+                        #endregion
+
+                        #region Rank 7
+                        case 7:
+                            break;
+                        #endregion
+
+                        #region Rank 8
+                        case 8:
+                            break;
+                        #endregion
+
+                        #region Rank 9
+                        case 9:
+                            break;
+                        #endregion
+
+                        #region Rank 10
+                        case 10:
+                            break;
+                        #endregion
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                #endregion
+
+                #region Malicious Parasite
+                case SkillType.MaliciousParasite:
+                    switch (rank)
+                    {
+                        #region Rank 1
+                        case 1:
+                            break;
+                        #endregion
+
+                        #region Rank 2
+                        case 2:
+                            break;
+                        #endregion
+
+                        #region Rank 3
+                        case 3:
+                            break;
+                        #endregion
+
+                        #region Rank 4
+                        case 4:
+                            break;
+                        #endregion
+
+                        #region Rank 5
+                        case 5:
+                            break;
+                        #endregion
+
+                        #region Rank 6
+                        case 6:
+                            break;
+                        #endregion
+
+                        #region Rank 7
+                        case 7:
+                            break;
+                        #endregion
+
+                        #region Rank 8
+                        case 8:
+                            break;
+                        #endregion
+
+                        #region Rank 9
+                        case 9:
+                            break;
+                        #endregion
+
+                        #region Rank 10
+                        case 10:
+                            break;
+                        #endregion
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                #endregion
+
+                #region Mindless Parasite
+                case SkillType.MindlessParasites:
+                    switch (rank)
+                    {
+                        #region Rank 1
+                        case 1:
+                            break;
+                        #endregion
+
+                        #region Rank 2
+                        case 2:
+                            break;
+                        #endregion
+
+                        #region Rank 3
+                        case 3:
+                            break;
+                        #endregion
+
+                        #region Rank 4
+                        case 4:
+                            break;
+                        #endregion
+
+                        #region Rank 5
+                        case 5:
+                            break;
+                        #endregion
+
+                        #region Rank 6
+                        case 6:
+                            break;
+                        #endregion
+
+                        #region Rank 7
+                        case 7:
+                            break;
+                        #endregion
+
+                        #region Rank 8
+                        case 8:
+                            break;
+                        #endregion
+
+                        #region Rank 9
+                        case 9:
+                            break;
+                        #endregion
+
+                        #region Rank 10
+                        case 10:
+                            break;
+                        #endregion
+                        default:
+                            throw new Exception("Unimplemented Rank");
+                    }
+                    break;
+                #endregion
+
+                #endregion
                 default:
                     throw new Exception("Unimplemented SKill");
             }
         }
-
 
         #endregion
 
