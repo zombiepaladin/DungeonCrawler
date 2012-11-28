@@ -10,6 +10,7 @@
 // Modified by:Nick Boen
 //      Added Stat values to each of the players as well as a stat component
 // Modified: Devin Kelly-Collins - Added roomID to collisions (11/15/12)
+// Modified: Devin Kelly-Collins - Replaced HUDComponent with HUDSystem. (11/29/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.

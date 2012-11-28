@@ -20,6 +20,8 @@ using DungeonCrawler.Components;
 
 namespace DungeonCrawler.Components
 {
+    //Note: Use HUDSystem instead.
+
     public struct HUD
     {
         public uint EntityID;

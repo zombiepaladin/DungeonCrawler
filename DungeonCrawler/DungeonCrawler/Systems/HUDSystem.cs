@@ -1,4 +1,16 @@
-﻿using System;
+﻿#region File Description
+//-----------------------------------------------------------------------------
+// HUDSystem.cs 
+//
+// Author: Devin Kelly-Collins
+//
+// Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
+// Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
+// Released under the Microsoft Permissive Licence 
+//-----------------------------------------------------------------------------
+#endregion
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +21,9 @@ using DungeonCrawler.Components;
 
 namespace DungeonCrawler.Systems
 {
+    /// <summary>
+    /// Handles drawing the hud.
+    /// </summary>
     public class HUDSystem
     {
         //Contains all the information needed to draw the main HUD
@@ -54,10 +69,12 @@ namespace DungeonCrawler.Systems
             public string Level;
         }
 
+        //Constants for the status bars.
         private const int HEALTH_BAR_MAX_BOUNDS = 115;
         private const int PSI_BAR_MAX_BOUNDS = 115;
         private const int EXP_BAR_MAX_BOUNDS = 115;
 
+        //Refernces to the game.
         private DungeonCrawlerGame _game;
         private ContentManager _content;
         private PlayerComponent _playerComponent;
@@ -69,6 +86,10 @@ namespace DungeonCrawler.Systems
 
         private SpriteFont _font;
 
+        /// <summary>
+        /// Creates a new HUDSystem.
+        /// </summary>
+        /// <param name="game">Parent game.</param>
         public HUDSystem(DungeonCrawlerGame game)
         {
             _game = game;
@@ -81,6 +102,9 @@ namespace DungeonCrawler.Systems
             _p4 = new HUDSprite { Show = false };
         }
 
+        /// <summary>
+        /// Loads content needed for the HUD and creates a HUD for any players in the game.
+        /// </summary>
         public void LoadContent()
         {
             _font = _content.Load<SpriteFont>("SpriteFonts/Pescadero");
@@ -92,6 +116,10 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        /// <summary>
+        /// Creates a HUD for the specific player.
+        /// </summary>
+        /// <param name="player">Player to create hud for.</param>
         public void LoadPlayerHUD(Player player)
         {
             HUDSprite hud = new HUDSprite { Show = true };
@@ -134,15 +162,18 @@ namespace DungeonCrawler.Systems
             hud.PsiSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/PsiBar");
             hud.PsiBounds = new Rectangle(0, 0, 15, PSI_BAR_MAX_BOUNDS);
             hud.ExpSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/ExpBar");
-            hud.ExpBounds = new Rectangle(0, 0, 15, EXP_BAR_MAX_BOUNDS);
+            hud.ExpBounds = new Rectangle(0, 0, 10, EXP_BAR_MAX_BOUNDS);
 
-            //Load the right background and set all the positions base on the playerindex.
+            //Load the right background and set all the positions based on the playerindex.
             switch (player.PlayerIndex)
             {
                 case PlayerIndex.One:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_one");
                     hud.HudBgPosition = new Vector2(0, 0);
                     hud.AvatarPosition = new Vector2(20, 20);
+                    hud.HealthPosition = new Vector2(66, 1);
+                    hud.PsiPosition = new Vector2(66, 17);
+                    hud.ExpPosition = new Vector2(66, 34);
 
                     _p1 = hud;
                     break;
@@ -172,11 +203,20 @@ namespace DungeonCrawler.Systems
             }
         }
 
+        /// <summary>
+        /// Updates the HUD.
+        /// </summary>
+        /// <param name="elapsedTime">Time since the last call.</param>
         public void Update(float elapsedTime)
         {
 
         }
 
+        /// <summary>
+        /// Draws the HUD to the given spritebatch.
+        /// </summary>
+        /// <param name="elapsedTime">Time since last call.</param>
+        /// <param name="spriteBatch">SpriteBatch to draw to.</param>
         public void Draw(float elapsedTime, SpriteBatch spriteBatch)
         {
             if (_p1.Show)
@@ -189,8 +229,10 @@ namespace DungeonCrawler.Systems
                 drawHud(_p4, elapsedTime, spriteBatch);
         }
 
+        //Handles drawing the individual HUDs.
         private void drawHud(HUDSprite hud, float elapsedTime, SpriteBatch spriteBatch)
         {
+            //Background
             spriteBatch.Draw(hud.HudBgSpriteSheet,
                                     hud.HudBgPosition,
                                     hud.HudBgSpriteBounds,
@@ -201,6 +243,7 @@ namespace DungeonCrawler.Systems
                                     SpriteEffects.None,
                                     0.1f);
 
+            //Avatar
             spriteBatch.Draw(hud.AvatarSpriteSheet,
                                     hud.AvatarPosition,
                                     hud.AvatarSpriteBounds,
@@ -210,6 +253,46 @@ namespace DungeonCrawler.Systems
                                     1f,                                             // scale
                                     SpriteEffects.None,
                                     0);
+            /*
+            //Health bar
+            spriteBatch.Draw(hud.HealthSpriteSheet,
+                                    hud.HealthPosition,
+                                    hud.HealthBounds,
+                                    Color.White,
+                                    75,                                             // rotation
+                                    new Vector2(0),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+
+            //Psi bar
+            spriteBatch.Draw(hud.PsiSpriteSheet,
+                                    hud.PsiPosition,
+                                    hud.PsiBounds,
+                                    Color.White,
+                                    75,                                             // rotation
+                                    new Vector2(0),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+
+            //Exp bar
+            spriteBatch.Draw(hud.ExpSpriteSheet,
+                                    hud.ExpPosition,
+                                    hud.ExpBounds,
+                                    Color.White,
+                                    75,                                             // rotation
+                                    new Vector2(0),  // origin
+                                    1f,                                             // scale
+                                    SpriteEffects.None,
+                                    0);
+             */
+
+            //Skill icon
+
+            //Item icon
+
+            //Collection icon
         }
     }
 }

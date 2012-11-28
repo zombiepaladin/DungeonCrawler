@@ -17,6 +17,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DungeonCrawler.Components
 {
+    //Note: Use HUDSystem instead.
 
     public struct HUDSprite
     {
