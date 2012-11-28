@@ -180,21 +180,30 @@ namespace DungeonCrawler.Systems
                 case PlayerIndex.Two:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_two");
                     hud.HudBgPosition = new Vector2(1024, 0);
-                    hud.AvatarPosition = new Vector2(-20, 20);
+                    hud.AvatarPosition = new Vector2(940, 20);
+                    hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 4);
+                    hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 26);
+                    hud.ExpPosition = new Vector2(925 - EXP_BAR_MAX_BOUNDS, 48);
 
                     _p2 = hud;
                     break;
                 case PlayerIndex.Three:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_three");
                     hud.HudBgPosition = new Vector2(0, 656);
-                    hud.AvatarPosition = new Vector2(20, -84);
+                    hud.AvatarPosition = new Vector2(20, 572);
+                    hud.HealthPosition = new Vector2(109, 635);
+                    hud.PsiPosition = new Vector2(109, 613);
+                    hud.ExpPosition = new Vector2(109, 591);
 
                     _p3 = hud;
                     break;
                 case PlayerIndex.Four:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_four");
                     hud.HudBgPosition = new Vector2(1024, 656);
-                    hud.AvatarPosition = new Vector2(-20, -84);
+                    hud.AvatarPosition = new Vector2(940, 572);
+                    hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 635);
+                    hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 613);
+                    hud.ExpPosition = new Vector2(109, 591);
 
                     _p4 = hud;
                     break;
@@ -228,6 +237,9 @@ namespace DungeonCrawler.Systems
                 hud.ExpBounds.Width = (int)(EXP_BAR_MAX_BOUNDS * expPercent);
 
                 //Update icons
+
+                //Update level
+                
 
                 setHUDSprite(player.PlayerIndex, hud);
             }
@@ -349,6 +361,8 @@ namespace DungeonCrawler.Systems
             //Item icon
 
             //Collection icon
+
+            //Level
         }
     }
 }
