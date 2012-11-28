@@ -57,6 +57,10 @@ namespace DungeonCrawler.Entities
 
             switch (skillP)
             {
+                #region Vermis Projectiles
+                case SkillType.ThrownBlades:
+                case SkillType.MaliciousParasite:
+                case SkillType.MindlessParasites:
                 case SkillType.BenignParasite:
                     skillProjectile = new SkillProjectile()
                     {
@@ -79,6 +83,7 @@ namespace DungeonCrawler.Entities
                     };
                     position.Radius = 5;
                     break;
+                #endregion
                 default:
                     throw new Exception("Not a projectile skill");
             }

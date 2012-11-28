@@ -1823,42 +1823,62 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                        _game.PositionComponent[userID], 1, 300);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 2, 300);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 3, 300);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 4, 300);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 5, 300);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 6, 300);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 7, 300);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 8, 300);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 9, 300);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 10, 300);
                                     break;
 
                                 default:
@@ -2153,42 +2173,61 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 1, 300);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 2, 300);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 3, 300);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 4, 300);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 5, 300);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 6, 300);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 7, 300);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID],8, 300);
                                     break;
 
                                 case 9:
-									eid = Entity.NextEntity();
+									eid = Entity.NextEntity();_game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 9, 300);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 10, 300);
                                     break;
 
                                 default:
@@ -2208,42 +2247,62 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 1, 300);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 2, 300);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 3, 300);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 4, 300);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 5, 300);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 6, 300);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 7, 300);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 8, 300);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 9, 300);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 10, 300);
                                     break;
 
                                 default:
@@ -2263,42 +2322,62 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 1, 300);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 2, 300);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 3, 300);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 4, 300);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 5, 300);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 6, 300);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID],7, 300);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 8, 300);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 9, 300);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
+                                       _game.PositionComponent[userID], 10, 300);
                                     break;
 
                                 default:

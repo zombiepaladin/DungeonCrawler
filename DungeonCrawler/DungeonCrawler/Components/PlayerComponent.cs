@@ -201,5 +201,6 @@ namespace DungeonCrawler.Components
     ///</summary>
     public class PlayerInfoComponent : GameComponent<PlayerInfo>
     {
+
     }
 }

@@ -44,6 +44,7 @@ namespace DungeonCrawler.Systems
 
         private GamePadState[] oldGamePadState;
 
+
         #endregion
 
         #region Constructors
@@ -70,6 +71,7 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
+
             // Update all entities that have a movement component
             foreach (Player player in game.PlayerComponent.All)
             {
