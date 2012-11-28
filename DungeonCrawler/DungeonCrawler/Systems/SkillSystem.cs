@@ -54,7 +54,7 @@ namespace DungeonCrawler.Systems
         CausticWeapons,
         MeatShield,
         HardenedBody,
-        GraspingBlade,
+        Regeneration,
         BenignParasite,
         MaliciousParasite,
         MindlessParasites,
@@ -2107,7 +2107,7 @@ namespace DungeonCrawler.Systems
                             }
                             break;
 
-                        case SkillType.GraspingBlade:
+                        case SkillType.Regeneration:
 
                             #region Skill Variables
 
@@ -4107,7 +4107,7 @@ namespace DungeonCrawler.Systems
 
                 //May Change
                 #region GraspingBlade
-                case SkillType.GraspingBlade:
+                case SkillType.Regeneration:
                     switch (rank)
                     {
                         #region Rank 1
