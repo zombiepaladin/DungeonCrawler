@@ -3516,10 +3516,12 @@ namespace DungeonCrawler.Systems
                         #endregion
 
                         #region TrickShot
+                            //Trick shot has been modified greatly to fit into our prototype game.
                         case SkillType.TrickShot:
 
                             #region Skill Variables
-
+                            int TSDamage;
+                            DirectDamage dd;
                             #endregion
 
                             switch (rank)
@@ -3527,42 +3529,112 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    TSDamage = 20;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    TSDamage = 40;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    TSDamage = 60;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    TSDamage = 80;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    TSDamage = 100;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    TSDamage = 120;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    TSDamage = 140;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    TSDamage = 160;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    TSDamage = 180;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    TSDamage = 200;
+                                    dd = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = TSDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, dd);
                                     break;
 
                                 default:
@@ -3781,10 +3853,12 @@ namespace DungeonCrawler.Systems
                         #endregion
 
                         #region EagleShot
+                            //EagleShot has been heavly modified to fit within our game prototype.
                         case SkillType.EagleShot:
 
                             #region Skill Variables
-
+                            int ESA;
+                            InstantEffect eie;
                             #endregion
 
                             switch (rank)
@@ -3792,42 +3866,182 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 10;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 20;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 30;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 40;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 50;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 60;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 70;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 80;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 90;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    ESA = 100;
+                                    eie = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, eie);
+                                    buffeffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponAccuracy = ESA
+                                    };
+                                    _game.BuffComponent.Add(eid, buffeffect);
                                     break;
 
                                 default:
