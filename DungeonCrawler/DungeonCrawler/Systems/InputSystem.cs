@@ -197,7 +197,7 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                     //TODO: Set skill
-                    game.SkillEntityFactory.CreateSkillAoE(SkillType.Detnate, game.PositionComponent[player.EntityID],1);
+                    game.SkillEntityFactory.CreateSkillAoE(SkillType.Detnate, game.PositionComponent[player.EntityID],1,10);
                 }
                 if (gamePadState.IsButtonDown(Buttons.X) || keyboardState.IsKeyDown(Keys.D3))
                 {

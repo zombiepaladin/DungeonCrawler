@@ -105,7 +105,7 @@ namespace DungeonCrawler.Entities
 #endregion
 
         #region SkillAoE
-        public uint CreateSkillAoE(SkillType skill, Position position, int rankP)
+        public uint CreateSkillAoE(SkillType skill, Position position, int rankP, int radius)
         {
             SkillAoE skillAoE;
             Sprite sprite;
@@ -129,7 +129,7 @@ namespace DungeonCrawler.Entities
                         SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
-                    position.Radius = 5;
+                    position.Radius = radius;
                     break;
                 default:
                     throw new Exception("Not a AoE skill");
