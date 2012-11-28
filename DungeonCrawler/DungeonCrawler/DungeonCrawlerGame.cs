@@ -297,6 +297,7 @@ namespace DungeonCrawler
             HealingStationComponent = new HealingStationComponent();
             PortableShieldComponent = new PortableShieldComponent();
             PortableStoreComponent = new PortableStoreComponent();
+            ActiveSkillComponent = new ActiveSkillComponent();
 
             Quests = new List<Quest>();
 

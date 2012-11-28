@@ -114,6 +114,15 @@
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\HealingStationComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\MotivateComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShieldComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\EngineeringSupportComponents.cs" />

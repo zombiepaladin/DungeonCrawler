@@ -226,7 +226,7 @@ namespace DungeonCrawler.Systems
 
 
                 game.PlayerInfoComponent[player.EntityID] = info;
-
+                /*
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];
@@ -371,7 +371,6 @@ namespace DungeonCrawler.Systems
                     iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
                     iss.isSeen = true;
                     game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
-                    */
                 }
                 #endregion // end key down
                 #region key/Button UP
@@ -433,9 +432,10 @@ namespace DungeonCrawler.Systems
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }*/
+                }
                 #endregion //end key up
                 #endregion //end hud control
+                */
                 // Cache last frame's input state
                 oldKeyboardState = keyboardState;
                 oldGamePadState[(int)player.PlayerIndex] = gamePadState;
