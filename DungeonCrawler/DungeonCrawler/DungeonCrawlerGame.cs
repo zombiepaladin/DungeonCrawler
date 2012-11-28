@@ -451,6 +451,7 @@ namespace DungeonCrawler
                     SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
+                    HUDSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
                     NpcAISystem.Update(elapsedTime);

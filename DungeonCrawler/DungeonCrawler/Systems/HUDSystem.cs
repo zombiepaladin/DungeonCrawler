@@ -70,9 +70,9 @@ namespace DungeonCrawler.Systems
         }
 
         //Constants for the status bars.
-        private const int HEALTH_BAR_MAX_BOUNDS = 115;
-        private const int PSI_BAR_MAX_BOUNDS = 115;
-        private const int EXP_BAR_MAX_BOUNDS = 115;
+        private const int HEALTH_BAR_MAX_BOUNDS = 157;
+        private const int PSI_BAR_MAX_BOUNDS = 157;
+        private const int EXP_BAR_MAX_BOUNDS = 157;
 
         //Refernces to the game.
         private DungeonCrawlerGame _game;
@@ -158,11 +158,11 @@ namespace DungeonCrawler.Systems
             //Load the rest of the spritesheets. Dont worry about position yet.
             hud.HudBgSpriteBounds = new Rectangle(0, 0, 270, 143);
             hud.HealthSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/HealthBar");
-            hud.HealthBounds = new Rectangle(0, 0, 15, HEALTH_BAR_MAX_BOUNDS);
+            hud.HealthBounds = new Rectangle(0, 0, HEALTH_BAR_MAX_BOUNDS, 17);
             hud.PsiSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/PsiBar");
-            hud.PsiBounds = new Rectangle(0, 0, 15, PSI_BAR_MAX_BOUNDS);
+            hud.PsiBounds = new Rectangle(0, 0, PSI_BAR_MAX_BOUNDS, 17);
             hud.ExpSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/ExpBar");
-            hud.ExpBounds = new Rectangle(0, 0, 10, EXP_BAR_MAX_BOUNDS);
+            hud.ExpBounds = new Rectangle(0, 0, EXP_BAR_MAX_BOUNDS, 7);
 
             //Load the right background and set all the positions based on the playerindex.
             switch (player.PlayerIndex)
@@ -171,9 +171,9 @@ namespace DungeonCrawler.Systems
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_one");
                     hud.HudBgPosition = new Vector2(0, 0);
                     hud.AvatarPosition = new Vector2(20, 20);
-                    hud.HealthPosition = new Vector2(66, 1);
-                    hud.PsiPosition = new Vector2(66, 17);
-                    hud.ExpPosition = new Vector2(66, 34);
+                    hud.HealthPosition = new Vector2(109, 4);
+                    hud.PsiPosition = new Vector2(109, 26);
+                    hud.ExpPosition = new Vector2(109, 48);
 
                     _p1 = hud;
                     break;
@@ -209,7 +209,64 @@ namespace DungeonCrawler.Systems
         /// <param name="elapsedTime">Time since the last call.</param>
         public void Update(float elapsedTime)
         {
+            foreach (Player player in _playerComponent.All)
+            {
+                HUDSprite hud = getHUDSprite(player.PlayerIndex);
+                if (hud.Show == false)
+                    continue;
 
+                //Update status bars.
+                PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+                Stats stats = _game.StatsComponent[player.EntityID];
+
+                float healthPercent = info.Health / stats.HealthBase;
+                float psiPercent = info.Psi / stats.PsiBase;
+                float expPercent = info.Experience / 100; //Need to find expbase
+
+                hud.HealthBounds.Width = (int)(HEALTH_BAR_MAX_BOUNDS * healthPercent);
+                hud.PsiBounds.Width = (int)(PSI_BAR_MAX_BOUNDS * psiPercent);
+                hud.ExpBounds.Width = (int)(EXP_BAR_MAX_BOUNDS * expPercent);
+
+                //Update icons
+
+                setHUDSprite(player.PlayerIndex, hud);
+            }
+        }
+
+        private HUDSprite getHUDSprite(PlayerIndex index)
+        {
+            switch(index)
+            {
+                case PlayerIndex.One:
+                    return _p1;
+                case PlayerIndex.Two:
+                    return _p2;
+                case PlayerIndex.Three:
+                    return _p3;
+                case PlayerIndex.Four:
+                    return _p4;
+                default:
+                    return new HUDSprite() { Show = false }; 
+            }
+        }
+
+        private void setHUDSprite(PlayerIndex index, HUDSprite sprite)
+        {
+            switch(index)
+            {
+                case PlayerIndex.One:
+                    _p1 = sprite;
+                    break;
+                case PlayerIndex.Two:
+                    _p2 = sprite;
+                    break;
+                case PlayerIndex.Three:
+                    _p3 = sprite;
+                    break;
+                case PlayerIndex.Four:
+                    _p4 = sprite;
+                    break; 
+            }
         }
 
         /// <summary>
@@ -253,13 +310,13 @@ namespace DungeonCrawler.Systems
                                     1f,                                             // scale
                                     SpriteEffects.None,
                                     0);
-            /*
+
             //Health bar
             spriteBatch.Draw(hud.HealthSpriteSheet,
                                     hud.HealthPosition,
                                     hud.HealthBounds,
                                     Color.White,
-                                    75,                                             // rotation
+                                    0,                                             // rotation
                                     new Vector2(0),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
@@ -270,7 +327,7 @@ namespace DungeonCrawler.Systems
                                     hud.PsiPosition,
                                     hud.PsiBounds,
                                     Color.White,
-                                    75,                                             // rotation
+                                    0,                                             // rotation
                                     new Vector2(0),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
@@ -281,12 +338,11 @@ namespace DungeonCrawler.Systems
                                     hud.ExpPosition,
                                     hud.ExpBounds,
                                     Color.White,
-                                    75,                                             // rotation
+                                    0,                                             // rotation
                                     new Vector2(0),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
                                     0);
-             */
 
             //Skill icon
 

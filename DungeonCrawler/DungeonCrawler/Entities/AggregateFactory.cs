@@ -181,7 +181,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 10,
                         Agility = 10,
                         Intelligence = 16,
-                        Defense = 10
+                        Defense = 10,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -310,8 +312,11 @@ namespace DungeonCrawler.Entities
                         Stamina = 10,
                         Agility = 10,
                         Intelligence = 16,
-                        Defense = 10
+                        Defense = 10,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
+                    game.StatsComponent[entityID] = stats;
 
                     player = new Player()
                     {
@@ -439,7 +444,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 12,
                         Agility = 13,
                         Intelligence = 0,
-                        Defense = 12
+                        Defense = 12,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -559,7 +566,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 10,
                         Agility = 10,
                         Intelligence = 10,
-                        Defense = 10
+                        Defense = 10,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -704,7 +713,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 10,
                         Agility = 10,
                         Intelligence = 14,
-                        Defense = 12
+                        Defense = 12,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -824,7 +835,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 5,
                         Agility = 25,
                         Intelligence = 5,
-                        Defense = 5
+                        Defense = 5,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -948,7 +961,9 @@ namespace DungeonCrawler.Entities
                         Stamina = 5,
                         Agility = 5,
                         Intelligence = 10,
-                        Defense = 14
+                        Defense = 14,
+                        HealthBase = 100,
+                        PsiBase = 100,
                     };
                     game.StatsComponent[entityID] = stats;
 
@@ -1127,7 +1142,9 @@ namespace DungeonCrawler.Entities
                     Stamina = gameSave.stats.Stamina,
                     Agility = gameSave.stats.Agility,
                     Intelligence = gameSave.stats.Intelligence,
-                    Defense = gameSave.stats.Defense
+                    Defense = gameSave.stats.Defense,
+                    HealthBase = gameSave.stats.HealthBase,
+                    PsiBase = gameSave.stats.PsiBase,
                 };
                 game.StatsComponent[entityID] = stats;
 
