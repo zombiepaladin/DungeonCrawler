@@ -123,15 +123,6 @@
     <Compile Include="Components\CyborgSkillComponents\TargetingUpgradeComponent.cs" />
     <Compile Include="Components\CyborgSkillComponents\ThrusterRushComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\HealingStationComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\MotivateComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\PortableShieldComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
-    <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\HealComponent.cs" />
@@ -157,6 +148,7 @@
     <Compile Include="Components\SkillProjectileComponent.cs" />
     <Compile Include="Components\SoundComponent.cs" />
     <Compile Include="Components\SpriteAnimationComponent.cs" />
+    <Compile Include="Components\EngineeringOffenseComponents.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
     <Compile Include="ControllerBindings.cs" />
@@ -216,6 +208,7 @@
     <Compile Include="Systems\SkillSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />
+    <Compile Include="Systems\EngineeringOffenseSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
   </ItemGroup>
   <ItemGroup>

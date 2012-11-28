@@ -18,6 +18,7 @@
 
 #region Using Statements
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -70,7 +71,9 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             // Update all entities that have a movement component
-            foreach (Player player in game.PlayerComponent.All)
+            List<Player> players = new List<Player>();
+            foreach(Player player in game.PlayerComponent.All) { players.Add(player); }
+            foreach (Player player in players)
             {
                 // Grab input for the player
                 KeyboardState keyboardState = Keyboard.GetState(player.PlayerIndex);
@@ -139,7 +142,7 @@ namespace DungeonCrawler.Systems
                             thisPlayerKey = p.EntityID;
                     }
 
-                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.HealingStation, 1, thisPlayerKey);
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ExplodingDroids, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;

@@ -211,6 +211,7 @@ namespace DungeonCrawler.Entities
                         SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
                         SpriteBounds = new Rectangle(0, 0, 38, 27),
                     };
+
                     position.Radius = 5;
                     break;
 

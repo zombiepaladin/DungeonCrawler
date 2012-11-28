@@ -97,8 +97,12 @@ namespace DungeonCrawler.Systems
             }
 
             // Draw all Sprites
-            foreach (Sprite sprite in game.SpriteComponent.All)
+            List<Sprite> sprites = new List<Sprite>();
+            foreach(Sprite sprite in game.SpriteComponent.All) { sprites.Add(sprite); }
+            foreach (Sprite sprite in sprites)
             {
+            //foreach (Sprite sprite in game.SpriteComponent.All)
+            //{
                 Position position = game.PositionComponent[sprite.EntityID];
                 if (position.RoomID == roomId)
                 {

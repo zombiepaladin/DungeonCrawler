@@ -36,7 +36,6 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
 using DungeonCrawler.Components.CyborgSkills;
-using DungeonCrawler.Components.EarthianSkillComponents;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -172,18 +171,12 @@ namespace DungeonCrawler
         public AlloyBodyComponent AlloyBodyComponent;
         public CyberneticSlamComponent CyberneticSlamComponent;
         public ThrusterRushComponent ThrusterRushComponent;
-        public TurretComponent TurretComponent;
-        public TrapComponent TrapComponent;
-        public PortableShopComponent PortableShopComponent;
-        public PortableShieldComponent PortableShieldComponent;
-        public MotivateComponent MotivateComponent;
-        public FallbackComponent FallbackComponent;
-        public ChargeComponent ChargeComponent;
-        public HealingStationComponent HealingStationComponent;
-        public ExplodingDroidComponent ExplodingDroidComponent;
         public SoundComponent SoundComponent;
         public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
+        public TurretComponent TurretComponent;
+        public TrapComponent TrapComponent;
+        public ExplodingDroidComponent ExplodingDroidComponent;
         
 
         #region Effect Components
@@ -221,6 +214,7 @@ namespace DungeonCrawler
 	    SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
+        public EngineeringOffenseSystem TurretSystem;
 
         public GarbagemanSystem GarbagemanSystem;
         TextSystem TextSystem;
@@ -296,16 +290,10 @@ namespace DungeonCrawler
             SkillDeployableComponent = new SkillDeployableComponent();
             SoundComponent = new SoundComponent();
             ActorTextComponent = new ActorTextComponent();
+            TurretComponent = new TurretComponent();
+            TrapComponent = new TrapComponent();
+            ExplodingDroidComponent = new ExplodingDroidComponent();
 
-            //TurretComponent = new TurretComponent();
-            //TrapComponent = new TrapComponent();
-            //PortableShopComponent = new PortableShopComponent();
-            //PortableShieldComponent = new PortableShieldComponent();
-            //MotivateComponent =  new MotivateComponent();
-            //FallbackComponent = new FallbackComponent();
-            //ChargeComponent = new ChargeComponent();
-            //HealingStationComponent = new HealingStationComponent();
-            //ExplodingDroidComponent = new ExplodingDroidComponent();
 
             #region Initialize Effect Components
             AgroDropComponent = new AgroDropComponent();
@@ -353,6 +341,7 @@ namespace DungeonCrawler
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
+            TurretSystem = new EngineeringOffenseSystem(this);
 
 
             // Testing code.
@@ -465,6 +454,7 @@ namespace DungeonCrawler
                     NpcAISystem.Update(elapsedTime);
                     EnemyAISystem.Update(elapsedTime);
                     TextSystem.Update(elapsedTime);
+                    TurretSystem.Update(elapsedTime);
 
                     GarbagemanSystem.Update(elapsedTime);
                     break;

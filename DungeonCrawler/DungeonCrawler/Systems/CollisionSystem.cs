@@ -850,10 +850,12 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p))
                 obj1 = CollisionType.Trigger;
-            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p)||_game.SkillDeployableComponent.Contains(p))
+            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p) || _game.SkillDeployableComponent.Contains(p))
                 obj1 = CollisionType.Skill;
             else if (_game.WeaponComponent.Contains(p))
                 obj1 = CollisionType.Weapon;
+            else if (_game.ExplodingDroidComponent.Contains(p))
+                obj1 = CollisionType.Bullet;
             else //Static
                 obj1 = CollisionType.Static;
 

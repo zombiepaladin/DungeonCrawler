@@ -40,6 +40,7 @@ namespace DungeonCrawler.Entities
     public enum BulletType
     {
         StandardBullet,
+        TurretBullet,
     }
 
     /// <summary>
@@ -215,6 +216,26 @@ namespace DungeonCrawler.Entities
                     };
                     position.Radius = 5;
                     break;
+
+                case BulletType.TurretBullet:
+                    position.Center -= direction * 63;
+                    bullet = _standardBullet;
+                    bullet.EntityID = eid;
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = 300,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                    };
+                    position.Radius = 5;
+                    break;
+
                 default:
                     throw new Exception("Unknown BulletType");
             }

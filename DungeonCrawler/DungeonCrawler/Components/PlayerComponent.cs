@@ -89,7 +89,6 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int MeleeAttackSpeed;
 
-
         /// <summary>
         /// Bonus to accuracy;
         /// </summary>
@@ -104,6 +103,16 @@ namespace DungeonCrawler.Components
         /// Bonus Health
         /// </summary>
         public int HealthBonus;
+
+        /// <summary>
+        /// Melee Defense Bonus
+        /// </summary>
+        public int MeleeDefenseBonus;
+
+        /// <summary>
+        /// Melee Defense Reduction
+        /// </summary>
+        public int MeleeDefenseReduction;
     }
 
     /// <summary>
