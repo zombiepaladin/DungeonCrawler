@@ -81,7 +81,7 @@ namespace DungeonCrawler.Systems
 
                 if (game.EnemyComponent[id].Health <= 0)
                 {
-                    game.GarbagemanSystem.ScheduleVisit(id);
+                    game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                 }
                 switch(AIBehavior)
                 {
