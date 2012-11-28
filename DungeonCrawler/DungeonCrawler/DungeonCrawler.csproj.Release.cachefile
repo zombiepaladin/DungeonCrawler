@@ -100,4 +100,11 @@ Content\Spritesheets\QuestLog.xnb
 Content\Spritesheets\alien.xnb
 Content\SpriteFonts\BoldPescadero.xnb
 Content\Audio\Main_Loop.xnb
+Content\Spritesheets\Weapons\BlueBeamSword.xnb
+Content\Spritesheets\Weapons\StandardGun.xnb
+Content\Spritesheets\Weapons\StandardSword.xnb
+Content\Spritesheets\hud_two.xnb
+Content\Spritesheets\hud_three.xnb
+Content\Spritesheets\hud_one.xnb
+Content\Spritesheets\hud_four.xnb
 Content\Audio\Main_Loop.wma

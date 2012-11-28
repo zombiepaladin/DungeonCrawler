@@ -29,6 +29,7 @@ namespace DungeonCrawler.Components
         public uint YButtonSpriteID;
         public uint DPadSpriteID;
         public uint HealthPsiStatusSpriteID;
+        public uint AvatarSpriteID;
     }
     public class HUDComponent : GameComponent<HUD>
     {

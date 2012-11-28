@@ -93,7 +93,7 @@ namespace DungeonCrawler.Systems
             }
             catch
             {
-                roomId = uint.MaxValue;
+                roomId = uint.MaxValue; //should change this no room should not have an id
             }
 
             // Draw all Sprites
