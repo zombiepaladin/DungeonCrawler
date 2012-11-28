@@ -22,22 +22,22 @@ namespace DungeonCrawler
     /// <summary>
     /// Manages user input.
     /// </summary>
-    public class UserInput
+    public class InputHelper
     {
         #region Static Members
 
         //Stores all the player's inputs.
-        private static Dictionary<PlayerIndex, UserInput> _inputs = new Dictionary<PlayerIndex, UserInput>(4);
+        private static Dictionary<PlayerIndex, InputHelper> _inputs = new Dictionary<PlayerIndex, InputHelper>(4);
 
         /// <summary>
         /// Load inputs for up to four players.
         /// </summary>
         public static void Load()
         {
-            _inputs.Add(PlayerIndex.One, new UserInput(PlayerIndex.One));
-            _inputs.Add(PlayerIndex.Two, new UserInput(PlayerIndex.Two));
-            _inputs.Add(PlayerIndex.Three, new UserInput(PlayerIndex.Three));
-            _inputs.Add(PlayerIndex.Four, new UserInput(PlayerIndex.Four));
+            _inputs.Add(PlayerIndex.One, new InputHelper(PlayerIndex.One));
+            _inputs.Add(PlayerIndex.Two, new InputHelper(PlayerIndex.Two));
+            _inputs.Add(PlayerIndex.Three, new InputHelper(PlayerIndex.Three));
+            _inputs.Add(PlayerIndex.Four, new InputHelper(PlayerIndex.Four));
         }
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public static UserInput GetInput(PlayerIndex index)
+        public static InputHelper GetInput(PlayerIndex index)
         {
-            UserInput input = _inputs[index];
+            InputHelper input = _inputs[index];
             input.updateState();
             return input;
         }
@@ -109,7 +109,7 @@ namespace DungeonCrawler
         private bool _disabled;
 
         //Creates a new input.
-        private UserInput(PlayerIndex index)
+        private InputHelper(PlayerIndex index)
         {
             _pIndex = index;
             _disabled = false;

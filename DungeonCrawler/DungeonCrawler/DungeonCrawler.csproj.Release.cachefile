@@ -64,7 +64,6 @@ Content\Spritesheets\cyborgSkills2.xnb
 Content\Spritesheets\target2.xnb
 Content\Spritesheets\darkralph.xnb
 Content\Spritesheets\trollph.xnb
-Content\Spritesheets\QuestLog.xnb
 Content\Spritesheets\charSelectNewGame.xnb
 Content\Spritesheets\charSelectControls2.xnb
 Content\Tilesets\misc.xnb
@@ -97,4 +96,8 @@ Content\Tilemaps\D01F01R05.xnb
 Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
 Content\SpriteFonts\Pescadero.xnb
+Content\Spritesheets\QuestLog.xnb
 Content\Spritesheets\alien.xnb
+Content\SpriteFonts\BoldPescadero.xnb
+Content\Audio\Main_Loop.xnb
+Content\Audio\Main_Loop.wma

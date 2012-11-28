@@ -233,7 +233,7 @@ namespace DungeonCrawler
         public void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            UserInput state = UserInput.GetInput(currentPlayer.playerIndex);
+            InputHelper state = InputHelper.GetInput(currentPlayer.playerIndex);
             if (state.IsPressed(Keys.Escape, Buttons.Back))
             {
                 currentPlayer.timer = controllerDelay;

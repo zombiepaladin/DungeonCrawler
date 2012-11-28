@@ -345,7 +345,7 @@ namespace DungeonCrawler
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
 
-            UserInput.Load();
+            InputHelper.Load();
 
             // Testing code.
             LevelManager.LoadContent();
@@ -379,7 +379,7 @@ namespace DungeonCrawler
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (UserInput.GetInput(PlayerIndex.One).IsPressed(Keys.Escape, Buttons.Back))
+            if (InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Escape, Buttons.Back))
                 this.Exit();
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -397,13 +397,13 @@ namespace DungeonCrawler
                         if (IsActive)
                         {
                             Guide.ShowSignIn(4, false);
-                            UserInput.DisableAll();
+                            InputHelper.DisableAll();
                         }
                     }
                     else
                     {
                         GameState = GameState.CharacterSelection;
-                        UserInput.EnableAll();
+                        InputHelper.EnableAll();
                         if (!ContinueNewGameScreen.isConnected)
                         {
                             ContinueNewGameScreen.LoadContent();

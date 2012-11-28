@@ -206,7 +206,7 @@
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
-    <Compile Include="UserInput.cs" />
+    <Compile Include="InputHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
