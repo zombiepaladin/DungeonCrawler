@@ -18,5 +18,8 @@ namespace DungeonCrawler.Entities
         GargranianPlayer = 4,
         SpacePiratePlayer = 5,
         ZombiePlayer = 6,
+
+
+        AlienEnemy = 100,
     }
 }

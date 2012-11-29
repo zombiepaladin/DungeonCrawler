@@ -190,6 +190,7 @@ namespace DungeonCrawler
         public HealOverTimeComponent HealOverTimeComponent;
         public InstantEffectComponent InstantEffectComponent;
         public KnockBackComponent KnockBackComponent;
+        public TargetedKnockBackComponent TargetedKnockBackComponent;
         public ReduceAgroRangeComponent ReduceAgroRangeComponent;
         public ResurrectComponent ResurrectComponent;
         public StunComponent StunComponent;
@@ -311,6 +312,7 @@ namespace DungeonCrawler
             HealOverTimeComponent = new HealOverTimeComponent();
             InstantEffectComponent = new InstantEffectComponent();
             KnockBackComponent = new KnockBackComponent();
+            TargetedKnockBackComponent = new TargetedKnockBackComponent();
             ReduceAgroRangeComponent = new ReduceAgroRangeComponent();
             ResurrectComponent = new ResurrectComponent();
             StunComponent = new StunComponent();
