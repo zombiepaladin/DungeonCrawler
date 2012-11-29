@@ -4,6 +4,7 @@
 //
 // Author: Nicholas Boen 
 // Contributers: Austin Murphy
+// Modfied by Adam Clark: cyborg skill added
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
