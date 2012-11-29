@@ -200,9 +200,9 @@ namespace DungeonCrawler.Components
 
         public int Skill4Rank;
 
-        public int SKill5Rank;
+        public int Skill5Rank;
 
-        public int SKill6Rank;
+        public int Skill6Rank;
 
         public int Skill7Rank;
 
