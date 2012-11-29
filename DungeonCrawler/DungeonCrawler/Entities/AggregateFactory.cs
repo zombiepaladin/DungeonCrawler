@@ -479,6 +479,26 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill=info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
+
                     game.PlayerComponent[entityID] = player;
                     //create HUD
                     hudagg.CreateHUD(player);
@@ -612,6 +632,26 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill=info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
+
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv
@@ -733,6 +773,26 @@ namespace DungeonCrawler.Entities
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill=info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
+
                     //Create HUD
                     hudagg.CreateHUD(player);
                     //create Inv
@@ -853,6 +913,26 @@ namespace DungeonCrawler.Entities
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
+
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill=info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -992,6 +1072,26 @@ namespace DungeonCrawler.Entities
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
+
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill=info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);
