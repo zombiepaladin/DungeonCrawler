@@ -69,19 +69,19 @@ namespace DungeonCrawler.Systems
         /// <summary>
         /// Contains the names of the quests, sorted by their quest id
         /// </summary>
-        private string[] questNames = { "Dungeon Extraordinaire" };
+        private string[] questNames = { "Dungeon Extraordinaire", "Test Quest" };
 
         /// <summary>
         /// Contains all of the descriptions for the quests, sorted by their quest id
         /// </summary>
-        private string[] questDescriptions = { "Reach the end of the dungeon." };
+        private string[] questDescriptions = { "Reach the end of the dungeon.", "Holder Text" };
 
         /// <summary>
         /// Contains the objective goal for each quest, sorted by their quest id. For a kill quest,
         /// this would be the number of kills needed to complete the quest. For a non count quest, 
         /// such as a quest to reach a certain room, this will just be 1
         /// </summary>
-        private int[] objectiveGoalCount = { 1 };
+        private int[] objectiveGoalCount = { 1, 1 };
 
         /// <summary>
         /// The useable width, in pixels, of the quest log gui
