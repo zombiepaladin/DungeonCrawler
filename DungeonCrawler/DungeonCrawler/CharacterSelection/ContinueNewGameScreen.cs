@@ -9,6 +9,8 @@
 // Author: Joseph Shaw
 // Modified: Josh Zavala - Moved Equipment to AggregateFactory, Assignment 9
 //
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -159,14 +161,14 @@ namespace DungeonCrawler
         public void LoadContent()
         {
             // Set up the background
-            titleTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectBackground");
+            titleTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectBackground");
 
             titleImage = new ImageSprite(titleTexture, viewport.Width / 2, viewport.Height / 2, Color.White);
             titleImage.Visible = true;
             titleImage.Scale = (float)(new Vector2(viewport.Width, viewport.Height).Length()) / (float)(new Vector2(titleTexture.Width, titleTexture.Height).Length());
 
             // Set the control images
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectControls1");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectControls1");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height * 0.365f);
             controlsImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             controlsImage.Scale = 1;
@@ -175,13 +177,13 @@ namespace DungeonCrawler
             spriteFont = game.Content.Load<SpriteFont>("SpriteFonts/Pescadero");
 
 
-            playerOne = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerOneCursor"), (int)buttonPos.X,
+            playerOne = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerOneCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, selected), true, PlayerIndex.One);
-            playerTwo = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerTwoCursor"), (int)buttonPos.X,
+            playerTwo = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerTwoCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Two);
-            playerThree = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerThreeCursor"), (int)buttonPos.X,
+            playerThree = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerThreeCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Three);
-            playerFour = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerFourCursor"), (int)buttonPos.X,
+            playerFour = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerFourCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Four);
             players.Add(playerOne);
             currentPlayer = playerOne;
@@ -201,8 +203,8 @@ namespace DungeonCrawler
                 if (!isNewGame)
                 {
                     // Allows the game to exit
-                    if ((GamePad.GetState(currentPlayer.PlayerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                        && currentPlayer.Timer <= 0)
+                    if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back) 
+                        && currentPlayer.timer <= 0)
                     {
                         if (currentPlayerIndex == 0)
                             game.Exit();
@@ -214,47 +216,51 @@ namespace DungeonCrawler
                             currentPlayer.Selected = false;
                         }
                     }
-                    if ((GamePad.GetState(PlayerIndex.One).Buttons.Start == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Enter)) && !playerOne.Connected)
+                    if (InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerOne.Connected = true;
-                        players.Add(playerOne);
+                        if(!players.Contains(playerOne))
+                            players.Add(playerOne);
                     }
-                    if (GamePad.GetState(PlayerIndex.Two).Buttons.Start == ButtonState.Pressed && !playerTwo.Connected)
+                    if (InputHelper.GetInput(PlayerIndex.Two).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerTwo.Connected = true;
-                        players.Add(playerTwo);
+                        if(!players.Contains(playerTwo))
+                            players.Add(playerTwo);
                     }
-                    if (GamePad.GetState(PlayerIndex.Three).Buttons.Start == ButtonState.Pressed && !playerThree.Connected)
+                    if (InputHelper.GetInput(PlayerIndex.Three).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerThree.Connected = true;
-                        players.Add(playerThree);
+                        if(!players.Contains(playerThree))
+                            players.Add(playerThree);
                     }
-                    if (GamePad.GetState(PlayerIndex.Four).Buttons.Start == ButtonState.Pressed && !playerFour.Connected)
+                    if (InputHelper.GetInput(PlayerIndex.Four).IsPressed(Keys.Enter, Buttons.Start))
                     {
                         playerFour.Connected = true;
-                        players.Add(playerFour);
+                        if(!players.Contains(playerFour))
+                            players.Add(playerFour);
                     }
 
 #if XBOX 
                 // If windows we don't want to disconnect the keyboard, which is player one
-                if (!GamePad.GetState(PlayerIndex.One).IsConnected) 
+                if (!UserInput.GetInput(PlayerIndex.One).IsGamePadConnected()) 
                 {
                     players.Remove(playerOne);
                     playerOne.Connected = false;
                 }
 #endif
 
-                    if (!GamePad.GetState(PlayerIndex.Two).IsConnected)
+                    if (!InputHelper.GetInput(PlayerIndex.Two).IsGamePadConnected())
                     {
                         players.Remove(playerTwo);
                         playerTwo.Connected = false;
                     }
-                    if (!GamePad.GetState(PlayerIndex.Three).IsConnected)
+                    if (!InputHelper.GetInput(PlayerIndex.Three).IsGamePadConnected())
                     {
                         players.Remove(playerThree);
                         playerThree.Connected = false;
                     }
-                    if (!GamePad.GetState(PlayerIndex.Four).IsConnected)
+                    if (!InputHelper.GetInput(PlayerIndex.Four).IsGamePadConnected())
                     {
                         players.Remove(playerFour);
                         playerFour.Connected = false;
@@ -265,8 +271,8 @@ namespace DungeonCrawler
                         currentPlayer.Timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
                         if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                         {
-                            currentPlayer.Timer = controllerDelay;
-                            if (GamePad.GetState(currentPlayer.PlayerIndex).DPad.Down == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Down))
+                            currentPlayer.timer = controllerDelay;
+                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Down, Buttons.DPadDown))
                             {
                                 selectedGameSave++;
                                 if (selectedGameSave < gameSaves.Count)
@@ -289,7 +295,7 @@ namespace DungeonCrawler
                                 cursorMoved = true;
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
-                            if (GamePad.GetState(currentPlayer.PlayerIndex).DPad.Up == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Up))
+                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Up, Buttons.DPadUp))
                             {
                                 selectedGameSave--;
                                 if (selectedGameSave >= 0)
@@ -313,7 +319,7 @@ namespace DungeonCrawler
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
 
-                            if (GamePad.GetState(currentPlayer.PlayerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
+                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Space, Buttons.A))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave == 0)
@@ -345,8 +351,7 @@ namespace DungeonCrawler
                                     }
                                 }
                             }
-
-                            if (GamePad.GetState(currentPlayer.PlayerIndex).Buttons.X == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Back))
+                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave != 0)
@@ -402,7 +407,7 @@ namespace DungeonCrawler
         public void loadGameSaves()
         {
             // Create the "New Game" slot
-            CharSelectPreview charPreview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
+            CharSelectPreview charPreview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
             gameSaves.Add(charPreview);
 
             IAsyncResult result = StorageDevice.BeginShowSelector(PlayerIndex.One, null, null);
@@ -511,7 +516,7 @@ namespace DungeonCrawler
             CharSelectPlayer previousPlayer = players.ElementAt(currentPlayerIndex - 1);
             if (previousPlayer.GameSave.NewGame)
             {
-                preview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
+                preview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
                 preview.FileNumber = previousPlayer.GameSave.FileNumber + 1;
                 preview.FileName = "charSave" + preview.FileNumber;
                 gameSaves.Insert(0, preview);
@@ -541,7 +546,7 @@ namespace DungeonCrawler
                 {
                     entityID = game.AggregateFactory.CreateFromAggregate((Aggregate)player.GameSave.Aggregate, player.PlayerIndex, player.GameSave.FileName, out gameSave);
                     gameSave.characterType = player.GameSave.CharType.Text;
-                    gameSave.charSprite = "Spritesheets/charSelect" + gameSave.characterType.Replace(" ", "");
+                    gameSave.charSprite = "Spritesheets/CharSelect/charSelect" + gameSave.characterType.Replace(" ", "");
                     DoGameSave(gameSave);
                 }
                 else

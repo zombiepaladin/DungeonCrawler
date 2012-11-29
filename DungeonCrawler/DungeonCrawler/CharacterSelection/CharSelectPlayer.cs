@@ -28,21 +28,21 @@ namespace DungeonCrawler
     public class CharSelectPlayer
     {
         #region Fields
-        private ImageSprite cursor;
+        public ImageSprite cursor;
 
-        private bool connected;
+        public bool connected;
 
-        private bool selected;
+        public bool selected;
 
-        private int xPos;
+        public int xPos;
 
-        private int yPos;
+        public int yPos;
 
-        private float timer;
+        public float timer;
 
-        private PlayerIndex playerIndex;
+        public PlayerIndex playerIndex;
 
-        private CharSelectPreview gameSave;
+        public CharSelectPreview gameSave;
         #endregion
 
         #region Properties

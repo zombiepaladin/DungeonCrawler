@@ -125,7 +125,19 @@ namespace DungeonCrawler.Components
     /// </summary>
     public class PlayerComponent : GameComponent<Player>
     {
-
+        public bool GetByIndex(PlayerIndex index, out Player player)
+        {
+            player = new Player();
+            foreach (Player p in this.All)
+            {
+                if (p.PlayerIndex == index)
+                {
+                    player = p;
+                    return true;
+                }
+            }
+            return false; 
+        }
     }
 
     ///<summary>
