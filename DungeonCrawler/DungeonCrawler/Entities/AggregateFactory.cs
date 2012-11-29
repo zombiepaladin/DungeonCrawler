@@ -61,6 +61,7 @@ namespace DungeonCrawler.Entities
             Texture2D spriteSheet;
             Position position;
             Movement movement;
+            Equipment equipment;
 
             Sprite sprite;
             SpriteAnimation spriteAnimation;
@@ -91,6 +92,7 @@ namespace DungeonCrawler.Entities
 
             switch (aggregate)
             {
+                #region Fairy
                 /****************************************
                  * Fairy
                  * *************************************/
@@ -209,7 +211,9 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
                     
                     break;
+                #endregion
 
+                #region Cultist
                 /****************************************
                 * Cultist
                 * *************************************/
@@ -217,6 +221,16 @@ namespace DungeonCrawler.Entities
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
                     spriteSheet.Name = "Spritesheets/Cultist";
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     position = new Position()
                     {
@@ -350,7 +364,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
 
                     break;
+                #endregion
 
+                #region Cyborg
                 /****************************************
                 * Cyborg - Added by adam Clark
                 * *************************************/
@@ -366,6 +382,16 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    Equipment e = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.ShockRod),
+                    };
+                    game.EquipmentComponent.Add(e.EntityID, e);
 
                     collideable = new Collideable()
                     {
@@ -459,7 +485,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Earthian
                 /*******************************************************************************
                 * Earthian
                 * Done by Andrew Bellinder. I added the character's sprite and his skill sprites
@@ -476,6 +504,16 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.TreeBranch),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -579,7 +617,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Gargranian
                 /****************************************
                 * Gargranian by Michael Fountain
                 * *************************************/
@@ -595,6 +635,16 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.PsychicStun),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -688,7 +738,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Space Pirate
                 /****************************************
                 * Space Pirate
                 * Done by Austin Murphy and I also have posted the 9 sprites for my skills that are listed in the design document.
@@ -705,6 +757,16 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StolenCutlass),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -797,7 +859,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Zombie
                 /****************************************
                 * Zombie
                  * written by Matthew Hart
@@ -820,6 +884,16 @@ namespace DungeonCrawler.Entities
                     };
 
                     game.PositionComponent[entityID] = position;
+
+                    //Author: Josh Zavala, Assignment 9
+                    //This has been transferred from ContinueNewGameScreen.goToNetworking
+                    //Allows default weapons assignment per class
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.DeadHand),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -924,6 +998,7 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
                 default:
                     throw new Exception("Unknown type.");
@@ -954,6 +1029,7 @@ namespace DungeonCrawler.Entities
             Texture2D spriteSheet;
             Position position;
             Movement movement;
+            Equipment equipment;
 
             Sprite sprite;
             SpriteAnimation spriteAnimation;
@@ -985,6 +1061,17 @@ namespace DungeonCrawler.Entities
                 entityID = Entity.NextEntity();
                 spriteSheet = game.Content.Load<Texture2D>(gameSave.charAnimation);
                 spriteSheet.Name = gameSave.charAnimation;
+
+                //Author: Josh Zavala, Assignment 9
+                //This has been transferred from ContinueNewGameScreen.goToNetworking
+                //Allows default weapons assignment per class, needs to load saved weaps
+                equipment = new Equipment()
+                {
+                    EntityID = entityID,
+                    //this line needs to load the saved weap for the character
+                    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                };
+                game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                 position = new Position()
                 {

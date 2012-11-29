@@ -3,6 +3,7 @@
 // ContinueNewGameScreen.cs 
 //
 // Author: Joseph Shaw
+// Modified: Josh Zavala - Moved Equipment to AggregateFactory, Assignment 9
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -520,12 +521,18 @@ namespace DungeonCrawler
                     gameSave = LoadGameSave(player.gameSave);
                     entityID = game.AggregateFactory.CreateFromGameSave(gameSave, currentPlayer.playerIndex);
                 }
-                Equipment e = new Equipment()
-                {
-                    EntityID = entityID,
-                    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
-                };
-                game.EquipmentComponent.Add(e.EntityID, e);
+
+                //Author: Josh Zavala - Assignment 9
+                //This has been moved to AggregateFactory.CreateFromAggregate.
+                //This allows us to have different default weapons for each class
+                //without having to write a lot of needless switch statements.
+                //Equipment e = new Equipment()
+                //{
+                //    EntityID = entityID,
+                //    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                //};
+                //game.EquipmentComponent.Add(e.EntityID, e);
+
                 game.GameState = GameState.NetworkSetup;
             }
             game.GameState = GameState.NetworkSetup;
