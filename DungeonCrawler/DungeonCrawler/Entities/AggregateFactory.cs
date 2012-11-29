@@ -62,6 +62,7 @@ namespace DungeonCrawler.Entities
             Position position;
             Movement movement;
             Equipment equipment;
+            WeaponType weaponType;
 
             Sprite sprite;
             SpriteAnimation spriteAnimation;
@@ -73,8 +74,6 @@ namespace DungeonCrawler.Entities
             Player player;
             PlayerInfo info;
             Stats stats = new Stats();
-            PlayerSkillInfo skillInfo;
-            ActiveSkill active_Skill;
 
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
@@ -100,6 +99,23 @@ namespace DungeonCrawler.Entities
                     entityID = Entity.NextEntity();
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
                     spriteSheet.Name = "Spritesheets/wind_fae";
+
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.StandardSword;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     position = new Position()
                     {
@@ -149,7 +165,6 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
-                   
 
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
@@ -206,10 +221,12 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-                    
+
                     break;
                 #endregion
 
@@ -222,13 +239,20 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
                     spriteSheet.Name = "Spritesheets/Cultist";
 
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.StandardSword;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -333,29 +357,11 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-
-                    skillInfo = new PlayerSkillInfo()
-                    {
-                        Skill1Rank = 1,
-                        Skill2Rank = 1,
-                        Skill3Rank = 1,
-                        Skill4Rank = 1,
-                        Skill5Rank = 1,
-                        Skill6Rank = 1,
-                        Skill7Rank = 1,
-                        Skill8Rank = 1,
-                        Skill9Rank = 1,
-                    };
-                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
-
-                    active_Skill = new ActiveSkill()
-                    {
-                        activeSkill=info.skill1,
-                    };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
@@ -375,6 +381,23 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/cyborg");
                     spriteSheet.Name = "Spritesheets/cyborg";
 
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.ShockRod;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -382,16 +405,6 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
-                    Equipment e = new Equipment()
-                    {
-                        EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.ShockRod),
-                    };
-                    game.EquipmentComponent.Add(e.EntityID, e);
 
                     collideable = new Collideable()
                     {
@@ -475,29 +488,11 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-
-                    skillInfo = new PlayerSkillInfo()
-                    {
-                        Skill1Rank = 1,
-                        Skill2Rank = 1,
-                        Skill3Rank = 1,
-                        Skill4Rank = 1,
-                        Skill5Rank = 1,
-                        Skill6Rank = 1,
-                        Skill7Rank = 1,
-                        Skill8Rank = 1,
-                        Skill9Rank = 1,
-                    };
-                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
-
-                    active_Skill = new ActiveSkill()
-                    {
-                        activeSkill=info.skill1,
-                    };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     game.PlayerComponent[entityID] = player;
                     //create HUD
@@ -517,6 +512,23 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
                     spriteSheet.Name = "Spritesheets/Earthian2x";
 
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.TreeBranch;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -524,16 +536,6 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
-                    equipment = new Equipment()
-                    {
-                        EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.TreeBranch),
-                    };
-                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -628,6 +630,8 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                         skill1 = Systems.SkillType.Motivate,
                     };
@@ -669,6 +673,23 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
                     spriteSheet.Name = "Spritesheets/gargranian";
 
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.PsychicStun;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -676,16 +697,6 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
-                    equipment = new Equipment()
-                    {
-                        EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.PsychicStun),
-                    };
-                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -763,36 +774,18 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
                     };
-                    
+
                     game.PlayerComponent[entityID] = player;
 
                     info = new PlayerInfo()
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-
-                    skillInfo = new PlayerSkillInfo()
-                    {
-                        Skill1Rank = 1,
-                        Skill2Rank = 1,
-                        Skill3Rank = 1,
-                        Skill4Rank = 1,
-                        Skill5Rank = 1,
-                        Skill6Rank = 1,
-                        Skill7Rank = 1,
-                        Skill8Rank = 1,
-                        Skill9Rank = 1,
-                    };
-                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
-
-                    active_Skill = new ActiveSkill()
-                    {
-                        activeSkill=info.skill1,
-                    };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -811,6 +804,23 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
                     spriteSheet.Name = "Spritesheets/SpacePBig";
 
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.StolenCutlass;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
+
                     position = new Position()
                     {
                         EntityID = entityID,
@@ -818,16 +828,6 @@ namespace DungeonCrawler.Entities
                         Radius = 32f,
                     };
                     game.PositionComponent[entityID] = position;
-
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
-                    equipment = new Equipment()
-                    {
-                        EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StolenCutlass),
-                    };
-                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -911,29 +911,11 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-
-                    skillInfo = new PlayerSkillInfo()
-                    {
-                        Skill1Rank = 1,
-                        Skill2Rank = 1,
-                        Skill3Rank = 1,
-                        Skill4Rank = 1,
-                        Skill5Rank = 1,
-                        Skill6Rank = 1,
-                        Skill7Rank = 1,
-                        Skill8Rank = 1,
-                        Skill9Rank = 1,
-                    };
-                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
-
-                    active_Skill = new ActiveSkill()
-                    {
-                        activeSkill=info.skill1,
-                    };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -952,6 +934,23 @@ namespace DungeonCrawler.Entities
                     spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
                     spriteSheet.Name = "Spritesheets/MzombieBx2";
 
+                    /*Author: Josh Zavala, Assignment 9
+                     *This has been transferred from ContinueNewGameScreen.goToNetworking
+                     *Allows default weapons assignment per class
+                     */
+                    /*Update:Joseph Shaw, Assignment 9
+                     *Set the weapon type here and use it in the create weapon so that it 
+                     *can be saved into the gameSave after the switch statement.
+                     *We could abstract this method entirely but leaving it here gives more flexibility.
+                     */
+                    weaponType = WeaponType.DeadHand;
+                    equipment = new Equipment()
+                    {
+                        EntityID = entityID,
+                        WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                    };
+                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
+
                     //Placeholder values
                     miscMeleeAttack = 5;
                     miscMeleeDef = 5;
@@ -965,16 +964,6 @@ namespace DungeonCrawler.Entities
                     };
 
                     game.PositionComponent[entityID] = position;
-
-                    //Author: Josh Zavala, Assignment 9
-                    //This has been transferred from ContinueNewGameScreen.goToNetworking
-                    //Allows default weapons assignment per class
-                    equipment = new Equipment()
-                    {
-                        EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.DeadHand),
-                    };
-                    game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
                     collideable = new Collideable()
                     {
@@ -1070,38 +1059,11 @@ namespace DungeonCrawler.Entities
                     {
                         Health = 100,
                         Psi = 100,
+                        Level = 1,
+                        Experience = 0,
                         State = PlayerState.Default,
-                        skill1 = Systems.SkillType.ThrownBlades,
-                        skill2 = Systems.SkillType.FrenziedAttack,
-                        skill3 = Systems.SkillType.CausticWeapons,
-                        skill4 = Systems.SkillType.MeatShield,
-                        skill5 = Systems.SkillType.HardenedBody,
-                        skill6 = Systems.SkillType.Regeneration,
-                        skill7 = Systems.SkillType.BenignParasite,
-                        skill8 = Systems.SkillType.MaliciousParasite,
-                        skill9 = Systems.SkillType.MindlessParasites,
                     };
                     game.PlayerInfoComponent[entityID] = info;
-
-                    skillInfo = new PlayerSkillInfo()
-                    {
-                        Skill1Rank = 1,
-                        Skill2Rank = 1,
-                        Skill3Rank = 1,
-                        Skill4Rank = 1,
-                        Skill5Rank = 1,
-                        Skill6Rank = 1,
-                        Skill7Rank = 1,
-                        Skill8Rank = 1,
-                        Skill9Rank = 1,
-                    };
-                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
-
-                    active_Skill = new ActiveSkill()
-                    {
-                        activeSkill=info.skill1,
-                    };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);
@@ -1119,12 +1081,15 @@ namespace DungeonCrawler.Entities
             gameSave.health = 100;
             gameSave.psi = 100;
             gameSave.stats = stats;
-            gameSave.Level = 1;
+            gameSave.level = 1;
+            gameSave.experience = 0;
             gameSave.charAnimation = spriteSheet.Name;
             gameSave.fileName = fileName;
             info.FileName = fileName;
+            gameSave.weaponType = (int)weaponType;
 
             game.QuestLogSystem.ActivateQuest(entityID, 0);
+            game.QuestLogSystem.ActivateQuest(entityID, 1);
 
             return entityID;
         }
@@ -1172,14 +1137,14 @@ namespace DungeonCrawler.Entities
                 spriteSheet = game.Content.Load<Texture2D>(gameSave.charAnimation);
                 spriteSheet.Name = gameSave.charAnimation;
 
-                //Author: Josh Zavala, Assignment 9
-                //This has been transferred from ContinueNewGameScreen.goToNetworking
-                //Allows default weapons assignment per class, needs to load saved weaps
+                /*Author: Josh Zavala, Assignment 9
+                 *This has been transferred from ContinueNewGameScreen.goToNetworking
+                 *Allows default weapons assignment per class
+                 */
                 equipment = new Equipment()
                 {
                     EntityID = entityID,
-                    //this line needs to load the saved weap for the character
-                    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                    WeaponID = game.WeaponFactory.CreateWeapon((WeaponType)gameSave.weaponType),
                 };
                 game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -1270,8 +1235,10 @@ namespace DungeonCrawler.Entities
 
                 info = new PlayerInfo()
                 {
-                    Health = 100,
-                    Psi = 100,
+                    Health = gameSave.health,
+                    Psi = gameSave.psi,
+                    Level = gameSave.level,
+                    Experience = gameSave.experience,
                     State = PlayerState.Default,
                 };
                 game.PlayerInfoComponent[entityID] = info;
@@ -1282,8 +1249,6 @@ namespace DungeonCrawler.Entities
                 //create Inv
                 invagg.CreateInv(player);
             }
-
-            game.QuestLogSystem.ActivateQuest(entityID, 0);
 
             return entityID;
         }

@@ -13,7 +13,11 @@
 #endregion
 
 #region Using Statements
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using DungeonCrawler.Entities;
 using DungeonCrawler.Systems;
@@ -144,6 +148,16 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int Psi;
 
+        /// <summary>
+        /// The current level of the player
+        /// </summary>
+        public int Level;
+
+        /// <summary>
+        /// The current experience of the player
+        /// </summary>
+        public int Experience;
+
         ///<summary>
         ///The current state of the player.
         ///</summary>
@@ -199,6 +213,7 @@ namespace DungeonCrawler.Components
 
     }
 
+    [Serializable]
     public struct PlayerSkillInfo
     {
         public int Skill1Rank;
