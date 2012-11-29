@@ -5,7 +5,7 @@
 // Author: Matthew McHaney
 //
 // Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
-// Modified by Samuel Fike and Jiri Malina: Added handling of SpriteAnimationComponents
+// Modified by Samuel Fike, Jiri Malina, Brett Barger: Added handling of SpriteAnimationComponents and EnemyComponent
 // Modified By: Nick Boen - Added compatability with Effect Components
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
