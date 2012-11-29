@@ -81,7 +81,7 @@ namespace DungeonCrawler.Systems
 
                 if (game.EnemyComponent[id].Health <= 0)
                 {
-                    game.GarbagemanSystem.ScheduleVisit(id);
+                    game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                 }
                 switch(AIBehavior)
                 {
@@ -98,6 +98,13 @@ namespace DungeonCrawler.Systems
                     case AIBehaviorType.Alien:
                         updateTargeting(id);
                         MoveTowardTarget(id);
+                        
+                        uint targetID = enemyAI.TargetID;
+                        float dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                        
+                        if(dist < 35)
+                            game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
+
                         ManageAnimation(id);
                         break;
 
