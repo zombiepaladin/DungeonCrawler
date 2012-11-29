@@ -142,8 +142,6 @@ namespace DungeonCrawler.Systems
             {
                 _game.GarbagemanSystem.ScheduleVisit(key, GarbagemanSystem.ComponentType.Effect);
             }
-
-            int x;
         }
 
         public void UseSkill(Aggregate playerType, SkillType skillType, int rank, uint userID)
@@ -2235,6 +2233,7 @@ namespace DungeonCrawler.Systems
 
                 #region Earthian
 
+                //Earthian Skills done by Andrew Bellinder
                 case Aggregate.EarthianPlayer:
 
                     #region Race Variables
@@ -2286,8 +2285,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2319,8 +2318,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2352,8 +2351,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2384,8 +2383,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2416,8 +2415,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2448,8 +2447,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2480,8 +2479,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2512,8 +2511,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2544,8 +2543,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2576,8 +2575,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2637,8 +2636,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2671,8 +2670,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2705,8 +2704,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2739,8 +2738,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2773,8 +2772,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2807,8 +2806,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2841,8 +2840,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2875,8 +2874,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2909,8 +2908,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -2943,8 +2942,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 38, 27),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -3006,6 +3005,7 @@ namespace DungeonCrawler.Systems
                                         _game.MovementComponent.Add(eid, movement);
 
                                         droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 32;
                                         explodingDroid = new ExplodingDroid()
                                         {
                                             EntityID = eid,
@@ -3017,8 +3017,8 @@ namespace DungeonCrawler.Systems
                                         sprite = new Sprite()
                                         {
                                             EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                                            SpriteBounds = new Rectangle(0, 0, 80, 93),
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
                                         };
                                         _game.SpriteComponent.Add(eid, sprite);
 
@@ -3035,7 +3035,8 @@ namespace DungeonCrawler.Systems
 
                                     case 2:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 115;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3045,12 +3046,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 35;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 3:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 120;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3060,12 +3095,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 40;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 4:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 125;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3075,12 +3144,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 45;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 5:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                       effectDuration = 15;
+                                        droidSpeed = 130;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3090,12 +3193,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 50;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 6:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 135;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3105,12 +3242,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 55;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 7:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 140;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3120,12 +3291,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 60;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 8:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 145;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3135,12 +3340,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 65;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 9:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 150;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3150,12 +3389,46 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 70;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     case 10:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 5;
+                                        effectDuration = 15;
+                                        droidSpeed = 155;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3165,7 +3438,40 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 75;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
                                         break;
 
                                     default:
@@ -3184,8 +3490,12 @@ namespace DungeonCrawler.Systems
 
                             #region Skill Variables
 
-                            TimedEffect timedEffect;
-                            float effectDuration;
+                                HealingStation healingStation;
+                                Sprite sprite;
+                                Position stationPosition;
+
+                                Collideable collideable;
+
 
                             #endregion
 
@@ -3194,152 +3504,342 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 10,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 2:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 15,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 3:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 20,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 4:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 25,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 5:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 30,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 6:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 35,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 7:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 40,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 8:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 45,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 9:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 50,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 10:
                                     eid = Entity.NextEntity();
-                                    effectDuration = 5;
 
-                                    timedEffect = new TimedEffect()
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
                                     {
                                         EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        position = stationPosition,
+                                        healthAvailable = 60,
 
-                                    _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 default:
@@ -3376,7 +3876,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 2:
@@ -3391,7 +3891,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 3:
@@ -3406,7 +3906,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 4:
@@ -3421,7 +3921,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 5:
@@ -3436,7 +3936,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 6:
@@ -3451,7 +3951,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 7:
@@ -3466,7 +3966,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 8:
@@ -3481,7 +3981,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 9:
@@ -3496,7 +3996,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     case 10:
@@ -3511,7 +4011,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
                                         break;
 
                                     default:
@@ -3529,8 +4029,16 @@ namespace DungeonCrawler.Systems
                             {
 
                                 #region Skill Variables
+
                                 TimedEffect timedEffect;
                                 float effectDuration;
+
+                                PortableShield portableShield;
+                                Position shieldPosition;
+
+                                Sprite sprite;
+                                Collideable collideable;
+
                                 #endregion
 
                                 switch (rank)
@@ -3548,12 +4056,37 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
-                                        break;
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);                                        break;
 
                                     case 2:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 8;
+                                        effectDuration = 6;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3563,12 +4096,38 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 3:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 10;
+                                        effectDuration = 7;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3578,7 +4137,33 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 4:
@@ -3593,12 +4178,38 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 5:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 10;
+                                        effectDuration = 9;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3608,26 +4219,37 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 6:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 12;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
-                                        break;
-
-                                    case 7:
-                                        eid = Entity.NextEntity();
                                         effectDuration = 10;
 
                                         timedEffect = new TimedEffect()
@@ -3638,7 +4260,74 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 11;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 8:
@@ -3653,12 +4342,38 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 9:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 13;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3668,12 +4383,38 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     case 10:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 14;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -3683,7 +4424,33 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, _game.PositionComponent[GetPlayerID()]);
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
                                         break;
 
                                     default:
@@ -3741,46 +4508,6 @@ namespace DungeonCrawler.Systems
                                         p.abilityModifiers.HealthBonus += 5;
                                         _game.PlayerComponent[p.EntityID] = p;
                                     }
-
-                                    //eid = Entity.NextEntity();
-                                    //effectDuration = 5;
-                                    //targetID = GetPlayerID();
-                                    //speedIncrease = 200;
-
-                                    //eid_2 = Entity.NextEntity();
-                                    //origin = _game.PositionComponent[targetID].Center;
-                                    //distance = 100;
-
-                                    //timedEffect = new TimedEffect()
-                                    //{
-                                    //    EntityID = eid,
-                                    //    TotalDuration = effectDuration,
-                                    //    TimeLeft = effectDuration
-                                    //};
-                                    //_game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                    //buffEffect = new Buff()
-                                    //{
-                                    //    EntityID = eid,
-                                    //    TargetID = targetID,
-                                    //    MovementSpeed = speedIncrease
-                                    //};
-                                    //_game.BuffComponent.Add(eid, buffEffect);
-
-
-                                    //instantEffect = new InstantEffect()
-                                    //{
-                                    //    EntityID = eid_2,
-                                    //};
-                                    //_game.InstantEffectComponent.Add(eid_2, instantEffect);
-
-                                    //knockBackEffect = new KnockBack()
-                                    //{
-                                    //    EntityID = eid_2,
-                                    //    Origin = origin,
-                                    //    Distance = distance,
-                                    //};
-                                    //_game.KnockBackComponent.Add(eid_2, knockBackEffect);
 
                                     break;
 
@@ -4003,8 +4730,6 @@ namespace DungeonCrawler.Systems
                                         effectDuration = 15;
 
                                         players = new List<Player>();
-                                        //for (int i = 0; i < _game.PlayerComponent.All.Count(); i++)
-                                        //{ }
                                         foreach (Player player in _game.PlayerComponent.All)
                                         {
                                             Player p = _game.PlayerComponent[player.EntityID];
@@ -4320,8 +5045,6 @@ namespace DungeonCrawler.Systems
                                         effectDuration = 15;
 
                                         players = new List<Player>();
-                                        //for (int i = 0; i < _game.PlayerComponent.All.Count(); i++)
-                                        //{ }
                                         foreach (Player player in _game.PlayerComponent.All)
                                         {
                                             Player p = _game.PlayerComponent[player.EntityID];

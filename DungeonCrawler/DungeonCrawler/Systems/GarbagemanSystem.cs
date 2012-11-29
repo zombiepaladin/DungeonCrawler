@@ -165,6 +165,8 @@ namespace DungeonCrawler.Systems
                         if (game.SpriteComponent.Contains(keyValue.Key))          game.SpriteComponent.Remove(keyValue.Key);
                         if (game.MovementComponent.Contains(keyValue.Key))        game.MovementComponent.Remove(keyValue.Key);
                         if (game.CollisionComponent.Contains(keyValue.Key))       game.CollisionComponent.Remove(keyValue.Key);
+                        if (game.HealingStationComponent.Contains(keyValue.Key))  game.HealingStationComponent.Remove(keyValue.Key);
+                        if (game.PortableShieldComponent.Contains(keyValue.Key))  game.PortableShieldComponent.Remove(keyValue.Key); 
                         break;
 
 

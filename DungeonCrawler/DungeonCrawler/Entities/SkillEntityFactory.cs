@@ -154,82 +154,6 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case Skills.healingStation:
-                    skillDeployable = new SkillDeployable()
-                    {
-                        EntityID = eid,
-                        duration = 1,
-                    };
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
-                    };
-                    position.Radius = 5;
-                    break;
-
-                case Skills.explodingDroids:
-                    skillDeployable = new SkillDeployable()
-                    {
-                        EntityID = eid,
-                        duration = 1,
-                    };
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
-                    };
-                    position.Radius = 5;
-                    break;
-
-                case Skills.trap:
-                    skillDeployable = new SkillDeployable()
-                    {
-                        EntityID = eid,
-                        duration = 1,
-                    };
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
-                    };
-                    position.Radius = 5;
-                    break;
-
-                case Skills.turret:
-                    skillDeployable = new SkillDeployable()
-                    {
-                        EntityID = eid,
-                        duration = 1,
-                    };
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
-                    };
-
-                    position.Radius = 5;
-                    break;
-
-                case Skills.portableShield:
-                    skillDeployable = new SkillDeployable()
-                    {
-                        EntityID = eid,
-                        duration = 1,
-                    };
-                    sprite = new Sprite()
-                    {
-                        EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
-                    };
-                    position.Radius = 5;
-                    break;
-
                 case Skills.portableShop:
                     skillDeployable = new SkillDeployable()
                     {
@@ -239,8 +163,8 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Turret"),
-                        SpriteBounds = new Rectangle(0, 0, 38, 27),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/shop"),
+                        SpriteBounds = new Rectangle(343, 50, 24, 25),
                     };
                     position.Radius = 5;
                     break;

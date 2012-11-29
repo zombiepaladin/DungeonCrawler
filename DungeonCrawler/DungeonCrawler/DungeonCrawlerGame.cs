@@ -177,6 +177,9 @@ namespace DungeonCrawler
         public TurretComponent TurretComponent;
         public TrapComponent TrapComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
+        public HealingStationComponent HealingStationComponent;
+        public PortableShieldComponent PortableShieldComponent;
+        public PortableStoreComponent PortableStoreComponent;
         
 
         #region Effect Components
@@ -214,7 +217,7 @@ namespace DungeonCrawler
 	    SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
-        public EngineeringOffenseSystem TurretSystem;
+        public EngineeringOffenseSystem EngineeringOffenseSystem;
 
         public GarbagemanSystem GarbagemanSystem;
         TextSystem TextSystem;
@@ -293,6 +296,9 @@ namespace DungeonCrawler
             TurretComponent = new TurretComponent();
             TrapComponent = new TrapComponent();
             ExplodingDroidComponent = new ExplodingDroidComponent();
+            HealingStationComponent = new HealingStationComponent();
+            PortableShieldComponent = new PortableShieldComponent();
+            PortableStoreComponent = new PortableStoreComponent();
 
 
             #region Initialize Effect Components
@@ -341,8 +347,7 @@ namespace DungeonCrawler
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
-            TurretSystem = new EngineeringOffenseSystem(this);
-
+            EngineeringOffenseSystem = new EngineeringOffenseSystem(this);
 
             // Testing code.
             LevelManager.LoadContent();
@@ -454,7 +459,7 @@ namespace DungeonCrawler
                     NpcAISystem.Update(elapsedTime);
                     EnemyAISystem.Update(elapsedTime);
                     TextSystem.Update(elapsedTime);
-                    TurretSystem.Update(elapsedTime);
+                    EngineeringOffenseSystem.Update(elapsedTime);
 
                     GarbagemanSystem.Update(elapsedTime);
                     break;

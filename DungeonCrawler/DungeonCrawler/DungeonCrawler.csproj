@@ -125,6 +125,7 @@
     <Compile Include="Components\DamageReductionComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
+    <Compile Include="Components\EngineeringSupportComponents.cs" />
     <Compile Include="Components\HealComponent.cs" />
     <Compile Include="Components\NpcAIComponent.cs" />
     <Compile Include="Components\NPCComponent.cs" />

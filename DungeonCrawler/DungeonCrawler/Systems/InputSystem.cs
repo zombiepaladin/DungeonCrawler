@@ -142,8 +142,10 @@ namespace DungeonCrawler.Systems
                             thisPlayerKey = p.EntityID;
                     }
 
-                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ExplodingDroids, 1, thisPlayerKey);
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.PortableShop, 1, thisPlayerKey);
+
                 }
+
 
                 game.PlayerInfoComponent[player.EntityID] = info;
 

@@ -68,8 +68,8 @@ namespace DungeonCrawler.Systems
             _debugTexture = new Texture2D(game.GraphicsDevice, 1, 1);
 
 	        Color[] data = new Color[1];
-	        for (int i = 0; i < data.Length; ++i) { data[i] = Color.Red; data[i].A /= 2; }
-	        _debugTexture.SetData(data);
+	        //for (int i = 0; i < data.Length; ++i) { data[i] = Color.Red; data[i].A /= 2; }
+	        //_debugTexture.SetData(data);
 #endif
         }
 
