@@ -366,7 +366,7 @@ namespace DungeonCrawler.Entities
                     Equipment e = new Equipment()
                     {
                         EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.ShockRod),
                     };
                     game.EquipmentComponent.Add(e.EntityID, e);
 

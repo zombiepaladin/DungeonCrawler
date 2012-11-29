@@ -31,12 +31,13 @@ namespace DungeonCrawler.Entities
     {
         DeadHand,
         PsychicStun,
-        WeakSword,
+        ShockRod,
         StandardSword,
         StrongSword,
         StandardGun,
         StolenCutlass,
         TreeBranch,
+        WeakSword,
     }
 
     /// <summary>
@@ -108,6 +109,11 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
+                case WeaponType.ShockRod:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
                 case WeaponType.PsychicStun:
                     weapon = _standardSword;
                     sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
@@ -175,6 +181,10 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
+                case WeaponType.ShockRod:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/ShockRod");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
                 case WeaponType.DeadHand:
                     sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/DeadHand");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
