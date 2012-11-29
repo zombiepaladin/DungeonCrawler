@@ -506,6 +506,7 @@ namespace DungeonCrawler
 
         /// <summary>
         /// Serializable for the master save file, which holds the previews for the actual saved files
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct MasterSaveFile
@@ -515,6 +516,7 @@ namespace DungeonCrawler
 
         /// <summary>
         /// A preview of the actual saved file, including the real filename, character sprite, and level
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct CharacterSaveFilePreview
@@ -527,25 +529,49 @@ namespace DungeonCrawler
 
         /// <summary>
         /// The actual saved character file, which stores the character type, level, stats, skills, and items
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct CharacterSaveFile
         {
+            // Filename this file is saved as
             public string fileName;
+
+            // Information for the previews on the ContinueNewGameScreen
             public string charSprite;
             public string characterType;
             public string charAnimation;
             public int aggregate;
-            public int Level;
+
+            // Level information
+            public int level;
+            public int experience;
+
             // Other skills/stats
             public Stats stats;
             public float health;
             public int psi;
+            public int skill1;
+            public int skill2;
+            public int skill3;
+            public int skill4;
+            public int skill5;
+            public int skill6;
+
+            // Inventory Quantities and Weapon Type
+            public int healthPotions;
+            public int manaPotions;
+            public int pogs;
+            public int weaponType;
+
+            // Quest information
+            List<Quest> quests;
         }
 
         /// <summary>
         /// Go through the components and save the pertinent information for the entity id
         /// Use this when saving the character in-game (possibly from a save menu or via autosaving)
+        /// By: Joseph Shaw
         /// </summary>
         /// <param name="entityId">The entityID of the character we are saving</param>
         public static void SavePlayer(uint entityId)
@@ -561,23 +587,44 @@ namespace DungeonCrawler
                 // Load file for this entityID
                 gameSave = DoLoadGame(device, info.FileName);
 
-                // Redo save info
+                // Populate save info
+                // Level information
+                gameSave.level = info.Level;
+                gameSave.experience = info.Experience;
+
+                // Other skills/stats
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
                 gameSave.psi = info.Psi;
-                //gameSave.Level = ?
+                //gameSave.skill1 = ;
+                //gameSave.skill2 = ;
+                //gameSave.skill3 = ;
+                //gameSave.skill4 = ;
+                //gameSave.skill5 = ;
+                //gameSave.skill6 = ;
+
+                // Inventory Quantities and Weapon
+                //gameSave.healthPotions = ;
+                //gameSave.manaPotions = ;
+                //gameSave.pogs = ;
+                gameSave.weaponType = (int)game.EquipmentComponent[entityId].WeaponID;
+
+                // Quest information
 
                 // Resave file
-                DungeonCrawlerGame.DoSaveGame(device, gameSave);
+                DungeonCrawlerGame.DoSaveGame(device, gameSave, true);
             }
         }
 
         /// <summary>
-        /// This method serializes a data object into
+        /// This method serializes a game save object into
         /// the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
-        public static void DoSaveGame(StorageDevice device, CharacterSaveFile gameData)
+        /// <param name="device">The device we are saving to</param>
+        /// <param name="gameData">The game data we are saving</param>
+        /// <param name="updatePreview">Whether we are updating the preview, false only in delete game functionality</param>
+        public static void DoSaveGame(StorageDevice device, CharacterSaveFile gameData, bool updatePreview)
         {
             // Open a storage container.
             IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
@@ -604,29 +651,30 @@ namespace DungeonCrawler
             }
 
             // Create/Update the charPreview to reflect the current player's level
-            CharacterSaveFilePreview charPreview;
-            MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
-            if (fileExists)
+            if (updatePreview)
             {
-                charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
-                masterSaveFile.charFiles.Remove(charPreview);
+                CharacterSaveFilePreview charPreview;
+                MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
+                if (fileExists)
+                {
+                    charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
+                    masterSaveFile.charFiles.Remove(charPreview);
+                }
+                charPreview = new CharacterSaveFilePreview();
+                charPreview.CharacterSaveFile = gameData.fileName;
+                charPreview.charSprite = gameData.charSprite;
+                charPreview.characterType = gameData.characterType;
+                charPreview.Level = gameData.level;
+
+                if (masterSaveFile.charFiles == null)
+                    masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
+
+                masterSaveFile.charFiles.Add(charPreview);
+
+                // Sort the list by the file name and resave it
+                masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
+                SaveMasterFile(device, masterSaveFile);
             }
-            charPreview = new CharacterSaveFilePreview();
-            charPreview.CharacterSaveFile = gameData.fileName;
-            charPreview.charSprite = gameData.charSprite;
-            charPreview.characterType = gameData.characterType;
-            charPreview.Level = gameData.Level;
-
-            if (masterSaveFile.charFiles == null)
-                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
-
-            if (masterSaveFile.charFiles == null) masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
-            masterSaveFile.charFiles.Add(charPreview);
-
-            // Sort the list by the file name and resave it
-            masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
-            SaveMasterFile(device, masterSaveFile);
-
             // Create the file.
             stream = container.CreateFile(gameData.fileName);
 
@@ -641,10 +689,12 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method loads a serialized data object
+        /// This method loads a game save object
         /// from the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device we are loading from</param>
+        /// <param name="fileName">The file we are loading</param>
         public static CharacterSaveFile DoLoadGame(StorageDevice device, string fileName)
         {
             // Open a storage container.
@@ -683,10 +733,11 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method loads a serialized data object
+        /// This method loads the master save file object
         /// from the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device we are loading from</param>
         public static MasterSaveFile GetMasterSaveFile(StorageDevice device)
         {
             // Open a storage container.
@@ -725,8 +776,9 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method serializes a data object into
+        /// This method serializes the master save file into
         /// the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
         /// <param name="device"></param>
         public static void SaveMasterFile(StorageDevice device, MasterSaveFile masterSaveFile)
@@ -762,6 +814,97 @@ namespace DungeonCrawler
 
             // Dispose the container, to commit changes.
             container.Dispose();
+        }
+
+        /// <summary>
+        /// This method deletes a game save object from
+        /// the StorageContainer for this game.
+        /// By: Joseph Shaw
+        /// </summary>
+        /// <param name="device">The device we are deleting from</param>
+        /// <param name="gameData">The game data we are deleting</param>
+        public static void DoDeleteGame(StorageDevice device, CharacterSaveFile gameData)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Create the BinaryFormatter here in-case we have to create a new save
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            Stream stream;
+            // Use this to tell us if this is a new save
+            bool fileExists = false;
+            // Check to see whether the save exists.
+            if (container.FileExists(gameData.fileName))
+            {
+                // Delete it so that we can create one fresh.
+                container.DeleteFile(gameData.fileName);
+                fileExists = true;
+            }
+
+            // Create/Update the charPreview to reflect the current player's level
+            CharacterSaveFilePreview charPreview;
+            MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
+            if (fileExists)
+            {
+                charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
+                masterSaveFile.charFiles.Remove(charPreview);
+            }
+
+            if (masterSaveFile.charFiles != null)
+            {
+                // Sort the list by the file name and rename the files to eliminate gaps
+                masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
+                RenameFiles(device, masterSaveFile.charFiles);
+            }
+            else
+                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
+
+            SaveMasterFile(device, masterSaveFile);
+
+            // Create the file.
+            stream = container.CreateFile(gameData.fileName);
+
+            // Convert the file to binary and save it
+            binaryFormatter.Serialize(stream, gameData);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container, to commit changes.
+            container.Dispose();
+        }
+
+        /// <summary>
+        /// Renames the files in this list and the associated game saves in sequential order
+        /// By: Joseph Shaw
+        /// </summary>
+        /// <param name="device">The device we are using to load/save the game saves</param>
+        /// <param name="charFiles">The list of previews in the master save file</param>
+        public static void RenameFiles(StorageDevice device, List<CharacterSaveFilePreview> charFiles)
+        {
+            List<CharacterSaveFile> gameSaves = new List<CharacterSaveFile>();
+            CharacterSaveFilePreview preview;
+            CharacterSaveFile gameSave;
+            for (int i = 0; i < charFiles.Count; i++)
+            {
+                preview = charFiles.ElementAt(i);
+                gameSaves.Add(DoLoadGame(device, preview.CharacterSaveFile));
+                preview.CharacterSaveFile = "charSave" + i.ToString();
+            }
+            for (int i = 0; i < gameSaves.Count; i++)
+            {
+                gameSave = gameSaves.ElementAt(i);
+                gameSave.fileName = "charSave" + i.ToString();
+                DoSaveGame(device, gameSave, false);
+            }
         }
         #endregion
     }

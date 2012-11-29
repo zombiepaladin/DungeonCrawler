@@ -134,6 +134,16 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int Psi;
 
+        /// <summary>
+        /// The current level of the player
+        /// </summary>
+        public int Level;
+
+        /// <summary>
+        /// The current experience of the player
+        /// </summary>
+        public int Experience;
+
         ///<summary>
         ///The current state of the player.
         ///</summary>
