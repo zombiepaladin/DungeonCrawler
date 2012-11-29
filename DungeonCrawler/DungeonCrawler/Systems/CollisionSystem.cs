@@ -171,11 +171,11 @@ namespace DungeonCrawler.Systems
                                 break;
                             case CollisionType.SkillCollectible:
                                 break;
-                            case CollisionType.SkillDoor:
-                                break;
+                                
                             case CollisionType.SkillEnemy:
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
                                 break;
+                            case CollisionType.SkillDoor:
                             case CollisionType.SkillStatic:
                                 SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
