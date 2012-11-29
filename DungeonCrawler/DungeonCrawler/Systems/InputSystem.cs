@@ -10,6 +10,7 @@
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 // Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
 // Modified: Nick Boen - Added a test control for using a skill (buffs speed)
+// Modified: Adam Clark - Added a test control for using a skill
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -44,6 +45,7 @@ namespace DungeonCrawler.Systems
 
         private GamePadState[] oldGamePadState;
 
+
         #endregion
 
         #region Constructors
@@ -70,6 +72,7 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
+
             // Update all entities that have a movement component
             foreach (Player player in game.PlayerComponent.All)
             {
@@ -164,6 +167,8 @@ namespace DungeonCrawler.Systems
                     }
 
                     game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
+
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ThrusterRush, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;
@@ -195,7 +200,7 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                     //TODO: Set skill
-                    game.SkillEntityFactory.CreateSkillAoE(SkillType.Detnate, game.PositionComponent[player.EntityID],1);
+                    game.SkillEntityFactory.CreateSkillAoE(SkillType.Detnate, game.PositionComponent[player.EntityID],1,10);
                 }
                 if (gamePadState.IsButtonDown(Buttons.X) || keyboardState.IsKeyDown(Keys.D3))
                 {

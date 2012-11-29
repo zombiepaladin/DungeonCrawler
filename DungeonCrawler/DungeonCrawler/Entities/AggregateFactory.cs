@@ -91,6 +91,7 @@ namespace DungeonCrawler.Entities
 
             switch (aggregate)
             {
+                #region Fairy
                 /****************************************
                  * Fairy
                  * *************************************/
@@ -227,7 +228,9 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
 
                     break;
+                #endregion
 
+                #region Cultist
                 /****************************************
                 * Cultist
                 * *************************************/
@@ -367,7 +370,9 @@ namespace DungeonCrawler.Entities
                     invagg.CreateInv(player);
 
                     break;
+                #endregion
 
+                #region Cyborg
                 /****************************************
                 * Cyborg - Added by adam Clark
                 * *************************************/
@@ -385,7 +390,7 @@ namespace DungeonCrawler.Entities
                      *can be saved into the gameSave after the switch statement.
                      *We could abstract this method entirely but leaving it here gives more flexibility.
                      */
-                    weaponType = WeaponType.StandardSword;
+                    weaponType = WeaponType.ShockRod;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
@@ -495,7 +500,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Earthian
                 /*******************************************************************************
                 * Earthian
                 * Done by Andrew Bellinder. I added the character's sprite and his skill sprites
@@ -514,7 +521,7 @@ namespace DungeonCrawler.Entities
                      *can be saved into the gameSave after the switch statement.
                      *We could abstract this method entirely but leaving it here gives more flexibility.
                      */
-                    weaponType = WeaponType.StandardSword;
+                    weaponType = WeaponType.TreeBranch;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
@@ -634,7 +641,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Gargranian
                 /****************************************
                 * Gargranian by Michael Fountain
                 * *************************************/
@@ -652,7 +661,7 @@ namespace DungeonCrawler.Entities
                      *can be saved into the gameSave after the switch statement.
                      *We could abstract this method entirely but leaving it here gives more flexibility.
                      */
-                    weaponType = WeaponType.StandardSword;
+                    weaponType = WeaponType.PsychicStun;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
@@ -744,6 +753,7 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
                     };
+                    
                     game.PlayerComponent[entityID] = player;
 
                     info = new PlayerInfo()
@@ -761,7 +771,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Space Pirate
                 /****************************************
                 * Space Pirate
                 * Done by Austin Murphy and I also have posted the 9 sprites for my skills that are listed in the design document.
@@ -780,7 +792,7 @@ namespace DungeonCrawler.Entities
                      *can be saved into the gameSave after the switch statement.
                      *We could abstract this method entirely but leaving it here gives more flexibility.
                      */
-                    weaponType = WeaponType.StandardSword;
+                    weaponType = WeaponType.StolenCutlass;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
@@ -889,7 +901,9 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
+                #region Zombie
                 /****************************************
                 * Zombie
                  * written by Matthew Hart
@@ -908,7 +922,7 @@ namespace DungeonCrawler.Entities
                      *can be saved into the gameSave after the switch statement.
                      *We could abstract this method entirely but leaving it here gives more flexibility.
                      */
-                    weaponType = WeaponType.StandardSword;
+                    weaponType = WeaponType.DeadHand;
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
@@ -1035,6 +1049,7 @@ namespace DungeonCrawler.Entities
                     //create Inv
                     invagg.CreateInv(player);
                     break;
+                #endregion
 
                 default:
                     throw new Exception("Unknown type.");

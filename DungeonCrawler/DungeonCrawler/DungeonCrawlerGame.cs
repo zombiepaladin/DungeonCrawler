@@ -551,12 +551,14 @@ namespace DungeonCrawler
             public Stats stats;
             public float health;
             public int psi;
-            public int skill1;
-            public int skill2;
-            public int skill3;
-            public int skill4;
-            public int skill5;
-            public int skill6;
+            public int skill1Rank;
+            public int skill2Rank;
+            public int skill3Rank;
+            public int skill4Rank;
+            public int skill5Rank;
+            public int skill6Rank;
+            public int skill7Rank;
+            public int skill8Rank;
 
             // Inventory Quantities and Weapon Type
             public int healthPotions;
@@ -565,7 +567,7 @@ namespace DungeonCrawler
             public int weaponType;
 
             // Quest information
-            List<Quest> quests;
+            public List<Quest> quests;
         }
 
         /// <summary>
@@ -596,12 +598,14 @@ namespace DungeonCrawler
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
                 gameSave.psi = info.Psi;
-                //gameSave.skill1 = ;
-                //gameSave.skill2 = ;
-                //gameSave.skill3 = ;
-                //gameSave.skill4 = ;
-                //gameSave.skill5 = ;
-                //gameSave.skill6 = ;
+                gameSave.skill1Rank = info.Skill1Rank;
+                gameSave.skill2Rank = info.Skill2Rank;
+                gameSave.skill3Rank = info.Skill3Rank;
+                gameSave.skill4Rank = info.Skill4Rank;
+                gameSave.skill5Rank = info.Skill5Rank;
+                gameSave.skill6Rank = info.Skill6Rank;
+                gameSave.skill7Rank = info.Skill7Rank;
+                gameSave.skill8Rank = info.Skill8Rank;
 
                 // Inventory Quantities and Weapon
                 //gameSave.healthPotions = ;
@@ -610,6 +614,7 @@ namespace DungeonCrawler
                 gameSave.weaponType = (int)game.EquipmentComponent[entityId].WeaponID;
 
                 // Quest information
+                //gameSave.quests = 
 
                 // Resave file
                 DungeonCrawlerGame.DoSaveGame(device, gameSave, true);
@@ -862,7 +867,7 @@ namespace DungeonCrawler
             {
                 // Sort the list by the file name and rename the files to eliminate gaps
                 masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
-                RenameFiles(device, masterSaveFile.charFiles);
+                masterSaveFile.charFiles = RenameFiles(device, masterSaveFile.charFiles);
             }
             else
                 masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
@@ -888,23 +893,29 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="device">The device we are using to load/save the game saves</param>
         /// <param name="charFiles">The list of previews in the master save file</param>
-        public static void RenameFiles(StorageDevice device, List<CharacterSaveFilePreview> charFiles)
+        public static List<CharacterSaveFilePreview> RenameFiles(StorageDevice device, List<CharacterSaveFilePreview> charFiles)
         {
             List<CharacterSaveFile> gameSaves = new List<CharacterSaveFile>();
+            List<CharacterSaveFilePreview> previews = new List<CharacterSaveFilePreview>();
             CharacterSaveFilePreview preview;
             CharacterSaveFile gameSave;
+            int fileNumber = 0;
             for (int i = 0; i < charFiles.Count; i++)
             {
                 preview = charFiles.ElementAt(i);
                 gameSaves.Add(DoLoadGame(device, preview.CharacterSaveFile));
-                preview.CharacterSaveFile = "charSave" + i.ToString();
+                fileNumber = i + 1;
+                preview.CharacterSaveFile = "charSave" + fileNumber.ToString();
+                previews.Add(preview);
             }
             for (int i = 0; i < gameSaves.Count; i++)
             {
                 gameSave = gameSaves.ElementAt(i);
-                gameSave.fileName = "charSave" + i.ToString();
+                fileNumber = i++;
+                gameSave.fileName = "charSave" + fileNumber.ToString();
                 DoSaveGame(device, gameSave, false);
             }
+            return previews;
         }
         #endregion
     }

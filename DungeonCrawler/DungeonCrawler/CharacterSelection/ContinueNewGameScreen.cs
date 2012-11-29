@@ -7,6 +7,7 @@
 // When new game is selected, it operates through the CharacterSelectionSreen.
 //
 // Author: Joseph Shaw
+// Modified: Josh Zavala - Moved Equipment to AggregateFactory, Assignment 9
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -150,8 +151,7 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, game);
         }
-
-
+        
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -496,7 +496,7 @@ namespace DungeonCrawler
                 {
                     preview = gameSaves.ElementAt(i);
                     preview.SetPosition(gameSavePosition + (movementOffset * (i - selectedGameSave)));
-                    if (i == 0)
+                    if (i == selectedGameSave)
                         preview.Color = selected;
                     else
                         preview.Color = unselected;
@@ -549,6 +549,16 @@ namespace DungeonCrawler
                     gameSave = LoadGameSave(player.GameSave);
                     entityID = game.AggregateFactory.CreateFromGameSave(gameSave, currentPlayer.PlayerIndex);
                 }
+                //Author: Josh Zavala - Assignment 9
+                //This has been moved to AggregateFactory.CreateFromAggregate.
+                //This allows us to have different default weapons for each class
+                //without having to write a lot of needless switch statements.
+                //Equipment e = new Equipment()
+                //{
+                //    EntityID = entityID,
+                //    WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                //};
+                //game.EquipmentComponent.Add(e.EntityID, e);
             }
             game.GameState = GameState.NetworkSetup;
         }

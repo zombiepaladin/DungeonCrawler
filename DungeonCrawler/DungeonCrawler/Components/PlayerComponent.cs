@@ -1,4 +1,4 @@
-﻿#region File Description
+﻿﻿#region File Description
 //-----------------------------------------------------------------------------
 // LocalComponent.cs 
 //
@@ -16,6 +16,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Systems;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -154,7 +155,6 @@ namespace DungeonCrawler.Components
         /// </summary>
         public string FileName;
 
-
         public int PoisonResistance;
 
         public int AttackMelee;
@@ -172,6 +172,38 @@ namespace DungeonCrawler.Components
         public int WeaponSpeed;
 
         public int AttackSpeed;
+
+        public int Skill1Rank;
+
+        public int Skill2Rank;
+
+        public int Skill3Rank;
+
+        public int Skill4Rank;
+
+        public int Skill5Rank;
+
+        public int Skill6Rank;
+
+        public int Skill7Rank;
+
+        public int Skill8Rank;
+
+        public SkillType skill1;
+
+        public SkillType skill2;
+
+        public SkillType skill3;
+
+        public SkillType skill4;
+
+        public SkillType skill5;
+
+        public SkillType skill6;
+
+        public SkillType skill7;
+
+        public SkillType skill8;
     }
 
     ///<summary>
