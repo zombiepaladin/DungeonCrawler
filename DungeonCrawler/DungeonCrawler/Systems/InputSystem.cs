@@ -140,6 +140,9 @@ namespace DungeonCrawler.Systems
                     }
 
                     game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Motivate, 1, thisPlayerKey);
+
+                    //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.RepulsorArm, 1, thisPlayerKey);
+                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ThrusterRush, 1, thisPlayerKey);
                 }
 
                 game.PlayerInfoComponent[player.EntityID] = info;
