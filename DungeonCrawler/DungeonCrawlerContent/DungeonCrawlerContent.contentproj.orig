@@ -670,7 +670,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Compile Include="Spritesheets\Turret.bmp">
       <Name>Turret</Name>
       <Importer>TextureImporter</Importer>
@@ -678,7 +677,15 @@
       <ProcessorParameters_ColorKeyColor>255, 255, 255, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
   </ItemGroup>
+    <ItemGroup>
+    <Compile Include="Spritesheets\DeadHand.png">
+      <Name>DeadHand</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Spritesheets\EngineeringOffense.png">
       <Name>EngineeringOffense</Name>
       <Importer>TextureImporter</Importer>
@@ -701,8 +708,23 @@
       <Processor>TextureProcessor</Processor>
       <ProcessorParameters_ColorKeyColor>0, 128, 128, 255</ProcessorParameters_ColorKeyColor>
 =======
-    <Compile Include="Spritesheets\DeadHand.png">
-      <Name>DeadHand</Name>
+    <Compile Include="Spritesheets\skillPlaceHolder1.png">
+      <Name>skillPlaceHolder1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Spritesheets\skillPlaceHolder2.png">
+      <Name>skillPlaceHolder2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Spritesheets\skillPlaceHolder3.png">
+      <Name>skillPlaceHolder3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Spritesheets\skillPlaceHolder4.png">
+      <Name>skillPlaceHolder4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
 >>>>>>> upstream/master
