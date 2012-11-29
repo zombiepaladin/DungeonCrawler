@@ -5,6 +5,7 @@
 // Author: Devin Kelly-Collins
 //
 // Modified: Devin Kelly-Collins - Moved Sprite creation method from WeaponSystem to here. (11/15/12)
+//           Josh Zavala - Added sprites for a basic animation for each class, Assignment 9
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -28,10 +29,15 @@ namespace DungeonCrawler.Entities
     /// </summary>
     public enum WeaponType
     {
-        WeakSword,
+        DeadHand,
+        PsychicStun,
+        ShockRod,
         StandardSword,
         StrongSword,
         StandardGun,
+        StolenCutlass,
+        TreeBranch,
+        WeakSword,
     }
 
     /// <summary>
@@ -103,6 +109,21 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
+                case WeaponType.ShockRod:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
+                case WeaponType.PsychicStun:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
+                case WeaponType.DeadHand:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
                 case WeaponType.WeakSword:
                     weapon = _standardSword;
                     weapon.Critical *= .5f;
@@ -124,6 +145,16 @@ namespace DungeonCrawler.Entities
 
                 case WeaponType.StandardGun:
                     weapon = _standardGun;
+                    break;
+
+                case WeaponType.StolenCutlass:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
+                case WeaponType.TreeBranch:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
                     break;
 
                 default:
@@ -150,6 +181,18 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
+                case WeaponType.ShockRod:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/ShockRod");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.DeadHand:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/DeadHand");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.PsychicStun:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/PsychicStun");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
                 case WeaponType.WeakSword:
                 case WeaponType.StandardSword:
                 case WeaponType.StrongSword:
@@ -158,6 +201,14 @@ namespace DungeonCrawler.Entities
                     break;
                 case WeaponType.StandardGun:
                     sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.StolenCutlass:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StolenCutlass");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.TreeBranch:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/TreeBranch");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }

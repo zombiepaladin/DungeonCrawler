@@ -217,7 +217,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 2] = Aggregate.ZombiePlayer;
 
             currentPlayer = player;
-            currentPlayer.cursor.Position = buttons[0, 0].Position;
+            currentPlayer.Cursor.Position = buttons[0, 0].Position;
 
             // Initialized the sound effect
             soundEffect = game.Content.Load<SoundEffect>("Audio/BClick_Menu");
@@ -231,49 +231,49 @@ namespace DungeonCrawler
         public void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(currentPlayer.playerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (GamePad.GetState(currentPlayer.PlayerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
-                currentPlayer.timer = controllerDelay;
+                currentPlayer.Timer = controllerDelay;
                 selectionDone = true;
             }
 
-            if (!currentPlayer.connected) selectionDone = true;
+            if (!currentPlayer.Connected) selectionDone = true;
 
-            if (currentPlayer.connected)
+            if (currentPlayer.Connected)
             {
-                currentPlayer.timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
-                if (!currentPlayer.selected && currentPlayer.timer <= 0)
+                currentPlayer.Timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
+                if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                 {
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Down == ButtonState.Pressed || GamePad.GetState(currentPlayer.playerIndex).DPad.Up == ButtonState.Pressed
+                    if (GamePad.GetState(currentPlayer.PlayerIndex).DPad.Down == ButtonState.Pressed || GamePad.GetState(currentPlayer.PlayerIndex).DPad.Up == ButtonState.Pressed
                         || (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
                     {
                         currentPlayer.MoveUpDown();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Left == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Left))
+                    if (GamePad.GetState(currentPlayer.PlayerIndex).DPad.Left == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Left))
                     {
                         currentPlayer.MoveLeft();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Right == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Right))
+                    if (GamePad.GetState(currentPlayer.PlayerIndex).DPad.Right == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Right))
                     {
                         currentPlayer.MoveRight();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
 
-                    if (GamePad.GetState(currentPlayer.playerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
+                    if (GamePad.GetState(currentPlayer.PlayerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
                     {
-                        currentPlayer.selected = true;
-                        currentPlayer.gameSave.aggregate = (int)buttonAggregates[currentPlayer.yPos, currentPlayer.xPos];
-                        currentPlayer.gameSave.charType.Text = buttonTexts[currentPlayer.yPos, currentPlayer.xPos].Text;
+                        currentPlayer.Selected = true;
+                        currentPlayer.GameSave.Aggregate = (int)buttonAggregates[currentPlayer.YPos, currentPlayer.XPos];
+                        currentPlayer.GameSave.CharType.Text = buttonTexts[currentPlayer.YPos, currentPlayer.XPos].Text;
                         selectionDone = true;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Timer = controllerDelay;
                     }
                 }
             }
@@ -283,7 +283,7 @@ namespace DungeonCrawler
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (currentPlayer.yPos == i && currentPlayer.xPos == j)
+                    if (currentPlayer.YPos == i && currentPlayer.XPos == j)
                         buttons[i, j].Color = selected;
                     else
                         buttons[i, j].Color = unselected;
@@ -325,7 +325,7 @@ namespace DungeonCrawler
                 }
 
                 // Draw the player cursor 
-                spriteBatch.Draw(currentPlayer.cursor.Image, currentPlayer.cursor.Position, new Rectangle?(), currentPlayer.cursor.Color, 0, currentPlayer.cursor.Origin, 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(currentPlayer.Cursor.Image, currentPlayer.Cursor.Position, new Rectangle?(), currentPlayer.Cursor.Color, 0, currentPlayer.Cursor.Origin, 1, SpriteEffects.None, 1);
 
                 spriteBatch.End();
             }

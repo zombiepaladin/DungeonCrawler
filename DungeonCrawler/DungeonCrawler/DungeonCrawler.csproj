@@ -167,7 +167,7 @@
     <Compile Include="CharacterSelection\ImageSprite.cs" />
     <Compile Include="CharacterSelection\TextSprite.cs" />
     <Compile Include="CharacterSelection\CharSelectPlayer.cs" />
-    <Compile Include="CharacterSelection\Sprite.cs" />
+    <Compile Include="CharacterSelection\BaseSprite.cs" />
     <Compile Include="Components\EquipmentComponent.cs" />
     <Compile Include="Components\DoorComponent.cs" />
     <Compile Include="Components\InventoryComponent.cs" />
