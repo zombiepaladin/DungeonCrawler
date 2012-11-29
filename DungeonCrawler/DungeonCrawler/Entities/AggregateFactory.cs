@@ -1070,6 +1070,15 @@ namespace DungeonCrawler.Entities
                         Health = 100,
                         Psi = 100,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.ThrownBlades,
+                        skill2 = Systems.SkillType.FrenziedAttack,
+                        skill3 = Systems.SkillType.CausticWeapons,
+                        skill4 = Systems.SkillType.MeatShield,
+                        skill5 = Systems.SkillType.HardenedBody,
+                        skill6 = Systems.SkillType.Regeneration,
+                        skill7 = Systems.SkillType.BenignParasite,
+                        skill8 = Systems.SkillType.MaliciousParasite,
+                        skill9 = Systems.SkillType.MindlessParasites,
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
