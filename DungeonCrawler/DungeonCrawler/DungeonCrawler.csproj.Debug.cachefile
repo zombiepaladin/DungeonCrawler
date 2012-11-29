@@ -62,7 +62,6 @@ Content\Spritesheets\cyborgskills.xnb
 Content\Spritesheets\MiscIcons1.xnb
 Content\Spritesheets\cyborgSkills2.xnb
 Content\Spritesheets\target2.xnb
-Content\SpriteFonts\BoldPescadero.xnb
 Content\Spritesheets\darkralph.xnb
 Content\Spritesheets\trollph.xnb
 Content\Spritesheets\QuestLog.xnb
@@ -84,7 +83,6 @@ Content\Tilesets\texture2.xnb
 Content\Tilesets\texture3.xnb
 Content\Spritesheets\alien.xnb
 Content\Spritesheets\Turret.xnb
-Content\Spritesheets\DeadHand.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
@@ -105,3 +103,4 @@ Content\SpriteFonts\BoldPescadero.xnb
 Content\Spritesheets\EngineeringOffense.xnb
 Content\Spritesheets\BubbleShield.xnb
 Content\Spritesheets\shop.xnb
+Content\Spritesheets\DeadHand.xnb

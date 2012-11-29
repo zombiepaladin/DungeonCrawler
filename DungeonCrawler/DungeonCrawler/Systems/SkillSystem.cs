@@ -5713,7 +5713,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 1);
                                         break;
 
                                     case 2:
@@ -5728,7 +5728,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 3:
@@ -5743,7 +5743,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 4:
@@ -5758,7 +5758,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 5:
@@ -5773,7 +5773,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 6:
@@ -5788,7 +5788,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 7:
@@ -5803,7 +5803,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 8:
@@ -5818,7 +5818,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 9:
@@ -5833,7 +5833,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     case 10:
@@ -5848,7 +5848,7 @@ namespace DungeonCrawler.Systems
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                        _game.SkillEntityFactory.CreateSkillDeployable(Skills.portableShop, _game.PositionComponent[GetPlayerID()]);
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
                                         break;
 
                                     default:

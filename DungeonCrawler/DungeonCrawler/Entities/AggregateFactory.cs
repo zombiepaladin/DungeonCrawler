@@ -629,6 +629,7 @@ namespace DungeonCrawler.Entities
                         Health = 100,
                         Psi = 100,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.Motivate,
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
@@ -648,9 +649,9 @@ namespace DungeonCrawler.Entities
 
                     active_Skill = new ActiveSkill()
                     {
-                        activeSkill=info.skill1,
+                        activeSkill = info.skill1,
                     };
-                    game.ActiveSkillComponent[entityID] = active_Skill;
+                    game.ActiveSkillComponent[entityID] = active_Skill;//active_Skill;
 
                     //Create HUD
                     hudagg.CreateHUD(player);

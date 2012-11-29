@@ -162,7 +162,7 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case Skills.portableShop:
+                case SkillType.PortableShop:
                     skillDeployable = new SkillDeployable()
                     {
                         EntityID = eid,
