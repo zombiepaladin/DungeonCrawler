@@ -649,6 +649,7 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
                     };
+                    
                     game.PlayerComponent[entityID] = player;
 
                     info = new PlayerInfo()
@@ -915,7 +916,7 @@ namespace DungeonCrawler.Entities
             gameSave.fileName = fileName;
             info.FileName = fileName;
 
-            game.QuestLogSystem.ActivateQuest(0);
+            game.QuestLogSystem.ActivateQuest(entityID, 0);
 
             return entityID;
         }
@@ -1062,7 +1063,7 @@ namespace DungeonCrawler.Entities
                 invagg.CreateInv(player);
             }
 
-            game.QuestLogSystem.ActivateQuest(0);
+            game.QuestLogSystem.ActivateQuest(entityID, 0);
 
             return entityID;
         }

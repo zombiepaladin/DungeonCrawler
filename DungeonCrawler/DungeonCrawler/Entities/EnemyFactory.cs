@@ -77,7 +77,7 @@ namespace DungeonCrawler.Entities
 
                 case EnemyType.Alien:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 1;
+                    enemy.Health = 10;
                     spritesheet = "Spritesheets/alien";
                     spriteBounds = new Rectangle(0, 0, 32, 32);
                     aiBehaviorType = AIBehaviorType.Alien;
