@@ -753,7 +753,7 @@ namespace DungeonCrawler.Entities
                         PlayerIndex = playerIndex,
                         PlayerRace = aggregate,
                     };
-                    
+
                     game.PlayerComponent[entityID] = player;
 
                     info = new PlayerInfo()

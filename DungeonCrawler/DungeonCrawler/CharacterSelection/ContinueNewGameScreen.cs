@@ -151,7 +151,7 @@ namespace DungeonCrawler
 
             CharacterSelectionScreen = new CharacterSelectionScreen(graphics, game);
         }
-        
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -201,7 +201,7 @@ namespace DungeonCrawler
                 if (!isNewGame)
                 {
                     // Allows the game to exit
-                    if ((GamePad.GetState(currentPlayer.PlayerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) 
+                    if ((GamePad.GetState(currentPlayer.PlayerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                         && currentPlayer.Timer <= 0)
                     {
                         if (currentPlayerIndex == 0)

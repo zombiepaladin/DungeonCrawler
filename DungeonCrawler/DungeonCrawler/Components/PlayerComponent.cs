@@ -1,4 +1,4 @@
-﻿﻿#region File Description
+﻿#region File Description
 //-----------------------------------------------------------------------------
 // LocalComponent.cs 
 //
@@ -13,7 +13,11 @@
 #endregion
 
 #region Using Statements
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using DungeonCrawler.Entities;
 using DungeonCrawler.Systems;
@@ -173,6 +177,36 @@ namespace DungeonCrawler.Components
 
         public int AttackSpeed;
 
+        public SkillType skill1;
+
+        public SkillType skill2;
+
+        public SkillType skill3;
+
+        public SkillType skill4;
+
+        public SkillType skill5;
+
+        public SkillType skill6;
+
+        public SkillType skill7;
+
+        public SkillType skill8;
+
+        public SkillType skill9;
+    }
+
+    ///<summary>
+    ///The player information components.
+    ///</summary>
+    public class PlayerInfoComponent : GameComponent<PlayerInfo>
+    {
+
+    }
+
+    [Serializable]
+    public struct PlayerSkillInfo
+    {
         public int Skill1Rank;
 
         public int Skill2Rank;
@@ -189,28 +223,19 @@ namespace DungeonCrawler.Components
 
         public int Skill8Rank;
 
-        public SkillType skill1;
-
-        public SkillType skill2;
-
-        public SkillType skill3;
-
-        public SkillType skill4;
-
-        public SkillType skill5;
-
-        public SkillType skill6;
-
-        public SkillType skill7;
-
-        public SkillType skill8;
+        public int Skill9Rank;
     }
 
-    ///<summary>
-    ///The player information components.
-    ///</summary>
-    public class PlayerInfoComponent : GameComponent<PlayerInfo>
+    public class PlayerSkillInfoComponent : GameComponent<PlayerSkillInfo>
     {
-        
+    }
+
+    public struct ActiveSkill
+    {
+        public SkillType activeSkill;
+    }
+
+    public class ActiveSkillComponent : GameComponent<ActiveSkill>
+    {
     }
 }

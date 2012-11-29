@@ -174,6 +174,8 @@ namespace DungeonCrawler
         public SoundComponent SoundComponent;
         public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
+        public PlayerSkillInfoComponent PlayerSkillInfoComponent;
+        public ActiveSkillComponent ActiveSkillComponent;
         
 
         #region Effect Components
@@ -551,14 +553,7 @@ namespace DungeonCrawler
             public Stats stats;
             public float health;
             public int psi;
-            public int skill1Rank;
-            public int skill2Rank;
-            public int skill3Rank;
-            public int skill4Rank;
-            public int skill5Rank;
-            public int skill6Rank;
-            public int skill7Rank;
-            public int skill8Rank;
+            public PlayerSkillInfo skillInfo;
 
             // Inventory Quantities and Weapon Type
             public int healthPotions;
@@ -598,14 +593,7 @@ namespace DungeonCrawler
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
                 gameSave.psi = info.Psi;
-                gameSave.skill1Rank = info.Skill1Rank;
-                gameSave.skill2Rank = info.Skill2Rank;
-                gameSave.skill3Rank = info.Skill3Rank;
-                gameSave.skill4Rank = info.Skill4Rank;
-                gameSave.skill5Rank = info.Skill5Rank;
-                gameSave.skill6Rank = info.Skill6Rank;
-                gameSave.skill7Rank = info.Skill7Rank;
-                gameSave.skill8Rank = info.Skill8Rank;
+                gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
 
                 // Inventory Quantities and Weapon
                 //gameSave.healthPotions = ;
@@ -920,3 +908,4 @@ namespace DungeonCrawler
         #endregion
     }
 }
+
