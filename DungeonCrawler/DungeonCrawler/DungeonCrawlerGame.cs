@@ -174,6 +174,8 @@ namespace DungeonCrawler
         public SoundComponent SoundComponent;
         public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
+        public PlayerSkillInfoComponent PlayerSkillInfoComponent;
+        public ActiveSkillComponent ActiveSkillComponent;
         
 
         #region Effect Components
@@ -287,6 +289,10 @@ namespace DungeonCrawler
             SkillDeployableComponent = new SkillDeployableComponent();
             SoundComponent = new SoundComponent();
             ActorTextComponent = new ActorTextComponent();
+
+            PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
+            ActiveSkillComponent = new ActiveSkillComponent(); 
+
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();

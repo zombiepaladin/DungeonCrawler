@@ -72,6 +72,8 @@ namespace DungeonCrawler.Entities
             Player player;
             PlayerInfo info;
             Stats stats = new Stats();
+            PlayerSkillInfo skillInfo;
+            ActiveSkill active_skill;
 
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
@@ -145,6 +147,20 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        SKill5Rank = 1,
+                        SKill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
 
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
