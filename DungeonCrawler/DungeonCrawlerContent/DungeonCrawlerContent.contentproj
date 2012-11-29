@@ -677,6 +677,15 @@
       <ProcessorParameters_ColorKeyColor>255, 255, 255, 255</ProcessorParameters_ColorKeyColor>
     </Compile>
   </ItemGroup>
+    <ItemGroup>
+    <Compile Include="Spritesheets\DeadHand.png">
+      <Name>DeadHand</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="Spritesheets\EngineeringOffense.png">
       <Name>EngineeringOffense</Name>

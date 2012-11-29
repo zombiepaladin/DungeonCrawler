@@ -103,17 +103,20 @@ namespace DungeonCrawler.Systems
                         game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:
+                        game.SpriteAnimationComponent.Remove(keyValue.Key);
                         game.EnemyComponent.Remove(keyValue.Key);
                         game.CollisionComponent.Remove(keyValue.Key);
                         game.PositionComponent.Remove(keyValue.Key);
                         if (game.EnemyAIComponent.Contains(keyValue.Key))
-                            game.EnemyComponent.Remove(keyValue.Key);
+                            game.EnemyAIComponent.Remove(keyValue.Key);
                         if (game.MovementComponent.Contains(keyValue.Key))
                             game.MovementComponent.Remove(keyValue.Key);
                         if (game.MovementSpriteComponent.Contains(keyValue.Key))
                             game.MovementSpriteComponent.Remove(keyValue.Key);
                         if (game.SpriteComponent.Contains(keyValue.Key))
                             game.SpriteComponent.Remove(keyValue.Key);
+                        if (game.ActorTextComponent.Contains(keyValue.Key))
+                            game.ActorTextComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Bullet:
                         game.PositionComponent.Remove(keyValue.Key);
@@ -142,23 +145,23 @@ namespace DungeonCrawler.Systems
                         //game.SpriteComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Effect:
-                        if (game.AgroDropComponent.Contains(keyValue.Key))        game.AgroDropComponent.Remove(keyValue.Key);
-                        if (game.AgroGainComponent.Contains(keyValue.Key))        game.AgroGainComponent.Remove(keyValue.Key);
-                        if (game.BuffComponent.Contains(keyValue.Key))            game.BuffComponent.Remove(keyValue.Key);
-                        if (game.ChanceToSucceedComponent.Contains(keyValue.Key)) game.ChanceToSucceedComponent.Remove(keyValue.Key);
-                        if (game.CoolDownComponent.Contains(keyValue.Key))        game.CoolDownComponent.Remove(keyValue.Key);
-                        if (game.DamageOverTimeComponent.Contains(keyValue.Key))  game.DamageOverTimeComponent.Remove(keyValue.Key);
-                        if (game.DirectDamageComponent.Contains(keyValue.Key))    game.DirectDamageComponent.Remove(keyValue.Key);
-                        if (game.DirectHealComponent.Contains(keyValue.Key))      game.DirectHealComponent.Remove(keyValue.Key);
-                        if (game.FearComponent.Contains(keyValue.Key))            game.FearComponent.Remove(keyValue.Key);
-                        if (game.HealOverTimeComponent.Contains(keyValue.Key))    game.HealOverTimeComponent.Remove(keyValue.Key);
-                        if (game.InstantEffectComponent.Contains(keyValue.Key))   game.InstantEffectComponent.Remove(keyValue.Key);
-                        if (game.KnockBackComponent.Contains(keyValue.Key))       game.KnockBackComponent.Remove(keyValue.Key);
-                        if (game.ReduceAgroRangeComponent.Contains(keyValue.Key)) game.ReduceAgroRangeComponent.Remove(keyValue.Key);
-                        if (game.ResurrectComponent.Contains(keyValue.Key))       game.ResurrectComponent.Remove(keyValue.Key);
-                        if (game.StunComponent.Contains(keyValue.Key))            game.StunComponent.Remove(keyValue.Key);
-                        if (game.TimedEffectComponent.Contains(keyValue.Key))     game.TimedEffectComponent.Remove(keyValue.Key);
-
+                        if (game.AgroDropComponent.Contains(keyValue.Key))          game.AgroDropComponent.Remove(keyValue.Key);
+                        if (game.AgroGainComponent.Contains(keyValue.Key))          game.AgroGainComponent.Remove(keyValue.Key);
+                        if (game.BuffComponent.Contains(keyValue.Key))              game.BuffComponent.Remove(keyValue.Key);
+                        if (game.ChanceToSucceedComponent.Contains(keyValue.Key))   game.ChanceToSucceedComponent.Remove(keyValue.Key);
+                        if (game.CoolDownComponent.Contains(keyValue.Key))          game.CoolDownComponent.Remove(keyValue.Key);
+                        if (game.DamageOverTimeComponent.Contains(keyValue.Key))    game.DamageOverTimeComponent.Remove(keyValue.Key);
+                        if (game.DirectDamageComponent.Contains(keyValue.Key))      game.DirectDamageComponent.Remove(keyValue.Key);
+                        if (game.DirectHealComponent.Contains(keyValue.Key))        game.DirectHealComponent.Remove(keyValue.Key);
+                        if (game.FearComponent.Contains(keyValue.Key))              game.FearComponent.Remove(keyValue.Key);
+                        if (game.HealOverTimeComponent.Contains(keyValue.Key))      game.HealOverTimeComponent.Remove(keyValue.Key);
+                        if (game.InstantEffectComponent.Contains(keyValue.Key))     game.InstantEffectComponent.Remove(keyValue.Key);
+                        if (game.KnockBackComponent.Contains(keyValue.Key))         game.KnockBackComponent.Remove(keyValue.Key);
+                        if (game.ReduceAgroRangeComponent.Contains(keyValue.Key))   game.ReduceAgroRangeComponent.Remove(keyValue.Key);
+                        if (game.ResurrectComponent.Contains(keyValue.Key))         game.ResurrectComponent.Remove(keyValue.Key);
+                        if (game.StunComponent.Contains(keyValue.Key))              game.StunComponent.Remove(keyValue.Key);
+                        if (game.TimedEffectComponent.Contains(keyValue.Key))       game.TimedEffectComponent.Remove(keyValue.Key);
+                        if (game.TargetedKnockBackComponent.Contains(keyValue.Key)) game.TargetedKnockBackComponent.Remove(keyValue.Key);
                         if (game.TurretComponent.Contains(keyValue.Key))          game.TurretComponent.Remove(keyValue.Key);
                         if (game.TrapComponent.Contains(keyValue.Key))            game.TrapComponent.Remove(keyValue.Key);
                         if (game.ExplodingDroidComponent.Contains(keyValue.Key))  game.ExplodingDroidComponent.Remove(keyValue.Key);
@@ -187,8 +190,8 @@ namespace DungeonCrawler.Systems
             ComponentType cType;
             if (game.PlayerInfoComponent.Contains(eid))
                 cType = ComponentType.Player;
-            //else if (game.EnemyComponent.Contains(eid)) Not Implemented
-            //    cType = ComponentType.Enemy;
+            //else if (game.EnemyComponent.Contains(eid)) 
+              //  cType = ComponentType.Enemy;
             else if (game.BulletComponent.Contains(eid))
                 cType = ComponentType.Bullet;
             else if (game.CollectibleComponent.Contains(eid))

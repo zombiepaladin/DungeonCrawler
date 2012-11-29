@@ -20,6 +20,7 @@ using DungeonCrawler.Components;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Entities
 {
@@ -41,8 +42,8 @@ namespace DungeonCrawler.Entities
         }
 
 
-        #region SkillProjectile
-        public uint CreateSkillProjectile(Skills skillP, Facing facing, Position position)
+#region SkillProjectile
+        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed)
         {
             SkillProjectile skillProjectile;
             Movement movement;
@@ -56,18 +57,23 @@ namespace DungeonCrawler.Entities
 
             switch (skillP)
             {
-                case Skills.benignParasite:
+                #region Vermis Projectiles
+                case SkillType.ThrownBlades:
+                case SkillType.MaliciousParasite:
+                case SkillType.MindlessParasites:
+                case SkillType.BenignParasite:
                     skillProjectile = new SkillProjectile()
                     {
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
+                        rank=rankP,
                     };
                     movement = new Movement()
                     {
                         EntityID = eid,
                         Direction = direction,
-                        Speed = 300,
+                        Speed = speed,
                     };
                     sprite = new Sprite()
                     {
@@ -77,6 +83,7 @@ namespace DungeonCrawler.Entities
                     };
                     position.Radius = 5;
                     break;
+                #endregion
                 default:
                     throw new Exception("Not a projectile skill");
             }
@@ -98,7 +105,7 @@ namespace DungeonCrawler.Entities
 #endregion
 
         #region SkillAoE
-        public uint CreateSkillAoE(Skills skill, Position position)
+        public uint CreateSkillAoE(SkillType skill, Position position, int rankP, int radius)
         {
             SkillAoE skillAoE;
             Sprite sprite;
@@ -109,11 +116,12 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case Skills.detonate:
+                case SkillType.Detnate:
                     skillAoE = new SkillAoE()
                     {
                         EntityID = eid,
                         radius = 1,
+                        rank = rankP,
                     };
                     sprite = new Sprite()
                     {
@@ -121,7 +129,7 @@ namespace DungeonCrawler.Entities
                         SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
-                    position.Radius = 5;
+                    position.Radius = radius;
                     break;
                 default:
                     throw new Exception("Not a AoE skill");
@@ -143,7 +151,7 @@ namespace DungeonCrawler.Entities
         #endregion
 
         #region SkillDeployable
-        public uint CreateSkillDeployable(Skills skill, Position position)
+        public uint CreateSkillDeployable(SkillType skill, Position position, int rankP)
         {
             SkillDeployable skillDeployable;
             Sprite sprite;
@@ -159,6 +167,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = eid,
                         duration = 1,
+                        rank = rankP,
                     };
                     sprite = new Sprite()
                     {

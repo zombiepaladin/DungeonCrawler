@@ -35,7 +35,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
-using DungeonCrawler.Components.CyborgSkills;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -162,18 +161,11 @@ namespace DungeonCrawler
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
-        public DefibrillateComponent DefibrillateComponent;
-        public EnergyShieldComponent EnergyShieldComponent;
-        public NanobotsComponent NanobotsComponent;
-        public RepulsorArmComponent RepulsorArmComponent;
-        public TargetingUpgradeComponent TargetingUpgradeComponent;
-        public EnergyShotComponent EnergyShotComponent;
-        public AlloyBodyComponent AlloyBodyComponent;
-        public CyberneticSlamComponent CyberneticSlamComponent;
-        public ThrusterRushComponent ThrusterRushComponent;
         public SoundComponent SoundComponent;
         public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
+        public PlayerSkillInfoComponent PlayerSkillInfoComponent;
+        public ActiveSkillComponent ActiveSkillComponent;
         public TurretComponent TurretComponent;
         public TrapComponent TrapComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
@@ -195,6 +187,7 @@ namespace DungeonCrawler
         public HealOverTimeComponent HealOverTimeComponent;
         public InstantEffectComponent InstantEffectComponent;
         public KnockBackComponent KnockBackComponent;
+        public TargetedKnockBackComponent TargetedKnockBackComponent;
         public ReduceAgroRangeComponent ReduceAgroRangeComponent;
         public ResurrectComponent ResurrectComponent;
         public StunComponent StunComponent;
@@ -300,6 +293,10 @@ namespace DungeonCrawler
             PortableShieldComponent = new PortableShieldComponent();
             PortableStoreComponent = new PortableStoreComponent();
 
+            PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
+            ActiveSkillComponent = new ActiveSkillComponent(); 
+
+
 
             #region Initialize Effect Components
             AgroDropComponent = new AgroDropComponent();
@@ -314,6 +311,7 @@ namespace DungeonCrawler
             HealOverTimeComponent = new HealOverTimeComponent();
             InstantEffectComponent = new InstantEffectComponent();
             KnockBackComponent = new KnockBackComponent();
+            TargetedKnockBackComponent = new TargetedKnockBackComponent();
             ReduceAgroRangeComponent = new ReduceAgroRangeComponent();
             ResurrectComponent = new ResurrectComponent();
             StunComponent = new StunComponent();

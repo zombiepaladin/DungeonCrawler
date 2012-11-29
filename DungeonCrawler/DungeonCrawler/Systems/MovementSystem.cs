@@ -65,15 +65,12 @@ namespace DungeonCrawler.Systems
             {
                 // Update the entity's position in the world
                 Position position = game.PositionComponent[movement.EntityID];
-                float speedScale = 1f;
-
-              /*  if (game.DefibrillateComponent.Contains(movement.EntityID))
-                    speedScale *= game.DefibrillateComponent[movement.EntityID].MovementSpeedIncrease;*/
 
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;
 
-                position.Center += elapsedTime * movement.Speed * movement.Direction;
+                if(movement.Speed > 0)
+                    position.Center += elapsedTime * movement.Speed * movement.Direction;
                 // Player clamping based on the size of the walls, the tile sizes, and the room dimensions.
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();
 
