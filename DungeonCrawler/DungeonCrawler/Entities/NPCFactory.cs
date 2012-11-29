@@ -71,7 +71,7 @@ namespace DungeonCrawler.Entities
                      sprite = new Sprite()
                         {
                             EntityID = eid,
-                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/trollph"),
+                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/NPC/trollph"),
                             SpriteBounds = new Rectangle(0, 0, 64, 64),
                         };
 
@@ -88,7 +88,7 @@ namespace DungeonCrawler.Entities
                         sprite = new Sprite()
                         {
                             EntityID = eid,
-                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/darkralph"),
+                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/NPC/darkralph"),
                             SpriteBounds = new Rectangle(0, 0, 64, 64),
                         };
                         

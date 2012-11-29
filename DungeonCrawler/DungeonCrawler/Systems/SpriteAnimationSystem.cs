@@ -16,7 +16,7 @@ using DungeonCrawler.Components;
 
 namespace DungeonCrawler.Systems
 {
-    class SpriteAnimationSystem
+    public class SpriteAnimationSystem
     {
         private DungeonCrawlerGame game;
 

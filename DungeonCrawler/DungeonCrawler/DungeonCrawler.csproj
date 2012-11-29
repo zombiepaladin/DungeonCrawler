@@ -39,7 +39,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\x86\Debug</OutputPath>
-    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoStdLib>true</NoStdLib>
@@ -114,6 +114,15 @@
     <Compile Include="Components\CollisionComponent.cs" />
     <Compile Include="Components\CollectibleComponent.cs" />
     <Compile Include="Components\DamageReductionComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ChargeComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\ExplodingDroidComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\FallbackComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\HealingStationComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\MotivateComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShieldComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\PortableShopComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TrapComponent.cs" />
+    <Compile Include="Components\EarthianSkillComponents\TurretComponent.cs" />
     <Compile Include="Components\EnemyAIComponent.cs" />
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\EngineeringSupportComponents.cs" />
@@ -144,13 +153,11 @@
     <Compile Include="Components\EngineeringOffenseComponents.cs" />
     <Compile Include="Components\WeaponSpriteComponent.cs" />
     <Compile Include="Entities\CollectibleFactory.cs" />
-    <Compile Include="ControllerBindings.cs" />
     <Compile Include="Entities\EnemyFactory.cs" />
     <Compile Include="Entities\NPCFactory.cs" />
     <Compile Include="Entities\SkillEntityFactory.cs" />
     <Compile Include="Entities\WallFactory.cs" />
     <Compile Include="Entities\WeaponFactory.cs" />
-    <Compile Include="KeyboardBindings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="DungeonCrawlerGame.cs" />
@@ -190,6 +197,7 @@
     <Compile Include="Systems\CollisionSystem.cs" />
     <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\GarbagemanSystem.cs" />
+    <Compile Include="Systems\HUDSystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />
@@ -203,6 +211,7 @@
     <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\EngineeringOffenseSystem.cs" />
     <Compile Include="Systems\WeaponSystem.cs" />
+    <Compile Include="InputHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
