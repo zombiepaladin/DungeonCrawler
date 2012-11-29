@@ -59,8 +59,71 @@ namespace DungeonCrawler.Entities
             {
                 #region Vermis Projectiles
                 case SkillType.ThrownBlades:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank=rankP,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(0,250,50,50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.MaliciousParasite:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank=rankP,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(300, 150, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.MindlessParasites:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank=rankP,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(250, 50, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.BenignParasite:
                     skillProjectile = new SkillProjectile()
                     {
@@ -78,10 +141,10 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(100, 0, 50, 50),
                     };
-                    position.Radius = 5;
+                    position.Radius = 10;
                     break;
                 #endregion
                 default:
