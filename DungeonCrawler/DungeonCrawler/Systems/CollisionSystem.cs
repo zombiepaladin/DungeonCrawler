@@ -168,13 +168,19 @@ namespace DungeonCrawler.Systems
                                 BulletDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillBullet:
+                                break;
                             case CollisionType.SkillCollectible:
+                                break;
                             case CollisionType.SkillDoor:
+                                break;
                             case CollisionType.SkillEnemy:
+                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
+                                break;
                             case CollisionType.SkillStatic:
-                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillPlayer:
+                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID, true);
                                 break;
 
                             case CollisionType.NPCPlayer:
@@ -657,7 +663,7 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
-        private void SkillCollision(uint p, uint p_2)
+        private void SkillStaticCollision(uint p, uint p_2)
         {  
             //TODO: actuall skill collision
             uint skillId, oId;
@@ -677,7 +683,7 @@ namespace DungeonCrawler.Systems
             }
         }
 
-        private void SkillProjectileCollision(uint p, uint p_2, bool friendly)
+        private void SkillCollision(uint p, uint p_2, bool friendly)
         {
             uint skillId, oId;
             if (_game.SkillProjectileComponent.Contains(p))
@@ -693,8 +699,29 @@ namespace DungeonCrawler.Systems
             SkillProjectile skill = _game.SkillProjectileComponent[skillId];
 
             _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+
+            if (_game.SkillProjectileComponent.Contains(skillId))
+            {
+                _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
+            }
         }
-        
+
+        private void SkillAoECollision(uint p, uint p_2, bool friendly)
+        {
+            uint skillId, oId;
+            if (_game.SkillProjectileComponent.Contains(p))
+            {
+                skillId = p;
+                oId = p_2;
+            }
+            else
+            {
+                skillId = p_2;
+                oId = p;
+            }
+            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+        }
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
