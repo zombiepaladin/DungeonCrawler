@@ -165,8 +165,8 @@ namespace DungeonCrawler.Systems
                 }
             }
 
-            //Draw HUD
-            foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
+            //Draw HUD - Moving this to the new HUDSystem.
+            /*foreach (HUDSprite sprite in game.HUDSpriteComponent.All)
             {
                 Color playerColor;
                 PlayerIndex playerDex = sprite.PlayerIndex;
@@ -203,7 +203,9 @@ namespace DungeonCrawler.Systems
                                     SpriteEffects.None,
                                     0.6f);
                 }
-            }
+            }*/
+
+            game.HUDSystem.Draw(elapsedTime, spriteBatch);
 
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {

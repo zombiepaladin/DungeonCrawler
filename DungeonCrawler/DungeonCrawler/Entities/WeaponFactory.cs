@@ -153,11 +153,11 @@ namespace DungeonCrawler.Entities
                 case WeaponType.WeakSword:
                 case WeaponType.StandardSword:
                 case WeaponType.StrongSword:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/StandardSword");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.StandardGun:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/StandardSword");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }
@@ -210,7 +210,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/Bullets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
                     position.Radius = 5;

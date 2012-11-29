@@ -48,25 +48,25 @@ namespace DungeonCrawler.Entities
             switch(player.PlayerRace)
             {
                 case Aggregate.CultistPlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Cultist");
                     break;
                 case Aggregate.CyborgPlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/cyborg");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/cyborg");
                     break;
                 case Aggregate.EarthianPlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Earthian2x");
                     break;
                 case Aggregate.FairyPlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/wind_fae");
                     break;
                 case Aggregate.GargranianPlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/gargranian");
                     break;
                 case Aggregate.SpacePiratePlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/SpacePBig");
                     break;
                 case Aggregate.ZombiePlayer:
-                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/MzombieBx2");
                     break;
                 default:
                     throw new Exception("Unknown player race");
@@ -194,19 +194,19 @@ namespace DungeonCrawler.Entities
             {
                 case PlayerIndex.One:
                     corner = new Vector2(0, 0);
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/hud_one");
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_one");
                     break;
                 case PlayerIndex.Two:
                     corner = new Vector2(1024, 0);
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/hud_two");
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_two");
                     break;
                 case PlayerIndex.Three:
                     corner = new Vector2(0, 656);
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/hud_three");
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_three");
                     break;
                 case PlayerIndex.Four:
                     corner = new Vector2(1024, 656);
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/hud_four");
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_four");
                     break;
                 default:
                     throw new Exception("Too many players");

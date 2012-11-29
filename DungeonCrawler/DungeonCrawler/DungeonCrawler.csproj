@@ -194,6 +194,7 @@
     <Compile Include="Systems\CollisionSystem.cs" />
     <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\GarbagemanSystem.cs" />
+    <Compile Include="Systems\HUDSystem.cs" />
     <Compile Include="Systems\InputSystem.cs" />
     <Compile Include="Systems\MovementSystem.cs" />
     <Compile Include="Systems\NetworkSystem.cs" />

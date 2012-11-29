@@ -66,19 +66,19 @@ namespace DungeonCrawler.Entities
                 case EnemyType.StationaryTarget:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 1;
-                    spritesheet = "Spritesheets/target2";
+                    spritesheet = "Spritesheets/Enemies/target2";
                     break;
 
                 case EnemyType.MovingTarget:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 1;
-                    spritesheet = "Spritesheets/target2";
+                    spritesheet = "Spritesheets/Enemies/target2";
                     break;
 
                 case EnemyType.Alien:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 1;
-                    spritesheet = "Spritesheets/alien";
+                    spritesheet = "Spritesheets/Enemies/alien";
                     spriteBounds = new Rectangle(0, 0, 32, 32);
                     aiBehaviorType = AIBehaviorType.Alien;
                     break;

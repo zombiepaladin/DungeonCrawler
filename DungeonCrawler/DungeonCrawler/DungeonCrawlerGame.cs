@@ -200,21 +200,21 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
-        InputSystem InputSystem;
-        NetworkSystem NetworkSystem;
-        RenderingSystem RenderingSystem;
-        MovementSystem MovementSystem;
-        WeaponSystem WeaponSystem;
+        public InputSystem InputSystem;
+        public NetworkSystem NetworkSystem;
+        public RenderingSystem RenderingSystem;
+        public MovementSystem MovementSystem;
+        public WeaponSystem WeaponSystem;
         public EnemyAISystem EnemyAISystem;
         public NpcAISystem NpcAISystem;
-        CollisionSystem CollisionSystem;
+        public CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
-	    SpriteAnimationSystem SpriteAnimationSystem;
+	    public SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
-
         public GarbagemanSystem GarbagemanSystem;
-        TextSystem TextSystem;
+        public TextSystem TextSystem;
+        public HUDSystem HUDSystem;
 
         #endregion
 
@@ -344,16 +344,18 @@ namespace DungeonCrawler
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
+            HUDSystem = new HUDSystem(this);
 
             InputHelper.Load();
+            HUDSystem.LoadContent();
 
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("D01F01R01");
-            Song bg = Content.Load<Song>("Audio/Main_Loop");
-            MediaPlayer.Stop();
-            MediaPlayer.IsRepeating = true;
-            MediaPlayer.Play(bg);
+            //Song bg = Content.Load<Song>("Audio/Main_Loop");
+            //MediaPlayer.Stop();
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(bg);
             //End Testing Code
         }
 

@@ -94,8 +94,8 @@ namespace DungeonCrawler.Entities
                  * *************************************/
                 case Aggregate.FairyPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/wind_fae");
-                    spriteSheet.Name = "Spritesheets/wind_fae";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/wind_fae");
+                    spriteSheet.Name = "Spritesheets/Aggregate/wind_fae";
 
                     position = new Position()
                     {
@@ -121,19 +121,6 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementComponent[entityID] = movement;
 
-
-                    /*
-                    movementSprite = new MovementSprite()
-                    {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
-                    */
-
                     spriteAnimation = new SpriteAnimation()
                     {
                         EntityID = entityID,
@@ -145,7 +132,6 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
-
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
 
@@ -212,8 +198,8 @@ namespace DungeonCrawler.Entities
                 * *************************************/
                 case Aggregate.CultistPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Cultist");
-                    spriteSheet.Name = "Spritesheets/Cultist";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Cultist");
+                    spriteSheet.Name = "Spritesheets/Aggregate/Cultist";
 
                     position = new Position()
                     {
@@ -238,15 +224,6 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-
-                    //movementSprite = new MovementSprite() {
-                    //    EntityID = entityID,
-                    //    Facing = Facing.South,
-                    //    SpriteSheet = spriteSheet,
-                    //    SpriteBounds = new Rectangle(0, 0, 64, 64),
-                    //    Timer = 0f,
-                    //};
-                    //game.MovementSpriteComponent[entityID] = movementSprite;
 
                     spriteAnimation = new SpriteAnimation()
                     {
@@ -333,8 +310,8 @@ namespace DungeonCrawler.Entities
                 * *************************************/
                 case Aggregate.CyborgPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/cyborg");
-                    spriteSheet.Name = "Spritesheets/cyborg";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/cyborg");
+                    spriteSheet.Name = "Spritesheets/Aggregate/cyborg";
 
                     position = new Position()
                     {
@@ -360,16 +337,6 @@ namespace DungeonCrawler.Entities
                     };
                     game.MovementComponent[entityID] = movement;
 
-                    /*movementSprite = new MovementSprite()
-                    {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;*/
-
                     spriteAnimation = new SpriteAnimation()
                     {
                         EntityID = entityID,
@@ -381,7 +348,6 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
-
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
 
@@ -443,8 +409,8 @@ namespace DungeonCrawler.Entities
                 * ******************************************************************************/
                 case Aggregate.EarthianPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Earthian2x");
-                    spriteSheet.Name = "Spritesheets/Earthian2x";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Earthian2x");
+                    spriteSheet.Name = "Spritesheets/Aggregate/Earthian2x";
 
                     position = new Position()
                     {
@@ -469,16 +435,6 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    /*
-                    movementSprite = new MovementSprite() {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
-                    */
 
                     spriteAnimation = new SpriteAnimation()
                     {
@@ -562,8 +518,8 @@ namespace DungeonCrawler.Entities
                 * *************************************/
                 case Aggregate.GargranianPlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/gargranian");
-                    spriteSheet.Name = "Spritesheets/gargranian";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/gargranian");
+                    spriteSheet.Name = "Spritesheets/Aggregate/gargranian";
 
                     position = new Position()
                     {
@@ -588,17 +544,6 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    /*
-                    movementSprite = new MovementSprite()
-                    {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
-                    */
 
                     spriteAnimation = new SpriteAnimation()
                     {
@@ -611,7 +556,6 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
-
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
 
@@ -671,8 +615,8 @@ namespace DungeonCrawler.Entities
                 * *************************************/
                 case Aggregate.SpacePiratePlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/SpacePBig");
-                    spriteSheet.Name = "Spritesheets/SpacePBig";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/SpacePBig");
+                    spriteSheet.Name = "Spritesheets/Aggregate/SpacePBig";
 
                     position = new Position()
                     {
@@ -697,17 +641,6 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    /*
-                    movementSprite = new MovementSprite()
-                    {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
-                    */
 
                     spriteAnimation = new SpriteAnimation()
                     {
@@ -780,8 +713,8 @@ namespace DungeonCrawler.Entities
                 * *************************************/
                 case Aggregate.ZombiePlayer:
                     entityID = Entity.NextEntity();
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/MzombieBx2");
-                    spriteSheet.Name = "Spritesheets/MzombieBx2";
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/MzombieBx2");
+                    spriteSheet.Name = "Spritesheets/Aggregate/MzombieBx2";
 
                     //Placeholder values
                     miscMeleeAttack = 5;
@@ -812,17 +745,6 @@ namespace DungeonCrawler.Entities
                         Speed = 200f,
                     };
                     game.MovementComponent[entityID] = movement;
-                    /*
-                    movementSprite = new MovementSprite()
-                    {
-                        EntityID = entityID,
-                        Facing = Facing.South,
-                        SpriteSheet = spriteSheet,
-                        SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        Timer = 0f,
-                    };
-                    game.MovementSpriteComponent[entityID] = movementSprite;
-                    */
 
                     spriteAnimation = new SpriteAnimation()
                     {
@@ -835,7 +757,6 @@ namespace DungeonCrawler.Entities
                         CurrentAnimationRow = 0
 
                     };
-
 
                     game.SpriteAnimationComponent[entityID] = spriteAnimation;
 

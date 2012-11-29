@@ -157,14 +157,14 @@ namespace DungeonCrawler
         public void LoadContent()
         {
             // Set up the background
-            titleTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectBackground");
+            titleTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectBackground");
 
             titleImage = new ImageSprite(titleTexture, viewport.Width / 2, viewport.Height / 2, Color.White);
             titleImage.Visible = true;
             titleImage.Scale = (float)(new Vector2(viewport.Width, viewport.Height).Length()) / (float)(new Vector2(titleTexture.Width, titleTexture.Height).Length());
 
             // Set the control images
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectControls1");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectControls1");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height * 0.365f);
             controlsImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             controlsImage.Scale = 1;
@@ -173,13 +173,13 @@ namespace DungeonCrawler
             spriteFont = game.Content.Load<SpriteFont>("SpriteFonts/Pescadero");
 
 
-            playerOne = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerOneCursor"), (int)buttonPos.X,
+            playerOne = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerOneCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, selected), true, PlayerIndex.One);
-            playerTwo = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerTwoCursor"), (int)buttonPos.X,
+            playerTwo = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerTwoCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Two);
-            playerThree = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerThreeCursor"), (int)buttonPos.X,
+            playerThree = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerThreeCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Three);
-            playerFour = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/charSelectPlayerFourCursor"), (int)buttonPos.X,
+            playerFour = new CharSelectPlayer(new ImageSprite(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectPlayerFourCursor"), (int)buttonPos.X,
                                             (int)buttonPos.Y, unselected), true, PlayerIndex.Four);
             players.Add(playerOne);
             currentPlayer = playerOne;
@@ -404,7 +404,7 @@ namespace DungeonCrawler
         public void loadGameSaves()
         {
             // Create the "New Game" slot
-            CharSelectPreview charPreview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
+            CharSelectPreview charPreview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
             gameSaves.Add(charPreview);
 
             IAsyncResult result = StorageDevice.BeginShowSelector(PlayerIndex.One, null, null);
@@ -488,7 +488,7 @@ namespace DungeonCrawler
             CharSelectPlayer previousPlayer = players.ElementAt(currentPlayerIndex - 1);
             if (previousPlayer.gameSave.newGame)
             {
-                preview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
+                preview = new CharSelectPreview(game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectNewGame"), gameSavePosition, spriteFont, "New Game", " ", selected, "");
                 preview.fileNumber = previousPlayer.gameSave.fileNumber + 1;
                 preview.fileName = "charSave" + preview.fileNumber;
                 gameSaves.Insert(0, preview);
@@ -518,7 +518,7 @@ namespace DungeonCrawler
                 {
                     entityID = game.AggregateFactory.CreateFromAggregate((Aggregate)player.gameSave.aggregate, player.playerIndex, player.gameSave.fileName, out gameSave);
                     gameSave.characterType = player.gameSave.charType.Text;
-                    gameSave.charSprite = "Spritesheets/charSelect" + gameSave.characterType.Replace(" ", "");
+                    gameSave.charSprite = "Spritesheets/CharSelect/charSelect" + gameSave.characterType.Replace(" ", "");
                     DoGameSave(gameSave);
                 }
                 else
@@ -532,6 +532,7 @@ namespace DungeonCrawler
                     WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
                 };
                 game.EquipmentComponent.Add(e.EntityID, e);
+                //game.HUDSystem.LoadPlayerHUD(game.PlayerComponent[entityID]);
                 game.GameState = GameState.NetworkSetup;
             }
             game.GameState = GameState.NetworkSetup;

@@ -128,14 +128,14 @@ namespace DungeonCrawler
         public void LoadContent(CharSelectPlayer player)
         {
             // Set up the background
-            titleTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectBackground");
+            titleTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectBackground");
 
             titleImage = new ImageSprite(titleTexture, viewport.Width / 2, viewport.Height / 2, Color.White);
             titleImage.Visible = true;
             titleImage.Scale = (float)(new Vector2(viewport.Width, viewport.Height).Length()) / (float)(new Vector2(titleTexture.Width, titleTexture.Height).Length());
 
             // Set the control images
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectControls2");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectControls2");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height * 0.365f);
             controlsImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             controlsImage.Scale = 1;
@@ -145,7 +145,7 @@ namespace DungeonCrawler
 
             // Initialize the character buttons and the text for each button and the character's aggregate
             // The Cultist Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectCultist");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectCultist");
             buttonPos = new Vector2(center.X - viewport.Width / 4, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -158,7 +158,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 0] = Aggregate.CultistPlayer;
 
             // The Earthian Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectEarthian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectEarthian");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -170,7 +170,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 1] = Aggregate.EarthianPlayer;
 
             // The Cyborg Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectCyborg");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectCyborg");
             buttonPos = new Vector2(center.X + viewport.Width / 4, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -182,7 +182,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 2] = Aggregate.CyborgPlayer;
 
             // The Gargranian Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectGargranian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectGargranian");
             buttonPos = new Vector2(center.X - viewport.Width / 4, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -194,7 +194,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 0] = Aggregate.GargranianPlayer;
 
             // The Space Pirate Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectSpacePirate");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectSpacePirate");
             buttonPos = new Vector2(center.X, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -206,7 +206,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 1] = Aggregate.SpacePiratePlayer;
 
             // The Zombie Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectZombie");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectZombie");
             buttonPos = new Vector2(center.X + viewport.Width / 4, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
