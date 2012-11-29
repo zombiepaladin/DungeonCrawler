@@ -267,7 +267,13 @@ namespace DungeonCrawler.Systems
                         case SkillType.EnergyShield:
 
                             #region Skill Variables
-
+                            TimedEffect timedEffectShield;
+                            Buff buffEffectShield;
+                            float effectDurationShield;
+                            uint targetIDShield;
+                            int damageDecreaseShield;
+                            int healShield;
+                            HealOverTime hotShield;
                             #endregion
 
                             switch (rank)
@@ -275,42 +281,374 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 1;
+                                    effectDurationShield = 5;
+                                    damageDecreaseShield = 10;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
+
+
                                     break;
                                 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 1;
+                                    effectDurationShield = 5;
+                                    damageDecreaseShield = 12;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 2;
+                                    effectDurationShield = 6;
+                                    damageDecreaseShield = 12;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 2;
+                                    effectDurationShield = 6;
+                                    damageDecreaseShield = 14;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 3;
+                                    effectDurationShield = 7;
+                                    damageDecreaseShield = 15;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 3;
+                                    effectDurationShield = 8;
+                                    damageDecreaseShield = 16;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 4;
+                                    effectDurationShield = 17;
+                                    damageDecreaseShield = 9;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 4;
+                                    effectDurationShield = 10;
+                                    damageDecreaseShield = 18;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 5;
+                                    effectDurationShield = 10;
+                                    damageDecreaseShield = 20;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
                                         
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetIDShield = GetPlayerID();
+                                    healShield = 5;
+                                    effectDurationShield = 10;
+                                    damageDecreaseShield = 25;
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        targetIDShield = player.EntityID;
+                                        timedEffectShield = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDurationShield,
+                                            TimeLeft = effectDurationShield,
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffectShield);
+
+                                        hotShield = new HealOverTime()
+                                        {
+                                            EntityID = eid,
+                                            AmountPerTick = healShield,
+                                            TickTime = 1
+                                        };
+                                        _game.HealOverTimeComponent.Add(eid, hotShield);
+
+                                        buffEffectShield = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = targetIDShield,
+                                            DefenseMelee = damageDecreaseShield,
+                                            DefenseRanged = damageDecreaseShield
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffectShield);
+                                    }
                                     break;
 
                                 default:
@@ -323,6 +661,16 @@ namespace DungeonCrawler.Systems
 
                             #region Skill Variables
 
+                            TimedEffect timedEffect;
+                            float effectDuration;
+
+                            Buff buffEffect;
+                            uint targetID;
+                            int speedIncrease;
+                            int AttackSpeedIncrease;
+
+
+
                             #endregion
 
                             switch (rank)
@@ -330,42 +678,252 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    effectDuration = 3;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 150;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    effectDuration = 3;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 200;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    effectDuration = 4;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 200;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    effectDuration = 4;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 250;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    effectDuration = 5;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 250;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    effectDuration = 5;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 300;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    effectDuration = 5;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 300;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    effectDuration = 6;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 300;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    effectDuration = 6;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 350;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    effectDuration = 8;
+                                    targetID = GetPlayerID();
+                                    speedIncrease = 200;
+                                    AttackSpeedIncrease = 400;
+
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDuration,
+                                        TimeLeft = effectDuration,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    buffEffect = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        MovementSpeed = speedIncrease,
+                                        AttackSpeed = AttackSpeedIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffect);
                                     break;
 
                                 default:
@@ -377,7 +935,14 @@ namespace DungeonCrawler.Systems
                         case SkillType.Nanobots:
 
                             #region Skill Variables
+                            TimedEffect timedEffectNano;
+                            float effectDurationNano;
 
+                            DirectHeal directheal;
+                            uint targetIDNano;
+                            int heal;
+
+                            HealOverTime hot;
                             #endregion
 
                             switch (rank)
@@ -385,42 +950,149 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 5;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 8;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 10;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 12;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 14;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);eid = Entity.NextEntity();
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 16;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 18;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 20;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 25;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetIDNano = GetPlayerID();
+                                    heal = 25;
+                                    effectDurationNano = 10;
+
+                                    directheal = new DirectHeal()
+                                    {
+                                        EntityID = eid,
+                                        Amount = heal
+                                    };
+                                    _game.DirectHealComponent.Add(eid, directheal);
+
+                                    timedEffectNano = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationNano,
+                                        TimeLeft = effectDurationNano,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectNano);
+
+                                    hot = new HealOverTime()
+                                    {
+                                        EntityID = eid,
+                                        AmountPerTick = 1,
+                                        TickTime = 2
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, hot);
                                     break;
 
                                 default:
@@ -433,6 +1105,9 @@ namespace DungeonCrawler.Systems
 
                             #region Skill Variables
 
+                            Buff buffEffectTarget;
+                            int WeaponIncrease;
+
                             #endregion
 
                             switch (rank)
@@ -440,42 +1115,132 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 120;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 145;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 130;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 135;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 145;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 160;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 175;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 200;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 225;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    WeaponIncrease = 250;
+                                    buffEffectTarget = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        WeaponStrength = WeaponIncrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectTarget);
                                     break;
 
                                 default:
@@ -487,7 +1252,13 @@ namespace DungeonCrawler.Systems
                         case SkillType.RepulsorArm:
 
                             #region Skill Variables
+                            InstantEffect instantEffectRepulse;
+                            uint eid_2Repulse;
+                            uint targetIDRepulse;
 
+                            KnockBack knockBackEffectRepulse;
+                            Vector2 originRepulse;
+                            float distanceRepulse;
                             #endregion
 
                             switch (rank)
@@ -495,42 +1266,232 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetIDRepulse = GetPlayerID();
+                                    eid_2Repulse = Entity.NextEntity();
+                                    originRepulse = _game.PositionComponent[targetIDRepulse].Center;
+                                    distanceRepulse = 100;
+
+
+                                    instantEffectRepulse = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Repulse, instantEffectRepulse);
+
+                                    knockBackEffectRepulse = new KnockBack()
+                                    {
+                                        EntityID = eid_2Repulse,
+                                        Origin = originRepulse,
+                                        Distance = distanceRepulse,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Repulse, knockBackEffectRepulse);
                                     break;
 
                                 default:
@@ -542,7 +1503,9 @@ namespace DungeonCrawler.Systems
                         case SkillType.EnergyShot:
 
                             #region Skill Variables
-
+                            DirectDamage DirectDamageShot;
+                            InstantEffect instantEffectShot;
+                            int shotDamage;
                             #endregion
 
                             switch (rank)
@@ -550,42 +1513,183 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    shotDamage = 5;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
+
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    shotDamage = 10;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    shotDamage = 15;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    shotDamage = 20;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    shotDamage = 25;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    shotDamage = 30;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    shotDamage = 35;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    shotDamage = 38;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    shotDamage = 40;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    shotDamage = 45;
+
+                                    instantEffectShot = new InstantEffect()
+                                    {
+                                        EntityID = eid,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid, instantEffectShot);
+
+                                    DirectDamageShot = new DirectDamage()
+                                    {
+                                        EntityID = eid,
+                                        Damage = shotDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid, DirectDamageShot);
                                     break;
 
                                 default:
@@ -598,6 +1702,8 @@ namespace DungeonCrawler.Systems
 
                             #region Skill Variables
 
+                            Buff buffEffectAlloy;
+                            int damageDecrease;
                             #endregion
 
                             switch (rank)
@@ -605,42 +1711,142 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 5;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 10;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 12;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 14;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 16;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 18;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 20;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 26;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 32;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetID = GetPlayerID();
+                                    damageDecrease = 40;
+                                    buffEffectAlloy = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetID,
+                                        DefenseMelee = damageDecrease,
+                                        DefenseRanged = damageDecrease
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectAlloy);
                                     break;
 
                                 default:
@@ -652,7 +1858,16 @@ namespace DungeonCrawler.Systems
                         case SkillType.CyberneticSlam:
 
                             #region Skill Variables
+                            InstantEffect instantEffectSlam;
+                            uint eid_2Slam;
+                            uint targetIDSlam;
 
+                            DirectDamage DirectDamageSlam;
+                            int slamDamage;
+
+                            KnockBack knockBackEffectSlam;
+                            Vector2 originSlam;
+                            float distanceSlam;
                             #endregion
 
                             switch (rank)
@@ -660,42 +1875,304 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 40;
+                                    slamDamage = 5;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 60;
+                                    slamDamage = 10;
+
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 80;
+                                    slamDamage = 15;
+
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 100;
+                                    slamDamage = 20;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 120;
+                                    slamDamage = 25;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 140;
+                                    slamDamage = 30;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 160;
+                                    slamDamage = 35;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 180;
+                                    slamDamage = 40;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 200;
+                                    slamDamage = 45;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    targetIDSlam = GetPlayerID();
+                                    eid_2Slam = Entity.NextEntity();
+                                    originSlam = _game.PositionComponent[targetIDSlam].Center;
+                                    distanceSlam = 220;
+                                    slamDamage = 50;
+
+                                    instantEffectSlam = new InstantEffect()
+                                    {
+                                        EntityID = eid_2Slam,
+                                    };
+                                    _game.InstantEffectComponent.Add(eid_2Slam, instantEffectSlam);
+
+                                    DirectDamageSlam = new DirectDamage()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Damage = slamDamage
+                                    };
+                                    _game.DirectDamageComponent.Add(eid_2Slam, DirectDamageSlam);
+
+                                    knockBackEffectSlam = new KnockBack()
+                                    {
+                                        EntityID = eid_2Slam,
+                                        Origin = originSlam,
+                                        Distance = distanceSlam,
+                                    };
+                                    _game.KnockBackComponent.Add(eid_2Slam, knockBackEffectSlam);
                                     break;
 
                                 default:
@@ -707,7 +2184,12 @@ namespace DungeonCrawler.Systems
                         case SkillType.ThrusterRush:
 
                             #region Skill Variables
+                            TimedEffect timedEffectRush;
+                            float effectDurationRush;
 
+                            Buff buffEffectRush;
+                            uint targetIDRush;
+                            int speedIncreaseRush;
                             #endregion
 
                             switch (rank)
@@ -715,42 +2197,232 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 2:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 3:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 4:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 5:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 6:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 7:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 8:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 9:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 case 10:
 									eid = Entity.NextEntity();
+                                    effectDurationRush = 1;
+                                    targetIDRush = GetPlayerID();
+                                    speedIncreaseRush = 600;
+
+                                    timedEffectRush = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = effectDurationRush,
+                                        TimeLeft = effectDurationRush,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffectRush);
+
+                                    buffEffectRush = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = targetIDRush,
+                                        MovementSpeed = speedIncreaseRush,
+                                    };
+                                    _game.BuffComponent.Add(eid, buffEffectRush);
                                     break;
 
                                 default:
