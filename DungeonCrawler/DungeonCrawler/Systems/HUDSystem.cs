@@ -54,6 +54,10 @@ namespace DungeonCrawler.Systems
             public string Level;
         }
 
+        private const int HEALTH_BAR_MAX_BOUNDS = 115;
+        private const int PSI_BAR_MAX_BOUNDS = 115;
+        private const int EXP_BAR_MAX_BOUNDS = 115;
+
         private DungeonCrawlerGame _game;
         private ContentManager _content;
         private PlayerComponent _playerComponent;
@@ -71,7 +75,6 @@ namespace DungeonCrawler.Systems
             _content = game.Content;
             _playerComponent = game.PlayerComponent;
 
-            //Start the huds as null. If a player is not active it will stay null;
             _p1 = new HUDSprite { Show = false };
             _p2 = new HUDSprite { Show = false };
             _p3 = new HUDSprite { Show = false };
@@ -126,6 +129,12 @@ namespace DungeonCrawler.Systems
 
             //Load the rest of the spritesheets. Dont worry about position yet.
             hud.HudBgSpriteBounds = new Rectangle(0, 0, 270, 143);
+            hud.HealthSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/HealthBar");
+            hud.HealthBounds = new Rectangle(0, 0, 15, HEALTH_BAR_MAX_BOUNDS);
+            hud.PsiSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/PsiBar");
+            hud.PsiBounds = new Rectangle(0, 0, 15, PSI_BAR_MAX_BOUNDS);
+            hud.ExpSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/ExpBar");
+            hud.ExpBounds = new Rectangle(0, 0, 15, EXP_BAR_MAX_BOUNDS);
 
             //Load the right background and set all the positions base on the playerindex.
             switch (player.PlayerIndex)
@@ -133,13 +142,31 @@ namespace DungeonCrawler.Systems
                 case PlayerIndex.One:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_one");
                     hud.HudBgPosition = new Vector2(0, 0);
-                    hud.AvatarPosition = new Vector2(10, 10);
+                    hud.AvatarPosition = new Vector2(20, 20);
 
                     _p1 = hud;
                     break;
                 case PlayerIndex.Two:
+                    hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_two");
+                    hud.HudBgPosition = new Vector2(1024, 0);
+                    hud.AvatarPosition = new Vector2(-20, 20);
+
+                    _p2 = hud;
+                    break;
                 case PlayerIndex.Three:
+                    hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_three");
+                    hud.HudBgPosition = new Vector2(0, 656);
+                    hud.AvatarPosition = new Vector2(20, -84);
+
+                    _p3 = hud;
+                    break;
                 case PlayerIndex.Four:
+                    hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_four");
+                    hud.HudBgPosition = new Vector2(1024, 656);
+                    hud.AvatarPosition = new Vector2(-20, -84);
+
+                    _p4 = hud;
+                    break;
                 default:
                     throw new Exception("Invalid player index");
             }
@@ -172,7 +199,7 @@ namespace DungeonCrawler.Systems
                                     new Vector2(0),  // origin
                                     1f,                                             // scale
                                     SpriteEffects.None,
-                                    0);
+                                    0.1f);
 
             spriteBatch.Draw(hud.AvatarSpriteSheet,
                                     hud.AvatarPosition,

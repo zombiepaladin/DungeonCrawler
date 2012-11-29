@@ -306,12 +306,16 @@ namespace DungeonCrawler
 
         private Vector2 getGamePadLeftStick()
         {
-            return _curGamePadState.ThumbSticks.Left;
+            Vector2 direction = _curGamePadState.ThumbSticks.Left;
+            direction.Y *= -1; //Invert the Y axis
+            return direction;
         }
 
         private Vector2 getGamePadRightStick()
         {
-            return _curGamePadState.ThumbSticks.Right;
+            Vector2 direction = _curGamePadState.ThumbSticks.Right;
+            direction.Y *= -1;
+            return direction;
         }
 
         private bool isButtonPressed(Buttons button)

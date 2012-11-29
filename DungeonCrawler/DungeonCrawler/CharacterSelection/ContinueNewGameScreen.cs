@@ -532,7 +532,6 @@ namespace DungeonCrawler
                     WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
                 };
                 game.EquipmentComponent.Add(e.EntityID, e);
-                //game.HUDSystem.LoadPlayerHUD(game.PlayerComponent[entityID]);
                 game.GameState = GameState.NetworkSetup;
             }
             game.GameState = GameState.NetworkSetup;

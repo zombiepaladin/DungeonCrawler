@@ -134,6 +134,7 @@ namespace DungeonCrawler.Systems
 
                 game.PlayerInfoComponent[player.EntityID] = info;
 
+                /*
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];
@@ -152,7 +153,7 @@ namespace DungeonCrawler.Systems
                     
                     //temp activate shot skill
                     //Test Skill buttons
-                    game.SkillEntityFactory.CreateSkillProjectile(Skills.benignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID]);
+                    //game.SkillEntityFactory.CreateSkillProjectile(Skills.benignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID]);
 
                 }
                 if (state.IsPressed(Keys.D2, Buttons.B))
@@ -161,14 +162,14 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                     //TODO: Set skill
-                    game.SkillEntityFactory.CreateSkillAoE(Skills.detonate, game.PositionComponent[player.EntityID]);
+                    //game.SkillEntityFactory.CreateSkillAoE(Skills.detonate, game.PositionComponent[player.EntityID]);
                 }
                 if (state.IsPressed(Keys.D3, Buttons.X))
                 {
                     hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
                     hs.isSeen = true;
                     game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
-                    game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, game.PositionComponent[player.EntityID]);
+                    //game.SkillEntityFactory.CreateSkillDeployable(Skills.healingStation, game.PositionComponent[player.EntityID]);
                     //TODO: Set skill
                 }
                 if (state.IsPressed(Keys.D4, Buttons.Y))
@@ -278,9 +279,10 @@ namespace DungeonCrawler.Systems
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }*/
+                }
                 #endregion //end key up
                 #endregion //end hud control
+                */
             }
         }
 

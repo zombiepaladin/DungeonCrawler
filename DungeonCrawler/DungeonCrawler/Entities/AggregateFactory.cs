@@ -299,7 +299,7 @@ namespace DungeonCrawler.Entities
 
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
 
@@ -398,7 +398,7 @@ namespace DungeonCrawler.Entities
 
                     game.PlayerComponent[entityID] = player;
                     //create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
                     break;
@@ -508,7 +508,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
 
                     //Create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
                     break;
@@ -605,7 +605,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
 
                     //Create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
                     break;
@@ -703,7 +703,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
 
                     //Create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
                     break;
@@ -818,7 +818,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
 
                     //Create HUD
-                    hudagg.CreateHUD(player);
+                    game.HUDSystem.LoadPlayerHUD(player);
                     //create Inv
                     invagg.CreateInv(player);
                     break;
@@ -979,7 +979,7 @@ namespace DungeonCrawler.Entities
 
                 game.PlayerComponent[entityID] = player;
                 //Create HUD
-                hudagg.CreateHUD(player);
+                game.HUDSystem.LoadPlayerHUD(player);
                 //create Inv
                 invagg.CreateInv(player);
             }
