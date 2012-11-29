@@ -619,7 +619,7 @@ namespace DungeonCrawler.Entities
                     equipment = new Equipment()
                     {
                         EntityID = entityID,
-                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.StandardSword),
+                        WeaponID = game.WeaponFactory.CreateWeapon(WeaponType.PsychicStun),
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 

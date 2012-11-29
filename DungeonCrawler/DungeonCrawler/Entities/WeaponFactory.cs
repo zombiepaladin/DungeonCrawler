@@ -30,6 +30,7 @@ namespace DungeonCrawler.Entities
     public enum WeaponType
     {
         DeadHand,
+        PsychicStun,
         WeakSword,
         StandardSword,
         StrongSword,
@@ -107,6 +108,11 @@ namespace DungeonCrawler.Entities
 
             switch (type)
             {
+                case WeaponType.PsychicStun:
+                    weapon = _standardSword;
+                    sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
+                    break;
+
                 case WeaponType.DeadHand:
                     weapon = _standardSword;
                     sound = new Sound { SoundEffect = _game.Content.Load<SoundEffect>("Sounds/sword sound") };
@@ -171,6 +177,10 @@ namespace DungeonCrawler.Entities
             {
                 case WeaponType.DeadHand:
                     sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/DeadHand");
+                    sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
+                    break;
+                case WeaponType.PsychicStun:
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/PsychicStun");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.WeakSword:
