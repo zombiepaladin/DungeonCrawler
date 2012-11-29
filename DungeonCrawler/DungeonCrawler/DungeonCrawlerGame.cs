@@ -127,6 +127,11 @@ namespace DungeonCrawler
         /// </summary>
         public SkillEntityFactory SkillEntityFactory;
 
+        /// <summary>
+        /// A list of all the quests in the game
+        /// </summary>
+        public List<Quest> Quests;
+
         #endregion
 
         #region Game Components
@@ -172,7 +177,7 @@ namespace DungeonCrawler
         public HealingStationComponent HealingStationComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
         public SoundComponent SoundComponent;
-        public QuestComponent QuestComponent;
+        //public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
         
 
@@ -279,7 +284,7 @@ namespace DungeonCrawler
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
             NPCComponent = new NPCComponent();
-            QuestComponent = new QuestComponent();
+            //QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
             SpriteAnimationComponent = new SpriteAnimationComponent();
             SkillProjectileComponent = new SkillProjectileComponent();
@@ -287,6 +292,8 @@ namespace DungeonCrawler
             SkillDeployableComponent = new SkillDeployableComponent();
             SoundComponent = new SoundComponent();
             ActorTextComponent = new ActorTextComponent();
+
+            Quests = new List<Quest>();
 
             //TurretComponent = new TurretComponent();
             //TrapComponent = new TrapComponent();

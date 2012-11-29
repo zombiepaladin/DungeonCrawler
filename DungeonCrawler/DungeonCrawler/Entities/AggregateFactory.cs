@@ -917,6 +917,7 @@ namespace DungeonCrawler.Entities
             info.FileName = fileName;
 
             game.QuestLogSystem.ActivateQuest(entityID, 0);
+            game.QuestLogSystem.ActivateQuest(entityID, 1);
 
             return entityID;
         }
@@ -1062,8 +1063,6 @@ namespace DungeonCrawler.Entities
                 //create Inv
                 invagg.CreateInv(player);
             }
-
-            game.QuestLogSystem.ActivateQuest(entityID, 0);
 
             return entityID;
         }
