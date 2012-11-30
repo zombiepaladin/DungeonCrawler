@@ -354,9 +354,37 @@ namespace DungeonCrawler.Entities
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.Enslave,
+                        skill2 = Systems.SkillType.Fear,
+                        skill3 = Systems.SkillType.Sacrifice,
+                        skill4 = Systems.SkillType.PsionicSpear,
+                        skill5 = Systems.SkillType.Taint,
+                        skill6 = Systems.SkillType.Rot,
+                        skill7 = Systems.SkillType.Push,
+                        skill8 = Systems.SkillType.Lightning,
+                        skill9 = Systems.SkillType.Malice,
                     };
                     game.PlayerInfoComponent[entityID] = info;
+                    
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
 
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill = info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
                     game.PlayerComponent[entityID] = player;
                     //Create HUD
                     game.HUDSystem.LoadPlayerHUD(player);
@@ -479,6 +507,15 @@ namespace DungeonCrawler.Entities
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
+                        skill1= Systems.SkillType.EnergyShield,
+                        skill2 = Systems.SkillType.Defibrillate,
+                        skill3 = Systems.SkillType.Nanobots,
+                        skill4 = Systems.SkillType.TargettingUpgrade,
+                        skill5 = Systems.SkillType.RepulsorArm,
+                        skill6 = Systems.SkillType.EnergyShield,
+                        skill7= Systems.SkillType.AlloyBody,
+                        skill8 = Systems.SkillType.CyberneticSlam,
+                        skill9= Systems.SkillType.ThrusterRush,
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
@@ -636,7 +673,16 @@ namespace DungeonCrawler.Entities
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
-                        skill1 = Systems.SkillType.Motivate,
+                        skill1 = Systems.SkillType.Trap,
+                        skill2 = Systems.SkillType.ExplodingDroids,
+                        skill3 = Systems.SkillType.Turret,
+                        skill4 = Systems.SkillType.HealingStation,
+                        skill5 = Systems.SkillType.PortableShop,
+                        skill6 = Systems.SkillType.PortableShield,
+                        skill7 = Systems.SkillType.Charge,
+                        skill8 = Systems.SkillType.FallBack,
+                        skill9 = Systems.SkillType.Motivate,
+
                     };
                     game.PlayerInfoComponent[entityID] = info;
 
@@ -780,6 +826,15 @@ namespace DungeonCrawler.Entities
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.MindLock,
+                        skill2 = Systems.SkillType.Invisibility,
+                        skill3 = Systems.SkillType.Possess,
+                        skill4 = Systems.SkillType.PsionicSpear,
+                        skill5 = Systems.SkillType.Push,
+                        skill6 = Systems.SkillType.Detnate,
+                        skill7 = Systems.SkillType.MentalBarrier,
+                        skill8 = Systems.SkillType.WormOfGargran,
+                        skill9 = Systems.SkillType.Soothe,
                     };
                     game.PlayerInfoComponent[entityID] = info;
                     skillInfo = new PlayerSkillInfo()
@@ -923,6 +978,15 @@ namespace DungeonCrawler.Entities
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.AgilityBerserker,
+                        skill2 = Systems.SkillType.DualWielding,
+                        skill3 = Systems.SkillType.HeavyDrinker,
+                        skill4 = Systems.SkillType.PowerShot,
+                        skill5 = Systems.SkillType.EagleShot,
+                        skill6 = Systems.SkillType.TrickShot,
+                        skill7 = Systems.SkillType.Mug,
+                        skill8 = Systems.SkillType.LockPicking,
+                        skill9 = Systems.SkillType.Theft,
                     };
                     game.PlayerInfoComponent[entityID] = info;
 

@@ -787,7 +787,7 @@ namespace DungeonCrawler.Systems
             sprite = new Sprite()
             {
                 EntityID = eid,
-                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                 SpriteBounds = new Rectangle(68, 8, 40, 37),
             };
             _game.SpriteComponent.Add(eid, sprite);
