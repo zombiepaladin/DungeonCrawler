@@ -65,6 +65,8 @@ namespace DungeonCrawler.Entities
             Equipment equipment;
             WeaponType weaponType;
 
+            PlayerSkillInfo skillInfo;
+            ActiveSkill active_Skill;
             Sprite sprite;
             SpriteAnimation spriteAnimation;
 
@@ -986,16 +988,42 @@ namespace DungeonCrawler.Entities
                     };
 
                     game.PlayerComponent[entityID] = player;
-
                     info = new PlayerInfo()
                     {
                         Health = 100,
                         Psi = 100,
-                        Level = 1,
-                        Experience = 0,
                         State = PlayerState.Default,
+                        skill1 = Systems.SkillType.ThrownBlades,
+                        skill2 = Systems.SkillType.FrenziedAttack,
+                        skill3 = Systems.SkillType.CausticWeapons,
+                        skill4 = Systems.SkillType.MeatShield,
+                        skill5 = Systems.SkillType.HardenedBody,
+                        skill6 = Systems.SkillType.Regeneration,
+                        skill7 = Systems.SkillType.BenignParasite,
+                        skill8 = Systems.SkillType.MaliciousParasite,
+                        skill9 = Systems.SkillType.MindlessParasites,
                     };
                     game.PlayerInfoComponent[entityID] = info;
+
+                    skillInfo = new PlayerSkillInfo()
+                    {
+                        Skill1Rank = 1,
+                        Skill2Rank = 1,
+                        Skill3Rank = 1,
+                        Skill4Rank = 1,
+                        Skill5Rank = 1,
+                        Skill6Rank = 1,
+                        Skill7Rank = 1,
+                        Skill8Rank = 1,
+                        Skill9Rank = 1,
+                    };
+                    game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    active_Skill = new ActiveSkill()
+                    {
+                        activeSkill = info.skill1,
+                    };
+                    game.ActiveSkillComponent[entityID] = active_Skill;
 
                     //Create HUD
                     game.HUDSystem.LoadPlayerHUD(player);

@@ -42,7 +42,7 @@ namespace DungeonCrawler.Entities
         }
 
 
-#region SkillProjectile
+        #region SkillProjectile
         public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed)
         {
             SkillProjectile skillProjectile;

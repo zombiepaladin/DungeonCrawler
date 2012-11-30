@@ -300,6 +300,7 @@ namespace DungeonCrawler
             PortableShieldComponent = new PortableShieldComponent();
             PortableStoreComponent = new PortableStoreComponent();
             ActiveSkillComponent = new ActiveSkillComponent();
+            PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
 
             Quests = new List<Quest>();
 
