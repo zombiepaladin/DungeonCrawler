@@ -82,6 +82,7 @@ Content\Tilesets\texture1.xnb
 Content\Tilesets\texture2.xnb
 Content\Tilesets\texture3.xnb
 Content\Spritesheets\alien.xnb
+Content\Spritesheets\Turret.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
@@ -99,3 +100,11 @@ Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
 Content\SpriteFonts\Pescadero.xnb
 Content\SpriteFonts\BoldPescadero.xnb
+Content\Spritesheets\EngineeringOffense.xnb
+Content\Spritesheets\BubbleShield.xnb
+Content\Spritesheets\shop.xnb
+Content\Spritesheets\DeadHand.xnb
+Content\Spritesheets\skillPlaceHolder1.xnb
+Content\Spritesheets\skillPlaceHolder2.xnb
+Content\Spritesheets\skillPlaceHolder3.xnb
+Content\Spritesheets\skillPlaceHolder4.xnb

@@ -4,6 +4,7 @@
 //
 // Author: Nicholas Boen 
 // Contributers: Austin Murphy
+// Modfied by Adam Clark: cyborg skill added
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -18,6 +19,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using DungeonCrawler.Entities;
 using DungeonCrawler.Components;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DungeonCrawler.Systems
 {
@@ -158,7 +160,6 @@ namespace DungeonCrawler.Systems
                 _game.GarbagemanSystem.ScheduleVisit(key, GarbagemanSystem.ComponentType.Effect);
             }
         }
-
         public void EnemyUseSkill(SkillType skillType, uint callerID, uint targetID)
         {
             foreach (CoolDown cd in _game.CoolDownComponent.All)
@@ -4069,6 +4070,7 @@ namespace DungeonCrawler.Systems
 
                 #region Earthian
 
+                //Earthian Skills done by Andrew Bellinder
                 case Aggregate.EarthianPlayer:
 
                     #region Race Variables
@@ -4082,57 +4084,346 @@ namespace DungeonCrawler.Systems
                         #region Turret
 
                         case SkillType.Turret:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
+                                Turret turret;
+                                TimedEffect timedEffect;
+                                float effectDuration;
+                                Sprite sprite;
+                                Position turretPosition;
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 3;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 100,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 100,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 150,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                       turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 200,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                       turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 250,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 300,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 350,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 10;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 400,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 11;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 450,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 12;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        turretPosition = _game.PositionComponent[GetPlayerID()];
+                                        turret = new Turret()
+                                        {
+                                            EntityID = eid,
+                                            position = turretPosition, 
+                                            range = 500,
+                                        };
+                                        _game.TurretComponent.Add(eid, turret);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(11, 49, 37, 63),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, turret.position);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4141,57 +4432,365 @@ namespace DungeonCrawler.Systems
                         #region Trap
 
                         case SkillType.Trap:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
+                                Trap trap;
+                                Sprite sprite;
+                                Position trapPosition;
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 3;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 20,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 20,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 30,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 4;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 30,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 40,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 40,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 50,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 50,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 60,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        trapPosition = _game.PositionComponent[GetPlayerID()];
+                                        trap = new Trap()
+                                        {
+                                            EntityID = eid,
+                                            position = trapPosition,
+                                            isSet = false,
+                                            range = 60,
+                                            duration = effectDuration,
+                                        };
+                                        _game.TrapComponent.Add(eid, trap);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(0, 10, 69, 42),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        _game.PositionComponent.Add(eid, trap.position);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4200,57 +4799,522 @@ namespace DungeonCrawler.Systems
                         #region Exploding Droids
 
                         case SkillType.ExplodingDroids:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
+                                Movement movement;
+                                float droidSpeed;
 
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
+                                ExplodingDroid explodingDroid;
+                                Sprite sprite;
 
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
+                                Position droidPosition;
 
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
+                                Collideable collideable;
 
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 110;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 32;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 115;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 35;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 120;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 40;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 125;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 45;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                       effectDuration = 15;
+                                        droidSpeed = 130;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 50;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 135;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 55;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 140;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 60;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 145;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 65;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 150;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 70;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+                                        droidSpeed = 155;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        movement = new Movement()
+                                        {
+                                            EntityID = eid,
+                                            Speed = droidSpeed,
+                                        };
+                                        _game.MovementComponent.Add(eid, movement);
+
+                                        droidPosition = _game.PositionComponent[GetPlayerID()];
+                                        droidPosition.Radius = 75;
+                                        explodingDroid = new ExplodingDroid()
+                                        {
+                                            EntityID = eid,
+                                            position = droidPosition,
+                                            hasEnemy = false,
+                                        };
+                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = droidPosition.RoomID,
+                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, explodingDroid.position);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4259,8 +5323,16 @@ namespace DungeonCrawler.Systems
                         #region Healing Station
 
                         case SkillType.HealingStation:
+                            {
 
                             #region Skill Variables
+
+                                HealingStation healingStation;
+                                Sprite sprite;
+                                Position stationPosition;
+
+                                Collideable collideable;
+
 
                             #endregion
 
@@ -4268,48 +5340,349 @@ namespace DungeonCrawler.Systems
                             {
                                 #region Checking Rank
                                 case 1:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 10,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 2:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 15,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 3:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 20,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 4:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 25,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 5:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 30,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 6:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 35,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 7:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 40,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 8:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 45,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 9:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 50,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 case 10:
-									eid = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    stationPosition = _game.PositionComponent[GetPlayerID()];
+
+                                    healingStation = new HealingStation()
+                                    {
+                                        EntityID = eid,
+                                        position = stationPosition,
+                                        healthAvailable = 60,
+
+                                    };
+                                    _game.HealingStationComponent.Add(eid, healingStation);
+
+                                    collideable = new Collideable()
+                                    {
+                                        EntityID = eid,
+                                        RoomID = stationPosition.RoomID,
+                                        Bounds = new CircleBounds(stationPosition.Center, stationPosition.Radius),
+                                    };
+                                    _game.CollisionComponent.Add(eid, collideable);
+
+                                    sprite = new Sprite()
+                                    {
+                                        EntityID = eid,
+                                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Turret"),
+                                        SpriteBounds = new Rectangle(0, 0, 37, 28),
+                                    };
+                                    _game.SpriteComponent.Add(eid, sprite);
+
+                                    _game.PositionComponent.Add(eid, stationPosition);
+                                    
                                     break;
 
                                 default:
                                     break;
                                 #endregion
+                            }
                             }
                             break;
 
@@ -4318,57 +5691,170 @@ namespace DungeonCrawler.Systems
                         #region Portable Shop
 
                         case SkillType.PortableShop:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 1);
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 11;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 13;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 17;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 20;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        _game.SkillEntityFactory.CreateSkillDeployable(SkillType.PortableShop, _game.PositionComponent[GetPlayerID()], 2);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4377,57 +5863,437 @@ namespace DungeonCrawler.Systems
                         #region Portable Shield
 
                         case SkillType.PortableShield:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
+                                PortableShield portableShield;
+                                Position shieldPosition;
 
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
+                                Sprite sprite;
+                                Collideable collideable;
 
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 5;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 6;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 7;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 8;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 9;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 10;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 11;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 12;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 13;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 14;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        shieldPosition = _game.PositionComponent[GetPlayerID()];
+                                        shieldPosition.Radius = 100;
+
+                                        portableShield = new PortableShield()
+                                        {
+                                            EntityID = eid,
+                                            position = shieldPosition, 
+                                        };
+                                        _game.PortableShieldComponent.Add(eid, portableShield);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/BubbleShield"),
+                                            SpriteBounds = new Rectangle(18, 34, 229, 136),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        collideable = new Collideable()
+                                        {
+                                            EntityID = eid,
+                                            RoomID = shieldPosition.RoomID,
+                                            Bounds = new CircleBounds(shieldPosition.Center, shieldPosition.Radius),
+                                        };
+                                        _game.CollisionComponent.Add(eid, collideable);
+
+                                        _game.PositionComponent.Add(eid, shieldPosition);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4436,6 +6302,7 @@ namespace DungeonCrawler.Systems
                         #region Motivate
 
                         case SkillType.Motivate:
+                            {
                             
                             #region Skill Variables
 
@@ -4453,6 +6320,8 @@ namespace DungeonCrawler.Systems
                             Vector2 origin;
                             float distance;
 
+                            List<Player> players;
+
                             #endregion
 
                             switch (rank)
@@ -4462,45 +6331,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 1
 
                                 case 1:
-									eid = Entity.NextEntity();
-                                    effectDuration = 5;
-                                    targetID = GetPlayerID();
-                                    speedIncrease = 200;
 
-                                    eid_2 = Entity.NextEntity();
-                                    origin = _game.PositionComponent[targetID].Center;
-                                    distance = 100;
-
-                                    timedEffect = new TimedEffect()
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        EntityID = eid,
-                                        TotalDuration = effectDuration,
-                                        TimeLeft = effectDuration,
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
 
-                                    buffEffect = new Buff()
+                                    for (int i = 0; i < players.Count; i++)
                                     {
-                                        EntityID = eid,
-                                        TargetID = targetID,
-                                        MovementSpeed = speedIncrease
-                                    };
-                                    _game.BuffComponent.Add(eid, buffEffect);
-
-
-                                    instantEffect = new InstantEffect()
-                                    {
-                                        EntityID = eid_2,
-                                    };
-                                    _game.InstantEffectComponent.Add(eid_2, instantEffect);
-
-                                    knockBackEffect = new KnockBack()
-                                    {
-                                        EntityID = eid_2,
-                                        Origin = origin,
-                                        Distance = distance,
-                                    };
-                                    _game.KnockBackComponent.Add(eid_2, knockBackEffect);
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 5;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
 
                                     break;
 
@@ -4509,7 +6353,19 @@ namespace DungeonCrawler.Systems
                                 #region Rank 2
 
                                 case 2:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 10;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
                                     break;
 
                                 #endregion
@@ -4517,7 +6373,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 3
 
                                 case 3:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 15;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4525,7 +6394,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 4
 
                                 case 4:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 20;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4533,7 +6415,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 5
 
                                 case 5:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 25;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4541,7 +6436,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 6
 
                                 case 6:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 30;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4549,7 +6457,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 7
 
                                 case 7:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 30;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4557,7 +6478,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 8
 
                                 case 8:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 40;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4565,7 +6499,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 9
 
                                 case 9:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 45;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4573,7 +6520,20 @@ namespace DungeonCrawler.Systems
                                 #region Rank 10
 
                                 case 10:
-									eid = Entity.NextEntity();
+                                    players = new List<Player>();
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        Player p = _game.PlayerComponent[player.EntityID];
+                                        players.Add(p);
+                                    }
+
+                                    for (int i = 0; i < players.Count; i++)
+                                    {
+                                        Player p = players[i];
+                                        p.abilityModifiers.HealthBonus += 50;
+                                        _game.PlayerComponent[p.EntityID] = p;
+                                    }
+                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -4581,6 +6541,7 @@ namespace DungeonCrawler.Systems
                                 default:
                                     break;
                                 #endregion
+                            }
                             }
                             break;
 
@@ -4589,57 +6550,313 @@ namespace DungeonCrawler.Systems
                         #region Fall Back
 
                         case SkillType.FallBack:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
+                                #region Skill Variables
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                TimedEffect timedEffect;
+                                float effectDuration;
+                                List<Player> players;
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 1;
+                                            p.abilityModifiers.meleeAttackBonus -= 1;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        break;
+
+                                    case 2:
+                                        eid = Entity.NextEntity();                                        
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 2;
+                                            p.abilityModifiers.meleeAttackBonus -= 1;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 3;
+                                            p.abilityModifiers.meleeAttackBonus -= 2;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 4;
+                                            p.abilityModifiers.meleeAttackBonus -= 2;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 5;
+                                            p.abilityModifiers.meleeAttackBonus -= 3;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 6;
+                                            p.abilityModifiers.meleeAttackBonus -= 3;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 7;
+                                            p.abilityModifiers.meleeAttackBonus -= 4;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 8;
+                                            p.abilityModifiers.meleeAttackBonus -= 4;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 9;
+                                            p.abilityModifiers.meleeAttackBonus -= 5;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.MeleeDefenseBonus += 10;
+                                            p.abilityModifiers.meleeAttackBonus -= 5;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 
@@ -4648,57 +6865,313 @@ namespace DungeonCrawler.Systems
                         #region Charge
 
                         case SkillType.Charge:
+                            {
 
                             #region Skill Variables
+                                TimedEffect timedEffect;
+                                float effectDuration;
+                                List<Player> players;
 
                             #endregion
 
-                            switch (rank)
-                            {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
 
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
+                                        players = new List<Player>();
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
 
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 1;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 1;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
 
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
+                                        break;
 
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
+                                    case 2:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
 
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
+                                        players = new List<Player>();
 
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
 
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 2;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 1;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
 
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
 
-                                default:
-                                    break;
-                                #endregion
+                                        break;
+
+                                    case 3:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 3;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 2;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 4:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 4;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 2;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 5:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 5;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 3;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 6:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 6;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 3;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 7:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 7;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 4;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 8:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 8;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 4;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 9:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 9;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 5;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    case 10:
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 15;
+
+                                        players = new List<Player>();
+
+                                        foreach (Player player in _game.PlayerComponent.All)
+                                        {
+                                            Player p = _game.PlayerComponent[player.EntityID];
+                                            players.Add(p);
+                                        }
+
+                                        for (int i = 0; i < players.Count; i++)
+                                        {
+                                            Player p = players[i];
+                                            p.abilityModifiers.meleeAttackBonus += 10;
+                                            p.abilityModifiers.MeleeDefenseBonus -= 5;
+                                            _game.PlayerComponent[p.EntityID] = p;
+                                        }
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
                             }
                             break;
 

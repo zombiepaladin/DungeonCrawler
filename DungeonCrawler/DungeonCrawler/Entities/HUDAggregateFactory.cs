@@ -14,6 +14,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Components;
+using System;
 #endregion
 
 
@@ -43,6 +44,35 @@ namespace DungeonCrawler.Entities
                       DPadSprite,
                       HeatlhPsiStatusSprite;
             HUD hud;
+            Sprite avatar = new Sprite { EntityID = Entity.NextEntity(), SpriteBounds = new Rectangle(0, 0, 64, 64) };
+            switch(player.PlayerRace)
+            {
+                case Aggregate.CultistPlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Cultist");
+                    break;
+                case Aggregate.CyborgPlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/cyborg");
+                    break;
+                case Aggregate.EarthianPlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/Earthian2x");
+                    break;
+                case Aggregate.FairyPlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/wind_fae");
+                    break;
+                case Aggregate.GargranianPlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/gargranian");
+                    break;
+                case Aggregate.SpacePiratePlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/SpacePBig");
+                    break;
+                case Aggregate.ZombiePlayer:
+                    avatar.SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Aggregate/MzombieBx2");
+                    break;
+                default:
+                    throw new Exception("Unknown player race");
+            }
+            game.SpriteComponent.Add(avatar.EntityID, avatar);
+            hud.AvatarSpriteID = avatar.EntityID;
             #region buttons
             //Make A button
             entityID = Entity.NextEntity();
@@ -158,38 +188,28 @@ namespace DungeonCrawler.Entities
             #endregion
             //Use a Health/Psi or Health/Fatigue Status Bar depending on the player's race
             entityID = Entity.NextEntity();
-            switch(player.PlayerRace)
-            {
-                case Aggregate.CultistPlayer:
-                case Aggregate.GargranianPlayer:
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HealthPsi");
-                    break;
-                case Aggregate.EarthianPlayer:
-                case Aggregate.CyborgPlayer:
-                case Aggregate.SpacePiratePlayer:
-                case Aggregate.ZombiePlayer:
-                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HealthFatigue");
-                break;
-            }
             
             //Choose player corner
             switch (player.PlayerIndex)
             {
                 case PlayerIndex.One:
                     corner = new Vector2(0, 0);
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_one");
                     break;
                 case PlayerIndex.Two:
                     corner = new Vector2(1024, 0);
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_two");
                     break;
                 case PlayerIndex.Three:
                     corner = new Vector2(0, 656);
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_three");
                     break;
                 case PlayerIndex.Four:
                     corner = new Vector2(1024, 656);
+                    spriteSheet = game.Content.Load<Texture2D>("Spritesheets/HUD/hud_four");
                     break;
                 default:
-                    corner = new Vector2(0,0);
-                    break;
+                    throw new Exception("Too many players");
             }
             position = new Position()
             {
@@ -203,7 +223,7 @@ namespace DungeonCrawler.Entities
                 EntityID = entityID,
                 isSeen = true,
                 SpriteSheet = spriteSheet,
-                SpriteBounds = new Rectangle(0,0,256,64),
+                SpriteBounds = new Rectangle(0,0,270,143),
                 PlayerIndex = player.PlayerIndex,
                 isStatus = true,
             };

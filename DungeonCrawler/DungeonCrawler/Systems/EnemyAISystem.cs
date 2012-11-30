@@ -5,13 +5,9 @@
 // Author: Brett Barger
 //
 // Modified: Nick Boen - added the Get and Set target methods, unimplemented for now
-//           Brett Barger - corrected functionalit of enemy moving towards the player it is targeting.
+//           Brett Barger - corrected functionality of enemy moving towards the player it is targeting.
 //
-// Modified Samuel Fike and Jiri Malina: Reorganized, added behaviors and stuff
-//
-// TODO: 1. Should probably refactor the Update to use the TargetID from the EnemyAI Component
-//              rather than a local instance.
-//       2. May want to check if the AI should get a different target if its current one isn't allowed
+// Modified Samuel Fike, Jiri Malina, Brett Barger: Reorganized, added behaviors and stuff, also 
 //              
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -92,7 +88,6 @@ namespace DungeonCrawler.Systems
 
                     case AIBehaviorType.DefaultRanged:
                         updateTargeting(id);
-                        MoveTowardTarget(id);
                         break;
 
                     case AIBehaviorType.Alien:

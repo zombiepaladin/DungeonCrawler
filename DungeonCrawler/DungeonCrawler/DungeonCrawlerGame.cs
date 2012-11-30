@@ -13,6 +13,7 @@
 // Modified by Michael Fountain:  Added NPCs
 // Modified: Nick Boen - Made the EnemyAISystem public so it can be accessed from agro effect components, 11/11/2012
 // Modified: Devin Kelly-Collins - Added ActorTextComponent and TextSystem (11/15/12)
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -35,7 +36,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
-using DungeonCrawler.Components.EarthianSkillComponents;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
 #endregion
@@ -127,6 +127,11 @@ namespace DungeonCrawler
         /// </summary>
         public SkillEntityFactory SkillEntityFactory;
 
+        /// <summary>
+        /// A list of all the quests in the game
+        /// </summary>
+        public List<Quest> Quests;
+
         #endregion
 
         #region Game Components
@@ -162,18 +167,17 @@ namespace DungeonCrawler
         public SkillProjectileComponent SkillProjectileComponent;
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
+        public SoundComponent SoundComponent;
+        //public QuestComponent QuestComponent;
+        public ActorTextComponent ActorTextComponent;
+        public PlayerSkillInfoComponent PlayerSkillInfoComponent;
+        public ActiveSkillComponent ActiveSkillComponent;
         public TurretComponent TurretComponent;
         public TrapComponent TrapComponent;
-        public PortableShopComponent PortableShopComponent;
-        public PortableShieldComponent PortableShieldComponent;
-        public MotivateComponent MotivateComponent;
-        public FallbackComponent FallbackComponent;
-        public ChargeComponent ChargeComponent;
-        public HealingStationComponent HealingStationComponent;
         public ExplodingDroidComponent ExplodingDroidComponent;
-        public SoundComponent SoundComponent;
-        public QuestComponent QuestComponent;
-        public ActorTextComponent ActorTextComponent;
+        public HealingStationComponent HealingStationComponent;
+        public PortableShieldComponent PortableShieldComponent;
+        public PortableStoreComponent PortableStoreComponent;
         
 
         #region Effect Components
@@ -200,21 +204,23 @@ namespace DungeonCrawler
         #region Game Systems
 
         // Game Systems
-        InputSystem InputSystem;
-        NetworkSystem NetworkSystem;
-        RenderingSystem RenderingSystem;
-        MovementSystem MovementSystem;
-        WeaponSystem WeaponSystem;
+        public InputSystem InputSystem;
+        public NetworkSystem NetworkSystem;
+        public RenderingSystem RenderingSystem;
+        public MovementSystem MovementSystem;
+        public WeaponSystem WeaponSystem;
         public EnemyAISystem EnemyAISystem;
         public NpcAISystem NpcAISystem;
-        CollisionSystem CollisionSystem;
+        public CollisionSystem CollisionSystem;
         public QuestLogSystem QuestLogSystem;
-	    SpriteAnimationSystem SpriteAnimationSystem;
+	    public SpriteAnimationSystem SpriteAnimationSystem;
         public RoomChangingSystem RoomChangingSystem;
         public SkillSystem SkillSystem;
+        public EngineeringOffenseSystem EngineeringOffenseSystem;
 
         public GarbagemanSystem GarbagemanSystem;
-        TextSystem TextSystem;
+        public TextSystem TextSystem;
+        public HUDSystem HUDSystem;
 
         #endregion
 
@@ -279,7 +285,7 @@ namespace DungeonCrawler
             TriggerComponent = new TriggerComponent();
             EnemyComponent = new EnemyComponent();
             NPCComponent = new NPCComponent();
-            QuestComponent = new QuestComponent();
+            //QuestComponent = new QuestComponent();
             LevelManager = new LevelManager(this);
             SpriteAnimationComponent = new SpriteAnimationComponent();
             SkillProjectileComponent = new SkillProjectileComponent();
@@ -287,16 +293,16 @@ namespace DungeonCrawler
             SkillDeployableComponent = new SkillDeployableComponent();
             SoundComponent = new SoundComponent();
             ActorTextComponent = new ActorTextComponent();
+            TurretComponent = new TurretComponent();
+            TrapComponent = new TrapComponent();
+            ExplodingDroidComponent = new ExplodingDroidComponent();
+            HealingStationComponent = new HealingStationComponent();
+            PortableShieldComponent = new PortableShieldComponent();
+            PortableStoreComponent = new PortableStoreComponent();
+            ActiveSkillComponent = new ActiveSkillComponent();
 
-            //TurretComponent = new TurretComponent();
-            //TrapComponent = new TrapComponent();
-            //PortableShopComponent = new PortableShopComponent();
-            //PortableShieldComponent = new PortableShieldComponent();
-            //MotivateComponent =  new MotivateComponent();
-            //FallbackComponent = new FallbackComponent();
-            //ChargeComponent = new ChargeComponent();
-            //HealingStationComponent = new HealingStationComponent();
-            //ExplodingDroidComponent = new ExplodingDroidComponent();
+            Quests = new List<Quest>();
+
 
             #region Initialize Effect Components
             AgroDropComponent = new AgroDropComponent();
@@ -345,13 +351,20 @@ namespace DungeonCrawler
 	        SpriteAnimationSystem = new SpriteAnimationSystem(this);
             SkillSystem = new SkillSystem(this);
             TextSystem = new TextSystem(this);
+            EngineeringOffenseSystem = new EngineeringOffenseSystem(this);
+            HUDSystem = new HUDSystem(this);
 
+            InputHelper.Load();
+            HUDSystem.LoadContent();
 
             // Testing code.
             LevelManager.LoadContent();
             LevelManager.LoadLevel("D01F01R01");
+            //Song bg = Content.Load<Song>("Audio/Main_Loop");
+            //MediaPlayer.Stop();
+            //MediaPlayer.IsRepeating = true;
+            //MediaPlayer.Play(bg);
             //End Testing Code
-
         }
 
         /// <summary>
@@ -376,27 +389,8 @@ namespace DungeonCrawler
         protected override void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            if (InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Escape, Buttons.Back))
                 this.Exit();
-
-            if (GameState == DungeonCrawler.GameState.SignIn)
-            {
-                // Requires at least one player to sign in
-                if (Gamer.SignedInGamers.Count == 0)
-                {
-                    if (IsActive) Guide.ShowSignIn(4, false);
-                }
-                else
-                {
-                    GameState = GameState.CharacterSelection;
-                    if (!ContinueNewGameScreen.isConnected)
-                    {
-                        ContinueNewGameScreen.LoadContent();
-                        ContinueNewGameScreen.isConnected = true;
-                        ContinueNewGameScreen.loadGameSaves();
-                    }
-                }
-            }
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
@@ -410,11 +404,16 @@ namespace DungeonCrawler
                     // Requires at least one player to sign in
                     if (Gamer.SignedInGamers.Count == 0)
                     {
-                        if (IsActive) Guide.ShowSignIn(4, false);
+                        if (IsActive)
+                        {
+                            Guide.ShowSignIn(4, false);
+                            InputHelper.DisableAll();
+                        }
                     }
                     else
                     {
                         GameState = GameState.CharacterSelection;
+                        InputHelper.EnableAll();
                         if (!ContinueNewGameScreen.isConnected)
                         {
                             ContinueNewGameScreen.LoadContent();
@@ -452,11 +451,13 @@ namespace DungeonCrawler
                     SkillSystem.Update(elapsedTime);
                     LevelManager.Update(elapsedTime);
                     CollisionSystem.Update(elapsedTime);
+                    HUDSystem.Update(elapsedTime);
                     QuestLogSystem.Update(elapsedTime);
 		            SpriteAnimationSystem.Update(elapsedTime);
                     NpcAISystem.Update(elapsedTime);
                     EnemyAISystem.Update(elapsedTime);
                     TextSystem.Update(elapsedTime);
+                    EngineeringOffenseSystem.Update(elapsedTime);
 
                     GarbagemanSystem.Update(elapsedTime);
                     break;
@@ -483,6 +484,10 @@ namespace DungeonCrawler
             GraphicsDevice.Clear(Color.Black);
 
             float elapsedTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (GameState == GameState.SignIn)
+                return;
+
             if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);
@@ -506,6 +511,7 @@ namespace DungeonCrawler
 
         /// <summary>
         /// Serializable for the master save file, which holds the previews for the actual saved files
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct MasterSaveFile
@@ -515,6 +521,7 @@ namespace DungeonCrawler
 
         /// <summary>
         /// A preview of the actual saved file, including the real filename, character sprite, and level
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct CharacterSaveFilePreview
@@ -527,25 +534,44 @@ namespace DungeonCrawler
 
         /// <summary>
         /// The actual saved character file, which stores the character type, level, stats, skills, and items
+        /// By: Joseph Shaw
         /// </summary>
         [Serializable]
         public struct CharacterSaveFile
         {
+            // Filename this file is saved as
             public string fileName;
+
+            // Information for the previews on the ContinueNewGameScreen
             public string charSprite;
             public string characterType;
             public string charAnimation;
             public int aggregate;
-            public int Level;
+
+            // Level information
+            public int level;
+            public int experience;
+
             // Other skills/stats
             public Stats stats;
             public float health;
             public int psi;
+            public PlayerSkillInfo skillInfo;
+
+            // Inventory Quantities and Weapon Type
+            public int healthPotions;
+            public int manaPotions;
+            public int pogs;
+            public int weaponType;
+
+            // Quest information
+            public List<Quest> quests;
         }
 
         /// <summary>
         /// Go through the components and save the pertinent information for the entity id
         /// Use this when saving the character in-game (possibly from a save menu or via autosaving)
+        /// By: Joseph Shaw
         /// </summary>
         /// <param name="entityId">The entityID of the character we are saving</param>
         public static void SavePlayer(uint entityId)
@@ -561,23 +587,40 @@ namespace DungeonCrawler
                 // Load file for this entityID
                 gameSave = DoLoadGame(device, info.FileName);
 
-                // Redo save info
+                // Populate save info
+                // Level information
+                gameSave.level = info.Level;
+                gameSave.experience = info.Experience;
+
+                // Other skills/stats
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
                 gameSave.psi = info.Psi;
-                //gameSave.Level = ?
+                gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
+
+                // Inventory Quantities and Weapon
+                //gameSave.healthPotions = ;
+                //gameSave.manaPotions = ;
+                //gameSave.pogs = ;
+                gameSave.weaponType = (int)game.EquipmentComponent[entityId].WeaponID;
+
+                // Quest information
+                //gameSave.quests = 
 
                 // Resave file
-                DungeonCrawlerGame.DoSaveGame(device, gameSave);
+                DungeonCrawlerGame.DoSaveGame(device, gameSave, true);
             }
         }
 
         /// <summary>
-        /// This method serializes a data object into
+        /// This method serializes a game save object into
         /// the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
-        public static void DoSaveGame(StorageDevice device, CharacterSaveFile gameData)
+        /// <param name="device">The device we are saving to</param>
+        /// <param name="gameData">The game data we are saving</param>
+        /// <param name="updatePreview">Whether we are updating the preview, false only in delete game functionality</param>
+        public static void DoSaveGame(StorageDevice device, CharacterSaveFile gameData, bool updatePreview)
         {
             // Open a storage container.
             IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
@@ -604,29 +647,30 @@ namespace DungeonCrawler
             }
 
             // Create/Update the charPreview to reflect the current player's level
-            CharacterSaveFilePreview charPreview;
-            MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
-            if (fileExists)
+            if (updatePreview)
             {
-                charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
-                masterSaveFile.charFiles.Remove(charPreview);
+                CharacterSaveFilePreview charPreview;
+                MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
+                if (fileExists)
+                {
+                    charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
+                    masterSaveFile.charFiles.Remove(charPreview);
+                }
+                charPreview = new CharacterSaveFilePreview();
+                charPreview.CharacterSaveFile = gameData.fileName;
+                charPreview.charSprite = gameData.charSprite;
+                charPreview.characterType = gameData.characterType;
+                charPreview.Level = gameData.level;
+
+                if (masterSaveFile.charFiles == null)
+                    masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
+
+                masterSaveFile.charFiles.Add(charPreview);
+
+                // Sort the list by the file name and resave it
+                masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
+                SaveMasterFile(device, masterSaveFile);
             }
-            charPreview = new CharacterSaveFilePreview();
-            charPreview.CharacterSaveFile = gameData.fileName;
-            charPreview.charSprite = gameData.charSprite;
-            charPreview.characterType = gameData.characterType;
-            charPreview.Level = gameData.Level;
-
-            if (masterSaveFile.charFiles == null)
-                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
-
-            if (masterSaveFile.charFiles == null) masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
-            masterSaveFile.charFiles.Add(charPreview);
-
-            // Sort the list by the file name and resave it
-            masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
-            SaveMasterFile(device, masterSaveFile);
-
             // Create the file.
             stream = container.CreateFile(gameData.fileName);
 
@@ -641,10 +685,12 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method loads a serialized data object
+        /// This method loads a game save object
         /// from the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device we are loading from</param>
+        /// <param name="fileName">The file we are loading</param>
         public static CharacterSaveFile DoLoadGame(StorageDevice device, string fileName)
         {
             // Open a storage container.
@@ -683,10 +729,11 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method loads a serialized data object
+        /// This method loads the master save file object
         /// from the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
-        /// <param name="device"></param>
+        /// <param name="device">The device we are loading from</param>
         public static MasterSaveFile GetMasterSaveFile(StorageDevice device)
         {
             // Open a storage container.
@@ -725,8 +772,9 @@ namespace DungeonCrawler
         }
 
         /// <summary>
-        /// This method serializes a data object into
+        /// This method serializes the master save file into
         /// the StorageContainer for this game.
+        /// By: Joseph Shaw
         /// </summary>
         /// <param name="device"></param>
         public static void SaveMasterFile(StorageDevice device, MasterSaveFile masterSaveFile)
@@ -763,6 +811,104 @@ namespace DungeonCrawler
             // Dispose the container, to commit changes.
             container.Dispose();
         }
+
+        /// <summary>
+        /// This method deletes a game save object from
+        /// the StorageContainer for this game.
+        /// By: Joseph Shaw
+        /// </summary>
+        /// <param name="device">The device we are deleting from</param>
+        /// <param name="gameData">The game data we are deleting</param>
+        public static void DoDeleteGame(StorageDevice device, CharacterSaveFile gameData)
+        {
+            // Open a storage container.
+            IAsyncResult result = device.BeginOpenContainer("DungeonCrawler", null, null);
+
+            // Wait for the WaitHandle to become signaled.
+            result.AsyncWaitHandle.WaitOne();
+
+            StorageContainer container = device.EndOpenContainer(result);
+
+            // Close the wait handle.
+            result.AsyncWaitHandle.Close();
+
+            // Create the BinaryFormatter here in-case we have to create a new save
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            Stream stream;
+            // Use this to tell us if this is a new save
+            bool fileExists = false;
+            // Check to see whether the save exists.
+            if (container.FileExists(gameData.fileName))
+            {
+                // Delete it so that we can create one fresh.
+                container.DeleteFile(gameData.fileName);
+                fileExists = true;
+            }
+
+            // Create/Update the charPreview to reflect the current player's level
+            CharacterSaveFilePreview charPreview;
+            MasterSaveFile masterSaveFile = GetMasterSaveFile(device);
+            if (fileExists)
+            {
+                charPreview = masterSaveFile.charFiles.Find(charFile => charFile.CharacterSaveFile == gameData.fileName);
+                masterSaveFile.charFiles.Remove(charPreview);
+            }
+
+            if (masterSaveFile.charFiles != null)
+            {
+                // Sort the list by the file name and rename the files to eliminate gaps
+                masterSaveFile.charFiles.OrderBy(s1 => s1.CharacterSaveFile);
+                masterSaveFile.charFiles = RenameFiles(device, masterSaveFile.charFiles);
+            }
+            else
+                masterSaveFile.charFiles = new List<CharacterSaveFilePreview>();
+
+            SaveMasterFile(device, masterSaveFile);
+
+            // Create the file.
+            stream = container.CreateFile(gameData.fileName);
+
+            // Convert the file to binary and save it
+            binaryFormatter.Serialize(stream, gameData);
+
+            // Close the file.
+            stream.Close();
+
+            // Dispose the container, to commit changes.
+            container.Dispose();
+        }
+
+        /// <summary>
+        /// Renames the files in this list and the associated game saves in sequential order
+        /// By: Joseph Shaw
+        /// </summary>
+        /// <param name="device">The device we are using to load/save the game saves</param>
+        /// <param name="charFiles">The list of previews in the master save file</param>
+        public static List<CharacterSaveFilePreview> RenameFiles(StorageDevice device, List<CharacterSaveFilePreview> charFiles)
+        {
+            List<CharacterSaveFile> gameSaves = new List<CharacterSaveFile>();
+            List<CharacterSaveFilePreview> previews = new List<CharacterSaveFilePreview>();
+            CharacterSaveFilePreview preview;
+            CharacterSaveFile gameSave;
+            int fileNumber = 0;
+            for (int i = 0; i < charFiles.Count; i++)
+            {
+                preview = charFiles.ElementAt(i);
+                gameSaves.Add(DoLoadGame(device, preview.CharacterSaveFile));
+                fileNumber = i + 1;
+                preview.CharacterSaveFile = "charSave" + fileNumber.ToString();
+                previews.Add(preview);
+            }
+            for (int i = 0; i < gameSaves.Count; i++)
+            {
+                gameSave = gameSaves.ElementAt(i);
+                fileNumber = i++;
+                gameSave.fileName = "charSave" + fileNumber.ToString();
+                DoSaveGame(device, gameSave, false);
+            }
+            return previews;
+        }
         #endregion
     }
 }
+
