@@ -718,12 +718,14 @@ namespace DungeonCrawler.Systems
                 skillId = p;
                 oId = p_2;
             }
-            else
+            else 
             {
                 skillId = p_2;
                 oId = p;
             }
-            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+            SkillProjectile skill;
+            if (_game.SkillProjectileComponent.Contains(skillId)) skill = _game.SkillProjectileComponent[skillId];
+            else return;
 
             _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
 

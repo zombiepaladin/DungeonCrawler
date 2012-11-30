@@ -6310,17 +6310,10 @@ namespace DungeonCrawler.Systems
                             float effectDuration;
 
                             Buff buffEffect;
-                            uint targetID;
-                            int speedIncrease;
 
-                            InstantEffect instantEffect;
-                            uint eid_2;
+                            Sprite sprite;
+                            Position motivatePosition;
 
-                            KnockBack knockBackEffect;
-                            Vector2 origin;
-                            float distance;
-
-                            List<Player> players;
 
                             #endregion
 
@@ -6331,19 +6324,42 @@ namespace DungeonCrawler.Systems
                                 #region Rank 1
 
                                 case 1:
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
 
-                                    players = new List<Player>();
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 5;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 5,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
 
                                     break;
@@ -6353,18 +6369,42 @@ namespace DungeonCrawler.Systems
                                 #region Rank 2
 
                                 case 2:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 10;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 10,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
                                     break;
 
@@ -6373,20 +6413,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 3
 
                                 case 3:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 15;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 15,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6394,20 +6457,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 4
 
                                 case 4:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 20;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 20,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6415,20 +6501,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 5
 
                                 case 5:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 25;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 25,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6436,20 +6545,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 6
 
                                 case 6:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 30;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 30,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6457,20 +6589,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 7
 
                                 case 7:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 30;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 35,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6478,20 +6633,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 8
 
                                 case 8:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 40;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 40,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6499,20 +6677,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 9
 
                                 case 9:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 45;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 45,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6520,20 +6721,43 @@ namespace DungeonCrawler.Systems
                                 #region Rank 10
 
                                 case 10:
-                                    players = new List<Player>();
+                                    eid = Entity.NextEntity();
+                                    effectDuration = 0.5f;
+
+                                        timedEffect = new TimedEffect()
+                                        {
+                                            EntityID = eid,
+                                            TotalDuration = effectDuration,
+                                            TimeLeft = effectDuration
+                                        };
+                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/bubble"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        motivatePosition = _game.PositionComponent[GetPlayerID()];
+                                        motivatePosition.Center.X += 40;
+                                        motivatePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, motivatePosition);
+
                                     foreach (Player player in _game.PlayerComponent.All)
                                     {
-                                        Player p = _game.PlayerComponent[player.EntityID];
-                                        players.Add(p);
-                                    }
+                                        eid = Entity.NextEntity();
 
-                                    for (int i = 0; i < players.Count; i++)
-                                    {
-                                        Player p = players[i];
-                                        p.abilityModifiers.HealthBonus += 50;
-                                        _game.PlayerComponent[p.EntityID] = p;
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            Health = 50,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
                                     }
-                                    eid = Entity.NextEntity();
                                     break;
 
                                 #endregion
@@ -6555,7 +6779,11 @@ namespace DungeonCrawler.Systems
 
                                 TimedEffect timedEffect;
                                 float effectDuration;
-                                List<Player> players;
+
+                                Buff buffEffect;
+
+                                Sprite sprite;
+                                Position fallBackPosition;
 
                                 #endregion
 
@@ -6564,22 +6792,7 @@ namespace DungeonCrawler.Systems
                                     #region Checking Rank
                                     case 1:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 1;
-                                            p.abilityModifiers.meleeAttackBonus -= 1;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6588,28 +6801,40 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 1,
+                                            AttackMelee = -1,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
 
                                         break;
 
                                     case 2:
-                                        eid = Entity.NextEntity();                                        
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 2;
-                                            p.abilityModifiers.meleeAttackBonus -= 1;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        eid = Entity.NextEntity();
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6618,28 +6843,40 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 2,
+                                            AttackMelee = -1,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
 
                                         break;
 
                                     case 3:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 3;
-                                            p.abilityModifiers.meleeAttackBonus -= 2;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6648,27 +6885,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 3,
+                                            AttackMelee = -2,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 4:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 4;
-                                            p.abilityModifiers.meleeAttackBonus -= 2;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6677,27 +6926,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 4,
+                                            AttackMelee = -2,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 5:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 5;
-                                            p.abilityModifiers.meleeAttackBonus -= 3;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6706,27 +6967,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 5,
+                                            AttackMelee = -3,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 6:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 6;
-                                            p.abilityModifiers.meleeAttackBonus -= 3;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6735,27 +7008,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 6,
+                                            AttackMelee = -3,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 7:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 7;
-                                            p.abilityModifiers.meleeAttackBonus -= 4;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6764,27 +7049,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 7,
+                                            AttackMelee = -4,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 8:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 8;
-                                            p.abilityModifiers.meleeAttackBonus -= 4;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6793,27 +7090,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 8,
+                                            AttackMelee = -4,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 9:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 9;
-                                            p.abilityModifiers.meleeAttackBonus -= 5;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6822,27 +7131,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 9,
+                                            AttackMelee = -5,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 10:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.MeleeDefenseBonus += 10;
-                                            p.abilityModifiers.meleeAttackBonus -= 5;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6851,6 +7172,34 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/fallback"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        fallBackPosition = _game.PositionComponent[GetPlayerID()];
+                                        fallBackPosition.Center.X += 40;
+                                        fallBackPosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, fallBackPosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = 10,
+                                            AttackMelee = -5,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     default:
@@ -6870,7 +7219,12 @@ namespace DungeonCrawler.Systems
                             #region Skill Variables
                                 TimedEffect timedEffect;
                                 float effectDuration;
-                                List<Player> players;
+
+                                Buff buffEffect;
+
+                                Sprite sprite;
+                                Position chargePosition;
+
 
                             #endregion
 
@@ -6879,22 +7233,7 @@ namespace DungeonCrawler.Systems
                                     #region Checking Rank
                                     case 1:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 1;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 1;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6903,28 +7242,40 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -1,
+                                            AttackMelee =  1,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
 
                                         break;
 
                                     case 2:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 2;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 1;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6933,28 +7284,40 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -1,
+                                            AttackMelee = 2,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
 
                                         break;
 
                                     case 3:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 3;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 2;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6963,27 +7326,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -2,
+                                            AttackMelee =  3,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 4:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 4;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 2;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -6992,27 +7367,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -2,
+                                            AttackMelee =  4,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 5:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 5;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 3;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7021,27 +7408,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -3,
+                                            AttackMelee =  5,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 6:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 6;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 3;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7050,27 +7449,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -3,
+                                            AttackMelee =  6,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 7:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 7;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 4;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7079,27 +7490,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -4,
+                                            AttackMelee =  7,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 8:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 8;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 4;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7108,27 +7531,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -4,
+                                            AttackMelee =  8,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 9:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 9;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 5;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7137,27 +7572,39 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -5,
+                                            AttackMelee =  9,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     case 10:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
-
-                                        players = new List<Player>();
-
-                                        foreach (Player player in _game.PlayerComponent.All)
-                                        {
-                                            Player p = _game.PlayerComponent[player.EntityID];
-                                            players.Add(p);
-                                        }
-
-                                        for (int i = 0; i < players.Count; i++)
-                                        {
-                                            Player p = players[i];
-                                            p.abilityModifiers.meleeAttackBonus += 10;
-                                            p.abilityModifiers.MeleeDefenseBonus -= 5;
-                                            _game.PlayerComponent[p.EntityID] = p;
-                                        }
+                                        effectDuration = 0.5f;
 
                                         timedEffect = new TimedEffect()
                                         {
@@ -7166,6 +7613,34 @@ namespace DungeonCrawler.Systems
                                             TimeLeft = effectDuration
                                         };
                                         _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                        sprite = new Sprite()
+                                        {
+                                            EntityID = eid,
+                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/charge"),
+                                            SpriteBounds = new Rectangle(0, 0, 76, 48),
+                                        };
+                                        _game.SpriteComponent.Add(eid, sprite);
+
+                                        chargePosition = _game.PositionComponent[GetPlayerID()];
+                                        chargePosition.Center.X += 40;
+                                        chargePosition.Center.Y -= 30;
+
+                                        _game.PositionComponent.Add(eid, chargePosition);
+
+                                    foreach (Player player in _game.PlayerComponent.All)
+                                    {
+                                        eid = Entity.NextEntity();
+
+                                        buffEffect = new Buff()
+                                        {
+                                            EntityID = eid,
+                                            TargetID = player.EntityID,
+                                            DefenseMelee = -5,
+                                            AttackMelee =  10,
+                                        };
+                                        _game.BuffComponent.Add(eid, buffEffect);
+                                    }
                                         break;
 
                                     default:
