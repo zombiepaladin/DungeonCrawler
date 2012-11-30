@@ -13,9 +13,14 @@
 #endregion
 
 #region Using Statements
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using Microsoft.Xna.Framework;
 using DungeonCrawler.Entities;
+using DungeonCrawler.Systems;
 #endregion
 
 namespace DungeonCrawler.Components
@@ -89,7 +94,6 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int MeleeAttackSpeed;
 
-
         /// <summary>
         /// Bonus to accuracy;
         /// </summary>
@@ -104,6 +108,16 @@ namespace DungeonCrawler.Components
         /// Bonus Health
         /// </summary>
         public int HealthBonus;
+
+        /// <summary>
+        /// Melee Defense Bonus
+        /// </summary>
+        public int MeleeDefenseBonus;
+
+        /// <summary>
+        /// Melee Defense Reduction
+        /// </summary>
+        public int MeleeDefenseReduction;
     }
 
     /// <summary>
@@ -111,7 +125,19 @@ namespace DungeonCrawler.Components
     /// </summary>
     public class PlayerComponent : GameComponent<Player>
     {
-
+        public bool GetByIndex(PlayerIndex index, out Player player)
+        {
+            player = new Player();
+            foreach (Player p in this.All)
+            {
+                if (p.PlayerIndex == index)
+                {
+                    player = p;
+                    return true;
+                }
+            }
+            return false; 
+        }
     }
 
     ///<summary>
@@ -134,6 +160,16 @@ namespace DungeonCrawler.Components
         /// </summary>
         public int Psi;
 
+        /// <summary>
+        /// The current level of the player
+        /// </summary>
+        public int Level;
+
+        /// <summary>
+        /// The current experience of the player
+        /// </summary>
+        public int Experience;
+
         ///<summary>
         ///The current state of the player.
         ///</summary>
@@ -143,7 +179,6 @@ namespace DungeonCrawler.Components
         /// The name of the game save file this player is associated with
         /// </summary>
         public string FileName;
-
 
         public int PoisonResistance;
 
@@ -162,6 +197,24 @@ namespace DungeonCrawler.Components
         public int WeaponSpeed;
 
         public int AttackSpeed;
+
+        public SkillType skill1;
+
+        public SkillType skill2;
+
+        public SkillType skill3;
+
+        public SkillType skill4;
+
+        public SkillType skill5;
+
+        public SkillType skill6;
+
+        public SkillType skill7;
+
+        public SkillType skill8;
+
+        public SkillType skill9;
     }
 
     ///<summary>
@@ -169,6 +222,41 @@ namespace DungeonCrawler.Components
     ///</summary>
     public class PlayerInfoComponent : GameComponent<PlayerInfo>
     {
-        
+
+    }
+
+    [Serializable]
+    public struct PlayerSkillInfo
+    {
+        public int Skill1Rank;
+
+        public int Skill2Rank;
+
+        public int Skill3Rank;
+
+        public int Skill4Rank;
+
+        public int Skill5Rank;
+
+        public int Skill6Rank;
+
+        public int Skill7Rank;
+
+        public int Skill8Rank;
+
+        public int Skill9Rank;
+    }
+
+    public class PlayerSkillInfoComponent : GameComponent<PlayerSkillInfo>
+    {
+    }
+
+    public struct ActiveSkill
+    {
+        public SkillType activeSkill;
+    }
+
+    public class ActiveSkillComponent : GameComponent<ActiveSkill>
+    {
     }
 }

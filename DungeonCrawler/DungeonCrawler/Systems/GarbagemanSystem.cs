@@ -5,7 +5,7 @@
 // Author: Matthew McHaney
 //
 // Modified By: Nicholas Strub - Added handing of doors and room 10/31/12
-// Modified by Samuel Fike and Jiri Malina: Added handling of SpriteAnimationComponents
+// Modified by Samuel Fike, Jiri Malina, Brett Barger: Added handling of SpriteAnimationComponents and EnemyComponent
 // Modified By: Nick Boen - Added compatability with Effect Components
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -52,6 +52,7 @@ namespace DungeonCrawler.Systems
             Effect,
             //Needs more in the future!
             Skill,
+            Turret,
         }
 
         private Stack<KeyValuePair<uint, ComponentType>> garbageSchedule;
@@ -161,7 +162,17 @@ namespace DungeonCrawler.Systems
                         if (game.StunComponent.Contains(keyValue.Key))              game.StunComponent.Remove(keyValue.Key);
                         if (game.TimedEffectComponent.Contains(keyValue.Key))       game.TimedEffectComponent.Remove(keyValue.Key);
                         if (game.TargetedKnockBackComponent.Contains(keyValue.Key)) game.TargetedKnockBackComponent.Remove(keyValue.Key);
+                        if (game.TurretComponent.Contains(keyValue.Key))          game.TurretComponent.Remove(keyValue.Key);
+                        if (game.TrapComponent.Contains(keyValue.Key))            game.TrapComponent.Remove(keyValue.Key);
+                        if (game.ExplodingDroidComponent.Contains(keyValue.Key))  game.ExplodingDroidComponent.Remove(keyValue.Key);
+                        if (game.SpriteComponent.Contains(keyValue.Key))          game.SpriteComponent.Remove(keyValue.Key);
+                        if (game.MovementComponent.Contains(keyValue.Key))        game.MovementComponent.Remove(keyValue.Key);
+                        if (game.CollisionComponent.Contains(keyValue.Key))       game.CollisionComponent.Remove(keyValue.Key);
+                        if (game.HealingStationComponent.Contains(keyValue.Key))  game.HealingStationComponent.Remove(keyValue.Key);
+                        if (game.PortableShieldComponent.Contains(keyValue.Key))  game.PortableShieldComponent.Remove(keyValue.Key); 
                         break;
+
+
                     case ComponentType.Skill:
                         game.PositionComponent.Remove(keyValue.Key);
                         game.SkillProjectileComponent.Remove(keyValue.Key);
@@ -169,6 +180,7 @@ namespace DungeonCrawler.Systems
                         game.MovementComponent.Remove(keyValue.Key);
                         game.CollisionComponent.Remove(keyValue.Key);
                         break;
+
                 }
             }
         }

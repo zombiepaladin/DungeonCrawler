@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Systems;
@@ -50,6 +51,9 @@ namespace DungeonCrawler.Systems
             Weapon = 0x80,
             Skill = 0x100,
             NPC = 0x200,
+            ExplodingDroid = 0x1000,
+            HealingStation = 0x400,
+            PortableShield = 0x800,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
@@ -79,6 +83,13 @@ namespace DungeonCrawler.Systems
             NPCEnemy = 0x204,
             NPCDoor = 0x220,
             
+            DroidEnemy=0x1004,
+            StationPlayer=0x402,
+            ShieldBullet=0x808,
+            ShieldEnemy=0x804,
+
+
+            
            
         }
 
@@ -104,8 +115,11 @@ namespace DungeonCrawler.Systems
         {
             uint roomID;
 
-            foreach (Player player in _game.PlayerComponent.All)
+            List<Player> players = new List<Player>();
+            foreach (Player player in _game.PlayerComponent.All) { players.Add(player); }
+            for (int p = 0; p < players.Count; p++)
             {
+                Player player = players[p];
                 //Get all collisions in the room.
                 roomID = _game.PositionComponent[player.EntityID].RoomID;
                 List<Collideable> collideablesInRoom = _game.CollisionComponent.InRoom(roomID);
@@ -121,7 +135,7 @@ namespace DungeonCrawler.Systems
 
                         CollisionType type = getCollisionType(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                         switch (type)
-                        {
+                        {  
                             case CollisionType.Player:
                                 PlayerPlayerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -152,6 +166,7 @@ namespace DungeonCrawler.Systems
                             case CollisionType.EnemyBullet:
                                 EnemyBulletCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.ShieldEnemy:
                             case CollisionType.EnemyStatic:
                                 EnemyStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -161,6 +176,7 @@ namespace DungeonCrawler.Systems
                             case CollisionType.EnemyWeapon:
                                 EnemyWeaponCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                            case CollisionType.ShieldBullet:
                             case CollisionType.BulletStatic:
                                 BulletStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -168,17 +184,23 @@ namespace DungeonCrawler.Systems
                                 BulletDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillBullet:
+                                break;
                             case CollisionType.SkillCollectible:
+                                break;
                             case CollisionType.SkillDoor:
+                                break;
                             case CollisionType.SkillEnemy:
+                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
+                                break;
                             case CollisionType.SkillStatic:
-                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillPlayer:
+                                SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID, true);
                                 break;
 
                             case CollisionType.NPCPlayer:
-                                NPCPlayerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                NPCPlayerCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);                                
                                 break;
                             case CollisionType.NPCStatic:
                                 NPCStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
@@ -186,9 +208,20 @@ namespace DungeonCrawler.Systems
                             case CollisionType.NPCDoor:
                                 NPCDoorCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+
                             case CollisionType.NPCEnemy:
                                 NPCEnemyCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
+                                
+                            case CollisionType.StationPlayer:
+                                HealingStationCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
+
+                          
+                            case CollisionType.DroidEnemy:
+                                ExplodingDroidCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
+
 
                         }
                     }
@@ -657,7 +690,7 @@ namespace DungeonCrawler.Systems
             throw new NotImplementedException();
         }
 
-        private void SkillCollision(uint p, uint p_2)
+        private void SkillStaticCollision(uint p, uint p_2)
         {  
             //TODO: actuall skill collision
             uint skillId, oId;
@@ -680,7 +713,7 @@ namespace DungeonCrawler.Systems
             }
         }
 
-        private void SkillProjectileCollision(uint p, uint p_2, bool friendly)
+        private void SkillCollision(uint p, uint p_2, bool friendly)
         {
             uint skillId, oId;
             if (_game.SkillProjectileComponent.Contains(p))
@@ -696,8 +729,148 @@ namespace DungeonCrawler.Systems
             SkillProjectile skill = _game.SkillProjectileComponent[skillId];
 
             _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+
+            if (_game.SkillProjectileComponent.Contains(skillId))
+            {
+                _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
+            }
         }
-        
+
+        private void SkillAoECollision(uint p, uint p_2, bool friendly)
+        {
+            uint skillId, oId;
+            if (_game.SkillProjectileComponent.Contains(p))
+            {
+                skillId = p;
+                oId = p_2;
+            }
+            else
+            {
+                skillId = p_2;
+                oId = p;
+            }
+            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+        }
+        /// <summary>
+        /// Handles Enemy/ExplodingDroid collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
+        private void ExplodingDroidCollision(uint p, uint p_2)
+        {
+            uint droidId, enemyId;
+            if (_game.ExplodingDroidComponent.Contains(p))
+            {
+                droidId = p;
+                enemyId = p_2;
+            }
+            else
+            {
+                enemyId = p;
+                droidId = p_2;
+            }
+
+            //Factor in damage
+            Enemy enemy = _game.EnemyComponent[enemyId];
+            Sprite sprite;
+            TimedEffect timedEffect;
+            DoDamage(enemy, 3);
+
+            uint eid = Entity.NextEntity();
+
+            timedEffect = new TimedEffect()
+            {
+                EntityID = eid,
+                TotalDuration = 1,
+                TimeLeft = 0.3f,
+            };
+            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+            sprite = new Sprite()
+            {
+                EntityID = eid,
+                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                SpriteBounds = new Rectangle(68, 8, 40, 37),
+            };
+            _game.SpriteComponent.Add(eid, sprite);
+
+            _game.PositionComponent.Add(eid, _game.PositionComponent[droidId]);
+
+            _game.GarbagemanSystem.ScheduleVisit(droidId, GarbagemanSystem.ComponentType.Effect);
+
+            if (_game.MovementComponent.Contains(enemyId))
+            {
+                Vector2 directionOfKnockback = (_game.PositionComponent[droidId].Center -
+                    _game.PositionComponent[enemyId].Center);
+                if (directionOfKnockback == Vector2.Zero) directionOfKnockback = new Vector2(1, 0);
+
+                directionOfKnockback.Normalize();
+
+                //knockback
+                Position newLocation = _game.PositionComponent[enemyId];
+                newLocation.Center -= directionOfKnockback * 10;
+
+                _game.PositionComponent[enemyId] = newLocation;
+            }
+        }
+
+        /// <summary>
+        /// Handles Player/HealingStation collisions.
+        /// </summary>
+        /// <param name="p">First entityID</param>
+        /// <param name="p_2">Second entityID</param>
+        private void HealingStationCollision(uint p, uint p_2)
+        {
+            uint stationId, playerId;
+            if (_game.HealingStationComponent.Contains(p))
+            {
+                stationId = p;
+                playerId = p_2;
+            }
+            else
+            {
+                playerId = p;
+                stationId = p_2;
+            }
+
+            Player player = _game.PlayerComponent[playerId];
+            HealingStation healingStation = _game.HealingStationComponent[stationId];
+
+            if (healingStation.healthAvailable > 0)
+            {
+                float playerHealth = _game.PlayerInfoComponent[player.EntityID].Health;
+
+                if (playerHealth < 100 && player.PlayerRace != Aggregate.EarthianPlayer)
+                {
+                    int healthBonus = 100 - (int)playerHealth;
+                    if (healingStation.healthAvailable >= healthBonus)
+                    {
+                        player.abilityModifiers.HealthBonus += healthBonus;
+                        healingStation.healthAvailable -= healthBonus;
+                    }
+
+                    else
+                    {
+                        player.abilityModifiers.HealthBonus += healingStation.healthAvailable;
+                        healingStation.healthAvailable = 0;
+                        _game.GarbagemanSystem.ScheduleVisit(healingStation.EntityID, GarbagemanSystem.ComponentType.Effect);
+                    }
+
+                    _game.PlayerComponent[player.EntityID] = player;
+                    _game.HealingStationComponent[healingStation.EntityID] = healingStation;
+                }
+            }
+
+            //Healing Station is empty
+            else
+            {
+                _game.GarbagemanSystem.ScheduleVisit(healingStation.EntityID, GarbagemanSystem.ComponentType.Effect);
+            }
+
+        }
+
+
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
@@ -719,12 +892,18 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p))
                 obj1 = CollisionType.Trigger;
-            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p)||_game.SkillDeployableComponent.Contains(p))
+            else if (_game.SkillProjectileComponent.Contains(p) || _game.SkillAoEComponent.Contains(p) || _game.SkillDeployableComponent.Contains(p))
                 obj1 = CollisionType.Skill;
             else if (_game.WeaponComponent.Contains(p))
                 obj1 = CollisionType.Weapon;
+            else if (_game.ExplodingDroidComponent.Contains(p))
+                obj1 = CollisionType.ExplodingDroid;
             else if (_game.NPCComponent.Contains(p))
                 obj1 = CollisionType.NPC;
+            else if (_game.HealingStationComponent.Contains(p))
+                obj1 = CollisionType.HealingStation;
+            else if (_game.PortableShieldComponent.Contains(p))
+                obj1 = CollisionType.PortableShield;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -745,8 +924,14 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Skill;
             else if (_game.WeaponComponent.Contains(p_2))
                 obj2 = CollisionType.Weapon;
+            else if (_game.ExplodingDroidComponent.Contains(p_2))
+                obj2 = CollisionType.ExplodingDroid;
             else if (_game.NPCComponent.Contains(p_2))
                 obj2 = CollisionType.NPC;
+            else if (_game.HealingStationComponent.Contains(p_2))
+                obj2 = CollisionType.HealingStation;
+            else if (_game.PortableShieldComponent.Contains(p_2))
+                obj2 = CollisionType.PortableShield;
             else //Static
                 obj2 = CollisionType.Static;
 

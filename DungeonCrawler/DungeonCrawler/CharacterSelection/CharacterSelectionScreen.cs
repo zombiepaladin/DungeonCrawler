@@ -4,6 +4,8 @@
 //
 // Author: Joseph Shaw
 //
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
+//
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
 // Released under the Microsoft Permissive Licence 
@@ -126,14 +128,14 @@ namespace DungeonCrawler
         public void LoadContent(CharSelectPlayer player)
         {
             // Set up the background
-            titleTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectBackground");
+            titleTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectBackground");
 
             titleImage = new ImageSprite(titleTexture, viewport.Width / 2, viewport.Height / 2, Color.White);
             titleImage.Visible = true;
             titleImage.Scale = (float)(new Vector2(viewport.Width, viewport.Height).Length()) / (float)(new Vector2(titleTexture.Width, titleTexture.Height).Length());
 
             // Set the control images
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectControls2");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectControls2");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height * 0.365f);
             controlsImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             controlsImage.Scale = 1;
@@ -143,7 +145,7 @@ namespace DungeonCrawler
 
             // Initialize the character buttons and the text for each button and the character's aggregate
             // The Cultist Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectCultist");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectCultist");
             buttonPos = new Vector2(center.X - viewport.Width / 4, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -156,7 +158,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 0] = Aggregate.CultistPlayer;
 
             // The Earthian Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectEarthian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectEarthian");
             buttonPos = new Vector2(center.X, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -168,7 +170,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 1] = Aggregate.EarthianPlayer;
 
             // The Cyborg Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectCyborg");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectCyborg");
             buttonPos = new Vector2(center.X + viewport.Width / 4, center.Y - viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -180,7 +182,7 @@ namespace DungeonCrawler
             buttonAggregates[0, 2] = Aggregate.CyborgPlayer;
 
             // The Gargranian Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectGargranian");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectGargranian");
             buttonPos = new Vector2(center.X - viewport.Width / 4, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -192,7 +194,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 0] = Aggregate.GargranianPlayer;
 
             // The Space Pirate Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectSpacePirate");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectSpacePirate");
             buttonPos = new Vector2(center.X, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -204,7 +206,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 1] = Aggregate.SpacePiratePlayer;
 
             // The Zombie Character
-            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/charSelectZombie");
+            buttonTexture = game.Content.Load<Texture2D>("Spritesheets/CharSelect/charSelectZombie");
             buttonPos = new Vector2(center.X + viewport.Width / 4, center.Y + viewport.Height / 6);
             buttonImage = new ImageSprite(buttonTexture, (int)buttonPos.X, (int)buttonPos.Y, Color.White * (1f / 1));
             buttonImage.Scale = 1;
@@ -217,7 +219,7 @@ namespace DungeonCrawler
             buttonAggregates[1, 2] = Aggregate.ZombiePlayer;
 
             currentPlayer = player;
-            currentPlayer.cursor.Position = buttons[0, 0].Position;
+            currentPlayer.Cursor.Position = buttons[0, 0].Position;
 
             // Initialized the sound effect
             soundEffect = game.Content.Load<SoundEffect>("Audio/BClick_Menu");
@@ -231,49 +233,49 @@ namespace DungeonCrawler
         public void Update(GameTime gameTime)
         {
             // Allows the game to exit
-            if (GamePad.GetState(currentPlayer.playerIndex).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            InputHelper state = InputHelper.GetInput(currentPlayer.playerIndex);
+            if (state.IsPressed(Keys.Escape, Buttons.Back))
             {
-                currentPlayer.timer = controllerDelay;
+                currentPlayer.Timer = controllerDelay;
                 selectionDone = true;
             }
 
-            if (!currentPlayer.connected) selectionDone = true;
+            if (!currentPlayer.Connected) selectionDone = true;
 
-            if (currentPlayer.connected)
+            if (currentPlayer.Connected)
             {
-                currentPlayer.timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
-                if (!currentPlayer.selected && currentPlayer.timer <= 0)
+                currentPlayer.Timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
+                if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                 {
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Down == ButtonState.Pressed || GamePad.GetState(currentPlayer.playerIndex).DPad.Up == ButtonState.Pressed
-                        || (Keyboard.GetState().IsKeyDown(Keys.Down) || Keyboard.GetState().IsKeyDown(Keys.Up)))
+                    if (state.IsPressed(Keys.Down, Buttons.DPadDown) || state.IsPressed(Keys.Up, Buttons.DPadUp))
                     {
                         currentPlayer.MoveUpDown();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Left == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Left))
+                    if (state.IsPressed(Keys.Left, Buttons.DPadLeft))
                     {
                         currentPlayer.MoveLeft();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (GamePad.GetState(currentPlayer.playerIndex).DPad.Right == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Right))
+                    if (state.IsPressed(Keys.Right, Buttons.DPadRight))
                     {
                         currentPlayer.MoveRight();
-                        currentPlayer.cursor.Position = buttons[currentPlayer.yPos, currentPlayer.xPos].Position;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
+                        currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
 
-                    if (GamePad.GetState(currentPlayer.playerIndex).Buttons.A == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.A))
+                    if (state.IsPressed(Keys.Enter, Buttons.A))
                     {
-                        currentPlayer.selected = true;
-                        currentPlayer.gameSave.aggregate = (int)buttonAggregates[currentPlayer.yPos, currentPlayer.xPos];
-                        currentPlayer.gameSave.charType.Text = buttonTexts[currentPlayer.yPos, currentPlayer.xPos].Text;
+                        currentPlayer.Selected = true;
+                        currentPlayer.GameSave.Aggregate = (int)buttonAggregates[currentPlayer.YPos, currentPlayer.XPos];
+                        currentPlayer.GameSave.CharType.Text = buttonTexts[currentPlayer.YPos, currentPlayer.XPos].Text;
                         selectionDone = true;
-                        currentPlayer.timer = controllerDelay;
+                        currentPlayer.Timer = controllerDelay;
                     }
                 }
             }
@@ -283,7 +285,7 @@ namespace DungeonCrawler
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (currentPlayer.yPos == i && currentPlayer.xPos == j)
+                    if (currentPlayer.YPos == i && currentPlayer.XPos == j)
                         buttons[i, j].Color = selected;
                     else
                         buttons[i, j].Color = unselected;
@@ -325,7 +327,7 @@ namespace DungeonCrawler
                 }
 
                 // Draw the player cursor 
-                spriteBatch.Draw(currentPlayer.cursor.Image, currentPlayer.cursor.Position, new Rectangle?(), currentPlayer.cursor.Color, 0, currentPlayer.cursor.Origin, 1, SpriteEffects.None, 1);
+                spriteBatch.Draw(currentPlayer.Cursor.Image, currentPlayer.Cursor.Position, new Rectangle?(), currentPlayer.Cursor.Color, 0, currentPlayer.Cursor.Origin, 1, SpriteEffects.None, 1);
 
                 spriteBatch.End();
             }

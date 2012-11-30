@@ -26,7 +26,8 @@ namespace DungeonCrawler.Components
     public enum QuestStatus
     {
        InProgress,
-       Finished,
+       Completed,
+       TurnedIn,
     };
 
     /// <summary>
