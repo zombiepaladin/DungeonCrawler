@@ -726,6 +726,8 @@ namespace DungeonCrawler
             // Dispose the container.
             container.Dispose();
 
+            DungeonCrawlerGame.game.Quests = characterSaveData.quests;
+
             return characterSaveData;
         }
 
