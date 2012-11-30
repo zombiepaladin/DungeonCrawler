@@ -81,6 +81,9 @@ namespace DungeonCrawler.Entities
             HUDAggregateFactory hudagg = new HUDAggregateFactory(game);
             InvAggregateFactory invagg = new InvAggregateFactory(game);
 
+            int defaultHealthPotQty = 1;
+            int defaultPsiPotQty = 1;
+
             //Miscelaneous modifyers for the potential ability modifiers
             //Placeholders for racial/class bonuses and item bonuses.
             int miscMeleeAttack = 0;
@@ -117,6 +120,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -244,6 +250,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -380,6 +389,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -502,6 +514,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -650,6 +665,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -771,6 +789,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -892,6 +913,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         WeaponID = game.WeaponFactory.CreateWeapon(weaponType),
+                        HealthPotsQty = defaultHealthPotQty,
+                        PsiPotsQty = defaultPsiPotQty,
+                        PogsQty = 0,
                     };
                     game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
@@ -1047,6 +1071,9 @@ namespace DungeonCrawler.Entities
             gameSave.fileName = fileName;
             info.FileName = fileName;
             gameSave.weaponType = (int)weaponType;
+            gameSave.healthPotions = defaultHealthPotQty;
+            gameSave.manaPotions = defaultPsiPotQty;
+            gameSave.pogs = 0;
 
             game.QuestLogSystem.ActivateQuest(entityID, 0);
             game.QuestLogSystem.ActivateQuest(entityID, 1);
@@ -1105,6 +1132,9 @@ namespace DungeonCrawler.Entities
                 {
                     EntityID = entityID,
                     WeaponID = game.WeaponFactory.CreateWeapon((WeaponType)gameSave.weaponType),
+                    HealthPotsQty = gameSave.healthPotions,
+                    PsiPotsQty = gameSave.manaPotions,
+                    PogsQty = gameSave.pogs,
                 };
                 game.EquipmentComponent.Add(equipment.EntityID, equipment);
 
