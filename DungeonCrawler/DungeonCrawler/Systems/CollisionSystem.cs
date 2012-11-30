@@ -187,11 +187,11 @@ namespace DungeonCrawler.Systems
                                 break;
                             case CollisionType.SkillCollectible:
                                 break;
-                            case CollisionType.SkillDoor:
-                                break;
+                                
                             case CollisionType.SkillEnemy:
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
                                 break;
+                            case CollisionType.SkillDoor:
                             case CollisionType.SkillStatic:
                                 SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
@@ -787,7 +787,7 @@ namespace DungeonCrawler.Systems
             sprite = new Sprite()
             {
                 EntityID = eid,
-                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/EngineeringOffense"),
+                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
                 SpriteBounds = new Rectangle(68, 8, 40, 37),
             };
             _game.SpriteComponent.Add(eid, sprite);

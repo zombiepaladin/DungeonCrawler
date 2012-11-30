@@ -190,12 +190,12 @@ namespace DungeonCrawler.Systems
 
 
                 game.PlayerInfoComponent[player.EntityID] = info;
-                /*
-                /*
+                
+                
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
-                HUD hud = game.HUDComponent[player.EntityID];
-                HUDSprite hs;
+               // HUD hud = game.HUDComponent[player.EntityID];
+              //  HUDSprite hs;
                 Inventory inv = game.InventoryComponent[player.EntityID];
                 InventorySprite isb;
                 InventorySprite iss;
@@ -205,9 +205,9 @@ namespace DungeonCrawler.Systems
                 SkillType desiredSkill;
                 if (state.IsPressed(Keys.D1, Buttons.A))
                 {
-                    hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
                     
                     //Set Skill1 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill1;
@@ -225,9 +225,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (state.IsPressed(Keys.D2, Buttons.B))
                 {
-                    hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
+                   // hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
 
                     //Set skill2 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill2;
@@ -239,9 +239,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (state.IsPressed(Keys.D3, Buttons.X))
                 {
-                    hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
+                   // hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
+                    //hs.isSeen = true;
+                   // game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
 
                     //Set skill3 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill3;
@@ -252,9 +252,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (state.IsPressed(Keys.D4, Buttons.Y))
                 {
-                    hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
                     
                     //Set skill4 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill4;
@@ -265,9 +265,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (state.IsPressed(Keys.D5, Buttons.DPadUp))
                 {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                     
                     //Set Skill5 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill5;
@@ -276,11 +276,11 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (state.IsPressed(Keys.Down, Buttons.DPadDown))
+                if (state.IsPressed(Keys.D6, Buttons.DPadDown))
                 {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                     
                     //Set Skill6 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill6;
@@ -289,11 +289,11 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (state.IsPressed(Keys.Left, Buttons.DPadLeft))
+                if (state.IsPressed(Keys.D7, Buttons.DPadLeft))
                 {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                     
                     //Set SKill7 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill7;
@@ -304,9 +304,9 @@ namespace DungeonCrawler.Systems
                 }
                 if (state.IsPressed(Keys.D8, Buttons.DPadRight))
                 {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = true;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
+                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
+                    //hs.isSeen = true;
+                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                     
                     //Set Skill8 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill8;
@@ -315,7 +315,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (state.IsPressed(Keys.D9, Buttons.))
+                if (state.IsPressed(Keys.D9, Buttons.DPadDown))
                 {
                     //Set Skill9 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill9;
@@ -324,7 +324,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (state.IsPressed(Keys.Tab, Buttons.LeftShoulder)
+                if (state.IsPressed(Keys.Tab, Buttons.LeftShoulder))
                 {
                     isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
                     isb.isSeen = true;
@@ -335,7 +335,7 @@ namespace DungeonCrawler.Systems
                 }
                 #endregion // end key down
                 #region key/Button UP
-                if (!state.IsPressed(Keys.D1, Buttons.A))
+                /*if (!state.IsPressed(Keys.D1, Buttons.A))
                 {
                     hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
                     hs.isSeen = false;
@@ -397,9 +397,10 @@ namespace DungeonCrawler.Systems
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                 }
+                 **/
                 #endregion //end key up
                 #endregion //end hud control
-                */
+                
             }
         }
 

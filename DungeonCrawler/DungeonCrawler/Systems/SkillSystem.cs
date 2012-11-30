@@ -8784,69 +8784,143 @@ namespace DungeonCrawler.Systems
         
         public void TriggerEffect(SkillType type, int rank, bool friendly, uint target)    
         {
+            uint eid;
+            HealOverTime HoT;
+            TimedEffect time;
+            DamageOverTime DoT;
+            Buff buff;
             switch (type)
             {
                 #region Vermis Triggered SKills
 
                 #region ThrownBlade
                 case SkillType.ThrownBlades:
+                    if (friendly)
+                        return;
+
+                    eid = Entity.NextEntity();
+                    InstantEffect instant = new InstantEffect() { EntityID = eid, isTriggered = true };
+                    _game.InstantEffectComponent.Add(eid, instant);
+                    DirectDamage damage;
                     switch (rank)
                     {
                         #region Rank 1
                         case 1:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 10,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 2
                         case 2:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 10,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 3
                         case 3:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 11,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 4
                         case 4:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 11,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 5
                         case 5:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 12,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 6
                         case 6:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 12,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 7
                         case 7:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 13,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 8
                         case 8:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 13,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 9
                         case 9:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 14,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
 
                         #region Rank 10
                         case 10:
+                            damage = new DirectDamage()
+                            {
+                                Damage = 15,
+                                EntityID = eid,
+                                TargetID = target,
+                            };
                             break;
                         #endregion
                         default:
                             throw new Exception("Unimplemented Rank");
                     }
+                    _game.DirectDamageComponent.Add(eid, damage);
                     break;
                 #endregion
 
+                    //unsure how to properly trigger, left unimplemented
                 #region Caustic Weapons
                 case SkillType.CausticWeapons:
                     switch (rank)
@@ -8906,117 +8980,252 @@ namespace DungeonCrawler.Systems
                     break;
                 #endregion
 
-                //May Change
-                #region GraspingBlade
-                case SkillType.Regeneration:
-                    switch (rank)
-                    {
-                        #region Rank 1
-                        case 1:
-                            break;
-                        #endregion
-
-                        #region Rank 2
-                        case 2:
-                            break;
-                        #endregion
-
-                        #region Rank 3
-                        case 3:
-                            break;
-                        #endregion
-
-                        #region Rank 4
-                        case 4:
-                            break;
-                        #endregion
-
-                        #region Rank 5
-                        case 5:
-                            break;
-                        #endregion
-
-                        #region Rank 6
-                        case 6:
-                            break;
-                        #endregion
-
-                        #region Rank 7
-                        case 7:
-                            break;
-                        #endregion
-
-                        #region Rank 8
-                        case 8:
-                            break;
-                        #endregion
-
-                        #region Rank 9
-                        case 9:
-                            break;
-                        #endregion
-
-                        #region Rank 10
-                        case 10:
-                            break;
-                        #endregion
-                        default:
-                            throw new Exception("Unimplemented Rank");
-                    }
-                    break;
-                #endregion
-
                 #region BenignParasite
                 case SkillType.BenignParasite:
+                    if (!friendly)
+                        return;
+                    eid = Entity.NextEntity();
+            
                     switch (rank)
                     {
                         #region Rank 1
                         case 1:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 1,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 10,
+                                TotalDuration = 10,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 2
                         case 2:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 1,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 12,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 3
                         case 3:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 2,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 12,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 4
                         case 4:
+                             HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 2,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 5
                         case 5:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 3,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 6
                         case 6:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 3,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 7
                         case 7:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 4,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 8
                         case 8:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 4,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 9
                         case 9:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 5,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 10
                         case 10:
+                            HoT = new HealOverTime()
+                            {
+                                AmountPerTick = 7,
+                                CurrentStack = 1,
+                                CurrentTime = 0,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.HealOverTimeComponent.Add(eid, HoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 20,
+                                TotalDuration = 20,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+
                             break;
                         #endregion
                         default:
@@ -9027,55 +9236,252 @@ namespace DungeonCrawler.Systems
 
                 #region Malicious Parasite
                 case SkillType.MaliciousParasite:
+                    if (friendly)
+                        return;
+
+                    eid = Entity.NextEntity();
                     switch (rank)
                     {
                         #region Rank 1
                         case 1:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 1,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 10,
+                                TotalDuration = 10,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                                
                             break;
                         #endregion
 
                         #region Rank 2
                         case 2:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 1,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 10,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                                
                             break;
                         #endregion
 
                         #region Rank 3
                         case 3:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 2,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 12,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                                
                             break;
                         #endregion
 
                         #region Rank 4
                         case 4:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 2,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 5
                         case 5:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 3,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 6
                         case 6:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 3,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 7
                         case 7:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 4,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 8
                         case 8:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 4,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 9
                         case 9:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 5,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
 
                         #region Rank 10
                         case 10:
+                            DoT = new DamageOverTime()
+                            {
+                                AmountPerTick = 7,
+                                CurrentStack = 1,
+                                CurrentTime = 10,
+                                EntityID = eid,
+                                MaxStack = 1,
+                                TargetID = target,
+                                TickTime = 1,
+                            };
+                            _game.DamageOverTimeComponent.Add(eid, DoT);
+
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 20,
+                                TotalDuration = 20,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
                             break;
                         #endregion
                         default:
@@ -9086,55 +9492,455 @@ namespace DungeonCrawler.Systems
 
                 #region Mindless Parasite
                 case SkillType.MindlessParasites:
+                    int mod;
+                    eid = Entity.NextEntity();
+                    if (friendly)
+                        mod = 1;
+                    else
+                        mod = -1;
+
                     switch (rank)
                     {
                         #region Rank 1
                         case 1:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 10,
+                                TotalDuration = 10,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.1)),
+                                DefenseMelee = mod * 1,
+                                DefenseRanged = mod*1,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
+
                             break;
                         #endregion
 
                         #region Rank 2
                         case 2:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 12,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.1)),
+                                DefenseMelee = mod * 1,
+                                DefenseRanged = mod*1,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 3
                         case 3:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 12,
+                                TotalDuration = 12,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.2)),
+                                DefenseMelee = mod * 2,
+                                DefenseRanged = mod*2,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
+                            
                         #endregion
 
                         #region Rank 4
                         case 4:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.2)),
+                                DefenseMelee = mod * 2,
+                                DefenseRanged = mod*2,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 5
                         case 5:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 14,
+                                TotalDuration = 14,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.3)),
+                                DefenseMelee = mod * 3,
+                                DefenseRanged = mod*3,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 6
                         case 6:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.3)),
+                                DefenseMelee = mod * 3,
+                                DefenseRanged = mod*3,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 7
                         case 7:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 16,
+                                TotalDuration = 16,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.4)),
+                                DefenseMelee = mod * 4,
+                                DefenseRanged = mod*4,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 8
                         case 8:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.4)),
+                                DefenseMelee = mod * 4,
+                                DefenseRanged = mod*4,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 9
                         case 9:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 18,
+                                TotalDuration = 18,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.5)),
+                                DefenseMelee = mod * 5,
+                                DefenseRanged = mod*5,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
 
                         #region Rank 10
                         case 10:
+                            time = new TimedEffect()
+                            {
+                                EntityID = eid,
+                                TimeLeft = 20,
+                                TotalDuration = 20,
+                            };
+                            _game.TimedEffectComponent.Add(eid, time);
+                            buff = new Buff()
+                            {
+                                EntityID = eid,
+                                MovementSpeed = mod*((int)(_game.MovementComponent[target].Speed*.7)),
+                                DefenseMelee = mod * 7,
+                                DefenseRanged = mod*7,
+                                AttackMelee=0,
+                                AttackRanged=0,
+                                AttackSpeed=0,
+                                isPercentAttackMelee=false,
+                                isPercentAttackRanged=false,
+                                isPercentAttackSpeed=false,
+                                
+                                isPercentDefenseMelee=false,
+                                isPercentDefenseRanged=false,
+                                isPercentFatigue=false,
+                                isPercentHealth=false,
+                                isPercentMovementSpeed=true,
+                                Fatigue=0,
+                                Health=0,
+                                isPercentPsi=false,
+                                isPercentResistPoison=false,
+                                isPercentWeaponAccuracy=false,
+                                isPercentWeaponSpeed=false,
+                                isPercentWeaponStrength=false,
+                                Psi=0,
+                                ResistPoison=0,
+                                TargetID=target,
+                                WeaponAccuracy=0,
+                                WeaponSpeed=0,
+                                WeaponStrength=0,
+                            };
+                            _game.BuffComponent.Add(eid, buff);
                             break;
                         #endregion
                         default:
