@@ -725,7 +725,8 @@ namespace DungeonCrawler
 
             // Dispose the container.
             container.Dispose();
-
+            if (characterSaveData.quests == null)
+                characterSaveData.quests = new List<Quest>();
             DungeonCrawlerGame.game.Quests = characterSaveData.quests;
 
             return characterSaveData;
