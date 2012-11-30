@@ -76,6 +76,21 @@ namespace DungeonCrawler.Components
         /// ID of the item equiped to the 4th item slot.
         /// </summary>
         public uint Item4ID;
+
+        /// <summary>
+        /// Quantity of health potions for this entity
+        /// </summary>
+        public int HealthPotsQty;
+
+        /// <summary>
+        /// Quantity of psi potions for this entity
+        /// </summary>
+        public int PsiPotsQty;
+
+        /// <summary>
+        /// Quantity of pogs for this entity
+        /// </summary>
+        public int PogsQty;
     }
 
     public class EquipmentComponent : GameComponent<Equipment>

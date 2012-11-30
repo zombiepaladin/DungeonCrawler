@@ -46,6 +46,7 @@ namespace DungeonCrawler.Entities
     public enum BulletType
     {
         StandardBullet,
+        TurretBullet,
     }
 
     /// <summary>
@@ -182,33 +183,33 @@ namespace DungeonCrawler.Entities
             switch (type)
             {
                 case WeaponType.ShockRod:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/ShockRod");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/ShockRod");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.DeadHand:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/DeadHand");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/DeadHand");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.PsychicStun:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/PsychicStun");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/PsychicStun");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.WeakSword:
                 case WeaponType.StandardSword:
                 case WeaponType.StrongSword:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/StandardSword");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.StandardGun:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StandardSword");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/StandardSword");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.StolenCutlass:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/StolenCutlass");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/StolenCutlass");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
                 case WeaponType.TreeBranch:
-                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/TreeBranch");
+                    sprite.SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/TreeBranch");
                     sprite.SpriteBounds = new Rectangle(0, y, 64, 64);
                     break;
             }
@@ -261,11 +262,31 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/Bullets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
                     position.Radius = 5;
                     break;
+
+                case BulletType.TurretBullet:
+                    position.Center -= direction * 63;
+                    bullet = _standardBullet;
+                    bullet.EntityID = eid;
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = 300,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Weapons/Bullets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                    };
+                    position.Radius = 5;
+                    break;
+
                 default:
                     throw new Exception("Unknown BulletType");
             }

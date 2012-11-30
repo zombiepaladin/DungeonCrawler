@@ -6,11 +6,10 @@
 //
 // Modified: Nick Stanley added Hud Controls, 10/15/2012
 // Modified: Daniel Rymph added Inventory Controls, 10/17/2012
-// Modified: Daniel Rymph: Fixed movement controls, and removed inventory controls, Assignment 9 11/27/2012
 // Modified: Devin Kelly-Collins added Attack buttons in update method, 10/24/2012
 // Modified by Samuel Fike and Jiri Malina: Added support for SpriteAnimationComponent
 // Modified: Nick Boen - Added a test control for using a skill (buffs speed)
-// Modified: Adam Clark - Added a test control for using a skill
+// Modified: Devin Kelly-Collins - Implemented UserInput (11/26/12)
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -20,6 +19,7 @@
 
 #region Using Statements
 using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -40,10 +40,6 @@ namespace DungeonCrawler.Systems
         /// The game this system belongs to
         /// </summary>
         private DungeonCrawlerGame game;
-
-        private KeyboardState oldKeyboardState;
-
-        private GamePadState[] oldGamePadState;
 
         private int getRank(uint eid, SkillType skill)
         {
@@ -103,7 +99,6 @@ namespace DungeonCrawler.Systems
         public InputSystem(DungeonCrawlerGame game)
         {
             this.game = game;
-            oldGamePadState = new GamePadState[4];
         }
 
         #endregion
@@ -118,65 +113,37 @@ namespace DungeonCrawler.Systems
         /// </param>
         public void Update(float elapsedTime)
         {
-
             // Update all entities that have a movement component
-            foreach (Player player in game.PlayerComponent.All)
+            List<Player> players = new List<Player>();
+            foreach(Player player in game.PlayerComponent.All) { players.Add(player); }
+            foreach (Player player in players)
             {
                 // Grab input for the player
-                KeyboardState keyboardState = Keyboard.GetState(player.PlayerIndex);
-                GamePadState gamePadState = GamePad.GetState(player.PlayerIndex);
+                InputHelper state = InputHelper.GetInput(player.PlayerIndex);
 
                 // Update the player's movement component
                 Movement movement = game.MovementComponent[player.EntityID];
-                //movement.Direction = gamePadState.ThumbSticks.Left;
-                //Multiply set movement directions seperately and multiple the y direction by -1 to switch vertical movement.
-                //Daniel Rymph
-                movement.Direction.X = gamePadState.ThumbSticks.Left.X;
-                movement.Direction.Y = -1*(gamePadState.ThumbSticks.Left.Y);
+                movement.Direction = state.GetLeftDirection();
 
                 SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[player.EntityID];
 
-                if (keyboardState.IsKeyDown(Keys.W))
+                if (movement.Direction.Y < 0)
                 {
-                    //spriteAnimation.CurrentAnimationRow = (int) AnimationMovementDirection.Up;
-                    movement.Direction.Y = -1;
+                    spriteAnimation.CurrentAnimationRow = (int) AnimationMovementDirection.Up;
                 }
-                if (keyboardState.IsKeyDown(Keys.S))
-                {
-                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
-                    movement.Direction.Y = 1;
-                }
-                if (keyboardState.IsKeyDown(Keys.A))
-                {
-                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
-                    movement.Direction.X = -1;
-                }
-                if (keyboardState.IsKeyDown(Keys.D))
-                {
-                    //spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
-                    movement.Direction.X = 1;
-                }
-
-                //Check for movement direction and change animation accordingly.
-                //Daniel Rymph
-                if (movement.Direction.Y > 0.0)
+                if (movement.Direction.Y > 0)
                 {
                     spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Down;
                 }
-                else if (movement.Direction.Y < 0.0)
-                {
-                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Up;
-                }
-
-                if (movement.Direction.X > 0.0)
-                {
-                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
-                }
-                else if(movement.Direction.X < 0.0)
+                if (movement.Direction.X < 0)
                 {
                     spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Left;
                 }
-
+                if (movement.Direction.X > 0)
+                {
+                    spriteAnimation.CurrentAnimationRow = (int)AnimationMovementDirection.Right;
+                }
+                
                 if (movement.Direction != Vector2.Zero)
                 {
                     movement.Direction.Normalize();
@@ -196,14 +163,14 @@ namespace DungeonCrawler.Systems
                 PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
                 info.State = PlayerState.Default;
 
-                if(keyboardState.IsKeyDown(Keys.Enter) || gamePadState.IsButtonDown(Buttons.LeftTrigger))
+                if(state.IsPressed(Keys.Enter, Buttons.LeftTrigger))
                 {
                     info.State = PlayerState.Attacking;
                 }
                
-                if (keyboardState.IsKeyDown(Keys.L) && !oldKeyboardState.IsKeyDown(Keys.L)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
+                if (state.IsPressed(Keys.L, Buttons.RightStick)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
 
-                if (keyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space))
+                if (state.IsPressed(Keys.Space, Buttons.RightTrigger))
                 {
                     uint thisPlayerKey = 0;
                     foreach(Player p in game.PlayerComponent.All)
@@ -221,8 +188,10 @@ namespace DungeonCrawler.Systems
                     //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ThrusterRush, 1, thisPlayerKey);
                 }
 
-                game.PlayerInfoComponent[player.EntityID] = info;
 
+                game.PlayerInfoComponent[player.EntityID] = info;
+                /*
+                /*
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                 HUD hud = game.HUDComponent[player.EntityID];
@@ -234,7 +203,7 @@ namespace DungeonCrawler.Systems
                 //Fields for selecting skills
                 SkillType currentActiveSkill = game.ActiveSkillComponent[player.EntityID].activeSkill;
                 SkillType desiredSkill;
-                if (gamePadState.IsButtonDown(Buttons.A) || keyboardState.IsKeyDown(Keys.D1))
+                if (state.IsPressed(Keys.D1, Buttons.A))
                 {
                     hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
                     hs.isSeen = true;
@@ -254,7 +223,7 @@ namespace DungeonCrawler.Systems
                     //game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID],1,300);
 
                 }
-                if (gamePadState.IsButtonDown(Buttons.B) || keyboardState.IsKeyDown(Keys.D2))
+                if (state.IsPressed(Keys.D2, Buttons.B))
                 {
                     hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
                     hs.isSeen = true;
@@ -268,7 +237,7 @@ namespace DungeonCrawler.Systems
                     }
 
                 }
-                if (gamePadState.IsButtonDown(Buttons.X) || keyboardState.IsKeyDown(Keys.D3))
+                if (state.IsPressed(Keys.D3, Buttons.X))
                 {
                     hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
                     hs.isSeen = true;
@@ -281,7 +250,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.Y) || keyboardState.IsKeyDown(Keys.D4))
+                if (state.IsPressed(Keys.D4, Buttons.Y))
                 {
                     hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
                     hs.isSeen = true;
@@ -294,7 +263,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.DPadUp) || keyboardState.IsKeyDown(Keys.D5))
+                if (state.IsPressed(Keys.D5, Buttons.DPadUp))
                 {
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = true;
@@ -307,7 +276,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.DPadDown) || keyboardState.IsKeyDown(Keys.D6))
+                if (state.IsPressed(Keys.Down, Buttons.DPadDown))
                 {
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = true;
@@ -320,7 +289,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.DPadLeft) || keyboardState.IsKeyDown(Keys.D7))
+                if (state.IsPressed(Keys.Left, Buttons.DPadLeft))
                 {
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = true;
@@ -333,7 +302,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.DPadRight) || keyboardState.IsKeyDown(Keys.D8))
+                if (state.IsPressed(Keys.D8, Buttons.DPadRight))
                 {
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = true;
@@ -346,7 +315,7 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if(keyboardState.IsKeyDown(Keys.D9))
+                if (state.IsPressed(Keys.D9, Buttons.))
                 {
                     //Set Skill9 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
                     desiredSkill = game.PlayerInfoComponent[player.EntityID].skill9;
@@ -355,61 +324,59 @@ namespace DungeonCrawler.Systems
                         game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
                     }
                 }
-                if (gamePadState.IsButtonDown(Buttons.LeftShoulder) || keyboardState.IsKeyDown(Keys.Tab))
+                if (state.IsPressed(Keys.Tab, Buttons.LeftShoulder)
                 {
-                    //Removed Code that would bring up the scrapped inventory screen.
-                    //The tab and left shoulder buttons can now be used for other fucntions
-                    //Daniel Rymph
-                    /*
                     isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
                     isb.isSeen = true;
                     game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
                     iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
                     iss.isSeen = true;
                     game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
-                    */
                 }
                 #endregion // end key down
                 #region key/Button UP
-                if (gamePadState.IsButtonUp(Buttons.A) && keyboardState.IsKeyUp(Keys.D1))
+                if (!state.IsPressed(Keys.D1, Buttons.A))
                 {
                     hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
                 }
-                if (gamePadState.IsButtonUp(Buttons.B) && keyboardState.IsKeyUp(Keys.D2))
+                if (!state.IsPressed(Keys.D2, Buttons.B))
                 {
                     hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
                 }
-                if (gamePadState.IsButtonUp(Buttons.X) && keyboardState.IsKeyUp(Keys.D3))
+                if (!state.IsPressed(Keys.D3, Buttons.X))
                 {
                     hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
                 }
-                if (gamePadState.IsButtonUp(Buttons.Y) && keyboardState.IsKeyUp(Keys.D4))
+                if (!state.IsPressed(Keys.D4, Buttons.Y))
                 {
                     hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
                 }
                 //A temporary solution...
-                if (gamePadState.IsButtonUp(Buttons.DPadRight) && keyboardState.IsKeyUp(Keys.Right)
-                    && gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left)
-                    && gamePadState.IsButtonUp(Buttons.DPadUp) && keyboardState.IsKeyUp(Keys.Up)
-                    && gamePadState.IsButtonUp(Buttons.DPadDown) && keyboardState.IsKeyUp(Keys.Down))
+                if (!state.IsPressed(Keys.Right, Buttons.DPadRight)
+                    && !state.IsPressed(Keys.Left, Buttons.DPadLeft)
+                    && !state.IsPressed(Keys.Up, Buttons.DPadUp)
+                    && !state.IsPressed(Keys.Down, Buttons.DPadDown))
                 {
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
                 }
-                if (gamePadState.IsButtonUp(Buttons.LeftShoulder) && keyboardState.IsKeyUp(Keys.Tab))
+                if (!state.IsPressed(Keys.Tab, Buttons.LeftShoulder))
                 {
-                    //Removed Code that would close the scrapped inventory screen.
-                    //The tab and left shoulder buttons can now be used for other fucntions
-                    //Daniel Rymph
+                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
+                    isb.isSeen = false;
+                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
+                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
+                    iss.isSeen = false;
+                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
                 }
                 /*
                 if (gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left))
@@ -429,12 +396,10 @@ namespace DungeonCrawler.Systems
                     hs = game.HUDSpriteComponent[hud.DPadSpriteID];
                     hs.isSeen = false;
                     game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }*/
+                }
                 #endregion //end key up
                 #endregion //end hud control
-                // Cache last frame's input state
-                oldKeyboardState = keyboardState;
-                oldGamePadState[(int)player.PlayerIndex] = gamePadState;
+                */
             }
         }
 

@@ -75,7 +75,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
                         SpriteBounds = new Rectangle(0,250,50,50),
                     };
                     position.Radius = 10;
@@ -97,7 +97,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
                         SpriteBounds = new Rectangle(300, 150, 50, 50),
                     };
                     position.Radius = 10;
@@ -119,7 +119,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
                         SpriteBounds = new Rectangle(250, 50, 50, 50),
                     };
                     position.Radius = 10;
@@ -141,7 +141,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/skillPlaceHolder2"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
                         SpriteBounds = new Rectangle(100, 0, 50, 50),
                     };
                     position.Radius = 10;
@@ -189,7 +189,7 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Weapons/Bullets/BlueBullet"),
                         SpriteBounds = new Rectangle(0, 0, 10, 10),
                     };
                     position.Radius = radius;
@@ -225,7 +225,7 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case SkillType.HealingStation:
+                case SkillType.PortableShop:
                     skillDeployable = new SkillDeployable()
                     {
                         EntityID = eid,
@@ -235,8 +235,8 @@ namespace DungeonCrawler.Entities
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/BlueBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/shop"),
+                        SpriteBounds = new Rectangle(343, 50, 24, 25),
                     };
                     position.Radius = 5;
                     break;

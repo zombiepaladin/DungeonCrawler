@@ -1,6 +1,4 @@
-Content\Spritesheets\wind_fae.xnb
 Content\Spritesheets\menuSelect.xnb
-Content\Spritesheets\gargranian.xnb
 Content\ControllerTGAs\xboxControllerBack.xnb
 Content\ControllerTGAs\xboxControllerButtonA.xnb
 Content\ControllerTGAs\xboxControllerButtonB.xnb
@@ -18,55 +16,15 @@ Content\ControllerTGAs\xboxControllerSpriteFont.xnb
 Content\ControllerTGAs\xboxControllerStart.xnb
 Content\Tilesets\Z18-TileA1.xnb
 Content\Tilesets\Z18-TileC.xnb
-Content\Spritesheets\charSelectGargranian.xnb
-Content\Spritesheets\charSelectPlayerOneCursor.xnb
-Content\Spritesheets\charSelectPlayerTwoCursor.xnb
-Content\Spritesheets\charSelectBackground.xnb
-Content\Spritesheets\charSelectPlayerFourCursor.xnb
-Content\Spritesheets\charSelectPlayerThreeCursor.xnb
 Content\Spritesheets\StatusBar.xnb
-Content\Spritesheets\cyborg.xnb
-Content\Spritesheets\MzombieBx2.xnb
-Content\Spritesheets\SpacePBig.xnb
-Content\Spritesheets\charSelectCyborg.xnb
-Content\Spritesheets\charSelectSpacePirate.xnb
-Content\Spritesheets\charSelectZombie.xnb
-Content\Spritesheets\charSelectControls1.xnb
 Content\Spritesheets\inventoryBackground.xnb
 Content\Spritesheets\selectInv.xnb
-Content\Spritesheets\charSelectCultist.xnb
-Content\Spritesheets\Cultist.xnb
-Content\Spritesheets\Earthian2x.xnb
-Content\Spritesheets\HealthPsi.xnb
 Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonY-BW.xnb
-Content\Spritesheets\charSelectEarthian.xnb
-Content\Spritesheets\Skill_Icons.xnb
-Content\Spritesheets\StandardGun.xnb
-Content\Spritesheets\StandardSword.xnb
-Content\Spritesheets\BlueBullet.xnb
-Content\Spritesheets\LockPick.xnb
-Content\Spritesheets\Steal.xnb
-Content\Spritesheets\Eagle Eye.xnb
-Content\Spritesheets\AglilyB.xnb
-Content\Spritesheets\Dual Weild.xnb
-Content\Spritesheets\Heavy Drinker.xnb
-Content\Spritesheets\Mug.xnb
-Content\Spritesheets\Power shot.xnb
-Content\Spritesheets\Trick Shot Real.xnb
-Content\Spritesheets\HealthFatigue.xnb
-Content\Spritesheets\EarthianSkillz.xnb
-Content\Spritesheets\cyborgskills.xnb
 Content\Spritesheets\MiscIcons1.xnb
-Content\Spritesheets\cyborgSkills2.xnb
-Content\Spritesheets\target2.xnb
-Content\Spritesheets\darkralph.xnb
-Content\Spritesheets\trollph.xnb
 Content\Spritesheets\QuestLog.xnb
-Content\Spritesheets\charSelectNewGame.xnb
-Content\Spritesheets\charSelectControls2.xnb
 Content\Tilesets\misc.xnb
 Content\Tilesets\misc2.xnb
 Content\Tilesets\misc3.xnb
@@ -81,8 +39,72 @@ Content\Tilesets\terrain4.xnb
 Content\Tilesets\texture1.xnb
 Content\Tilesets\texture2.xnb
 Content\Tilesets\texture3.xnb
-Content\Spritesheets\alien.xnb
-Content\Spritesheets\DeadHand.xnb
+Content\Spritesheets\Aggregate\Cultist.xnb
+Content\Spritesheets\Aggregate\cyborg.xnb
+Content\Spritesheets\Aggregate\Earthian2x.xnb
+Content\Spritesheets\Aggregate\gargranian.xnb
+Content\Spritesheets\Aggregate\MzombieBx2.xnb
+Content\Spritesheets\Aggregate\SpacePBig.xnb
+Content\Spritesheets\Aggregate\wind_fae.xnb
+Content\Spritesheets\CharSelect\charSelectBackground.xnb
+Content\Spritesheets\CharSelect\charSelectControls1.xnb
+Content\Spritesheets\CharSelect\charSelectControls2.xnb
+Content\Spritesheets\CharSelect\charSelectCultist.xnb
+Content\Spritesheets\CharSelect\charSelectCyborg.xnb
+Content\Spritesheets\CharSelect\charSelectEarthian.xnb
+Content\Spritesheets\CharSelect\charSelectGargranian.xnb
+Content\Spritesheets\CharSelect\charSelectNewGame.xnb
+Content\Spritesheets\CharSelect\charSelectPlayerFourCursor.xnb
+Content\Spritesheets\CharSelect\charSelectPlayerOneCursor.xnb
+Content\Spritesheets\CharSelect\charSelectPlayerThreeCursor.xnb
+Content\Spritesheets\CharSelect\charSelectPlayerTwoCursor.xnb
+Content\Spritesheets\CharSelect\charSelectSpacePirate.xnb
+Content\Spritesheets\CharSelect\charSelectZombie.xnb
+Content\Spritesheets\Enemies\alien.xnb
+Content\Spritesheets\Enemies\target2.xnb
+Content\Spritesheets\HUD\ExpBar.xnb
+Content\Spritesheets\HUD\HealthBar.xnb
+Content\Spritesheets\HUD\HealthFatigue.xnb
+Content\Spritesheets\HUD\HealthPsi.xnb
+Content\Spritesheets\HUD\hud_four.xnb
+Content\Spritesheets\HUD\hud_one.xnb
+Content\Spritesheets\HUD\hud_three.xnb
+Content\Spritesheets\HUD\hud_two.xnb
+Content\Spritesheets\HUD\PsiBar.xnb
+Content\Spritesheets\NPC\darkralph.xnb
+Content\Spritesheets\NPC\trollph.xnb
+Content\Spritesheets\Skills\AglilyB.xnb
+Content\Spritesheets\Skills\cyborgskills.xnb
+Content\Spritesheets\Skills\cyborgSkills2.xnb
+Content\Spritesheets\Skills\Dual Weild.xnb
+Content\Spritesheets\Skills\Eagle Eye.xnb
+Content\Spritesheets\Skills\EarthianSkills.xnb
+Content\Spritesheets\Skills\EarthianSkillz.xnb
+Content\Spritesheets\Skills\Heavy Drinker.xnb
+Content\Spritesheets\Skills\LockPick.xnb
+Content\Spritesheets\Skills\Mug.xnb
+Content\Spritesheets\Skills\Power shot.xnb
+Content\Spritesheets\Skills\Skill_Icons.xnb
+Content\Spritesheets\Skills\Steal.xnb
+Content\Spritesheets\Skills\Trick Shot Real.xnb
+Content\Spritesheets\Weapons\BlueBeamSword.xnb
+Content\Spritesheets\Weapons\Bullets\BlueBullet.xnb
+Content\Spritesheets\Weapons\Default_Pistol.xnb
+Content\Spritesheets\Weapons\StandardGun.xnb
+Content\Spritesheets\Weapons\StandardSword.xnb
+Content\Spritesheets\Skills\Effects\BubbleShield.xnb
+Content\Spritesheets\Weapons\DeadHand.xnb
+Content\Spritesheets\Skills\Effects\EngineeringOffense.xnb
+Content\Spritesheets\Weapons\PsychicStun.xnb
+Content\Spritesheets\Weapons\ShockRod.xnb
+Content\Spritesheets\shop.xnb
+Content\Spritesheets\Skills\skillPlaceHolder1.xnb
+Content\Spritesheets\Skills\skillPlaceHolder2.xnb
+Content\Spritesheets\Skills\skillPlaceHolder3.xnb
+Content\Spritesheets\Skills\skillPlaceHolder4.xnb
+Content\Spritesheets\Weapons\StolenCutlass.xnb
+Content\Spritesheets\Weapons\TreeBranch.xnb
+Content\Spritesheets\Turret.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
