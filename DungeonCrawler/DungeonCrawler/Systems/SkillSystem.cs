@@ -79,6 +79,7 @@ namespace DungeonCrawler.Systems
         Mug,
         LockPicking,
         DamagingPull,
+        SniperShot,
     }
 
     public class SkillSystem
@@ -225,6 +226,10 @@ namespace DungeonCrawler.Systems
                         MovementSpeed = -50,
                     };
                     _game.BuffComponent.Add(eid_3, buffEffect);
+
+                    break;
+
+                case SkillType.SniperShot:
 
                     break;
             }

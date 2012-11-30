@@ -146,6 +146,28 @@ namespace DungeonCrawler.Entities
                     };
                     position.Radius = 10;
                     break;
+                case SkillType.SniperShot:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 800,
+                        rank = rankP,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction, 
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/Weapons/Bullets/BlueBullet"),
+                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                    };
+                    position.Radius = 10;
+                    break;
                 #endregion
                 default:
                     throw new Exception("Not a projectile skill");
