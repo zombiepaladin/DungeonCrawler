@@ -671,6 +671,9 @@ namespace DungeonCrawler.Systems
                 skillId = p_2;
                 oId = p;
             }
+
+
+
             if (!(_game.SkillAoEComponent.Contains(skillId) || _game.SkillDeployableComponent.Contains(skillId)) )
             {
                 _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);

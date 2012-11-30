@@ -43,6 +43,10 @@ namespace DungeonCrawler.Components
         /// rank of the skill
         /// </summary>
         public int rank;
+
+        public bool canHitPlayers;
+
+        public bool canHitEnemies;
     }
     
     public class SkillProjectileComponent : GameComponent<SkillProjectile>
