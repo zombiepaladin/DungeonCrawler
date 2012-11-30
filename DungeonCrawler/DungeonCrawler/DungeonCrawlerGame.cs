@@ -300,6 +300,7 @@ namespace DungeonCrawler
             PortableShieldComponent = new PortableShieldComponent();
             PortableStoreComponent = new PortableStoreComponent();
             ActiveSkillComponent = new ActiveSkillComponent();
+            PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
 
             Quests = new List<Quest>();
 
@@ -578,6 +579,7 @@ namespace DungeonCrawler
         {
             DungeonCrawlerGame.CharacterSaveFile gameSave;
             PlayerInfo info = game.PlayerInfoComponent[entityId];
+            Equipment equipment = game.EquipmentComponent[entityId];
 
             IAsyncResult result = StorageDevice.BeginShowSelector(PlayerIndex.One, null, null);
             StorageDevice device = StorageDevice.EndShowSelector(result);
@@ -599,13 +601,13 @@ namespace DungeonCrawler
                 gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
 
                 // Inventory Quantities and Weapon
-                //gameSave.healthPotions = ;
-                //gameSave.manaPotions = ;
-                //gameSave.pogs = ;
-                gameSave.weaponType = (int)game.EquipmentComponent[entityId].WeaponID;
+                gameSave.healthPotions = equipment.HealthPotsQty;
+                gameSave.manaPotions = equipment.PsiPotsQty;
+                gameSave.pogs = equipment.PogsQty;
+                gameSave.weaponType = (int)equipment.WeaponID;
 
                 // Quest information
-                //gameSave.quests = 
+                gameSave.quests = DungeonCrawlerGame.game.Quests;
 
                 // Resave file
                 DungeonCrawlerGame.DoSaveGame(device, gameSave, true);
@@ -724,6 +726,9 @@ namespace DungeonCrawler
 
             // Dispose the container.
             container.Dispose();
+            if (characterSaveData.quests == null)
+                characterSaveData.quests = new List<Quest>();
+            DungeonCrawlerGame.game.Quests = characterSaveData.quests;
 
             return characterSaveData;
         }
