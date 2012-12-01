@@ -60,6 +60,8 @@ namespace DungeonCrawler.Components
 
         public int MovementSpeed;
         public bool isPercentMovementSpeed;
+
+        public int Stamina;
     }
 
     public class BuffComponent : GameComponent<Buff>
@@ -74,6 +76,11 @@ namespace DungeonCrawler.Components
             if (game.StatsComponent.Contains(component.TargetID))
             {
                 Stats stats = game.StatsComponent[component.TargetID];
+
+                if (component.Stamina != 0)
+                {
+                    stats.Stamina += component.Stamina;
+                }
 
                 if (game.PlayerInfoComponent.Contains(component.TargetID))
                 {
@@ -246,7 +253,12 @@ namespace DungeonCrawler.Components
             if (game.StatsComponent.Contains(component.TargetID))
             {
                 Stats stats = game.StatsComponent[component.TargetID];
-                
+
+                if (component.Stamina != 0)
+                {
+                    stats.Stamina -= component.Stamina;
+                }
+
                 if (game.PlayerInfoComponent.Contains(component.TargetID))
                 {
                     PlayerInfo playerInfo = game.PlayerInfoComponent[component.TargetID];

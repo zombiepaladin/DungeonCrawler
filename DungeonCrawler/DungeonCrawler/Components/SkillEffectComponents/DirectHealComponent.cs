@@ -22,7 +22,7 @@ namespace DungeonCrawler.Components
         public uint EntityID;
         public uint TargetID;
 
-        public int Amount;
+        public float Amount;
     }
 
     public class DirectHealComponent : GameComponent<DirectHeal>

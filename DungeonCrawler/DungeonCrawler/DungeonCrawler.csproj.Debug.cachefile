@@ -24,6 +24,15 @@ Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonY-BW.xnb
 Content\Spritesheets\MiscIcons1.xnb
+Content\Sounds\MenuSelect.xnb
+Content\Audio\BClick_Menu.xnb
+Content\Sounds\8bit_gunloop_explosion.xnb
+Content\Sounds\melee sound.xnb
+Content\Sounds\sword sound.xnb
+Content\Tilemaps\TestDungeon1.xnb
+Content\Tilemaps\TestDungeon2.xnb
+Content\Tilemaps\TestDungeon3.xnb
+Content\SpriteFonts\Pescadero.xnb
 Content\Spritesheets\QuestLog.xnb
 Content\Tilesets\misc.xnb
 Content\Tilesets\misc2.xnb
@@ -108,14 +117,10 @@ Content\Spritesheets\Turret.xnb
 Content\Spritesheets\Skills\Effects\bubble.xnb
 Content\Spritesheets\Skills\Effects\charge.xnb
 Content\Spritesheets\Skills\Effects\fallback.xnb
-Content\Sounds\MenuSelect.xnb
-Content\Audio\BClick_Menu.xnb
-Content\Sounds\8bit_gunloop_explosion.xnb
-Content\Sounds\melee sound.xnb
-Content\Sounds\sword sound.xnb
-Content\Tilemaps\TestDungeon1.xnb
-Content\Tilemaps\TestDungeon2.xnb
-Content\Tilemaps\TestDungeon3.xnb
+Content\Spritesheets\Enemies\spider.xnb
+Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
+Content\Spritesheets\Skills\Effects\AlienOrb.xnb
+Content\Spritesheets\Skills\Effects\CloakEffect.xnb
 Content\Tilemaps\D01F01R01.xnb
 Content\Tilemaps\D01F01R02.xnb
 Content\Tilemaps\D01F01R03.xnb
@@ -123,9 +128,4 @@ Content\Tilemaps\D01F01R04.xnb
 Content\Tilemaps\D01F01R05.xnb
 Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
-Content\SpriteFonts\Pescadero.xnb
 Content\SpriteFonts\BoldPescadero.xnb
-Content\Spritesheets\Enemies\spider.xnb
-Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
-Content\Spritesheets\Skills\Effects\AlienOrb.xnb
-Content\Spritesheets\Skills\Effects\CloakEffect.xnb
