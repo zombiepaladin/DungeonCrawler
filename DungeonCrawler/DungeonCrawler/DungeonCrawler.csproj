@@ -134,6 +134,7 @@
     <Compile Include="Components\SkillEffectComponents\AgroGainComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\BuffComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\ChanceToSucceedComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\CloakComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\CoolDownComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\DamageOverTimeComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\DirectDamageComponent.cs" />

@@ -189,6 +189,14 @@ namespace DungeonCrawler.Systems
                                 break;
                                 
                             case CollisionType.SkillEnemy:
+                                //If can hit enemy
+                                if (_game.SkillProjectileComponent.Contains(collideablesInRoom[i].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[i].EntityID].CanHitEnemies
+                                    || _game.SkillProjectileComponent.Contains(collideablesInRoom[j].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[j].EntityID].CanHitEnemies)
+                                {
+                                    continue;
+                                }
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
                                 break;
                             case CollisionType.SkillDoor:
@@ -196,6 +204,14 @@ namespace DungeonCrawler.Systems
                                 SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillPlayer:
+                                //If can hit player
+                                if (_game.SkillProjectileComponent.Contains(collideablesInRoom[i].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[i].EntityID].CanHitPlayers
+                                    || _game.SkillProjectileComponent.Contains(collideablesInRoom[j].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[j].EntityID].CanHitPlayers)
+                                {
+                                    continue;
+                                }
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID, true);
                                 break;
 

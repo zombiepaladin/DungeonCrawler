@@ -37,6 +37,8 @@ namespace DungeonCrawler.Systems
         /// </summary>
         private DungeonCrawlerGame game;
 
+        private Random rand;
+
         #endregion
 
         #region Constructors
@@ -48,6 +50,7 @@ namespace DungeonCrawler.Systems
         public EnemyAISystem(DungeonCrawlerGame game)
         {
             this.game = game;
+            this.rand = new Random();
         }
 
         #endregion
@@ -69,6 +72,7 @@ namespace DungeonCrawler.Systems
                 EnemyAI enemyAI = game.EnemyAIComponent[id];
                 AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
                 Position pos = game.PositionComponent[id];
+                Movement movement;
 
                 if (pos.RoomID != game.CurrentRoomEid)
                 {
@@ -79,6 +83,10 @@ namespace DungeonCrawler.Systems
                 {
                     game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                 }
+
+                uint targetID;
+                float dist;
+
                 switch(AIBehavior)
                 {
                     case AIBehaviorType.DefaultMelee:
@@ -88,14 +96,95 @@ namespace DungeonCrawler.Systems
 
                     case AIBehaviorType.DefaultRanged:
                         updateTargeting(id);
+
+                        targetID = enemyAI.TargetID;
+                        dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+
+                        if (true)
+                        {
+                            bool onCoolDown = false;
+                            foreach (CoolDown cd in game.CoolDownComponent.All)
+                            {
+                                if (cd.Type == SkillType.SniperShot && cd.UserID == id)
+                                {
+                                    onCoolDown = true;
+                                    break;
+                                }
+                            }
+
+                            if (!onCoolDown && dist > 299)
+                                MoveTowardTarget(id);
+
+                            if (!onCoolDown && dist < 300)
+                            {
+                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                movement = game.MovementComponent[id];
+                                Random next = new Random();
+                                movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
+                                movement.Direction = Vector2.Normalize(movement.Direction);
+                                game.MovementComponent[id] = movement;
+                            }
+                        }
+
+                        ManageAnimation(id);
+
                         break;
 
                     case AIBehaviorType.Alien:
                         updateTargeting(id);
+
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
+
+                        targetID = enemyAI.TargetID;
+                        dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+
+                        bool isUsingCloak = false;
+
+                        foreach (Cloak cloak in game.CloakComponent.All)
+                        {
+                            if (cloak.TargetID == id)
+                            {
+                                if (cloak.TimeLeft > 2 && cloak.StartingTime - cloak.TimeLeft > 2)
+                                    isUsingCloak = true;
+                                break;
+                            }
+                        }
+                            
+                        movement = game.MovementComponent[id];
+
+                        if (!isUsingCloak)
+                        {
+                            if (dist > 300)
+                                MoveTowardTarget(id);
+                            else
+                            {
+                                movement.Direction = Vector2.Zero;
+                                game.MovementComponent[id] = movement;
+                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                game.SkillSystem.EnemyUseSkill(SkillType.Cloak, id, id);
+                            }
+                        }
+                        else if (movement.Direction.Equals(Vector2.Zero))
+                        {
+                            movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
+                            movement.Direction = Vector2.Normalize(movement.Direction);
+                            game.MovementComponent[id] = movement;
+                        }
+                        
+                        ManageAnimation(id);
+
+                        break;
+
+                    case AIBehaviorType.Spider:
+                        updateTargeting(id);
                         MoveTowardTarget(id);
                         
-                        uint targetID = enemyAI.TargetID;
-                        float dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                        targetID = enemyAI.TargetID;
+                        dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
                         
                         if(dist < 35)
                             game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
@@ -163,6 +252,7 @@ namespace DungeonCrawler.Systems
         /// <param name="key"></param>
         private void ManageAnimation(uint id)
         {
+
             Enemy enemy = game.EnemyComponent[id];
             SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[id];
             Movement movement = game.MovementComponent[id];
@@ -177,7 +267,7 @@ namespace DungeonCrawler.Systems
                     else
                     {
                         spriteAnimation.IsPlaying = true;
-                        spriteAnimation.CurrentAnimationRow = (int)game.MovementComponent.GetFacingFromDirection(id);
+                        spriteAnimation.CurrentAnimationRow = (int)game.MovementComponent.GetFacingFromID(id);
                     }
                     break;
             }

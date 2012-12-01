@@ -75,12 +75,23 @@ namespace DungeonCrawler.Entities
                     spritesheet = "Spritesheets/Enemies/target2";
                     break;
 
+                case EnemyType.Spider:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 20;
+                    spritesheet = "Spritesheets/Enemies/spider";
+                    spriteBounds = new Rectangle(0, 0, 120/3, 141/4);
+                    aiBehaviorType = AIBehaviorType.Spider;
+                    moveSpeed = 115;
+                    spriteAnimation.FramesPerSecond = 14;
+                    break;
+
                 case EnemyType.Alien:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 10;
+                    enemy.Health = 150;
                     spritesheet = "Spritesheets/Enemies/alien";
-                    spriteBounds = new Rectangle(0, 0, 32, 32);
+                    spriteBounds = new Rectangle(0, 0, 64, 64);
                     aiBehaviorType = AIBehaviorType.Alien;
+                    position.Radius = 32;
                     break;
 
                 default:

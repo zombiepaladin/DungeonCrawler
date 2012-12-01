@@ -53,9 +53,14 @@ namespace DungeonCrawler.Components
     /// </summary>
     public class MovementComponent : GameComponent<Movement>
     {
-        public FacingDirection GetFacingFromDirection(uint id)
+        public FacingDirection GetFacingFromID(uint id)
         {
             Vector2 direction = elements[id].Direction;
+            return GetFacingFromDirection(direction);
+        }
+
+        public FacingDirection GetFacingFromDirection(Vector2 direction)
+        {
 
             if (direction.X > 0 && direction.X > Math.Abs(direction.Y))
                 return FacingDirection.East;
