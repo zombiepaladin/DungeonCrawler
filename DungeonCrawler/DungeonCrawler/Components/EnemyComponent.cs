@@ -29,6 +29,7 @@ namespace DungeonCrawler.Components
         Target,
         StationaryTarget,
         MovingTarget,
+        Spider,
         Alien,
     }
 

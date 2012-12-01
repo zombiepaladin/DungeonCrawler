@@ -26,6 +26,7 @@ namespace DungeonCrawler.Components
         None,
         DefaultRanged,
         DefaultMelee,
+        Spider,
         Alien,
     }
 

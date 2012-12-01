@@ -161,6 +161,7 @@ namespace DungeonCrawler.Systems
                         if (game.ResurrectComponent.Contains(keyValue.Key))         game.ResurrectComponent.Remove(keyValue.Key);
                         if (game.StunComponent.Contains(keyValue.Key))              game.StunComponent.Remove(keyValue.Key);
                         if (game.TimedEffectComponent.Contains(keyValue.Key))       game.TimedEffectComponent.Remove(keyValue.Key);
+                        if (game.CloakComponent.Contains(keyValue.Key))             game.CloakComponent.Remove(keyValue.Key);
                         if (game.TargetedKnockBackComponent.Contains(keyValue.Key)) game.TargetedKnockBackComponent.Remove(keyValue.Key);
                         if (game.TurretComponent.Contains(keyValue.Key))          game.TurretComponent.Remove(keyValue.Key);
                         if (game.TrapComponent.Contains(keyValue.Key))            game.TrapComponent.Remove(keyValue.Key);

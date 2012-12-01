@@ -80,6 +80,7 @@ namespace DungeonCrawler.Systems
         LockPicking,
         DamagingPull,
         SniperShot,
+        Cloak,
     }
 
     public class SkillSystem
@@ -113,6 +114,8 @@ namespace DungeonCrawler.Systems
                 TimedEffect effect = _game.TimedEffectComponent[key];
 
                 effect.TimeLeft -= elapsedTime;
+
+                HandleEffects(key, elapsedTime);
 
                 _game.TimedEffectComponent[key] = effect;
 
@@ -174,12 +177,17 @@ namespace DungeonCrawler.Systems
             uint eid = Entity.NextEntity();
             uint eid_2 = Entity.NextEntity();
             uint eid_3 = Entity.NextEntity();
+            InstantEffect instantEffect;
+            DirectDamage directDamage;
+            CoolDown coolDown;
+            Sprite sprite;
+            TimedEffect timedEffect;
 
             switch (skillType) //add in any skills you need an enemy to use
             {
                 case SkillType.DamagingPull:
                     
-                    InstantEffect instantEffect = new InstantEffect()
+                    instantEffect = new InstantEffect()
                     {
                         EntityID = eid,
                     };
@@ -193,7 +201,7 @@ namespace DungeonCrawler.Systems
                     };
                     _game.TargetedKnockBackComponent.Add(eid, targetedKnockBack);
 
-                    DirectDamage directDamage = new DirectDamage()
+                    directDamage = new DirectDamage()
                     {
                         TargetID = targetID,
                         Damage = 1,
@@ -201,7 +209,7 @@ namespace DungeonCrawler.Systems
                     };
                     _game.DirectDamageComponent.Add(eid, directDamage);
 
-                    CoolDown coolDown = new CoolDown()
+                    coolDown = new CoolDown()
                     {
                         EntityID = eid_2,
                         MaxTime = 8f,
@@ -211,13 +219,25 @@ namespace DungeonCrawler.Systems
                     };
                     _game.CoolDownComponent.Add(eid_2, coolDown);
 
-                    TimedEffect timedEffect = new TimedEffect()
+                    timedEffect = new TimedEffect()
                     {
                         EntityID = eid_3,
                         TimeLeft = 2f,
                         TotalDuration = 2f,
                     };
                     _game.TimedEffectComponent.Add(eid_3, timedEffect);
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid_3,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/SpiderWeb"),
+                        SpriteBounds = new Rectangle(0, 0, 50, 50),
+                    };
+                    _game.SpriteComponent.Add(eid_3, sprite);
+
+                    Position webPosition = _game.PositionComponent[targetID];
+                    webPosition.EntityID = eid_3;
+                    _game.PositionComponent.Add(eid_3, webPosition);
 
                     Buff buffEffect = new Buff()
                     {
@@ -230,8 +250,60 @@ namespace DungeonCrawler.Systems
                     break;
 
                 case SkillType.SniperShot:
+                    Position callerPos = _game.PositionComponent[callerID];
+                    Position targetPos = _game.PositionComponent[targetID];
+
+                    Vector2 direction = targetPos.Center - callerPos.Center;
+
+                    //if (_game.SpriteAnimationComponent.Contains(callerID))
+                    //{
+                    //    SpriteAnimation spriteAnimation = _game.SpriteAnimationComponent[callerID];
+                    //    spriteAnimation.CurrentAnimationRow = (int)_game.MovementComponent.GetFacingFromDirection(direction);
+                    //    _game.SpriteAnimationComponent[callerID] = spriteAnimation;
+                    //}
+                        
+                    eid = _game.SkillEntityFactory.CreateSkillProjectile(SkillType.SniperShot, direction, callerPos, 1, 300, true, false);
+
+                    coolDown = new CoolDown()
+                    {
+                        EntityID = eid,
+                        MaxTime = 1f,
+                        TimeLeft = 1f,
+                        Type = SkillType.SniperShot,
+                        UserID = callerID,
+                    };
+                    _game.CoolDownComponent.Add(eid, coolDown);
 
                     break;
+                
+                case SkillType.Cloak:
+                    timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid,
+                        TimeLeft = 12f,
+                        TotalDuration = 12f,
+                    };
+                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                    Cloak cloak = new Cloak(eid, targetID, 10);
+                    _game.CloakComponent.Add(eid, cloak);
+
+                    coolDown = new CoolDown()
+                    {
+                        EntityID = eid,
+                        MaxTime = 12f,
+                        TimeLeft = 12f,
+                        Type = SkillType.Cloak,
+                        UserID = callerID,
+                    };
+                    _game.CoolDownComponent.Add(eid, coolDown);
+
+                    
+
+                    break;
+
+                default:
+                    throw new NotImplementedException();
             }
         }
 
@@ -9365,11 +9437,14 @@ namespace DungeonCrawler.Systems
         
         public void TriggerEffect(SkillType type, int rank, bool friendly, uint target)    
         {
-            uint eid;
+            uint eid = Entity.NextEntity();
             HealOverTime HoT;
             TimedEffect time;
             DamageOverTime DoT;
             Buff buff;
+            InstantEffect instantEffect;
+            DirectDamage directDamage;
+
             switch (type)
             {
                 #region Vermis Triggered SKills
@@ -10531,6 +10606,22 @@ namespace DungeonCrawler.Systems
                 #endregion
 
                 #endregion
+                case SkillType.SniperShot:
+                    instantEffect = new InstantEffect()
+                    {
+                        EntityID = eid,
+                    };
+                    _game.InstantEffectComponent.Add(eid, instantEffect);
+
+                    directDamage = new DirectDamage()
+                    {
+                        TargetID = target,
+                        Damage = 1,
+                        EntityID = eid,
+                    };
+                    _game.DirectDamageComponent.Add(eid, directDamage);
+
+                    break;
                 default:
                     throw new Exception("Unimplemented SKill");
             }
@@ -10730,6 +10821,59 @@ namespace DungeonCrawler.Systems
             if (_game.ResurrectComponent.Contains(key))
             {
                 //Don't know how to handle this just yet
+            }
+
+            #endregion
+
+            #region Cloak
+
+            if (_game.CloakComponent.Contains(key))
+            {
+                Cloak cloak = _game.CloakComponent[key];
+                cloak.TimeLeft -= elapsedTime;
+                _game.CloakComponent[cloak.EntityID] = cloak;
+
+                if (!_game.PlayerComponent.Contains(cloak.TargetID) && !_game.EnemyComponent.Contains(cloak.TargetID))
+                {
+                    _game.GarbagemanSystem.ScheduleVisit(cloak.EntityID, GarbagemanSystem.ComponentType.Effect);
+                    return;
+                }
+
+                if (cloak.StartingTime - cloak.TimeLeft < 0)
+                    return;
+
+                Sprite sprite = _game.SpriteComponent[cloak.TargetID];
+
+                if(cloak.spriteHeight == -1)
+                    cloak.spriteHeight = sprite.SpriteBounds.Height;
+
+                float timePassed = cloak.StartingTime - cloak.TimeLeft;
+
+                if(cloak.TimeLeft < 1) //appear
+                {
+                    sprite.SpriteBounds.Height = cloak.spriteHeight;
+                }
+                else if (cloak.TimeLeft < 2) //flicker
+                {
+                    if (sprite.SpriteBounds.Height == 0)
+                        sprite.SpriteBounds.Height = cloak.spriteHeight;
+                    else
+                        sprite.SpriteBounds.Height = 0;
+                }
+                else if (timePassed > 2) //cloak
+                {
+                    sprite.SpriteBounds.Height = 0;
+                }
+                else if (timePassed > 1) //flicker
+                {
+                    if (sprite.SpriteBounds.Height == 0)
+                        sprite.SpriteBounds.Height = cloak.spriteHeight;
+                    else
+                        sprite.SpriteBounds.Height = 0;
+                }
+
+                _game.CloakComponent[cloak.EntityID] = cloak;
+                _game.SpriteComponent[sprite.EntityID] = sprite;
             }
 
             #endregion

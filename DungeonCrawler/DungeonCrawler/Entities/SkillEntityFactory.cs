@@ -43,28 +43,36 @@ namespace DungeonCrawler.Entities
 
 
         #region SkillProjectile
-        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed)
+        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed, bool canHitPlayers = false, bool canHitEnemies = true)
+        {
+            return CreateSkillProjectile(skillP, getDirectionFromFacing(facing), position, rankP, speed, canHitPlayers, canHitEnemies);
+        }
+
+        public uint CreateSkillProjectile(SkillType skillP, Vector2 direction, Position position, int rankP, int speed, bool canHitPlayers = false, bool canHitEnemies = true)
         {
             SkillProjectile skillProjectile;
             Movement movement;
             Sprite sprite;
             Collideable collideable;
             uint eid = Entity.NextEntity();
-            Vector2 direction = getDirectionFromFacing(facing);
+
+            direction = Vector2.Normalize(direction);
 
             position.EntityID = eid;
-            position.Center += direction * 70;
+            position.Center += direction * 40;
 
             switch (skillP)
             {
-                #region Vermis Projectiles
+                //#region Vermis Projectiles
                 case SkillType.ThrownBlades:
                     skillProjectile = new SkillProjectile()
                     {
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
-                        rank=rankP,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
                     };
                     movement = new Movement()
                     {
@@ -76,7 +84,7 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = eid,
                         SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
-                        SpriteBounds = new Rectangle(0,250,50,50),
+                        SpriteBounds = new Rectangle(0, 250, 50, 50),
                     };
                     position.Radius = 10;
                     break;
@@ -86,7 +94,9 @@ namespace DungeonCrawler.Entities
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
-                        rank=rankP,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
                     };
                     movement = new Movement()
                     {
@@ -108,7 +118,9 @@ namespace DungeonCrawler.Entities
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
-                        rank=rankP,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
                     };
                     movement = new Movement()
                     {
@@ -130,7 +142,9 @@ namespace DungeonCrawler.Entities
                         EntityID = eid,
                         skill = skillP,
                         maxRange = 1,
-                        rank=rankP,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
                     };
                     movement = new Movement()
                     {
@@ -153,22 +167,24 @@ namespace DungeonCrawler.Entities
                         skill = skillP,
                         maxRange = 800,
                         rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
                     };
                     movement = new Movement()
                     {
                         EntityID = eid,
-                        Direction = direction, 
+                        Direction = direction,
                         Speed = speed,
                     };
                     sprite = new Sprite()
                     {
                         EntityID = eid,
-                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/Weapons/Bullets/BlueBullet"),
-                        SpriteBounds = new Rectangle(0, 0, 10, 10),
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/AlienOrb"),
+                        SpriteBounds = new Rectangle(0, 0, 20, 20),
                     };
                     position.Radius = 10;
                     break;
-                #endregion
+                //#endregion
                 default:
                     throw new Exception("Not a projectile skill");
             }
