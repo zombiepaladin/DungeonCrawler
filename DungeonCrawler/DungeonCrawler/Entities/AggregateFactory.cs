@@ -382,7 +382,7 @@ namespace DungeonCrawler.Entities
 
                     active_Skill = new ActiveSkill()
                     {
-                        activeSkill = info.skill1,
+                        activeSkill = info.skill8,
                     };
                     game.ActiveSkillComponent[entityID] = active_Skill;
                     game.PlayerComponent[entityID] = player;
