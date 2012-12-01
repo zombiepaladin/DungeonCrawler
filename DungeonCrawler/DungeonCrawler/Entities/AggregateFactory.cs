@@ -831,7 +831,7 @@ namespace DungeonCrawler.Entities
                         skill3 = Systems.SkillType.Possess,
                         skill4 = Systems.SkillType.PsionicSpear,
                         skill5 = Systems.SkillType.Push,
-                        skill6 = Systems.SkillType.Detnate,
+                        skill6 = Systems.SkillType.Detinate,
                         skill7 = Systems.SkillType.MentalBarrier,
                         skill8 = Systems.SkillType.WormOfGargran,
                         skill9 = Systems.SkillType.Soothe,
