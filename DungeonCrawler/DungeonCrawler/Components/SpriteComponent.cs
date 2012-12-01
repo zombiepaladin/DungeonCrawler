@@ -36,6 +36,16 @@ namespace DungeonCrawler.Components
         /// The bounds of this sprite in its spritesheet
         /// </summary>
         public Rectangle SpriteBounds;
+
+        /// <summary>
+        /// What color to use when drawing the sprite.  Used to change the alpha channel
+        /// </summary>
+        public Color SpriteColor;
+
+        /// <summary>
+        /// Use SpriteColor as the color parameter instead of white
+        /// </summary>
+        public bool UseDifferentColor;
     }
 
 

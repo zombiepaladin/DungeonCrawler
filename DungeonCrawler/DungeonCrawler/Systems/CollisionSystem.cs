@@ -28,6 +28,12 @@ using DungeonCrawler.Systems;
 
 namespace DungeonCrawler.Systems
 {
+    public struct DistanceToTarget
+    {
+        public uint eid;
+        public float distance;
+    }
+
     public class CollisionSystem
     {
         /* To add in collision logic:
@@ -191,6 +197,14 @@ namespace DungeonCrawler.Systems
                                 break;
                                 
                             case CollisionType.SkillEnemy:
+                                //If can hit enemy
+                                if (_game.SkillProjectileComponent.Contains(collideablesInRoom[i].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[i].EntityID].CanHitEnemies
+                                    || _game.SkillProjectileComponent.Contains(collideablesInRoom[j].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[j].EntityID].CanHitEnemies)
+                                {
+                                    continue;
+                                }
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID,false);
                                 break;
                             case CollisionType.SkillDoor:
@@ -198,6 +212,14 @@ namespace DungeonCrawler.Systems
                                 SkillStaticCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
                             case CollisionType.SkillPlayer:
+                                //If can hit player
+                                if (_game.SkillProjectileComponent.Contains(collideablesInRoom[i].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[i].EntityID].CanHitPlayers
+                                    || _game.SkillProjectileComponent.Contains(collideablesInRoom[j].EntityID) &&
+                                    !_game.SkillProjectileComponent[collideablesInRoom[j].EntityID].CanHitPlayers)
+                                {
+                                    continue;
+                                }
                                 SkillCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID, true);
                                 break;
 
@@ -320,6 +342,120 @@ namespace DungeonCrawler.Systems
 
             //return our results
             return currentBestEnemyID;
+        }
+
+        /// <summary>
+        /// Gets a list of the enemie's ids within a certain range of a given position
+        /// </summary>
+        /// <param name="pos">The center of the check</param>
+        /// <param name="range">The radius away from the center to check</param>
+        /// <returns>A list of enemie's ids within that given range</returns>
+        public List<uint> GetEnemiesInRange(Position pos, int range)
+        {
+            List<uint> enemies = new List<uint>();
+            Position enemyPos;
+
+            foreach(Enemy enemy in _game.EnemyComponent.All)
+            {
+                enemyPos = _game.PositionComponent[enemy.EntityID];
+                if (enemyPos.RoomID == pos.RoomID)
+                {
+                    if (Vector2.DistanceSquared(enemyPos.Center, pos.Center) <= range)
+                        enemies.Add(enemy.EntityID);
+                }
+            }
+
+            return enemies;
+        }
+
+        /// <summary>
+        /// Gets a list of the enemie's ids within a certain range of a given position
+        /// </summary>
+        /// <param name="pos">The center of the check</param>
+        /// <param name="range">The radius away from the center to check</param>
+        /// <param name="count">The number of enemies to return</param>
+        /// <returns>A list of enemie's ids within that given range</returns>
+        public List<uint> GetEnemiesInRange(Position pos, int range, int count)
+        {
+            List<DistanceToTarget> distances = new List<DistanceToTarget>(); //this list will store each distance/eid pair that will go in our list that we return
+            float furthestDistance = 0; //the furthest distance an enemy is to the pos and is still in the list
+            int furthestEnemy = 0; //the enemy in the list that is the furthest distance from pos
+            float farness; //how far away the enemy is from the pos
+            List<uint> enemies = new List<uint>(); //the list of enemies to return
+            Position enemyPos; //the position of each enemy
+
+            //first, loop through each enemy in the enemy component
+            foreach (Enemy enemy in _game.EnemyComponent.All)
+            {
+                //we need to know there position of the enemy as we go through the list
+                enemyPos = _game.PositionComponent[enemy.EntityID];
+                //no need to check them if they are not in the same room as our position
+                if (enemyPos.RoomID == pos.RoomID)
+                {
+                    //using this nifty function, we'll find the distance between the enemy and the pos
+                    farness = Vector2.DistanceSquared(enemyPos.Center, pos.Center);
+                    //check to see if the enemy is in range
+                    if (farness <= range)
+                    {
+                        //first, has the necessary amount of enemies been counted yet?
+                        if (distances.Count < count)
+                        {
+                            //if so, then is the current enemy the furthest one away?
+                            if (farness > furthestDistance)
+                            {
+                                //if yes, then change the furthestDistance variable and indicate where that person is in the list
+                                //I do this before they are added to the list so that furthestEnemy will be their index in the list 
+                                //without subtracting.  Genius, I know :)
+                                furthestDistance = farness;
+                                furthestEnemy = distances.Count;
+                            }
+                            //create the enemy/distance pair and add it to the list
+                            DistanceToTarget newDistance = new DistanceToTarget()
+                            {
+                                eid = enemy.EntityID,
+                                distance = farness
+                            };
+                            distances.Add(newDistance);
+                            
+                        }
+                        //now is where it gets good, this means the list is full so we have to be selective
+                        else
+                        {
+                            //is the new enemy closer than the furthest enemy in the list?
+                            if (farness < furthestDistance)
+                            {
+                                //if they are then this enemy needs to be added to our list, first we need to create him
+                                DistanceToTarget newDistance = new DistanceToTarget()
+                                {
+                                    eid = enemy.EntityID,
+                                    distance = farness
+                                };
+                                //now add him to the list instead of the guy who is further out
+                                distances[furthestEnemy] = newDistance;
+
+                                //we don't know for sure that the new guy is the furthest one out in the list, so first we have to check the list
+                                for(int i = 0; i < distances.Count(); i++)
+                                {
+                                    //if we do find someone that is further away, we will change the variables to indicate so
+                                    if (distances[i].distance > furthestDistance)
+                                    {
+                                        furthestDistance = distances[i].distance;
+                                        furthestEnemy = i;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //finally, get the closest targets and store just their ids in the enemies list
+            foreach (DistanceToTarget enemy in distances)
+            {
+                enemies.Add(enemy.eid);
+            }
+            //and return that list
+            return enemies;
         }
 
         /// <summary>
@@ -797,6 +933,9 @@ namespace DungeonCrawler.Systems
                 skillId = p_2;
                 oId = p;
             }
+
+
+
             if (!(_game.SkillAoEComponent.Contains(skillId) || _game.SkillDeployableComponent.Contains(skillId)) )
             {
                 _game.GarbagemanSystem.ScheduleVisit(skillId, GarbagemanSystem.ComponentType.Skill);
@@ -811,12 +950,14 @@ namespace DungeonCrawler.Systems
                 skillId = p;
                 oId = p_2;
             }
-            else
+            else 
             {
                 skillId = p_2;
                 oId = p;
             }
-            SkillProjectile skill = _game.SkillProjectileComponent[skillId];
+            SkillProjectile skill;
+            if (_game.SkillProjectileComponent.Contains(skillId)) skill = _game.SkillProjectileComponent[skillId];
+            else return;
 
             _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId, skill.OwnerID);
 

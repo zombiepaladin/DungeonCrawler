@@ -238,7 +238,7 @@ namespace DungeonCrawler.Systems
             switch (skillType) //add in any skills you need an enemy to use
             {
                 case SkillType.DamagingPull:
-
+                    
                     instantEffect = new InstantEffect()
                     {
                         EntityID = eid,
@@ -313,8 +313,8 @@ namespace DungeonCrawler.Systems
                     //    spriteAnimation.CurrentAnimationRow = (int)_game.MovementComponent.GetFacingFromDirection(direction);
                     //    _game.SpriteAnimationComponent[callerID] = spriteAnimation;
                     //}
-
-                    eid = _game.SkillEntityFactory.CreateSkillProjectile(SkillType.SniperShot, direction, callerPos, 1, 300, true, false);
+                        
+                    eid = _game.SkillEntityFactory.CreateSkillProjectile(SkillType.SniperShot, direction, callerPos, 1, 300,callerID, true, false);
 
                     coolDown = new CoolDown()
                     {
@@ -327,7 +327,7 @@ namespace DungeonCrawler.Systems
                     _game.CoolDownComponent.Add(eid, coolDown);
 
                     break;
-
+                
                 case SkillType.Cloak:
                     timedEffect = new TimedEffect()
                     {
@@ -350,7 +350,7 @@ namespace DungeonCrawler.Systems
                     };
                     _game.CoolDownComponent.Add(eid, coolDown);
 
-
+                    
 
                     break;
 
@@ -2594,7 +2594,7 @@ namespace DungeonCrawler.Systems
                                 switch (rank)
                                 {
                                     #region Checking Rank
-                                    case 1:
+                                    case 1:                    
                                         chance = 60;  //60% chance that the skill will work
                                         maxEnemies = 1;  //only 1 enemy can be mind locked at a time
                                         duration = 5;  //the mind lock will last for 5 seconds
@@ -2658,11 +2658,11 @@ namespace DungeonCrawler.Systems
                                         break;
                                     #endregion
                                 }
-
+                                
                                 #region Logic
-
+                                
                                 List<uint> enemiesInRange = _game.CollisionSystem.GetEnemiesInRange(_game.PositionComponent[userID], 20, maxEnemies);
-
+                                
                                 foreach (uint enemyID in enemiesInRange)
                                 {
                                     uint cts = Entity.NextEntity();
@@ -2675,7 +2675,7 @@ namespace DungeonCrawler.Systems
                                         SuccessRateAsPercentage = chance
                                     };
                                     _game.ChanceToSucceedComponent.Add(eid, chanceToSucceed);
-
+                                
                                     TimedEffect timedEffect;
                                     timedEffect = new TimedEffect()
                                     {
@@ -2695,6 +2695,7 @@ namespace DungeonCrawler.Systems
 
                                     _game.StunComponent.Add(eid, stun);
                                 }
+                               
 
                                 #endregion
                                 break;
@@ -2754,7 +2755,7 @@ namespace DungeonCrawler.Systems
                                     #endregion
                                 }
                                 #region Logic
-
+                                
                                 eid = Entity.NextEntity();
 
                                 TimedEffect timedEffect;
@@ -2782,7 +2783,6 @@ namespace DungeonCrawler.Systems
                                     newColor = new Color(45, 45, 45, 0)
                                 };
                                 _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
-
 
                                 #endregion
                                 break;
@@ -4470,7 +4470,6 @@ namespace DungeonCrawler.Systems
 
                 //Earthian Skills done by Andrew Bellinder
                 case Aggregate.EarthianPlayer:
-
                     #region Race Variables
 
                     #endregion
@@ -12081,12 +12080,12 @@ namespace DungeonCrawler.Systems
 
                 Sprite sprite = _game.SpriteComponent[cloak.TargetID];
 
-                if (cloak.spriteHeight == -1)
+                if(cloak.spriteHeight == -1)
                     cloak.spriteHeight = sprite.SpriteBounds.Height;
 
                 float timePassed = cloak.StartingTime - cloak.TimeLeft;
 
-                if (cloak.TimeLeft < 1) //appear
+                if(cloak.TimeLeft < 1) //appear
                 {
                     sprite.SpriteBounds.Height = cloak.spriteHeight;
                 }

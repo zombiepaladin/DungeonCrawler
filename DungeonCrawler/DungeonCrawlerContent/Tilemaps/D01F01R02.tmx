@@ -62,6 +62,26 @@
   <object x="320" y="320"/>
   <object x="384" y="480"/>
   <object x="1152" y="160"/>
+  <object name="Enemy" type="Spider" x="1163" y="429"/>
+  <object name="Enemy" type="Spider" x="1151" y="432"/>
+  <object name="Enemy" type="Spider" x="1153" y="439"/>
+  <object name="Enemy" type="Spider" x="1184" y="451"/>
+  <object name="Enemy" type="Spider" x="1179" y="418"/>
+  <object name="Enemy" type="Spider" x="1161" y="407"/>
+  <object name="Enemy" type="Spider" x="1144" y="420"/>
+  <object name="Enemy" type="Spider" x="1137" y="439"/>
+  <object name="Enemy" type="Spider" x="1147" y="459"/>
+  <object name="Enemy" type="Spider" x="1170" y="471"/>
+  <object name="Enemy" type="Spider" x="1176" y="463"/>
+  <object name="Enemy" type="Spider" x="1173" y="411"/>
+  <object name="Enemy" type="Spider" x="1130" y="405"/>
+  <object name="Enemy" type="Spider" x="1116" y="424"/>
+  <object name="Enemy" type="Spider" x="1125" y="452"/>
+  <object name="Enemy" type="Spider" x="1159" y="462"/>
+  <object name="Enemy" type="Spider" x="1181" y="438"/>
+  <object name="Enemy" type="Spider" x="1173" y="407"/>
+  <object name="Enemy" type="Spider" x="1146" y="407"/>
+  <object name="Enemy" type="Spider" x="1138" y="425"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23">
   <object name="Trigger" type="Wall" x="0" y="0" width="704" height="64"/>

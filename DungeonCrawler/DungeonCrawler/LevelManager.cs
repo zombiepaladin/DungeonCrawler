@@ -133,6 +133,9 @@ namespace DungeonCrawler
                                     case "Alien":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.Alien, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
                                         break;
+                                    case "Spider":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Spider, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
                                     default:
                                         break;
                                 }

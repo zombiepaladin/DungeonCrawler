@@ -382,7 +382,7 @@ namespace DungeonCrawler.Entities
 
                     active_Skill = new ActiveSkill()
                     {
-                        activeSkill = info.skill1,
+                        activeSkill = info.skill8,
                     };
                     game.ActiveSkillComponent[entityID] = active_Skill;
                     game.PlayerComponent[entityID] = player;
@@ -784,7 +784,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        SpriteSheet = spriteSheet
+                        SpriteSheet = spriteSheet,
+                        //SpriteColor = new Color(45, 45, 45, 0),
+                        //UseDifferentColor = true
                     };
                     game.SpriteComponent[entityID] = sprite;
                     local = new Local()

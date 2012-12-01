@@ -92,12 +92,9 @@ Content\Spritesheets\Weapons\Bullets\BlueBullet.xnb
 Content\Spritesheets\Weapons\Default_Pistol.xnb
 Content\Spritesheets\Weapons\StandardGun.xnb
 Content\Spritesheets\Weapons\StandardSword.xnb
-Content\Spritesheets\Skills\Effects\BubbleShield.xnb
 Content\Spritesheets\Weapons\DeadHand.xnb
-Content\Spritesheets\Skills\Effects\EngineeringOffense.xnb
 Content\Spritesheets\Weapons\PsychicStun.xnb
 Content\Spritesheets\Weapons\ShockRod.xnb
-Content\Spritesheets\shop.xnb
 Content\Spritesheets\Skills\skillPlaceHolder1.xnb
 Content\Spritesheets\Skills\skillPlaceHolder2.xnb
 Content\Spritesheets\Skills\skillPlaceHolder3.xnb
@@ -122,3 +119,13 @@ Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
 Content\SpriteFonts\Pescadero.xnb
 Content\SpriteFonts\BoldPescadero.xnb
+Content\Spritesheets\Skills\Effects\BubbleShield.xnb
+Content\Spritesheets\Skills\Effects\EngineeringOffense.xnb
+Content\Spritesheets\shop.xnb
+Content\Spritesheets\Skills\Effects\bubble.xnb
+Content\Spritesheets\Skills\Effects\charge.xnb
+Content\Spritesheets\Skills\Effects\fallback.xnb
+Content\Spritesheets\Enemies\spider.xnb
+Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
+Content\Spritesheets\Skills\Effects\AlienOrb.xnb
+Content\Spritesheets\Skills\Effects\CloakEffect.xnb

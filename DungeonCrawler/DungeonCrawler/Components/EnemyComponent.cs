@@ -29,6 +29,7 @@ namespace DungeonCrawler.Components
         Target,
         StationaryTarget,
         MovingTarget,
+        Spider,
         Alien,
     }
 
@@ -38,6 +39,13 @@ namespace DungeonCrawler.Components
         Stunned = 0x1,
         Scared = 0x2, //for fear
         Poisoned = 0x3,
+    }
+
+    public enum EnemyIntelligence
+    {
+        Mindless,
+        SemiIntelligent,
+        Intelligent,
     }
 
     /// <summary>

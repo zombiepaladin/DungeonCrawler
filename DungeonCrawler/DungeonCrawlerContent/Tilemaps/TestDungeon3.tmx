@@ -35,6 +35,7 @@
   </object>
   <object name="Enemy" type="MovingTarget" x="300" y="300" width="10" height="10"/>
   <object name="NPC" type="Trollph" x="972" y="172" width="11" height="9"/>
+  <object name="NPC" type="DarkRalph" x="1001" y="494" width="15" height="13"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23"/>
  <objectgroup name="PlayerSpawns" width="40" height="23">

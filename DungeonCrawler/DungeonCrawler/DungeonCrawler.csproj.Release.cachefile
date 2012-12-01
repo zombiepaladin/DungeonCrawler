@@ -105,6 +105,9 @@ Content\Spritesheets\Skills\skillPlaceHolder4.xnb
 Content\Spritesheets\Weapons\StolenCutlass.xnb
 Content\Spritesheets\Weapons\TreeBranch.xnb
 Content\Spritesheets\Turret.xnb
+Content\Spritesheets\Skills\Effects\bubble.xnb
+Content\Spritesheets\Skills\Effects\charge.xnb
+Content\Spritesheets\Skills\Effects\fallback.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb

@@ -185,6 +185,7 @@ namespace DungeonCrawler
         public AgroGainComponent AgroGainComponent;
         public BuffComponent BuffComponent;
         public ChanceToSucceedComponent ChanceToSucceedComponent;
+        public ChangeVisibilityComponent ChangeVisibilityComponent;
         public CoolDownComponent CoolDownComponent;
         public DamageOverTimeComponent DamageOverTimeComponent;
         public DirectDamageComponent DirectDamageComponent;
@@ -199,6 +200,7 @@ namespace DungeonCrawler
         public StunComponent StunComponent;
         public TimedEffectComponent TimedEffectComponent;
         public EnslaveComponent EnslaveComponent;
+        public CloakComponent CloakComponent;
         #endregion
 
         #endregion
@@ -312,6 +314,7 @@ namespace DungeonCrawler
             AgroGainComponent = new AgroGainComponent();
             BuffComponent = new BuffComponent();
             ChanceToSucceedComponent = new ChanceToSucceedComponent();
+            ChangeVisibilityComponent = new ChangeVisibilityComponent();
             CoolDownComponent = new CoolDownComponent();
             DamageOverTimeComponent = new DamageOverTimeComponent();
             DirectDamageComponent = new DirectDamageComponent();
@@ -326,6 +329,7 @@ namespace DungeonCrawler
             StunComponent = new StunComponent();
             TimedEffectComponent = new TimedEffectComponent();
             EnslaveComponent = new EnslaveComponent();
+            CloakComponent = new CloakComponent();
             #endregion
 
             base.Initialize();

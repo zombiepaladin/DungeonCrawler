@@ -45,117 +45,123 @@ namespace DungeonCrawler.Entities
 
 
         #region SkillProjectile
-        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed, uint owner)
+        public uint CreateSkillProjectile(SkillType skillP, Facing facing, Position position, int rankP, int speed, uint owner, bool canHitPlayers = false, bool canHitEnemies = true)
+        {
+            return CreateSkillProjectile(skillP, getDirectionFromFacing(facing), position, rankP, speed, owner, canHitPlayers, canHitEnemies);
+        }
+
+        public uint CreateSkillProjectile(SkillType skillP, Vector2 direction, Position position, int rankP, int speed, uint owner, bool canHitPlayers = false, bool canHitEnemies = true)
         {
             SkillProjectile skillProjectile;
             Movement movement;
             Sprite sprite;
             Collideable collideable;
             uint eid = Entity.NextEntity();
-            Vector2 direction = getDirectionFromFacing(facing);
+
+            direction = Vector2.Normalize(direction);
 
             position.EntityID = eid;
-            position.Center += direction * 70;
+            position.Center += direction * 40;
 
             switch (skillP)
             {
                 #region Vermis Projectiles
                 case SkillType.ThrownBlades:
+                    skillProjectile = new SkillProjectile()
                     {
-                        skillProjectile = new SkillProjectile()
-                        {
-                            EntityID = eid,
-                            skill = skillP,
-                            maxRange = 1,
-                            rank = rankP,
-                        };
-                        movement = new Movement()
-                        {
-                            EntityID = eid,
-                            Direction = direction,
-                            Speed = speed,
-                        };
-                        sprite = new Sprite()
-                        {
-                            EntityID = eid,
-                            SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
-                            SpriteBounds = new Rectangle(0, 250, 50, 50),
-                        };
-                        position.Radius = 10;
-                        break;
-                    }
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(0, 250, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.MaliciousParasite:
+                    skillProjectile = new SkillProjectile()
                     {
-                        skillProjectile = new SkillProjectile()
-                        {
-                            EntityID = eid,
-                            skill = skillP,
-                            maxRange = 1,
-                            rank = rankP,
-                        };
-                        movement = new Movement()
-                        {
-                            EntityID = eid,
-                            Direction = direction,
-                            Speed = speed,
-                        };
-                        sprite = new Sprite()
-                        {
-                            EntityID = eid,
-                            SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
-                            SpriteBounds = new Rectangle(300, 150, 50, 50),
-                        };
-                        position.Radius = 10;
-                        break;
-                    }
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(300, 150, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.MindlessParasites:
+                    skillProjectile = new SkillProjectile()
                     {
-                        skillProjectile = new SkillProjectile()
-                        {
-                            EntityID = eid,
-                            skill = skillP,
-                            maxRange = 1,
-                            rank = rankP,
-                        };
-                        movement = new Movement()
-                        {
-                            EntityID = eid,
-                            Direction = direction,
-                            Speed = speed,
-                        };
-                        sprite = new Sprite()
-                        {
-                            EntityID = eid,
-                            SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
-                            SpriteBounds = new Rectangle(250, 50, 50, 50),
-                        };
-                        position.Radius = 10;
-                        break;
-                    }
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(250, 50, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 case SkillType.BenignParasite:
+                    skillProjectile = new SkillProjectile()
                     {
-                        skillProjectile = new SkillProjectile()
-                        {
-                            EntityID = eid,
-                            skill = skillP,
-                            maxRange = 1,
-                            rank = rankP,
-                        };
-                        movement = new Movement()
-                        {
-                            EntityID = eid,
-                            Direction = direction,
-                            Speed = speed,
-                        };
-                        sprite = new Sprite()
-                        {
-                            EntityID = eid,
-                            SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
-                            SpriteBounds = new Rectangle(100, 0, 50, 50),
-                        };
-                        position.Radius = 10;
-                        break;
-                    }
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 1,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/skillPlaceHolder2"),
+                        SpriteBounds = new Rectangle(100, 0, 50, 50),
+                    };
+                    position.Radius = 10;
+                    break;
                 #endregion
 
                 #region Cultist Projectiles
@@ -282,14 +288,38 @@ namespace DungeonCrawler.Entities
                         position.Radius = 10;
                         break;
                     }
-                #endregion
+#endregion
 
                 #endregion
+
+                case SkillType.SniperShot:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 800,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/AlienOrb"),
+                        SpriteBounds = new Rectangle(0, 0, 20, 20),
+                    };
+                    position.Radius = 10;
+                    break;
 
                 default:
                     throw new Exception("Not a projectile skill");
             }
-
             collideable = new Collideable()
             {
                 EntityID = eid,
@@ -304,7 +334,8 @@ namespace DungeonCrawler.Entities
             game.CollisionComponent.Add(eid, collideable);
             return eid;
         }
-#endregion
+
+        #endregion
 
         #region SkillAoE
         public uint CreateSkillAoE(SkillType skill, Position position, int rankP, int radius)

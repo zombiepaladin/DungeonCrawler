@@ -149,6 +149,7 @@ namespace DungeonCrawler.Systems
                         if (game.AgroGainComponent.Contains(keyValue.Key))          game.AgroGainComponent.Remove(keyValue.Key);
                         if (game.BuffComponent.Contains(keyValue.Key))              game.BuffComponent.Remove(keyValue.Key);
                         if (game.ChanceToSucceedComponent.Contains(keyValue.Key))   game.ChanceToSucceedComponent.Remove(keyValue.Key);
+                        if (game.ChangeVisibilityComponent.Contains(keyValue.Key))  game.ChangeVisibilityComponent.Remove(keyValue.Key);
                         if (game.CoolDownComponent.Contains(keyValue.Key))          game.CoolDownComponent.Remove(keyValue.Key);
                         if (game.DamageOverTimeComponent.Contains(keyValue.Key))    game.DamageOverTimeComponent.Remove(keyValue.Key);
                         if (game.DirectDamageComponent.Contains(keyValue.Key))      game.DirectDamageComponent.Remove(keyValue.Key);
@@ -161,6 +162,7 @@ namespace DungeonCrawler.Systems
                         if (game.ResurrectComponent.Contains(keyValue.Key))         game.ResurrectComponent.Remove(keyValue.Key);
                         if (game.StunComponent.Contains(keyValue.Key))              game.StunComponent.Remove(keyValue.Key);
                         if (game.TimedEffectComponent.Contains(keyValue.Key))       game.TimedEffectComponent.Remove(keyValue.Key);
+                        if (game.CloakComponent.Contains(keyValue.Key))             game.CloakComponent.Remove(keyValue.Key);
                         if (game.TargetedKnockBackComponent.Contains(keyValue.Key)) game.TargetedKnockBackComponent.Remove(keyValue.Key);
                         if (game.TurretComponent.Contains(keyValue.Key))          game.TurretComponent.Remove(keyValue.Key);
                         if (game.TrapComponent.Contains(keyValue.Key))            game.TrapComponent.Remove(keyValue.Key);
