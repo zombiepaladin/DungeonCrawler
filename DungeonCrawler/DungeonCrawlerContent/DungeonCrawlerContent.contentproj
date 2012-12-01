@@ -809,6 +809,25 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\D01F01R06solved.tmx">
+      <Name>D01F01R06solved</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\D01F02R01.tmx">
+      <Name>D01F02R01</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R02.tmx">
+      <Name>D01F02R02</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R04.tmx">
+      <Name>D01F02R04</Name>
+    </Compile>
+    <Compile Include="Tilemaps\Template.tmx">
+      <Name>Template</Name>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
