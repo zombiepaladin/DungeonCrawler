@@ -7,6 +7,8 @@
 // Modified: Nicholas Strub - Added Room Transitioning ability based on player/door collisions 10/31/2012
 // Modified: Nicholas Strub - Updated Player/Door Collisions (11/3/2012)
 // Modified: Devin Kelly-Collins - Added Weapon, PlayerWeapon, EnemyWeapon to CollisionType. Update switch statement in Update. Added PlayerWeaponCollision and EnemyWeaponCollision methods. Added DoDamage methods. (11/15/12)
+// Modified: Nick Boen - Added GetClosestEnemy() method to retrieve the closest enemy to a given position
+//                       I included it here because I felt that it best fit, though there may be a better place for it...
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -227,6 +229,97 @@ namespace DungeonCrawler.Systems
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns the Enemy closest to the given position
+        /// </summary>
+        /// <param name="currentPosition">The position to use as a base for finding the closest enemy</param>
+        /// <returns></returns>
+        public uint GetClosestEnemy(Position currentPosition)
+        {
+            return GetClosestEnemy(currentPosition, null);
+        }
+
+        public uint GetClosestEnemy(Position currentPosition, List<uint> doNotIncludeList, float maxDistance)
+        {
+            uint currentBestEnemyID = uint.MaxValue;
+            float currentBestDistance = float.MaxValue;
+            float distance;
+            Position enemyPosition;
+
+            foreach (Enemy enemy in _game.EnemyComponent.All)
+            {
+                //Make sure that we don't look at enemies that we want to skip
+                if (doNotIncludeList != null && doNotIncludeList.Contains(enemy.EntityID)) continue;
+
+                //Sanity Check - make sure that the enemy even has a position component
+                if (!_game.PositionComponent.Contains(enemy.EntityID)) continue;
+
+                //Get the Position of the enemy
+                enemyPosition = _game.PositionComponent[enemy.EntityID];
+
+                //Sanity Check - make sure that the two positions are actually in the same room
+                if (enemyPosition.RoomID != currentPosition.RoomID) continue;
+
+                //Get the distance between the two points (its ok that it's squared since we are just comparing)
+                distance = Vector2.DistanceSquared(currentPosition.Center, enemyPosition.Center);
+
+                //Check to see if the distance for this enemy is better than the best we've found so far
+                //If so, then keep track of it, otherwise keep going.
+                //Also with the added check for the maximum distance
+                if (distance < currentBestDistance && distance < maxDistance)
+                {
+                    currentBestDistance = distance;
+                    currentBestEnemyID = enemy.EntityID;
+                }
+            }
+
+            //return our results
+            return currentBestEnemyID;
+        }
+
+        /// <summary>
+        /// Returns the Enemy closest to the given position while ignoring specific enemies
+        /// </summary>
+        /// <param name="currentPosition">The position to use as a base for finding the closest enemy</param>
+        /// <param name="doNotIncludeList">The list of enemies to ignore</param>
+        /// <returns></returns>
+        public uint GetClosestEnemy(Position currentPosition, List<uint> doNotIncludeList)
+        {
+            uint currentBestEnemyID = 0;
+            float currentBestDistance = float.MaxValue;
+            float distance;
+            Position enemyPosition;
+
+            foreach (Enemy enemy in _game.EnemyComponent.All)
+            {
+                //Make sure that we don't look at enemies that we want to skip
+                if (doNotIncludeList != null && doNotIncludeList.Contains(enemy.EntityID)) continue;
+
+                //Sanity Check - make sure that the enemy even has a position component
+                if (!_game.PositionComponent.Contains(enemy.EntityID)) continue;
+
+                //Get the Position of the enemy
+                enemyPosition = _game.PositionComponent[enemy.EntityID];
+
+                //Sanity Check - make sure that the two positions are actually in the same room
+                if (enemyPosition.RoomID != currentPosition.RoomID) continue;
+
+                //Get the distance between the two points (its ok that it's squared since we are just comparing)
+                distance = Vector2.DistanceSquared(currentPosition.Center, enemyPosition.Center);
+
+                //Check to see if the distance for this enemy is better than the best we've found so far
+                //If so, then keep track of it, otherwise keep going.
+                if (distance < currentBestDistance)
+                {
+                    currentBestDistance = distance;
+                    currentBestEnemyID = enemy.EntityID;
+                }
+            }
+
+            //return our results
+            return currentBestEnemyID;
         }
 
         /// <summary>
@@ -725,7 +818,7 @@ namespace DungeonCrawler.Systems
             }
             SkillProjectile skill = _game.SkillProjectileComponent[skillId];
 
-            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId, skill.OwnerID);
 
             if (_game.SkillProjectileComponent.Contains(skillId))
             {
@@ -747,7 +840,7 @@ namespace DungeonCrawler.Systems
                 oId = p;
             }
             SkillProjectile skill = _game.SkillProjectileComponent[skillId];
-            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId);
+            _game.SkillSystem.TriggerEffect(skill.skill, skill.rank, friendly, oId,skill.OwnerID);
         }
         /// <summary>
         /// Handles Enemy/ExplodingDroid collisions.
@@ -867,7 +960,6 @@ namespace DungeonCrawler.Systems
 
         }
 
-
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
@@ -934,7 +1026,6 @@ namespace DungeonCrawler.Systems
 
             return obj1 | obj2;
         }
-
 
         private void HandleStaticDynamic(uint staticID, uint dynamicID)
         {
@@ -1085,5 +1176,6 @@ namespace DungeonCrawler.Systems
 
             _game.ActorTextComponent.Add(enemy.EntityID, damage.ToString());
         }
+        
     }
 }

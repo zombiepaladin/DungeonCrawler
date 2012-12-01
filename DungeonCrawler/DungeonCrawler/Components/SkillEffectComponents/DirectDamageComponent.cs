@@ -22,7 +22,7 @@ namespace DungeonCrawler.Components
         public uint EntityID;
         public uint TargetID;
 
-        public int Damage;
+        public float Damage;
     }
 
     public class DirectDamageComponent : GameComponent<DirectDamage>

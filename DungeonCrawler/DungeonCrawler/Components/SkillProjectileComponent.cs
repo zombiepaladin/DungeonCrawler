@@ -35,6 +35,11 @@ namespace DungeonCrawler.Components
         public SkillType skill;
 
         /// <summary>
+        /// The ID of the owner of this projectile
+        /// </summary>
+        public uint OwnerID;
+
+        /// <summary>
         /// Max range of the projectile
         /// </summary>
         public int maxRange;
