@@ -108,10 +108,6 @@ Content\Spritesheets\Turret.xnb
 Content\Spritesheets\Skills\Effects\bubble.xnb
 Content\Spritesheets\Skills\Effects\charge.xnb
 Content\Spritesheets\Skills\Effects\fallback.xnb
-Content\Spritesheets\Enemies\spider.xnb
-Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
-Content\Spritesheets\Skills\Effects\AlienOrb.xnb
-Content\Spritesheets\Skills\Effects\CloakEffect.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb

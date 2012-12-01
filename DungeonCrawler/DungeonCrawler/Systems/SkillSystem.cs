@@ -4,7 +4,8 @@
 //
 // Author: Nicholas Boen 
 // Contributers: Austin Murphy
-// Modfied by Adam Clark: cyborg skill added
+// Modfied by:  Adam Clark: cyborg skill added
+//              Michael Fountain: Gargranian skills have been updated
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -40,7 +41,7 @@ namespace DungeonCrawler.Systems
         Possess,
         PsionicSpear,
         Push,
-        Detnate,
+        Detinate,
         MentalBarrier,
         WormOfGargran,
         Soothe,
@@ -312,6 +313,7 @@ namespace DungeonCrawler.Systems
             #region Global Variables
 
             uint eid;
+            Random random = new Random();
 
             #endregion
             
@@ -2531,170 +2533,288 @@ namespace DungeonCrawler.Systems
                         #region Checking Skill Type
 
                         case SkillType.MindLock:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                int chance = 0;  //% chance that the skill will work
+                                int maxEnemies = 0;  //maximum number of enemies that can be mind locked at a time
+                                float duration = 0;  //duraction in seconds that the mind lock will be in effect
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:                    
+                                        chance = 60;  //60% chance that the skill will work
+                                        maxEnemies = 1;  //only 1 enemy can be mind locked at a time
+                                        duration = 5;  //the mind lock will last for 5 seconds
+                                        break;
+
+                                    case 2:
+                                        chance = 65;  //65% chance that the skill will work
+                                        maxEnemies = 1;  //only 1 enemy can be mind locked at a time
+                                        duration = 6;  //the mind lock will last for 6 seconds
+                                        break;
+
+                                    case 3:
+                                        chance = 65;  //65% chance that the skill will work
+                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
+                                        duration = 7;  //the mind lock will last for 7 seconds
+                                        break;
+
+                                    case 4:
+                                        chance = 70;  //70% chance that the skill will work
+                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
+                                        duration = 8;  //the mind lock will last for 8 seconds
+                                        break;
+
+                                    case 5:
+                                        chance = 75;  //75% chance that the skill will work
+                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
+                                        duration = 9;  //the mind lock will last for 9 seconds
+                                        break;
+
+                                    case 6:
+                                        chance = 75;  //75% chance that the skill will work
+                                        maxEnemies = 3;  //only 3 enemies can be mind locked at a time
+                                        duration = 10;  //the mind lock will last for 10 seconds
+                                        break;
+
+                                    case 7:
+                                        chance = 80;  //80% chance that the skill will work
+                                        maxEnemies = 3;  //only 3 enemies can be mind locked at a time
+                                        duration = 11;  //the mind lock will last for 11 seconds
+                                        break;
+
+                                    case 8:
+                                        chance = 80;  //80% chance that the skill will work
+                                        maxEnemies = 4;  //only 4 enemies can be mind locked at a time
+                                        duration = 12;  //the mind lock will last for 12 seconds
+                                        break;
+
+                                    case 9:
+                                        chance = 85;  //85% chance that the skill will work
+                                        maxEnemies = 4;  //only 4 enemies can be mind locked at a time
+                                        duration = 13;  //the mind lock will last for 13 seconds
+                                        break;
+
+                                    case 10:
+                                        chance = 85;  //85% chance that the skill will work
+                                        maxEnemies = 5;  //only 5 enemies can be mind locked at a time
+                                        duration = 14;  //the mind lock will last for 14 seconds
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
+                                
+                                #region Logic
+                                
+                                List<uint> enemiesInRange = _game.CollisionSystem.GetEnemiesInRange(_game.PositionComponent[userID], 20, maxEnemies);
+                                
+                                foreach (uint enemyID in enemiesInRange)
+                                {
+                                    uint cts = Entity.NextEntity();
+                                    eid = Entity.NextEntity();
+
+                                    ChanceToSucceed chanceToSucceed;
+                                    chanceToSucceed = new ChanceToSucceed()
+                                    {
+                                        EntityID = cts,
+                                        SuccessRateAsPercentage = chance
+                                    };
+                                    _game.ChanceToSucceedComponent.Add(eid, chanceToSucceed);
+                                
+                                    TimedEffect timedEffect;
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    Stun stun;
+                                    stun = new Stun()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = enemyID,
+                                        Type = StunType.BreakOnHit
+                                    };
+
+                                    _game.StunComponent.Add(eid, stun);
+                                }
+                               
+                                #endregion
+                                break;
                             }
-                            break;
 
                         case SkillType.Invisibility:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                int duration = 0;
                                 #endregion
+
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        duration = 2;
+                                        break;
+
+                                    case 2:
+                                        duration = 4;
+                                        break;
+
+                                    case 3:
+                                        duration = 6;
+                                        break;
+
+                                    case 4:
+                                        duration = 8;
+                                        break;
+
+                                    case 5:
+                                        duration = 10;
+                                        break;
+
+                                    case 6:
+                                        duration = 12;
+                                        break;
+
+                                    case 7:
+                                        duration = 14;
+                                        break;
+
+                                    case 8:
+                                        duration = 16;
+                                        break;
+
+                                    case 9:
+                                        duration = 18;
+                                        break;
+
+                                    case 10:
+                                        duration = 20;
+                                        break;
+
+                                    default:
+                                        break;
+                                    #endregion
+                                }
+                                #region Logic
+                                
+                                eid = Entity.NextEntity();
+
+                                TimedEffect timedEffect;
+                                timedEffect = new TimedEffect()
+                                {
+                                    EntityID = eid,
+                                    TotalDuration = duration,
+                                    TimeLeft = duration
+                                };
+                                _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                /*AgroDrop agroDrop;
+                                agroDrop = new AgroDrop()
+                                {
+                                    EntityID = eid,
+                                    PlayerID = userID
+                                };
+                                _game.AgroDropComponent.Add(eid, agroDrop);
+                                */
+                                ChangeVisibility changeVisibility;
+                                changeVisibility = new ChangeVisibility()
+                                {
+                                    EntityID = eid,
+                                    TargetID = userID,
+                                    newColor = new Color(45, 45, 45, 0)
+                                };
+                                _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
+
+
+                                #endregion
+                                break;
                             }
-                            break;
 
                         case SkillType.Possess:
-
-                            #region Skill Variables
-
-                            #endregion
-
-                            switch (rank)
                             {
-                                #region Checking Rank
-                                case 1:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 2:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 3:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 4:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 5:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 6:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 7:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 8:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 9:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                case 10:
-									eid = Entity.NextEntity();
-                                    break;
-
-                                default:
-                                    break;
+                                #region Skill Variables
+                                int chance;
+                                EnemyIntelligence affects;
+                                int duration;
                                 #endregion
-                            }
-                            break;
 
+                                switch (rank)
+                                {
+                                    #region Checking Rank
+                                    case 1:
+                                        chance = 40;
+                                        affects = EnemyIntelligence.Mindless;
+                                        duration = 5;
+                                        break;
+
+                                    case 2:
+                                        chance = 45;
+                                        affects = EnemyIntelligence.Mindless;
+                                        duration = 10;
+                                        break;
+
+                                    case 3:
+                                        chance = 50;
+                                        affects = EnemyIntelligence.Mindless;
+                                        duration = 20;
+                                        break;
+
+                                    case 4:
+                                        chance = 55;
+                                        affects = EnemyIntelligence.SemiIntelligent;
+                                        duration = 30;
+                                        break;
+
+                                    case 5:
+                                        chance = 60;
+                                        affects = EnemyIntelligence.SemiIntelligent;
+                                        duration = 45;
+                                        break;
+
+                                    case 6:
+                                        chance = 65;
+                                        affects = EnemyIntelligence.SemiIntelligent;
+                                        duration = 60;
+                                        break;
+
+                                    case 7:
+                                        chance = 70;
+                                        affects = EnemyIntelligence.Intelligent;
+                                        duration = 120;
+                                        break;
+
+                                    case 8:
+                                        chance = 75;
+                                        affects = EnemyIntelligence.Intelligent;
+                                        duration = 180;
+                                        break;
+
+                                    case 9:
+                                        chance = 80;
+                                        affects = EnemyIntelligence.Intelligent;
+                                        duration = 240;
+                                        break;
+
+                                    case 10:
+                                        chance = 85;
+                                        affects = EnemyIntelligence.Intelligent;
+                                        duration = 300;
+                                        break;
+
+                                    default:
+                                        break;
+
+                                    #endregion
+                                }
+                                break;
+                            }
                         case SkillType.PsionicSpear:
 
                             #region Skill Variables
@@ -2805,7 +2925,7 @@ namespace DungeonCrawler.Systems
                             }
                             break;
 
-                        case SkillType.Detnate:
+                        case SkillType.Detinate:
 
                             #region Skill Variables
 

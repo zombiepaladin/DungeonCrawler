@@ -149,6 +149,7 @@ namespace DungeonCrawler.Systems
                         if (game.AgroGainComponent.Contains(keyValue.Key))          game.AgroGainComponent.Remove(keyValue.Key);
                         if (game.BuffComponent.Contains(keyValue.Key))              game.BuffComponent.Remove(keyValue.Key);
                         if (game.ChanceToSucceedComponent.Contains(keyValue.Key))   game.ChanceToSucceedComponent.Remove(keyValue.Key);
+                        if (game.ChangeVisibilityComponent.Contains(keyValue.Key))  game.ChangeVisibilityComponent.Remove(keyValue.Key);
                         if (game.CoolDownComponent.Contains(keyValue.Key))          game.CoolDownComponent.Remove(keyValue.Key);
                         if (game.DamageOverTimeComponent.Contains(keyValue.Key))    game.DamageOverTimeComponent.Remove(keyValue.Key);
                         if (game.DirectDamageComponent.Contains(keyValue.Key))      game.DirectDamageComponent.Remove(keyValue.Key);

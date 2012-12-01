@@ -784,7 +784,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        SpriteSheet = spriteSheet
+                        SpriteSheet = spriteSheet,
+                        //SpriteColor = new Color(45, 45, 45, 0),
+                        //UseDifferentColor = true
                     };
                     game.SpriteComponent[entityID] = sprite;
                     local = new Local()
@@ -831,7 +833,7 @@ namespace DungeonCrawler.Entities
                         skill3 = Systems.SkillType.Possess,
                         skill4 = Systems.SkillType.PsionicSpear,
                         skill5 = Systems.SkillType.Push,
-                        skill6 = Systems.SkillType.Detnate,
+                        skill6 = Systems.SkillType.Detinate,
                         skill7 = Systems.SkillType.MentalBarrier,
                         skill8 = Systems.SkillType.WormOfGargran,
                         skill9 = Systems.SkillType.Soothe,

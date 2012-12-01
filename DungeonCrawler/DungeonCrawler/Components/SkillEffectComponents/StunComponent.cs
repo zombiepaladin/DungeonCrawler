@@ -19,7 +19,8 @@ namespace DungeonCrawler.Components
 {
     public enum StunType
     {
-        BreakOnHit
+        BreakOnHit,
+        CantBreak
     }
 
     public struct Stun

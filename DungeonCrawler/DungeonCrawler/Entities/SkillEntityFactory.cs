@@ -217,7 +217,7 @@ namespace DungeonCrawler.Entities
 
             switch (skill)
             {
-                case SkillType.Detnate:
+                case SkillType.Detinate:
                     skillAoE = new SkillAoE()
                     {
                         EntityID = eid,

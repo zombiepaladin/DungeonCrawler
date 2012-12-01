@@ -41,6 +41,13 @@ namespace DungeonCrawler.Components
         Poisoned = 0x3,
     }
 
+    public enum EnemyIntelligence
+    {
+        Mindless,
+        SemiIntelligent,
+        Intelligent,
+    }
+
     /// <summary>
     /// A struct representing an Enemy Component
     /// </summary>
