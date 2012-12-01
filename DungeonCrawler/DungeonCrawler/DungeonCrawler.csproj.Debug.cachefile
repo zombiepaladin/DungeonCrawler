@@ -125,3 +125,7 @@ Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
 Content\SpriteFonts\Pescadero.xnb
 Content\SpriteFonts\BoldPescadero.xnb
+Content\Spritesheets\Enemies\spider.xnb
+Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
+Content\Spritesheets\Skills\Effects\AlienOrb.xnb
+Content\Spritesheets\Skills\Effects\CloakEffect.xnb

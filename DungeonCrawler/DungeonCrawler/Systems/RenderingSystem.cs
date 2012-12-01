@@ -99,19 +99,25 @@ namespace DungeonCrawler.Systems
 
             // Draw all Sprites
             List<Sprite> sprites = new List<Sprite>();
+          
             foreach(Sprite sprite in game.SpriteComponent.All) { sprites.Add(sprite); }
             foreach (Sprite sprite in sprites)
             {
             //foreach (Sprite sprite in game.SpriteComponent.All)
             //{
-                Position position = game.PositionComponent[sprite.EntityID];
+                Position position = game.PositionComponent[sprite.EntityID];  
+                Color drawColor = Color.White;
                 if (position.RoomID == roomId)
                 {
+                    if (sprite.UseDifferentColor)
+                        drawColor = sprite.SpriteColor;
+                    else
+                        drawColor = Color.White;
 
                     spriteBatch.Draw(sprite.SpriteSheet,
                                     position.Center,
                                     sprite.SpriteBounds,
-                                    Color.White,
+                                    drawColor,
                                     0f,                                             // rotation
                                     new Vector2(position.Radius, position.Radius),  // origin
                                     1f,                                             // scale

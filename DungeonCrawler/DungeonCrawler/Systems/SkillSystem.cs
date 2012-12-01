@@ -4,7 +4,8 @@
 //
 // Author: Nicholas Boen 
 // Contributers: Austin Murphy
-// Modfied by Adam Clark: cyborg skill added
+// Modfied by:  Adam Clark: cyborg skill added
+//              Michael Fountain: Gargranian skills have been updated
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -2712,6 +2713,24 @@ namespace DungeonCrawler.Systems
                                     TotalDuration = duration,
                                     TimeLeft = duration
                                 };
+                                _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                /*AgroDrop agroDrop;
+                                agroDrop = new AgroDrop()
+                                {
+                                    EntityID = eid,
+                                    PlayerID = userID
+                                };
+                                _game.AgroDropComponent.Add(eid, agroDrop);
+                                */
+                                ChangeVisibility changeVisibility;
+                                changeVisibility = new ChangeVisibility()
+                                {
+                                    EntityID = eid,
+                                    TargetID = userID,
+                                    newColor = new Color(45, 45, 45, 0)
+                                };
+                                _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
 
 
                                 #endregion

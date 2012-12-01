@@ -784,7 +784,9 @@ namespace DungeonCrawler.Entities
                     {
                         EntityID = entityID,
                         SpriteBounds = new Rectangle(0, 0, 64, 64),
-                        SpriteSheet = spriteSheet
+                        SpriteSheet = spriteSheet,
+                        //SpriteColor = new Color(45, 45, 45, 0),
+                        //UseDifferentColor = true
                     };
                     game.SpriteComponent[entityID] = sprite;
                     local = new Local()
