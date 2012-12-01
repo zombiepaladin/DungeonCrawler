@@ -300,6 +300,7 @@ namespace DungeonCrawler
             PortableShieldComponent = new PortableShieldComponent();
             PortableStoreComponent = new PortableStoreComponent();
             ActiveSkillComponent = new ActiveSkillComponent();
+            PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
 
             Quests = new List<Quest>();
 
@@ -725,6 +726,9 @@ namespace DungeonCrawler
 
             // Dispose the container.
             container.Dispose();
+            if (characterSaveData.quests == null)
+                characterSaveData.quests = new List<Quest>();
+            DungeonCrawlerGame.game.Quests = characterSaveData.quests;
 
             return characterSaveData;
         }
