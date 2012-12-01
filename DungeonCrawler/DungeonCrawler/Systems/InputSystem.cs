@@ -181,10 +181,10 @@ namespace DungeonCrawler.Systems
 
                     uint eid = player.EntityID;
   
-                    //SkillType activeSkill = game.ActiveSkillComponent[eid].activeSkill;
-                    //game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(eid,activeSkill),eid);
+                    SkillType activeSkill = game.ActiveSkillComponent[eid].activeSkill;
+                    game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(eid,activeSkill),eid);
                     
-                    game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Invisibility, 1, thisPlayerKey);
+                    //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Invisibility, 1, thisPlayerKey);
 
                     //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ThrusterRush, 1, thisPlayerKey);
                 }

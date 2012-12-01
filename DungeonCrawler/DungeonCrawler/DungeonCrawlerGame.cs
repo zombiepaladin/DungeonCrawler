@@ -199,8 +199,10 @@ namespace DungeonCrawler
         public ResurrectComponent ResurrectComponent;
         public StunComponent StunComponent;
         public TimedEffectComponent TimedEffectComponent;
+        public EnslaveComponent EnslaveComponent;
         public CloakComponent CloakComponent;
         #endregion
+
         #endregion
 
         #region Game Systems
@@ -326,6 +328,7 @@ namespace DungeonCrawler
             ResurrectComponent = new ResurrectComponent();
             StunComponent = new StunComponent();
             TimedEffectComponent = new TimedEffectComponent();
+            EnslaveComponent = new EnslaveComponent();
             CloakComponent = new CloakComponent();
             #endregion
 

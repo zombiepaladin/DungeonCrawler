@@ -1,6 +1,6 @@
 ﻿#region File Description
 //-----------------------------------------------------------------------------
-// DirectDamageComponent.cs 
+// StunComponent.cs 
 //
 // Author: Nicholas Boen
 // 
@@ -17,15 +17,14 @@ using System.Text;
 
 namespace DungeonCrawler.Components
 {
-    public struct DirectDamage
+    public struct Enslave
     {
         public uint EntityID;
+        public uint OwnerID;
         public uint TargetID;
-
-        public float Damage;
     }
 
-    public class DirectDamageComponent : GameComponent<DirectDamage>
+    public class EnslaveComponent : GameComponent<Enslave>
     {
     }
 }

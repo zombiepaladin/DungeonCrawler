@@ -146,6 +146,7 @@
     <Compile Include="Components\SkillEffectComponents\KnockBackComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\ReduceAgroRangeComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\ResurrectComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\EnslaveComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\StunComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\TargetedKnockbackComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\TimedEffectComponent.cs" />
