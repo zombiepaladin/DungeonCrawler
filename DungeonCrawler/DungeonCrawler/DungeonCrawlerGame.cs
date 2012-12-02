@@ -178,6 +178,7 @@ namespace DungeonCrawler
         public HealingStationComponent HealingStationComponent;
         public PortableShieldComponent PortableShieldComponent;
         public PortableStoreComponent PortableStoreComponent;
+        public MatchingPuzzleComponent MatchingPuzzleComponent;
         
 
         #region Effect Components

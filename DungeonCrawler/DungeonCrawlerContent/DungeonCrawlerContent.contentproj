@@ -828,6 +828,71 @@
       <Name>Template</Name>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilesets\tech4.png">
+      <Name>tech4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\D01F02R05.tmx">
+      <Name>D01F02R05</Name>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\D01F02R06.tmx">
+      <Name>D01F02R06</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R07.tmx">
+      <Name>D01F02R07</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R08.tmx">
+      <Name>D01F02R08</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R09.tmx">
+      <Name>D01F02R09</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R10.tmx">
+      <Name>D01F02R10</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F02R11.tmx">
+      <Name>D01F02R11</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R01.tmx">
+      <Name>D01F03R01</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R02.tmx">
+      <Name>D01F03R02</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R03.tmx">
+      <Name>D01F03R03</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R04.tmx">
+      <Name>D01F03R04</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R05.tmx">
+      <Name>D01F03R05</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R06.tmx">
+      <Name>D01F03R06</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R07.tmx">
+      <Name>D01F03R07</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R08.tmx">
+      <Name>D01F03R08</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R09.tmx">
+      <Name>D01F03R09</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R10.tmx">
+      <Name>D01F03R10</Name>
+    </Compile>
+    <Compile Include="Tilemaps\D01F03R11.tmx">
+      <Name>D01F03R11</Name>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

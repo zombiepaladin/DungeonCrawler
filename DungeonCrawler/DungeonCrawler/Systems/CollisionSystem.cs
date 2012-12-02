@@ -62,6 +62,7 @@ namespace DungeonCrawler.Systems
             ExplodingDroid = 0x1000,
             HealingStation = 0x400,
             PortableShield = 0x800,
+            MatchingPuzzlePiece = 0x1200,
 
             PlayerEnemy = 0x6,
             PlayerBullet = 0xA,
@@ -246,6 +247,9 @@ namespace DungeonCrawler.Systems
                                 ExplodingDroidCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
                                 break;
 
+                            case CollisionType.MatchingPuzzlePiece:
+                                PlayerMatchingPuzzlePieceCollision(collideablesInRoom[i].EntityID, collideablesInRoom[j].EntityID);
+                                break;
 
                         }
                     }
@@ -1101,6 +1105,21 @@ namespace DungeonCrawler.Systems
 
         }
 
+        private void PlayerMatchingPuzzlePieceCollision(uint p, uint p_2)
+        {
+            uint MatchingPuzzlePieceId, playerId;
+            if (_game.PlayerComponent.Contains(p))
+            {
+                playerId = p;
+                MatchingPuzzlePieceId = p_2;
+            }
+            else
+            {
+                MatchingPuzzlePieceId = p;
+                playerId = p_2;
+            }
+        }
+
         /// <summary>
         /// Retrives the collision type between the two eids
         /// </summary>
@@ -1134,6 +1153,8 @@ namespace DungeonCrawler.Systems
                 obj1 = CollisionType.HealingStation;
             else if (_game.PortableShieldComponent.Contains(p))
                 obj1 = CollisionType.PortableShield;
+            else if (_game.MatchingPuzzleComponent.Contains(p))
+                obj1 = CollisionType.MatchingPuzzlePiece;
             else //Static
                 obj1 = CollisionType.Static;
 
@@ -1150,7 +1171,7 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.Door;
             else if (_game.TriggerComponent.Contains(p_2))
                 obj2 = CollisionType.Trigger;
-            else if(_game.SkillProjectileComponent.Contains(p_2) || _game.SkillAoEComponent.Contains(p_2)||_game.SkillDeployableComponent.Contains(p_2))
+            else if (_game.SkillProjectileComponent.Contains(p_2) || _game.SkillAoEComponent.Contains(p_2) || _game.SkillDeployableComponent.Contains(p_2))
                 obj2 = CollisionType.Skill;
             else if (_game.WeaponComponent.Contains(p_2))
                 obj2 = CollisionType.Weapon;
@@ -1162,6 +1183,8 @@ namespace DungeonCrawler.Systems
                 obj2 = CollisionType.HealingStation;
             else if (_game.PortableShieldComponent.Contains(p_2))
                 obj2 = CollisionType.PortableShield;
+            else if (_game.MatchingPuzzleComponent.Contains(p_2))
+                obj2 = CollisionType.MatchingPuzzlePiece;
             else //Static
                 obj2 = CollisionType.Static;
 
