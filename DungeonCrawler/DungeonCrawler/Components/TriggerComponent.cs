@@ -57,6 +57,9 @@ namespace DungeonCrawler.Components
                 case "Door":
                     DungeonCrawlerGame.game.DoorComponent.HandleTrigger(targetEntityID, trigger.TriggerType);
                     break;
+                case "MatchingPuzzlePiece":
+                    DungeonCrawlerGame.game.MatchingPuzzleComponent.HandleTrigger(targetEntityID, trigger.TriggerType);
+                    break;
             }
         }
 

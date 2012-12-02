@@ -127,6 +127,7 @@
     <Compile Include="Components\EnemyComponent.cs" />
     <Compile Include="Components\EngineeringSupportComponents.cs" />
     <Compile Include="Components\HealComponent.cs" />
+    <Compile Include="Components\MatchingPuzzleComponent.cs" />
     <Compile Include="Components\NpcAIComponent.cs" />
     <Compile Include="Components\NPCComponent.cs" />
     <Compile Include="Components\QuestComponent.cs" />

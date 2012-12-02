@@ -93,7 +93,7 @@ namespace DungeonCrawler.Systems
                 // Load the destination room
                 uint lastRoomEid = game.CurrentRoomEid;
 
-                if (door.DestinationRoom == "D01F01R07" && game.RoomComponent[lastRoomEid].roomName == "D01F01R06" && game.QuestLogSystem.ActiveQuests.Contains(0))
+                if (door.DestinationRoom == "D01F02R11" && game.RoomComponent[lastRoomEid].roomName == "D01F02R08" && game.QuestLogSystem.ActiveQuests.Contains(0))
                 {
                     game.QuestLogSystem.IncremementObjective(0);
                 }
