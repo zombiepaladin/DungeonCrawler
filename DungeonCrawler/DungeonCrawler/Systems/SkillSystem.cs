@@ -36,12 +36,12 @@ namespace DungeonCrawler.Systems
         AlloyBody,
         CyberneticSlam,
         ThrusterRush,
-        MindLock,
+        Teleport,
         Invisibility,
-        Possess,
+        Meditate,
         PsionicSpear,
         Push,
-        Detinate,
+        ImprovedPsionicSpear,
         MentalBarrier,
         WormOfGargran,
         Soothe,
@@ -2583,7 +2583,7 @@ namespace DungeonCrawler.Systems
                     {
                         #region Checking Skill Type
 
-                        case SkillType.MindLock:
+                        case SkillType.Teleport:
                             {
                                 #region Skill Variables
                                 int chance = 0;  //% chance that the skill will work
@@ -2788,7 +2788,7 @@ namespace DungeonCrawler.Systems
                                 break;
                             }
 
-                        case SkillType.Possess:
+                        case SkillType.Meditate:
                             {
                                 #region Skill Variables
                                 int chance;
@@ -2976,7 +2976,7 @@ namespace DungeonCrawler.Systems
                             }
                             break;
 
-                        case SkillType.Detinate:
+                        case SkillType.ImprovedPsionicSpear:
 
                             #region Skill Variables
 

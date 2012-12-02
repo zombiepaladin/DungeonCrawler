@@ -188,6 +188,20 @@ namespace DungeonCrawler
         }
 
         /// <summary>
+        /// Overloaded function that returns true if the given key is pressed.
+        /// This allows for keyboard only commands
+        /// </summary>
+        /// <param name="key">Keyboard key to check.</param>
+        /// <returns></returns>
+        public bool IsPressed(Keys key)
+        {
+            if (_disabled)
+                return false;
+            
+            return isKeyPressed(key);
+        }
+
+        /// <summary>
         /// Returns true if the given key or button is held.
         /// </summary>
         /// <param name="key"></param>
