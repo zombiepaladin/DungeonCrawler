@@ -352,7 +352,7 @@ namespace DungeonCrawler.Entities
                 #region Gargranian AOE Skills
 
                 #region Detonate
-                case SkillType.Detinate:
+                case SkillType.ImprovedPsionicSpear:
                     {
                         skillAoE = new SkillAoE()
                         {

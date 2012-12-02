@@ -170,6 +170,27 @@ namespace DungeonCrawler.Systems
                
                 if (state.IsPressed(Keys.L, Buttons.RightStick)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
 
+                //set up a system to switch skills by using the 1-9 keys
+                if(state.IsPressed(Keys.D1))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill1, player.EntityID);
+                if (state.IsPressed(Keys.D2))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill2, player.EntityID);
+                if (state.IsPressed(Keys.D3))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill3, player.EntityID);
+                if (state.IsPressed(Keys.D4))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill4, player.EntityID);
+                if (state.IsPressed(Keys.D5))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill5, player.EntityID);
+                if (state.IsPressed(Keys.D6))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill6, player.EntityID);
+                if (state.IsPressed(Keys.D7))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill7, player.EntityID);
+                if (state.IsPressed(Keys.D8))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill8, player.EntityID);
+                if (state.IsPressed(Keys.D9))
+                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
+
+
                 if (state.IsPressed(Keys.Space, Buttons.RightTrigger))
                 {
                     uint thisPlayerKey = 0;
@@ -178,11 +199,9 @@ namespace DungeonCrawler.Systems
                         if(p.PlayerIndex == PlayerIndex.One)
                             thisPlayerKey = p.EntityID;
                     }
-
-                    uint eid = player.EntityID;
   
-                    SkillType activeSkill = game.ActiveSkillComponent[eid].activeSkill;
-                    game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(eid,activeSkill),eid);
+                    SkillType activeSkill = game.ActiveSkillComponent[player.EntityID].activeSkill;
+                    game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(player.EntityID,activeSkill),player.EntityID);
                     
                     //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Invisibility, 1, thisPlayerKey);
 
@@ -403,6 +422,13 @@ namespace DungeonCrawler.Systems
                 #endregion //end hud control
                 
             }
+        }
+
+        private void ChangeActiveSkill(SkillType activatedSkill, uint playerId)
+        {
+            ActiveSkill skill = game.ActiveSkillComponent[playerId];
+            skill.activeSkill = activatedSkill;
+            game.ActiveSkillComponent[playerId] = skill;
         }
 
         #endregion
