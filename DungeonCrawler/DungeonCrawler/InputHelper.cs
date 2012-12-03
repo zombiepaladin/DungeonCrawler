@@ -10,10 +10,7 @@
 //-----------------------------------------------------------------------------
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -96,12 +93,14 @@ namespace DungeonCrawler
 
         //Conditional variables
 #if WINDOWS 
-        KeyboardState _curKeyboardState;
-        KeyboardState _oldKeyboardState;
+        private KeyboardState _curKeyboardState;
+        private KeyboardState _oldKeyboardState;
+        private Dictionary<string, Keys> _mappedKeys;
 #endif
 #if XBOX || WINDOWS
-        GamePadState _curGamePadState;
-        GamePadState _oldGamePadState;
+        private GamePadState _curGamePadState;
+        private GamePadState _oldGamePadState;
+        private Dictionary<string, Buttons> _mappedButtons;
 #endif
 
         //Local variables.
@@ -115,6 +114,7 @@ namespace DungeonCrawler
             _disabled = false;
 #if WINDOWS
             initKeyboard();
+            initGamePad();
 #elif XBOX
             initGamePad();
 #endif
@@ -136,6 +136,22 @@ namespace DungeonCrawler
         }
 
         /// <summary>
+        /// Maps the given key and button to the name.
+        /// </summary>
+        /// <param name="name">Name of mapping</param>
+        /// <param name="key">Keyboard key to map.</param>
+        /// <param name="button">Xbox controller key to map.</param>
+        public void MapInput(string name, Keys key, Buttons button)
+        {
+#if WINDOWS
+            mapKey(name, key);
+            mapButton(name, button);
+#elif XBOX
+            mapButton(name, button);
+#endif
+        }
+
+        /// <summary>
         /// Returns the direction the player is inputing. (With the left stick on the gamepad and the WASD keys on the keyboard)
         /// </summary>
         /// <returns></returns>
@@ -153,6 +169,10 @@ namespace DungeonCrawler
 #endif
         }
 
+        /// <summary>
+        /// Return the dirction the player is inputing. (With the right stick on the gamepad and arrow keys on the keyboard)
+        /// </summary>
+        /// <returns></returns>
         public Vector2 GetRightDirection()
         {
             if (_disabled)
@@ -181,7 +201,7 @@ namespace DungeonCrawler
 #if WINDOWS
             if (_curGamePadState.IsConnected)
                 return isButtonPressed(button);
-            return isKeyPressed(key); //Only allow keyboard input for the first player.
+            return isKeyPressed(key); 
 #elif XBOX
             return isButtonPressed((Buttons)button);
 #endif
@@ -199,6 +219,25 @@ namespace DungeonCrawler
                 return false;
             
             return isKeyPressed(key);
+        }
+
+        /// <summary>
+        /// Returns true if the given key or button is pressed.
+        /// </summary>
+        /// <param name="name">Name of mapped key/button.</param>
+        /// <returns></returns>
+        public bool IsPressed(string name)
+        {
+            if (_disabled)
+                return false;
+
+#if WINDOWS
+            if (_curGamePadState.IsConnected)
+                return isButtonPressed(name);
+            return isKeyPressed(name);
+#elif XBOX
+            return isBUtton(name);
+#endif
         }
 
         /// <summary>
@@ -222,6 +261,30 @@ namespace DungeonCrawler
 
         }
 
+        /// <summary>
+        /// Returns true if the given key or button is held.
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="button"></param>
+        /// <returns></returns>
+        public bool IsHeld(string name)
+        {
+            if (_disabled)
+                return false;
+
+#if WINDOWS
+            if(_curGamePadState.IsConnected)
+                return isButtonHeld(name);
+            return isKeyHeld(name);
+#elif XBOX
+            return isButtonHeld(name);
+#endif
+        }
+
+        /// <summary>
+        /// Returns true of the gamepad is connected.
+        /// </summary>
+        /// <returns></returns>
         public bool IsGamePadConnected()
         {
             return _curGamePadState.IsConnected;
@@ -234,7 +297,7 @@ namespace DungeonCrawler
         {
             _curKeyboardState = Keyboard.GetState(_pIndex);
             _oldKeyboardState = _curKeyboardState;
-            initGamePad();
+            _mappedKeys = new Dictionary<string, Keys>();
         }
 
         private void getKeyboardState()
@@ -291,14 +354,36 @@ namespace DungeonCrawler
             return direction;
         }
 
+        private void mapKey(string name, Keys key)
+        {
+            if (_mappedKeys.ContainsKey(name))
+                _mappedKeys[name] = key;
+            else
+                _mappedKeys.Add(name, key);
+        }
+
         private bool isKeyPressed(Keys key)
         {
             return _curKeyboardState.IsKeyDown(key);
         }
 
+        private bool isKeyPressed(string key)
+        {
+            if(_mappedKeys.ContainsKey(key))
+                return isKeyPressed(_mappedKeys[key]);
+            return false;
+        }
+
         private bool isKeyHeld(Keys key)
         {
             return _curKeyboardState.IsKeyDown(key) && _oldKeyboardState.IsKeyDown(key);
+        }
+
+        private bool isKeyHeld(string key)
+        {
+            if(_mappedKeys.ContainsKey(key))
+                return isKeyHeld(_mappedKeys[key]);
+            return false;
         }
 #endif
         #endregion
@@ -310,6 +395,7 @@ namespace DungeonCrawler
         {
             _curGamePadState = GamePad.GetState(_pIndex);
             _oldGamePadState = _curGamePadState;
+            _mappedButtons = new Dictionary<string, Buttons>();
         }
 
         private void getGamePadState()
@@ -332,14 +418,32 @@ namespace DungeonCrawler
             return direction;
         }
 
+        private void mapButton(string name, Buttons button)
+        {
+            if (_mappedButtons.ContainsKey(name))
+                _mappedButtons[name] = button;
+            else
+                _mappedButtons.Add(name, button);
+        }
+
         private bool isButtonPressed(Buttons button)
         {
             return _curGamePadState.IsButtonDown(button);
         }
 
+        private bool isButtonPressed(string button)
+        {
+            return isButtonPressed(_mappedButtons[button]);
+        }
+
         private bool isButtonHeld(Buttons button)
         {
             return _curGamePadState.IsButtonDown(button) && _oldGamePadState.IsButtonDown(button);
+        }
+
+        private bool isButtonHeld(string button)
+        {
+            return isButtonHeld(_mappedButtons[button]);
         }
 #endif
         #endregion
