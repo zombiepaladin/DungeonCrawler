@@ -218,6 +218,7 @@ namespace DungeonCrawler.Systems
 
             game.HUDSystem.Draw(elapsedTime, spriteBatch);
 
+            /*
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {
                 if (sprite.isSeen)
@@ -234,6 +235,7 @@ namespace DungeonCrawler.Systems
                                     0.5f);
                 }
             }
+            */
 
 #if DEBUG
             //If we are in debug, draw the collision bounds.
