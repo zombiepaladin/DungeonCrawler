@@ -18,7 +18,6 @@ Content\Tilesets\Z18-TileA1.xnb
 Content\Tilesets\Z18-TileC.xnb
 Content\Spritesheets\StatusBar.xnb
 Content\Spritesheets\inventoryBackground.xnb
-Content\Spritesheets\selectInv.xnb
 Content\ControllerTGAs\xboxControllerButtonB-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonA-BW.xnb
 Content\ControllerTGAs\xboxControllerButtonX-BW.xnb
@@ -153,3 +152,5 @@ Content\Tilemaps\D01F03R10.xnb
 Content\Tilemaps\D01F03R11.xnb
 Content\Spritesheets\Turret.xnb
 Content\Spritesheets\Skills\Effects\charge.xnb
+Content\Spritesheets\selectInv.xnb
+Content\Spritesheets\red_cross_logo.xnb

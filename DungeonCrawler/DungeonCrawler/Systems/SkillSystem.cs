@@ -5220,7 +5220,7 @@ namespace DungeonCrawler.Systems
                                     #region Checking Rank
                                     case 1:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 110;
 
                                         timedEffect = new TimedEffect()
@@ -5269,7 +5269,7 @@ namespace DungeonCrawler.Systems
 
                                     case 2:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 115;
 
                                         timedEffect = new TimedEffect()
@@ -5318,7 +5318,7 @@ namespace DungeonCrawler.Systems
 
                                     case 3:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 120;
 
                                         timedEffect = new TimedEffect()
@@ -5367,7 +5367,7 @@ namespace DungeonCrawler.Systems
 
                                     case 4:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 125;
 
                                         timedEffect = new TimedEffect()
@@ -5416,7 +5416,7 @@ namespace DungeonCrawler.Systems
 
                                     case 5:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 130;
 
                                         timedEffect = new TimedEffect()
@@ -5465,7 +5465,7 @@ namespace DungeonCrawler.Systems
 
                                     case 6:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 135;
 
                                         timedEffect = new TimedEffect()
@@ -5514,7 +5514,7 @@ namespace DungeonCrawler.Systems
 
                                     case 7:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 140;
 
                                         timedEffect = new TimedEffect()
@@ -5563,7 +5563,7 @@ namespace DungeonCrawler.Systems
 
                                     case 8:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 145;
 
                                         timedEffect = new TimedEffect()
@@ -5612,7 +5612,7 @@ namespace DungeonCrawler.Systems
 
                                     case 9:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 150;
 
                                         timedEffect = new TimedEffect()
@@ -5661,7 +5661,7 @@ namespace DungeonCrawler.Systems
 
                                     case 10:
                                         eid = Entity.NextEntity();
-                                        effectDuration = 15;
+                                        effectDuration = 6;
                                         droidSpeed = 155;
 
                                         timedEffect = new TimedEffect()

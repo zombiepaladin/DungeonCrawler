@@ -1071,26 +1071,68 @@ namespace DungeonCrawler.Systems
 
             Player player = _game.PlayerComponent[playerId];
             HealingStation healingStation = _game.HealingStationComponent[stationId];
+            Buff buffEffect;
+            TimedEffect timedEffect;
+            Sprite sprite;
+            Position position;
+            uint eid;
 
             if (healingStation.healthAvailable > 0)
             {
                 float playerHealth = _game.PlayerInfoComponent[player.EntityID].Health;
 
-                if (playerHealth < 100 && player.PlayerRace != Aggregate.EarthianPlayer)
+                if (playerHealth < 100 /*&& player.PlayerRace != Aggregate.EarthianPlayer*/)
                 {
                     int healthBonus = 100 - (int)playerHealth;
                     if (healingStation.healthAvailable >= healthBonus)
                     {
-                        player.abilityModifiers.HealthBonus += healthBonus;
+
                         healingStation.healthAvailable -= healthBonus;
+                        eid = Entity.NextEntity();
+                        buffEffect = new Buff()
+                        {
+                            EntityID = eid,
+                            TargetID = player.EntityID,
+                            Health = healthBonus,
+                        };
+                        _game.BuffComponent.Add(eid, buffEffect);
+
                     }
 
                     else
                     {
-                        player.abilityModifiers.HealthBonus += healingStation.healthAvailable;
+                        eid = Entity.NextEntity();
+                        buffEffect = new Buff()
+                        {
+                            EntityID = eid,
+                            TargetID = player.EntityID,
+                            Health = healingStation.healthAvailable,
+                        };
+                        _game.BuffComponent.Add(eid, buffEffect);
+
                         healingStation.healthAvailable = 0;
                         _game.GarbagemanSystem.ScheduleVisit(healingStation.EntityID, GarbagemanSystem.ComponentType.Effect);
                     }
+
+
+                    timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid,
+                        TotalDuration = 1,
+                        TimeLeft = 1
+                    };
+                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/red_cross_logo"),
+                        SpriteBounds = new Rectangle(0, 0, 72, 72),
+                    };
+                    _game.SpriteComponent.Add(eid, sprite);
+                    position = _game.PositionComponent[healingStation.EntityID];
+
+                    _game.PositionComponent.Add(eid, position);
 
                     _game.PlayerComponent[player.EntityID] = player;
                     _game.HealingStationComponent[healingStation.EntityID] = healingStation;
