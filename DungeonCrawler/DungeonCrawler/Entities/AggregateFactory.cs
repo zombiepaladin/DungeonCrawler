@@ -217,7 +217,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -350,7 +350,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -503,7 +503,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -669,7 +669,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -824,7 +824,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -976,7 +976,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -1145,7 +1145,7 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        PsiOrFatige = 100,
                         State = PlayerState.Default,
                         skill1 = Systems.SkillType.ThrownBlades,
                         skill2 = Systems.SkillType.FrenziedAttack,
@@ -1358,7 +1358,7 @@ namespace DungeonCrawler.Entities
                 info = new PlayerInfo()
                 {
                     Health = gameSave.health,
-                    Psi = gameSave.psi,
+                    PsiOrFatige = gameSave.psi,
                     Level = gameSave.level,
                     Experience = gameSave.experience,
                     State = PlayerState.Default,

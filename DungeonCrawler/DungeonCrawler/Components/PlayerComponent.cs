@@ -156,9 +156,9 @@ namespace DungeonCrawler.Components
         public float Health;
 
         /// <summary>
-        /// Current amount of psi the player has.
+        /// Current amount of psi or fatigue the player has.
         /// </summary>
-        public int Psi;
+        public int PsiOrFatige;
 
         /// <summary>
         /// The current level of the player

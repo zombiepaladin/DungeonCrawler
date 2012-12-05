@@ -2705,6 +2705,7 @@ namespace DungeonCrawler.Systems
                             {
                                 #region Skill Variables
                                 int duration = 0;
+                                int psiCost = (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .05);
                                 #endregion
 
                                 switch (rank)
@@ -2712,42 +2713,52 @@ namespace DungeonCrawler.Systems
                                     #region Checking Rank
                                     case 1:
                                         duration = 2;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .5);
                                         break;
 
                                     case 2:
                                         duration = 4;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .45);
                                         break;
 
                                     case 3:
                                         duration = 6;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .40);
                                         break;
 
                                     case 4:
                                         duration = 8;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .35);
                                         break;
 
                                     case 5:
                                         duration = 10;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .30);
                                         break;
 
                                     case 6:
                                         duration = 12;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .25);
                                         break;
 
                                     case 7:
                                         duration = 14;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .20);
                                         break;
 
                                     case 8:
                                         duration = 16;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .15);
                                         break;
 
                                     case 9:
                                         duration = 18;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .10);
                                         break;
 
                                     case 10:
                                         duration = 20;
+                                        psiCost += (int)(_game.PlayerInfoComponent[userID].PsiOrFatige * .05);
                                         break;
 
                                     default:
@@ -2755,35 +2766,43 @@ namespace DungeonCrawler.Systems
                                     #endregion
                                 }
                                 #region Logic
-                                
-                                eid = Entity.NextEntity();
-
-                                TimedEffect timedEffect;
-                                timedEffect = new TimedEffect()
+                                if (_game.PlayerInfoComponent[userID].PsiOrFatige >= psiCost)
                                 {
-                                    EntityID = eid,
-                                    TotalDuration = duration,
-                                    TimeLeft = duration
-                                };
-                                _game.TimedEffectComponent.Add(eid, timedEffect);
+                                    PlayerInfo info = _game.PlayerInfoComponent[userID];
+                                    info.PsiOrFatige -= psiCost;
+                                    _game.PlayerInfoComponent[userID] = info;
 
-                                /*AgroDrop agroDrop;
-                                agroDrop = new AgroDrop()
-                                {
-                                    EntityID = eid,
-                                    PlayerID = userID
-                                };
-                                _game.AgroDropComponent.Add(eid, agroDrop);
-                                */
-                                ChangeVisibility changeVisibility;
-                                changeVisibility = new ChangeVisibility()
-                                {
-                                    EntityID = eid,
-                                    TargetID = userID,
-                                    newColor = new Color(45, 45, 45, 0)
-                                };
-                                _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
+                                    Console.WriteLine("psi: " + _game.PlayerInfoComponent[userID].PsiOrFatige);
+                                    Console.WriteLine("psi cost: " + psiCost);
 
+                                    eid = Entity.NextEntity();
+
+                                    TimedEffect timedEffect;
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    /*AgroDrop agroDrop;
+                                    agroDrop = new AgroDrop()
+                                    {
+                                        EntityID = eid,
+                                        PlayerID = userID
+                                    };
+                                    _game.AgroDropComponent.Add(eid, agroDrop);
+                                    */
+                                    ChangeVisibility changeVisibility;
+                                    changeVisibility = new ChangeVisibility()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = userID,
+                                        newColor = new Color(45, 45, 45, 0)
+                                    };
+                                    _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
+                                }
                                 #endregion
                                 break;
                             }

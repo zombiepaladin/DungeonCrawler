@@ -171,23 +171,23 @@ namespace DungeonCrawler.Systems
                 if (state.IsPressed(Keys.L, Buttons.RightStick)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
 
                 //set up a system to switch skills by using the 1-9 keys
-                if(state.IsPressed(Keys.D1))
+                if (state.IsPressed(Keys.D1, Buttons.A))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill1, player.EntityID);
-                if (state.IsPressed(Keys.D2))
+                else if (state.IsPressed(Keys.D2, Buttons.B))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill2, player.EntityID);
-                if (state.IsPressed(Keys.D3))
+                else if (state.IsPressed(Keys.D3, Buttons.X))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill3, player.EntityID);
-                if (state.IsPressed(Keys.D4))
+                else if (state.IsPressed(Keys.D4, Buttons.Y))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill4, player.EntityID);
-                if (state.IsPressed(Keys.D5))
+                else if (state.IsPressed(Keys.D5, Buttons.DPadUp))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill5, player.EntityID);
-                if (state.IsPressed(Keys.D6))
+                else if (state.IsPressed(Keys.D6, Buttons.DPadDown))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill6, player.EntityID);
-                if (state.IsPressed(Keys.D7))
+                else if (state.IsPressed(Keys.D7, Buttons.DPadLeft))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill7, player.EntityID);
-                if (state.IsPressed(Keys.D8))
+                else if (state.IsPressed(Keys.D8, Buttons.DPadRight))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill8, player.EntityID);
-                if (state.IsPressed(Keys.D9))
+                else if (state.IsPressed(Keys.D9))
                     ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
 
 
@@ -219,206 +219,7 @@ namespace DungeonCrawler.Systems
                 Inventory inv = game.InventoryComponent[player.EntityID];
                 InventorySprite isb;
                 InventorySprite iss;
-                #region key/Button DOWN
-                //Fields for selecting skills
-                SkillType currentActiveSkill = game.ActiveSkillComponent[player.EntityID].activeSkill;
-                SkillType desiredSkill;
-                if (state.IsPressed(Keys.D1, Buttons.A))
-                {
-                    //hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
-                    
-                    //Set Skill1 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill1;
-
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                    
-                    
-                    //temp activate shot skill
-                    //Test Skill buttons
-                    //game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)game.SpriteAnimationComponent[player.EntityID].CurrentAnimationRow, game.PositionComponent[player.EntityID],1,300);
-
-                }
-                if (state.IsPressed(Keys.D2, Buttons.B))
-                {
-                   // hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
-
-                    //Set skill2 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill2;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-
-                }
-                if (state.IsPressed(Keys.D3, Buttons.X))
-                {
-                   // hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
-                    //hs.isSeen = true;
-                   // game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
-
-                    //Set skill3 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill3;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D4, Buttons.Y))
-                {
-                    //hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
-                    
-                    //Set skill4 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill4;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D5, Buttons.DPadUp))
-                {
-                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                    
-                    //Set Skill5 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill5;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D6, Buttons.DPadDown))
-                {
-                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                    
-                    //Set Skill6 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill6;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D7, Buttons.DPadLeft))
-                {
-                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                    
-                    //Set SKill7 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill7;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D8, Buttons.DPadRight))
-                {
-                    //hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    //hs.isSeen = true;
-                    //game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                    
-                    //Set Skill8 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill8;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.D9, Buttons.DPadDown))
-                {
-                    //Set Skill9 *****MAKE SURE TO ASSIGN YOU SKILLS IN THE AGGREGATE FACTORY*****
-                    desiredSkill = game.PlayerInfoComponent[player.EntityID].skill9;
-                    if(desiredSkill!=currentActiveSkill)
-                    {
-                        game.ActiveSkillComponent[player.EntityID] = new ActiveSkill(){activeSkill=desiredSkill,};
-                    }
-                }
-                if (state.IsPressed(Keys.Tab, Buttons.LeftShoulder))
-                {
-                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
-                    isb.isSeen = true;
-                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
-                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
-                    iss.isSeen = true;
-                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
-                }
-                #endregion // end key down
-                #region key/Button UP
-                /*if (!state.IsPressed(Keys.D1, Buttons.A))
-                {
-                    hs = game.HUDSpriteComponent[hud.AButtonSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.AButtonSpriteID] = hs;
-                }
-                if (!state.IsPressed(Keys.D2, Buttons.B))
-                {
-                    hs = game.HUDSpriteComponent[hud.BButtonSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.BButtonSpriteID] = hs;
-                }
-                if (!state.IsPressed(Keys.D3, Buttons.X))
-                {
-                    hs = game.HUDSpriteComponent[hud.XButtonSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.XButtonSpriteID] = hs;
-                }
-                if (!state.IsPressed(Keys.D4, Buttons.Y))
-                {
-                    hs = game.HUDSpriteComponent[hud.YButtonSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.YButtonSpriteID] = hs;
-                }
-                //A temporary solution...
-                if (!state.IsPressed(Keys.Right, Buttons.DPadRight)
-                    && !state.IsPressed(Keys.Left, Buttons.DPadLeft)
-                    && !state.IsPressed(Keys.Up, Buttons.DPadUp)
-                    && !state.IsPressed(Keys.Down, Buttons.DPadDown))
-                {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }
-                if (!state.IsPressed(Keys.Tab, Buttons.LeftShoulder))
-                {
-                    isb = game.InventorySpriteComponent[inv.BackgroundSpriteID];
-                    isb.isSeen = false;
-                    game.InventorySpriteComponent[inv.BackgroundSpriteID] = isb;
-                    iss = game.InventorySpriteComponent[inv.SelectorSpriteID];
-                    iss.isSeen = false;
-                    game.InventorySpriteComponent[inv.SelectorSpriteID] = iss;
-                }
-                /*
-                if (gamePadState.IsButtonUp(Buttons.DPadLeft) && keyboardState.IsKeyUp(Keys.Left))
-                {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }
-                if (gamePadState.IsButtonUp(Buttons.DPadUp) && keyboardState.IsKeyUp(Keys.Up))
-                {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }
-                if (gamePadState.IsButtonUp(Buttons.DPadDown) || keyboardState.IsKeyUp(Keys.Down))
-                {
-                    hs = game.HUDSpriteComponent[hud.DPadSpriteID];
-                    hs.isSeen = false;
-                    game.HUDSpriteComponent[hud.DPadSpriteID] = hs;
-                }
-                 **/
-                #endregion //end key up
+              
                 #endregion //end hud control
                 
             }
