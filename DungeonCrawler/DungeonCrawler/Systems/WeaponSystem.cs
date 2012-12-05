@@ -63,6 +63,7 @@ namespace DungeonCrawler.Systems
         /// <param name="elapsedTime"></param>
         public void Update(float elapsedTime)
         {
+            _playerInfoComponent = _game.PlayerInfoComponent;
             _timer += elapsedTime;
             bool spriteRemoved = false;
             Equipment equipment;

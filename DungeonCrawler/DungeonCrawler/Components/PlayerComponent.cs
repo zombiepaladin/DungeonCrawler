@@ -156,9 +156,19 @@ namespace DungeonCrawler.Components
         public float Health;
 
         /// <summary>
-        /// Current amount of psi or fatigue the player has.
+        /// Max amount of health the player can have.
         /// </summary>
-        public int PsiOrFatige;
+        public float MaxHealth;
+
+        /// <summary>
+        /// Amount of psi or fatigue the player has.
+        /// </summary>
+        public float PsiOrFatigue;
+
+        /// <summary>
+        /// Max amount of psi or fatigue the player can have.
+        /// </summary>
+        public float MaxPsiOrFatigue;
 
         /// <summary>
         /// The current level of the player
@@ -168,7 +178,7 @@ namespace DungeonCrawler.Components
         /// <summary>
         /// The current experience of the player
         /// </summary>
-        public int Experience;
+        public float Experience;
 
         ///<summary>
         ///The current state of the player.

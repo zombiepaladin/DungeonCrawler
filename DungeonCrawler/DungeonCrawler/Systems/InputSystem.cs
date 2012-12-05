@@ -39,12 +39,12 @@ namespace DungeonCrawler.Systems
         /// <summary>
         /// The game this system belongs to
         /// </summary>
-        private DungeonCrawlerGame game;
+        private DungeonCrawlerGame _game;
 
         private int getRank(uint eid, SkillType skill)
         {
-            PlayerSkillInfo sInfo = game.PlayerSkillInfoComponent[eid];
-            PlayerInfo pInfo = game.PlayerInfoComponent[eid];
+            PlayerSkillInfo sInfo = _game.PlayerSkillInfoComponent[eid];
+            PlayerInfo pInfo = _game.PlayerInfoComponent[eid];
 
             if (pInfo.skill1 == skill)
             {
@@ -98,7 +98,7 @@ namespace DungeonCrawler.Systems
         /// <param name="game">The game this system belongs to</param>
         public InputSystem(DungeonCrawlerGame game)
         {
-            this.game = game;
+            this._game = game;
         }
 
         #endregion
@@ -115,17 +115,17 @@ namespace DungeonCrawler.Systems
         {
             // Update all entities that have a movement component
             List<Player> players = new List<Player>();
-            foreach(Player player in game.PlayerComponent.All) { players.Add(player); }
+            foreach(Player player in _game.PlayerComponent.All) { players.Add(player); }
             foreach (Player player in players)
             {
                 // Grab input for the player
                 InputHelper state = InputHelper.GetInput(player.PlayerIndex);
 
                 // Update the player's movement component
-                Movement movement = game.MovementComponent[player.EntityID];
+                Movement movement = _game.MovementComponent[player.EntityID];
                 movement.Direction = state.GetLeftDirection();
 
-                SpriteAnimation spriteAnimation = game.SpriteAnimationComponent[player.EntityID];
+                SpriteAnimation spriteAnimation = _game.SpriteAnimationComponent[player.EntityID];
 
                 if (movement.Direction.Y < 0)
                 {
@@ -156,52 +156,58 @@ namespace DungeonCrawler.Systems
                     //TODO: idle frame
                 }
 
-                game.SpriteAnimationComponent[spriteAnimation.EntityID] = spriteAnimation;
+                _game.SpriteAnimationComponent[spriteAnimation.EntityID] = spriteAnimation;
                     
-                game.MovementComponent[player.EntityID] = movement;
+                _game.MovementComponent[player.EntityID] = movement;
 
-                PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
-                info.State = PlayerState.Default;
+               PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
+              
 
-                if(state.IsPressed(Keys.Enter, Buttons.LeftTrigger))
-                {
-                    info.State = PlayerState.Attacking;
-                }
-               
-                if (state.IsPressed(Keys.L, Buttons.RightStick)) game.QuestLogSystem.displayLog = !game.QuestLogSystem.displayLog;
+               if (state.IsPressed(Keys.Enter, Buttons.LeftTrigger))
+               {
+                   info.State = PlayerState.Attacking;
+               }
+               else
+               {
+                    info.State = PlayerState.Default;
+               }
+
+                _game.PlayerInfoComponent[player.EntityID] = info;
+
+                if (state.IsPressed(Keys.L, Buttons.RightStick)) _game.QuestLogSystem.displayLog = !_game.QuestLogSystem.displayLog;
 
                 //set up a system to switch skills by using the 1-9 keys
                 if (state.IsPressed(Keys.D1, Buttons.A))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill1, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill1, player.EntityID);
                 else if (state.IsPressed(Keys.D2, Buttons.B))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill2, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill2, player.EntityID);
                 else if (state.IsPressed(Keys.D3, Buttons.X))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill3, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill3, player.EntityID);
                 else if (state.IsPressed(Keys.D4, Buttons.Y))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill4, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill4, player.EntityID);
                 else if (state.IsPressed(Keys.D5, Buttons.DPadUp))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill5, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill5, player.EntityID);
                 else if (state.IsPressed(Keys.D6, Buttons.DPadDown))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill6, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill6, player.EntityID);
                 else if (state.IsPressed(Keys.D7, Buttons.DPadLeft))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill7, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill7, player.EntityID);
                 else if (state.IsPressed(Keys.D8, Buttons.DPadRight))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill8, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill8, player.EntityID);
                 else if (state.IsPressed(Keys.D9))
-                    ChangeActiveSkill(game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
+                    ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
 
 
                 if (state.IsPressed(Keys.Space, Buttons.RightTrigger))
                 {
                     uint thisPlayerKey = 0;
-                    foreach(Player p in game.PlayerComponent.All)
+                    foreach(Player p in _game.PlayerComponent.All)
                     {
                         if(p.PlayerIndex == PlayerIndex.One)
                             thisPlayerKey = p.EntityID;
                     }
   
-                    SkillType activeSkill = game.ActiveSkillComponent[player.EntityID].activeSkill;
-                    game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(player.EntityID,activeSkill),player.EntityID);
+                    SkillType activeSkill = _game.ActiveSkillComponent[player.EntityID].activeSkill;
+                    _game.SkillSystem.UseSkill(player.PlayerRace,activeSkill,getRank(player.EntityID,activeSkill),player.EntityID);
                     
                     //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.Invisibility, 1, thisPlayerKey);
 
@@ -209,14 +215,14 @@ namespace DungeonCrawler.Systems
                 }
 
 
-                game.PlayerInfoComponent[player.EntityID] = info;
+               
                 
                 
                 #region HUD Displays
                 // Show HUD (A,B,X,Y, or Dpad Item)
                // HUD hud = game.HUDComponent[player.EntityID];
               //  HUDSprite hs;
-                Inventory inv = game.InventoryComponent[player.EntityID];
+                Inventory inv = _game.InventoryComponent[player.EntityID];
                 InventorySprite isb;
                 InventorySprite iss;
               
@@ -227,9 +233,9 @@ namespace DungeonCrawler.Systems
 
         private void ChangeActiveSkill(SkillType activatedSkill, uint playerId)
         {
-            ActiveSkill skill = game.ActiveSkillComponent[playerId];
+            ActiveSkill skill = _game.ActiveSkillComponent[playerId];
             skill.activeSkill = activatedSkill;
-            game.ActiveSkillComponent[playerId] = skill;
+            _game.ActiveSkillComponent[playerId] = skill;
         }
 
         #endregion

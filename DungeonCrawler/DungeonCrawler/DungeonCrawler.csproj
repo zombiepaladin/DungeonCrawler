@@ -138,6 +138,7 @@
     <Compile Include="Components\SkillEffectComponents\ChangeVisibilityComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\CloakComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\CoolDownComponent.cs" />
+    <Compile Include="Components\SkillEffectComponents\PsiOrFatigueRegenComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\DamageOverTimeComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\DirectDamageComponent.cs" />
     <Compile Include="Components\SkillEffectComponents\DirectHealComponent.cs" />
