@@ -215,7 +215,7 @@ namespace DungeonCrawler.Components
                             amount = (amount * stats.PsiBase) / 100;
                         }
 
-                        playerInfo.Psi += amount;
+                        playerInfo.PsiOrFatigue += amount;
                     }
 
                     if (component.Fatigue != 0)
@@ -226,7 +226,7 @@ namespace DungeonCrawler.Components
                             amount = (amount * stats.FatigueBase) / 100;
                         }
 
-                        playerInfo.Psi += amount;
+                        playerInfo.PsiOrFatigue += amount;
                     }
                 }
 
@@ -392,7 +392,7 @@ namespace DungeonCrawler.Components
                             amount = (amount * stats.PsiBase) / 100;
                         }
 
-                        playerInfo.Psi -= amount;
+                        playerInfo.PsiOrFatigue -= amount;
                     }
 
                     if (component.Fatigue != 0)
@@ -403,7 +403,7 @@ namespace DungeonCrawler.Components
                             amount = (amount * stats.FatigueBase) / 100;
                         }
 
-                        playerInfo.Psi -= amount;
+                        playerInfo.PsiOrFatigue -= amount;
                     }
 
                     game.PlayerInfoComponent[component.TargetID] = playerInfo;
