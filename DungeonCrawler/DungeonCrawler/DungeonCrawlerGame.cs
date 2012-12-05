@@ -193,6 +193,7 @@ namespace DungeonCrawler
         public DirectHealComponent DirectHealComponent;
         public FearComponent FearComponent;
         public HealOverTimeComponent HealOverTimeComponent;
+        public PsiOrFatigueRegenComponent PsiOrFatigueRegenComponent;
         public InstantEffectComponent InstantEffectComponent;
         public KnockBackComponent KnockBackComponent;
         public TargetedKnockBackComponent TargetedKnockBackComponent;
@@ -323,6 +324,7 @@ namespace DungeonCrawler
             DirectHealComponent = new DirectHealComponent();
             FearComponent = new FearComponent();
             HealOverTimeComponent = new HealOverTimeComponent();
+            PsiOrFatigueRegenComponent = new PsiOrFatigueRegenComponent();
             InstantEffectComponent = new InstantEffectComponent();
             KnockBackComponent = new KnockBackComponent();
             TargetedKnockBackComponent = new TargetedKnockBackComponent();
@@ -560,12 +562,12 @@ namespace DungeonCrawler
 
             // Level information
             public int level;
-            public int experience;
+            public float experience;
 
             // Other skills/stats
             public Stats stats;
             public float health;
-            public int psi;
+            public float psi;
             public PlayerSkillInfo skillInfo;
 
             // Inventory Quantities and Weapon Type
@@ -606,7 +608,7 @@ namespace DungeonCrawler
                 // Other skills/stats
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
-                gameSave.psi = info.Psi;
+                gameSave.psi = info.PsiOrFatigue;
                 gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
 
                 // Inventory Quantities and Weapon
