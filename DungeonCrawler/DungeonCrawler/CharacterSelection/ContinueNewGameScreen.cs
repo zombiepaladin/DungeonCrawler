@@ -428,8 +428,8 @@ namespace DungeonCrawler
                 {
                     charPreview.FileNumber = masterSaveFile.charFiles.Count + 1;
                     charPreview.FileName = "charSave" + charPreview.FileNumber;
-                    //masterSaveFile.charFiles.Clear();
-                    //DungeonCrawlerGame.SaveMasterFile(device, masterSaveFile);
+                    masterSaveFile.charFiles.Clear();
+                    DungeonCrawlerGame.SaveMasterFile(device, masterSaveFile);
 
                     foreach (DungeonCrawlerGame.CharacterSaveFilePreview csf in masterSaveFile.charFiles)
                     {
