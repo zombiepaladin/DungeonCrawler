@@ -892,7 +892,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
                     skillInfo = new PlayerSkillInfo()
                     {
-                        Skill1Rank = 1,
+                        Skill1Rank = 10,
                         Skill2Rank = 1,
                         Skill3Rank = 1,
                         Skill4Rank = 1,
