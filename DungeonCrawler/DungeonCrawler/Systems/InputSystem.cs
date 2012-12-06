@@ -174,7 +174,7 @@ namespace DungeonCrawler.Systems
 
                 _game.PlayerInfoComponent[player.EntityID] = info;
 
-                if (state.IsPressed(Keys.L, Buttons.RightStick)) _game.QuestLogSystem.displayLog = !_game.QuestLogSystem.displayLog;
+                if (state.IsPressed(Keys.L, Buttons.RightStick) && !state.IsHeld(Keys.L, Buttons.RightStick)) _game.QuestLogSystem.displayLog = !_game.QuestLogSystem.displayLog;
 
                 //set up a system to switch skills by using the 1-9 keys
                 if (state.IsPressed(Keys.D1, Buttons.A))
