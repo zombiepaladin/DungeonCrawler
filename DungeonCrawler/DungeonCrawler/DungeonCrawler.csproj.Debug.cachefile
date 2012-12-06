@@ -127,6 +127,7 @@ Content\Spritesheets\Skills\Effects\SpiderWeb.xnb
 Content\Spritesheets\Skills\Effects\AlienOrb.xnb
 Content\Spritesheets\Skills\Effects\CloakEffect.xnb
 Content\Tilesets\tech4.xnb
+Content\Tilesets\tech4.xnb
 Content\Tilemaps\D01F01R06solved.xnb
 Content\Tilemaps\D01F02R01.xnb
 Content\Tilemaps\D01F02R02.xnb
@@ -152,5 +153,7 @@ Content\Tilemaps\D01F03R10.xnb
 Content\Tilemaps\D01F03R11.xnb
 Content\Spritesheets\Turret.xnb
 Content\Spritesheets\Skills\Effects\charge.xnb
+Content\Spritesheets\Enemies\CloakingRobot.xnb
+Content\Spritesheets\Enemies\BasicShootingRobot.xnb
 Content\Spritesheets\selectInv.xnb
 Content\Spritesheets\red_cross_logo.xnb
