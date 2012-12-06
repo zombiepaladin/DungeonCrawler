@@ -190,6 +190,17 @@ namespace DungeonCrawler.Systems
                     deleteList.Add(key);
             }
 
+            List<uint> psiOrFatigueRegenList = new List<uint>(_game.PsiOrFatigueRegenComponent.Keys);
+
+            foreach (uint key in psiOrFatigueRegenList)
+            {
+                //No need to process the effects of a skill that needs to be deleted
+                if (deleteList.Contains(key)) continue;
+                if (_game.TimedEffectComponent.Contains(key)) continue;
+
+                HandleEffects(key, elapsedTime);
+            }
+
             List<uint> instantEffectKeyList = new List<uint>(_game.InstantEffectComponent.Keys);
 
             foreach (uint key in instantEffectKeyList)
@@ -2657,72 +2668,51 @@ namespace DungeonCrawler.Systems
                         case SkillType.Teleport:
                             {
                                 #region Skill Variables
-                                int chance = 0;  //% chance that the skill will work
-                                int maxEnemies = 0;  //maximum number of enemies that can be mind locked at a time
-                                float duration = 0;  //duraction in seconds that the mind lock will be in effect
+                                int psiCost = (int)(_game.StatsComponent[userID].PsiBase * .05);
+                                int distance = 15;
                                 #endregion
 
                                 switch (rank)
                                 {
                                     #region Checking Rank
-                                    case 1:                    
-                                        chance = 60;  //60% chance that the skill will work
-                                        maxEnemies = 1;  //only 1 enemy can be mind locked at a time
-                                        duration = 5;  //the mind lock will last for 5 seconds
+                                    case 1:
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .5);
                                         break;
 
                                     case 2:
-                                        chance = 65;  //65% chance that the skill will work
-                                        maxEnemies = 1;  //only 1 enemy can be mind locked at a time
-                                        duration = 6;  //the mind lock will last for 6 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .45);
                                         break;
 
                                     case 3:
-                                        chance = 65;  //65% chance that the skill will work
-                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
-                                        duration = 7;  //the mind lock will last for 7 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .40);
                                         break;
 
                                     case 4:
-                                        chance = 70;  //70% chance that the skill will work
-                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
-                                        duration = 8;  //the mind lock will last for 8 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .35);
                                         break;
 
                                     case 5:
-                                        chance = 75;  //75% chance that the skill will work
-                                        maxEnemies = 2;  //only 2 enemies can be mind locked at a time
-                                        duration = 9;  //the mind lock will last for 9 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .30);
                                         break;
 
                                     case 6:
-                                        chance = 75;  //75% chance that the skill will work
-                                        maxEnemies = 3;  //only 3 enemies can be mind locked at a time
-                                        duration = 10;  //the mind lock will last for 10 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .25);
                                         break;
 
                                     case 7:
-                                        chance = 80;  //80% chance that the skill will work
-                                        maxEnemies = 3;  //only 3 enemies can be mind locked at a time
-                                        duration = 11;  //the mind lock will last for 11 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .20);
                                         break;
 
                                     case 8:
-                                        chance = 80;  //80% chance that the skill will work
-                                        maxEnemies = 4;  //only 4 enemies can be mind locked at a time
-                                        duration = 12;  //the mind lock will last for 12 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .15);
                                         break;
 
                                     case 9:
-                                        chance = 85;  //85% chance that the skill will work
-                                        maxEnemies = 4;  //only 4 enemies can be mind locked at a time
-                                        duration = 13;  //the mind lock will last for 13 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .10);
                                         break;
 
                                     case 10:
-                                        chance = 85;  //85% chance that the skill will work
-                                        maxEnemies = 5;  //only 5 enemies can be mind locked at a time
-                                        duration = 14;  //the mind lock will last for 14 seconds
+                                        psiCost += (int)(_game.StatsComponent[userID].PsiBase * .05);
                                         break;
 
                                     default:
@@ -2732,41 +2722,7 @@ namespace DungeonCrawler.Systems
                                 
                                 #region Logic
                                 
-                                List<uint> enemiesInRange = _game.CollisionSystem.GetEnemiesInRange(_game.PositionComponent[userID], 20, maxEnemies);
-                                
-                                foreach (uint enemyID in enemiesInRange)
-                                {
-                                    uint cts = Entity.NextEntity();
-                                    eid = Entity.NextEntity();
 
-                                    ChanceToSucceed chanceToSucceed;
-                                    chanceToSucceed = new ChanceToSucceed()
-                                    {
-                                        EntityID = cts,
-                                        SuccessRateAsPercentage = chance
-                                    };
-                                    _game.ChanceToSucceedComponent.Add(eid, chanceToSucceed);
-                                
-                                    TimedEffect timedEffect;
-                                    timedEffect = new TimedEffect()
-                                    {
-                                        EntityID = eid,
-                                        TotalDuration = duration,
-                                        TimeLeft = duration
-                                    };
-                                    _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                    Stun stun;
-                                    stun = new Stun()
-                                    {
-                                        EntityID = eid,
-                                        TargetID = enemyID,
-                                        Type = StunType.BreakOnHit
-                                    };
-
-                                    _game.StunComponent.Add(eid, stun);
-                                }
-                               
 
                                 #endregion
                                 break;
@@ -2776,6 +2732,7 @@ namespace DungeonCrawler.Systems
                             {
                                 #region Skill Variables
                                 int duration = 0;
+                                int psiCost = (int)(_game.StatsComponent[userID].PsiBase * .05);
                                 #endregion
 
                                 switch (rank)
@@ -2786,7 +2743,7 @@ namespace DungeonCrawler.Systems
                                         break;
 
                                     case 2:
-                                        duration = 4;
+                                        duration = 4;                                       
                                         break;
 
                                     case 3:
@@ -2826,35 +2783,40 @@ namespace DungeonCrawler.Systems
                                     #endregion
                                 }
                                 #region Logic
-                                
-                                eid = Entity.NextEntity();
-
-                                TimedEffect timedEffect;
-                                timedEffect = new TimedEffect()
+                                if (_game.PlayerInfoComponent[userID].PsiOrFatigue >= psiCost)
                                 {
-                                    EntityID = eid,
-                                    TotalDuration = duration,
-                                    TimeLeft = duration
-                                };
-                                _game.TimedEffectComponent.Add(eid, timedEffect);
+                                    PlayerInfo info = _game.PlayerInfoComponent[userID];
+                                    info.PsiOrFatigue -= psiCost;
+                                    _game.PlayerInfoComponent[userID] = info;
 
-                                /*AgroDrop agroDrop;
-                                agroDrop = new AgroDrop()
-                                {
-                                    EntityID = eid,
-                                    PlayerID = userID
-                                };
-                                _game.AgroDropComponent.Add(eid, agroDrop);
-                                */
-                                ChangeVisibility changeVisibility;
-                                changeVisibility = new ChangeVisibility()
-                                {
-                                    EntityID = eid,
-                                    TargetID = userID,
-                                    newColor = new Color(45, 45, 45, 0)
-                                };
-                                _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
+                                    eid = Entity.NextEntity();
 
+                                    TimedEffect timedEffect;
+                                    timedEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TotalDuration = duration,
+                                        TimeLeft = duration
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                    /*AgroDrop agroDrop;
+                                    agroDrop = new AgroDrop()
+                                    {
+                                        EntityID = eid,
+                                        PlayerID = userID
+                                    };
+                                    _game.AgroDropComponent.Add(eid, agroDrop);
+                                    */
+                                    ChangeVisibility changeVisibility;
+                                    changeVisibility = new ChangeVisibility()
+                                    {
+                                        EntityID = eid,
+                                        TargetID = userID,
+                                        newColor = new Color(45, 45, 45, 0)
+                                    };
+                                    _game.ChangeVisibilityComponent.Add(eid, changeVisibility);
+                                }
                                 #endregion
                                 break;
                             }
@@ -12086,6 +12048,40 @@ namespace DungeonCrawler.Systems
 
                     hOT.CurrentTime = hOT.TickTime;
                 }
+            }
+
+            #endregion
+
+            #region Psi or Fatigue Regen
+
+            if (_game.PsiOrFatigueRegenComponent.Contains(key))
+            {
+                PsiOrFatigueRegen regen = _game.PsiOrFatigueRegenComponent[key];
+
+                regen.CurrentTime -= elapsedTime;
+
+                if (regen.CurrentTime <= 0)
+                {
+                    /* in case this needs to be implemented later
+                    if (_game.EnemyComponent.Contains(hOT.TargetID))
+                    {
+                        Enemy enemy = _game.EnemyComponent[hOT.TargetID];
+                        enemy.Health += (hOT.AmountPerTick * hOT.CurrentStack);
+                        _game.EnemyComponent[hOT.TargetID] = enemy;
+                    }*/
+
+                    if (_game.PlayerComponent.Contains(regen.TargetID))
+                    {
+                        PlayerInfo player = _game.PlayerInfoComponent[regen.TargetID];
+
+                        player.PsiOrFatigue = Math.Min(player.PsiOrFatigue + regen.AmountPerTick, player.MaxPsiOrFatigue);
+                        _game.PlayerInfoComponent[regen.TargetID] = player;
+                        
+                    }
+
+                    regen.CurrentTime = regen.TickTime;
+                }
+                _game.PsiOrFatigueRegenComponent[key] = regen;
             }
 
             #endregion

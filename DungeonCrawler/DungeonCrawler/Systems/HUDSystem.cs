@@ -238,8 +238,8 @@ namespace DungeonCrawler.Systems
                 PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
                 Stats stats = _game.StatsComponent[player.EntityID];
 
-                float healthPercent = info.Health / stats.HealthBase;
-                float psiPercent = info.Psi / stats.PsiBase;
+                float healthPercent = info.Health / info.MaxHealth;
+                float psiPercent = info.PsiOrFatigue / info.MaxPsiOrFatigue;
                 float expPercent = info.Experience / 100; //Need to find expbase
 
                 hud.HealthBounds.Width = (int)(HEALTH_BAR_MAX_BOUNDS * healthPercent);
