@@ -69,7 +69,7 @@ namespace DungeonCrawler.Systems
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;
 
-               // if(movement.Speed > 0)
+                if(movement.Speed > 0) //We need this so slow effects don't end up making people move backwards
                     position.Center += elapsedTime * movement.Speed * movement.Direction;
                 // Player clamping based on the size of the walls, the tile sizes, and the room dimensions.
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();

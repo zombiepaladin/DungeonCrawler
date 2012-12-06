@@ -63,8 +63,27 @@
     <property name="SpawnName" value="2"/>
    </properties>
   </object>
-  <object name="Enemy" type="CloakingRobot" x="658" y="571" width="32" height="32"/>
-  <object name="Enemy" type="BasicShootingRobot" x="579" y="351" width="32" height="32"/>
+  <object name="Enemy" type="CloakingRobot" x="781" y="566" width="32" height="32"/>
+  <object name="Enemy" type="BasicShootingRobot" x="687" y="427" width="32" height="32"/>
+  <object name="Enemy" type="BasicShootingRobot" x="720" y="351" width="32" height="32"/>
+  <object name="Enemy" type="CloakingRobot" x="734" y="224" width="32" height="32"/>
+  <object name="Enemy" type="CloakingRobot" x="396" y="257" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1083" y="522" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1135" y="486" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1126" y="531" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1094" y="558" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1141" y="595" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1165" y="543" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1092" y="604" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1049" y="570" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1043" y="616" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1119" y="623" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1155" y="619" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="991" y="249" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="1122" y="205" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="747" y="495" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="205" y="625" width="32" height="32"/>
+  <object name="Enemy" type="Spider" x="209" y="161" width="32" height="32"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23">
   <object name="Trigger" type="Wall" x="0" y="0" width="640" height="64"/>
