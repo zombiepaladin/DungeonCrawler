@@ -196,8 +196,7 @@ namespace DungeonCrawler.Systems
                 else if (state.IsPressed(Keys.D9))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
 
-
-                if (state.IsPressed(Keys.Space, Buttons.RightTrigger))
+                if (state.IsPressed(Keys.Space, Buttons.RightTrigger) && !state.IsHeld(Keys.Space, Buttons.RightTrigger))
                 {
                     uint thisPlayerKey = 0;
                     foreach(Player p in _game.PlayerComponent.All)
@@ -225,6 +224,9 @@ namespace DungeonCrawler.Systems
                 Inventory inv = _game.InventoryComponent[player.EntityID];
                 InventorySprite isb;
                 InventorySprite iss;
+
+                //set the old keyboard state to be the same as the current keyboard state
+                state.SetOldKeyboardState();
               
                 #endregion //end hud control
                 

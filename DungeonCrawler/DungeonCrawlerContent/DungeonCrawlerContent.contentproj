@@ -894,15 +894,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Spritesheets\Enemies\CloakingRobot.png">
-      <Name>CloakingRobot</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Spritesheets\Enemies\BasicShootingRobot.png">
-      <Name>BasicShootingRobot</Name>
+    <Compile Include="Spritesheets\Skills\Effects\Invis.png">
+      <Name>Invis</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
