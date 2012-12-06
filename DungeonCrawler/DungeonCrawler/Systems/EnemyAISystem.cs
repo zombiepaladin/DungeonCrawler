@@ -228,6 +228,15 @@ namespace DungeonCrawler.Systems
                 ai.HasTarget = false;
             }
 
+            if (ai.HasTarget && game.AgroDropComponent.Count() > 0)
+            {
+                foreach (AgroDrop agro in game.AgroDropComponent.All)
+                {
+                    if (agro.PlayerID == ai.TargetID)
+                        ai.HasTarget = false;
+                }
+            }
+
             game.EnemyAIComponent[ai.EntityID] = ai;
         }
 

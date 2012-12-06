@@ -22,7 +22,7 @@ namespace DungeonCrawler.Components
         public uint EntityID;
         public uint TargetID;
 
-        public int AmountPerTick;
+        public float AmountPerTick;
         public float TickTime;
         public float CurrentTime;
     }
