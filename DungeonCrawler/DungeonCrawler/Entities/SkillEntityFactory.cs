@@ -50,7 +50,20 @@ namespace DungeonCrawler.Entities
             return CreateSkillProjectile(skillP, getDirectionFromFacing(facing), position, rankP, speed, owner, canHitPlayers, canHitEnemies);
         }
 
-        public uint CreateSkillProjectile(SkillType skillP, Vector2 direction, Position position, int rankP, int speed, uint owner, bool canHitPlayers = false, bool canHitEnemies = true)
+        /// <summary>
+        /// For using basic projectile: rank is damage, use last parameter for spritesheet
+        /// </summary>
+        /// <param name="skillP"></param>
+        /// <param name="direction"></param>
+        /// <param name="position"></param>
+        /// <param name="rankP"></param>
+        /// <param name="speed"></param>
+        /// <param name="owner"></param>
+        /// <param name="canHitPlayers"></param>
+        /// <param name="canHitEnemies"></param>
+        /// <param name="spriteSheet"></param>
+        /// <returns></returns>
+        public uint CreateSkillProjectile(SkillType skillP, Vector2 direction, Position position, int rankP, int speed, uint owner, bool canHitPlayers = false, bool canHitEnemies = true, string spriteSheet = null, Rectangle spriteBounds = new Rectangle())
         {
             SkillProjectile skillProjectile;
             Movement movement;
@@ -317,6 +330,30 @@ namespace DungeonCrawler.Entities
                     position.Radius = 10;
                     break;
 
+                case SkillType.BasicRangedAttack:
+                    skillProjectile = new SkillProjectile()
+                    {
+                        EntityID = eid,
+                        skill = skillP,
+                        maxRange = 800,
+                        rank = rankP,
+                        CanHitEnemies = canHitEnemies,
+                        CanHitPlayers = canHitPlayers,
+                    };
+                    movement = new Movement()
+                    {
+                        EntityID = eid,
+                        Direction = direction,
+                        Speed = speed,
+                    };
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>(spriteSheet),
+                        SpriteBounds = spriteBounds,
+                    };
+                    position.Radius = 10;
+                    break;
                 default:
                     throw new Exception("Not a projectile skill");
             }
