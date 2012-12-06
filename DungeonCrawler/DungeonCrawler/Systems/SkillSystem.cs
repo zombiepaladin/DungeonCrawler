@@ -5159,520 +5159,522 @@ namespace DungeonCrawler.Systems
 
                         case SkillType.ExplodingDroids:
                             {
-
-                                #region Skill Variables
-
-                                TimedEffect timedEffect;
-                                float effectDuration;
-
-                                Movement movement;
-                                float droidSpeed;
-
-                                ExplodingDroid explodingDroid;
-                                Sprite sprite;
-
-                                Position droidPosition;
-
-                                Collideable collideable;
-
-                                #endregion
-
-                                switch (rank)
+                                if (_game.EnemyComponent.All.Count() > 0)
                                 {
-                                    #region Checking Rank
-                                    case 1:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 110;
+                                    #region Skill Variables
 
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
+                                    TimedEffect timedEffect;
+                                    float effectDuration;
 
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
+                                    Movement movement;
+                                    float droidSpeed;
 
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 32;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+                                    ExplodingDroid explodingDroid;
+                                    Sprite sprite;
 
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
+                                    Position droidPosition;
 
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
+                                    Collideable collideable;
 
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 2:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 115;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 35;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 3:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 120;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 40;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 4:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 125;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 45;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 5:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 130;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 50;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 6:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 135;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 55;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 7:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 140;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 60;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 8:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 145;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 65;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 9:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 150;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 70;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    case 10:
-                                        eid = Entity.NextEntity();
-                                        effectDuration = 6;
-                                        droidSpeed = 155;
-
-                                        timedEffect = new TimedEffect()
-                                        {
-                                            EntityID = eid,
-                                            TotalDuration = effectDuration,
-                                            TimeLeft = effectDuration
-                                        };
-                                        _game.TimedEffectComponent.Add(eid, timedEffect);
-
-                                        movement = new Movement()
-                                        {
-                                            EntityID = eid,
-                                            Speed = droidSpeed,
-                                        };
-                                        _game.MovementComponent.Add(eid, movement);
-
-                                        droidPosition = _game.PositionComponent[GetPlayerID()];
-                                        droidPosition.Radius = 75;
-                                        explodingDroid = new ExplodingDroid()
-                                        {
-                                            EntityID = eid,
-                                            position = droidPosition,
-                                            hasEnemy = false,
-                                        };
-                                        _game.ExplodingDroidComponent.Add(eid, explodingDroid);
-
-                                        sprite = new Sprite()
-                                        {
-                                            EntityID = eid,
-                                            SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
-                                            SpriteBounds = new Rectangle(51, 45, 71, 82),
-                                        };
-                                        _game.SpriteComponent.Add(eid, sprite);
-
-                                        collideable = new Collideable()
-                                        {
-                                            EntityID = eid,
-                                            RoomID = droidPosition.RoomID,
-                                            Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
-                                        };
-                                        _game.CollisionComponent.Add(eid, collideable);
-
-                                        _game.PositionComponent.Add(eid, explodingDroid.position);
-                                        break;
-
-                                    default:
-                                        break;
                                     #endregion
+
+                                    switch (rank)
+                                    {
+                                        #region Checking Rank
+                                        case 1:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 110;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 32;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 2:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 115;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 35;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 3:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 120;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 40;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 4:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 125;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 45;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 5:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 130;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 50;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 6:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 135;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 55;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 7:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 140;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 60;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 8:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 145;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 65;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 9:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 150;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 70;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        case 10:
+                                            eid = Entity.NextEntity();
+                                            effectDuration = 6;
+                                            droidSpeed = 155;
+
+                                            timedEffect = new TimedEffect()
+                                            {
+                                                EntityID = eid,
+                                                TotalDuration = effectDuration,
+                                                TimeLeft = effectDuration
+                                            };
+                                            _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                                            movement = new Movement()
+                                            {
+                                                EntityID = eid,
+                                                Speed = droidSpeed,
+                                            };
+                                            _game.MovementComponent.Add(eid, movement);
+
+                                            droidPosition = _game.PositionComponent[GetPlayerID()];
+                                            droidPosition.Radius = 75;
+                                            explodingDroid = new ExplodingDroid()
+                                            {
+                                                EntityID = eid,
+                                                position = droidPosition,
+                                                hasEnemy = false,
+                                            };
+                                            _game.ExplodingDroidComponent.Add(eid, explodingDroid);
+
+                                            sprite = new Sprite()
+                                            {
+                                                EntityID = eid,
+                                                SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/Skills/Effects/EngineeringOffense"),
+                                                SpriteBounds = new Rectangle(51, 45, 71, 82),
+                                            };
+                                            _game.SpriteComponent.Add(eid, sprite);
+
+                                            collideable = new Collideable()
+                                            {
+                                                EntityID = eid,
+                                                RoomID = droidPosition.RoomID,
+                                                Bounds = new CircleBounds(droidPosition.Center, droidPosition.Radius),
+                                            };
+                                            _game.CollisionComponent.Add(eid, collideable);
+
+                                            _game.PositionComponent.Add(eid, explodingDroid.position);
+                                            break;
+
+                                        default:
+                                            break;
+                                        #endregion
+                                    }
                                 }
                             }
                             break;

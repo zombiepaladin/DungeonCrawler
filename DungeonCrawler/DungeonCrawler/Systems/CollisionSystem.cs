@@ -1081,7 +1081,7 @@ namespace DungeonCrawler.Systems
             {
                 float playerHealth = _game.PlayerInfoComponent[player.EntityID].Health;
 
-                if (playerHealth < 100 /*&& player.PlayerRace != Aggregate.EarthianPlayer*/)
+                if (playerHealth < 100 && player.PlayerRace != Aggregate.EarthianPlayer)
                 {
                     int healthBonus = 100 - (int)playerHealth;
                     if (healingStation.healthAvailable >= healthBonus)
