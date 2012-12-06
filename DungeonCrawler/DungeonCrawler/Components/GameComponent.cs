@@ -43,6 +43,7 @@ namespace DungeonCrawler.Components
         /// from the value array
         /// </summary>
         protected Dictionary<uint, T> elements;
+        int count;
 
         #endregion
 
@@ -54,6 +55,7 @@ namespace DungeonCrawler.Components
         public GameComponent()
         {
             elements = new Dictionary<uint, T>();
+            count = 0;
         }
 
         /// <summary>
@@ -102,6 +104,7 @@ namespace DungeonCrawler.Components
         public void Add(uint entityID, T component)
         {
             elements.Add(entityID, component);
+            count++;
         }
 
 
@@ -112,6 +115,7 @@ namespace DungeonCrawler.Components
         public void Remove(uint entityID)
         {
             elements.Remove(entityID);
+            count--;
         }
 
 
@@ -126,6 +130,11 @@ namespace DungeonCrawler.Components
         public bool Contains(uint entityID)
         {
             return elements.ContainsKey(entityID);
+        }
+
+        public int Count()
+        {
+            return count;
         }
 
         public virtual void HandleTrigger(uint entityID, string type)
