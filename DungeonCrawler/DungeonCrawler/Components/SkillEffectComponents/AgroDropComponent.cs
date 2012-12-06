@@ -31,25 +31,28 @@ namespace DungeonCrawler.Components
             base.Add(entityID, component);
 
             DungeonCrawlerGame game = DungeonCrawlerGame.game;
-            EnemyAI enemyAI = game.EnemyAIComponent[component.EnemyID];
-
-            enemyAI.NoTargetList.Add(component.PlayerID);
-
-            game.EnemyAIComponent[component.EnemyID] = enemyAI;
-            game.EnemyAISystem.GetDifferentTarget(component.EnemyID);
+            if (component.EnemyID > 0)
+            {
+                EnemyAI enemyAI = game.EnemyAIComponent[component.EnemyID];
+                enemyAI.NoTargetList.Add(component.PlayerID);
+                game.EnemyAIComponent[component.EnemyID] = enemyAI;
+                game.EnemyAISystem.GetDifferentTarget(component.EnemyID);
+            }
         }
 
         new public void Remove(uint entityID)
         {
             DungeonCrawlerGame game = DungeonCrawlerGame.game;
             AgroDrop component = game.AgroDropComponent[entityID];
-            EnemyAI enemyAI = game.EnemyAIComponent[component.EnemyID];
+            if (component.EnemyID > 0)
+            {
+                EnemyAI enemyAI = game.EnemyAIComponent[component.EnemyID];
 
-            enemyAI.NoTargetList.Remove(component.PlayerID);
+                enemyAI.NoTargetList.Remove(component.PlayerID);
 
-            game.EnemyAIComponent[component.EnemyID] = enemyAI;
-            game.EnemyAISystem.GetClosestTarget(component.EnemyID);
-
+                game.EnemyAIComponent[component.EnemyID] = enemyAI;
+                game.EnemyAISystem.GetClosestTarget(component.EnemyID);
+            }
             base.Remove(entityID);
         }
     }

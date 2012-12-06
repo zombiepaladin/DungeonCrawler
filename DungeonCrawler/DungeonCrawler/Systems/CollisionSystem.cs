@@ -349,7 +349,7 @@ namespace DungeonCrawler.Systems
         }
 
         /// <summary>
-        /// Gets a list of the enemie's ids within a certain range of a given position
+        /// Gets a list of the enemy's ids within a certain range of a given position
         /// </summary>
         /// <param name="pos">The center of the check</param>
         /// <param name="range">The radius away from the center to check</param>
@@ -460,6 +460,52 @@ namespace DungeonCrawler.Systems
             }
             //and return that list
             return enemies;
+        }
+
+        public void CheckTeleportCollision(uint playerID, Facing facing)
+        {
+            Position pos = _game.PositionComponent[playerID];
+            uint roomID = _game.PositionComponent[playerID].RoomID;
+
+            //get a list of all collidables in the room
+            List<Collideable> collideablesInRoom = _game.CollisionComponent.InRoom(roomID);
+
+            //get bounds for the player
+            
+            Bounds playerBounds = _game.CollisionComponent[playerID].Bounds;
+            playerBounds.UpdatePosition(pos.Center);
+
+            foreach(Collideable collidable in collideablesInRoom)
+            {
+                if (!collidable.Bounds.Intersect(playerBounds))
+                        continue;
+
+                 CollisionType type = getCollisionType(playerID, collidable.EntityID);
+                if (type == CollisionType.PlayerStatic)
+                {
+                    while (collidable.Bounds.Intersect(playerBounds))
+                    {
+                        switch (facing)
+                        {
+                            case Facing.North:
+                                pos.Center.Y++;
+                                break;
+                            case Facing.East:
+                                pos.Center.X--;
+                                break;
+                            case Facing.South:
+                                pos.Center.Y--;
+                                break;
+                            case Facing.West:
+                                pos.Center.X++;
+                                break;
+                        }
+                        playerBounds.UpdatePosition(pos.Center);
+                    }
+                }
+            }          
+
+            _game.PositionComponent[playerID] = pos;
         }
 
         /// <summary>
