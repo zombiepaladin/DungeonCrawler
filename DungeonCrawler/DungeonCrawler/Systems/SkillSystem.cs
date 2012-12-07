@@ -3874,7 +3874,7 @@ namespace DungeonCrawler.Systems
                 #region Vermis
 
                 case Aggregate.ZombiePlayer:
-
+                    CoolDown coolDown;
                     #region Race Variables
 
                     #endregion
@@ -3894,6 +3894,15 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
                                     eid = Entity.NextEntity();
+                                    coolDown = new CoolDown()
+                                    {
+                                        EntityID = eid,
+                                        MaxTime = 1,
+                                        TimeLeft = 1,
+                                        Type = SkillType.ThrownBlades,
+                                        UserID = userID,
+                                    };
+                                    _game.CoolDownComponent.Add(eid, coolDown);
                                     _game.SkillEntityFactory.CreateSkillProjectile(SkillType.ThrownBlades, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
                                         _game.PositionComponent[userID], 1, 300, userID);
                                     break;
@@ -4238,12 +4247,21 @@ namespace DungeonCrawler.Systems
                             #region Skill Variables
 
                             #endregion
-
+                            
                             switch (rank)
                             {
                                 #region Checking Rank
                                 case 1:
                                     eid = Entity.NextEntity();
+                                    coolDown = new CoolDown()
+                                    {
+                                        EntityID = eid,
+                                        MaxTime = 1,
+                                        TimeLeft = 1,
+                                        Type = SkillType.BenignParasite,
+                                        UserID = userID,
+                                    };
+                                    _game.CoolDownComponent.Add(eid, coolDown);
                                     _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BenignParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
                                        _game.PositionComponent[userID], 1, 300, userID);
                                     break;
@@ -4318,6 +4336,15 @@ namespace DungeonCrawler.Systems
                                 #region Checking Rank
                                 case 1:
                                     eid = Entity.NextEntity();
+                                    coolDown = new CoolDown()
+                                    {
+                                        EntityID = eid,
+                                        MaxTime = 1,
+                                        TimeLeft = 1,
+                                        Type = SkillType.ThrownBlades,
+                                        UserID = userID,
+                                    };
+                                    _game.CoolDownComponent.Add(eid, coolDown);
                                     _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MaliciousParasite, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
                                        _game.PositionComponent[userID], 1, 300, userID);
                                     break;
@@ -4387,12 +4414,21 @@ namespace DungeonCrawler.Systems
                             #region Skill Variables
 
                             #endregion
-
+                           
                             switch (rank)
                             {
                                 #region Checking Rank
                                 case 1:
                                     eid = Entity.NextEntity();
+                                    coolDown = new CoolDown()
+                                    {
+                                        EntityID = eid,
+                                        MaxTime = 1,
+                                        TimeLeft = 1,
+                                        Type = SkillType.ThrownBlades,
+                                        UserID = userID,
+                                    };
+                                    _game.CoolDownComponent.Add(eid, coolDown);
                                     _game.SkillEntityFactory.CreateSkillProjectile(SkillType.MindlessParasites, (Facing)_game.SpriteAnimationComponent[userID].CurrentAnimationRow,
                                        _game.PositionComponent[userID], 1, 300, userID);
                                     break;
@@ -9674,8 +9710,7 @@ namespace DungeonCrawler.Systems
                         return;
 
                     eid = Entity.NextEntity();
-                    InstantEffect instant = new InstantEffect() { EntityID = eid, isTriggered = true };
-                    _game.InstantEffectComponent.Add(eid, instant);
+                    
                     DirectDamage damage;
                     switch (rank)
                     {
@@ -9792,6 +9827,8 @@ namespace DungeonCrawler.Systems
                             throw new Exception("Unimplemented Rank");
                     }
                     _game.DirectDamageComponent.Add(eid, damage);
+                    InstantEffect instant = new InstantEffect() { EntityID = eid, isTriggered = false, };
+                    _game.InstantEffectComponent.Add(eid, instant);
                     break;
                 #endregion
 
@@ -10123,7 +10160,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 1,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 1,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,

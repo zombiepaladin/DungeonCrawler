@@ -567,6 +567,16 @@ namespace DungeonCrawler
             public float health;
             public int psi;
             public PlayerSkillInfo skillInfo;
+            public SkillType skill1;
+            public SkillType skill2;
+            public SkillType skill3;
+            public SkillType skill4;
+            public SkillType skill5;
+            public SkillType skill6;
+            public SkillType skill7;
+            public SkillType skill8;
+            public SkillType skill9;
+            
 
             // Inventory Quantities and Weapon Type
             public int healthPotions;
@@ -607,6 +617,16 @@ namespace DungeonCrawler
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
                 gameSave.psi = info.Psi;
+                gameSave.skill1 = info.skill1;
+                gameSave.skill2 = info.skill2;
+                gameSave.skill3 = info.skill3;
+                gameSave.skill4 = info.skill4;
+                gameSave.skill5 = info.skill5;
+                gameSave.skill6 = info.skill6;
+                gameSave.skill7 = info.skill7;
+                gameSave.skill8 = info.skill8;
+                gameSave.skill9 = info.skill9;
+
                 gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
 
                 // Inventory Quantities and Weapon

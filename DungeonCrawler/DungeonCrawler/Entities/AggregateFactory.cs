@@ -1362,8 +1362,34 @@ namespace DungeonCrawler.Entities
                     Level = gameSave.level,
                     Experience = gameSave.experience,
                     State = PlayerState.Default,
+                    skill1=gameSave.skill1,
+                    skill2=gameSave.skill2,
+                    skill3 = gameSave.skill3,
+                    skill4=gameSave.skill4,
+                    skill5=gameSave.skill5,
+                    skill6=gameSave.skill6,
+                    skill7=gameSave.skill7,
+                    skill8=gameSave.skill8,
+                    skill9=gameSave.skill9,
                 };
                 game.PlayerInfoComponent[entityID] = info;
+
+                game.ActiveSkillComponent[entityID] = new ActiveSkill()
+                {
+                    activeSkill = info.skill1,
+                };
+                game.PlayerSkillInfoComponent[entityID] = new PlayerSkillInfo()
+                {
+                    Skill1Rank=gameSave.skillInfo.Skill1Rank,
+                    Skill2Rank=gameSave.skillInfo.Skill2Rank,
+                    Skill3Rank=gameSave.skillInfo.Skill3Rank,
+                    Skill4Rank=gameSave.skillInfo.Skill4Rank,
+                    Skill5Rank=gameSave.skillInfo.Skill5Rank,
+                    Skill6Rank=gameSave.skillInfo.Skill6Rank,
+                    Skill7Rank=gameSave.skillInfo.Skill7Rank,
+                    Skill8Rank=gameSave.skillInfo.Skill8Rank,
+                    Skill9Rank=gameSave.skillInfo.Skill9Rank,
+                };
 
                 game.PlayerComponent[entityID] = player;
                 //Create HUD
