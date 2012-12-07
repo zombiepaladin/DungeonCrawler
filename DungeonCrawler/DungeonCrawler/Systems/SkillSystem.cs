@@ -4748,7 +4748,8 @@ namespace DungeonCrawler.Systems
                         case SkillType.Regeneration:
 
                             #region Skill Variables
-
+                            HealOverTime HoT;
+                            TimedEffect time;
                             #endregion
 
                             switch (rank)
@@ -4765,15 +4766,53 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 1,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 10,
+                                        TotalDuration = 10,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 2:
                                     eid = Entity.NextEntity();
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 1,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 12,
+                                        TotalDuration = 12,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 12,
+                                        TimeLeft = 12,
                                         Type = SkillType.Regeneration,
                                         UserID = userID,
                                     };
@@ -4785,12 +4824,31 @@ namespace DungeonCrawler.Systems
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 12,
+                                        TimeLeft = 12,
                                         Type = SkillType.Regeneration,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 1,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 12,
+                                        TotalDuration = 12,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 4:
@@ -4804,6 +4862,26 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 2,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 14,
+                                        TotalDuration = 14,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 5:
@@ -4817,6 +4895,25 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 3,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 14,
+                                        TotalDuration = 14,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 6:
@@ -4830,6 +4927,25 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 3,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 16,
+                                        TotalDuration = 16,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 7:
@@ -4843,6 +4959,25 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 4,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 16,
+                                        TotalDuration = 16,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 8:
@@ -4869,6 +5004,25 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 4,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 18,
+                                        TotalDuration = 18,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 case 10:
@@ -4882,6 +5036,25 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+                                    HoT = new HealOverTime()
+                                    {
+                                        AmountPerTick = 5,
+                                        CurrentStack = 1,
+                                        CurrentTime = 0,
+                                        EntityID = eid,
+                                        MaxStack = 1,
+                                        TargetID = userID,
+                                        TickTime = 1,
+                                    };
+                                    _game.HealOverTimeComponent.Add(eid, HoT);
+
+                                    time = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 20,
+                                        TotalDuration = 20,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, time);
                                     break;
 
                                 default:
