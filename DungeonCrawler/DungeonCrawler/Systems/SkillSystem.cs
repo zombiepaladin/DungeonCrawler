@@ -9830,7 +9830,7 @@ namespace DungeonCrawler.Systems
                         return;
 
                     eid = Entity.NextEntity();
-                    instant = new InstantEffect() { EntityID = eid, isTriggered = true };
+                    instantEffect = new InstantEffect() { EntityID = eid, isTriggered = true };
                     DirectDamage damage;
                     switch (rank)
                     {
@@ -9947,7 +9947,7 @@ namespace DungeonCrawler.Systems
                             throw new Exception("Unimplemented Rank");
                     }
                     _game.DirectDamageComponent.Add(eid, damage);
-                    InstantEffect instant = new InstantEffect() { EntityID = eid, isTriggered = false, };
+                    instant = new InstantEffect() { EntityID = eid, isTriggered = false, };
                     _game.InstantEffectComponent.Add(eid, instant);
                     break;
                 #endregion
@@ -10280,7 +10280,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 1,
                                 CurrentStack = 1,
-                                CurrentTime = 1,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10305,7 +10305,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 1,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10330,7 +10330,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 2,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10355,7 +10355,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 2,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10379,7 +10379,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 3,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10403,7 +10403,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 3,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10427,7 +10427,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 4,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10451,7 +10451,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 4,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10475,7 +10475,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 5,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
@@ -10499,7 +10499,7 @@ namespace DungeonCrawler.Systems
                             {
                                 AmountPerTick = 7,
                                 CurrentStack = 1,
-                                CurrentTime = 10,
+                                CurrentTime = 0,
                                 EntityID = eid,
                                 MaxStack = 1,
                                 TargetID = target,
