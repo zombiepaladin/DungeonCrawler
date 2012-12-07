@@ -27,7 +27,7 @@ namespace DungeonCrawler.Components
         DefaultRanged,
         DefaultMelee,
         Spider,
-        Alien,
+        CloakingRanged,
     }
 
     public struct EnemyAI

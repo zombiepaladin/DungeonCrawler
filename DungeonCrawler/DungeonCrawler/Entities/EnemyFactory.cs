@@ -4,6 +4,7 @@
 //
 // Author: Matthew McHaney
 // Modified Samuel Fike and Jiri Malina: Added Alien and organized
+// Modified Samuel Fike and Jiri Malina: Made spiders, changed aliens to robots, added support for default enemies
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -59,7 +60,8 @@ namespace DungeonCrawler.Entities
             float moveSpeed = 100;
 
             String spritesheet;
-            Rectangle spriteBounds = new Rectangle(0, 0, 64, 64); ;
+            Rectangle spriteBounds = new Rectangle(0, 0, 64, 64);
+            Color spriteColor = Color.White;
 
             switch (type)
             {
@@ -85,12 +87,23 @@ namespace DungeonCrawler.Entities
                     spriteAnimation.FramesPerSecond = 14;
                     break;
 
-                case EnemyType.Alien:
+                case EnemyType.CloakingRobot:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 150;
-                    spritesheet = "Spritesheets/Enemies/alien";
-                    spriteBounds = new Rectangle(0, 0, 64, 64);
-                    aiBehaviorType = AIBehaviorType.Alien;
+                    spritesheet = "Spritesheets/Enemies/CloakingRobot";
+                    spriteColor = Color.LightCyan;
+                    spriteBounds = new Rectangle(0, 0, 65, 75);
+                    spriteAnimation.FramesPerSecond = 5;
+                    aiBehaviorType = AIBehaviorType.CloakingRanged;
+                    position.Radius = 37;
+                    break;
+                case EnemyType.BasicShootingRobot:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/BasicShootingRobot";
+                    spriteBounds = new Rectangle(0, 0, 65, 75);
+                    spriteAnimation.FramesPerSecond = 5;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
                     position.Radius = 32;
                     break;
 
@@ -113,6 +126,7 @@ namespace DungeonCrawler.Entities
             {
                 EntityID = eid,
                 SpriteSheet = _game.Content.Load<Texture2D>(spritesheet),
+                SpriteColor = spriteColor,
                 SpriteBounds = spriteBounds
             };
 

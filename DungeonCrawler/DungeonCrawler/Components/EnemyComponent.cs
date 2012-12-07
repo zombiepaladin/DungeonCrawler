@@ -30,7 +30,8 @@ namespace DungeonCrawler.Components
         StationaryTarget,
         MovingTarget,
         Spider,
-        Alien,
+        CloakingRobot,
+        BasicShootingRobot,
     }
 
     public enum EnemyState

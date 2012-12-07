@@ -70,6 +70,7 @@ namespace DungeonCrawler.Systems
             foreach(uint id in keyList)
             {
                 EnemyAI enemyAI = game.EnemyAIComponent[id];
+                Enemy enemy = game.EnemyComponent[id];
                 AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
                 Position pos = game.PositionComponent[id];
                 Movement movement;
@@ -95,42 +96,43 @@ namespace DungeonCrawler.Systems
                         break;
 
                     case AIBehaviorType.DefaultRanged:
-                        updateTargeting(id);
+                         updateTargeting(id);
+
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
 
                         targetID = enemyAI.TargetID;
                         dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                            
+                        movement = game.MovementComponent[id];
 
-                        if (true)
+                        if (dist > 300)
+                            MoveTowardTarget(id);
+                        else
                         {
-                            bool onCoolDown = false;
-                            foreach (CoolDown cd in game.CoolDownComponent.All)
+                            movement.Direction = Vector2.Zero;
+                            game.MovementComponent[id] = movement;
+                            //Put spritesheets here
+                            string spriteSheet;
+
+                            switch (enemy.Type)
                             {
-                                if (cd.Type == SkillType.SniperShot && cd.UserID == id)
-                                {
-                                    onCoolDown = true;
+                                default:
+                                    spriteSheet = "Spritesheets/Skills/Effects/AlienOrb";
                                     break;
-                                }
                             }
 
-                            if (!onCoolDown && dist > 299)
-                                MoveTowardTarget(id);
-
-                            if (!onCoolDown && dist < 300)
-                            {
-                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
-                                movement = game.MovementComponent[id];
-                                Random next = new Random();
-                                movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
-                                movement.Direction = Vector2.Normalize(movement.Direction);
-                                game.MovementComponent[id] = movement;
-                            }
+                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, 1, 1f, spriteSheet, new Rectangle(0, 0, 20, 20));
                         }
-
+                        
                         ManageAnimation(id);
 
                         break;
 
-                    case AIBehaviorType.Alien:
+                    case AIBehaviorType.CloakingRanged:
                         updateTargeting(id);
 
                         if (!enemyAI.HasTarget)
@@ -164,7 +166,8 @@ namespace DungeonCrawler.Systems
                             {
                                 movement.Direction = Vector2.Zero;
                                 game.MovementComponent[id] = movement;
-                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                //game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                game.SkillSystem.EnemyUseBasicRanged(id, targetID, 1, 1f, "Spritesheets/Skills/Effects/AlienOrb", new Rectangle(0, 0, 20, 20));
                                 game.SkillSystem.EnemyUseSkill(SkillType.Cloak, id, id);
                             }
                         }
@@ -185,9 +188,12 @@ namespace DungeonCrawler.Systems
                         
                         targetID = enemyAI.TargetID;
                         dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
-                        
-                        if(dist < 35)
+
+                        if (dist < 50)
+                        {
                             game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
+                            game.SkillSystem.EnemyUseBasicMelee(id, targetID, 1, 1);
+                        }
 
                         ManageAnimation(id);
                         break;
@@ -220,6 +226,15 @@ namespace DungeonCrawler.Systems
             else if (ai.HasTarget == true && game.PlayerInfoComponent[ai.TargetID].Health <= 0)
             {
                 ai.HasTarget = false;
+            }
+
+            if (ai.HasTarget && game.AgroDropComponent.Count() > 0)
+            {
+                foreach (AgroDrop agro in game.AgroDropComponent.All)
+                {
+                    if (agro.PlayerID == ai.TargetID)
+                        ai.HasTarget = false;
+                }
             }
 
             game.EnemyAIComponent[ai.EntityID] = ai;

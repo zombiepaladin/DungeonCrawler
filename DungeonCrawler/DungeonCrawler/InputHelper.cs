@@ -233,13 +233,17 @@ namespace DungeonCrawler
         private void initKeyboard()
         {
             _curKeyboardState = Keyboard.GetState(_pIndex);
-            _oldKeyboardState = _curKeyboardState;
             initGamePad();
+        }
+
+        public void SetOldKeyboardState()
+        {
+            _oldKeyboardState = _curKeyboardState;
         }
 
         private void getKeyboardState()
         {
-            _oldKeyboardState = _curKeyboardState;
+            
             _curKeyboardState = Keyboard.GetState(_pIndex);
         }
 
@@ -293,7 +297,7 @@ namespace DungeonCrawler
 
         private bool isKeyPressed(Keys key)
         {
-            return _curKeyboardState.IsKeyDown(key);
+            return _curKeyboardState.IsKeyDown(key);// && _oldKeyboardState.IsKeyUp(key);
         }
 
         private bool isKeyHeld(Keys key)

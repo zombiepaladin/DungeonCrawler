@@ -130,8 +130,11 @@ namespace DungeonCrawler
                                     case "StationaryTarget":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.MovingTarget, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
                                         break;
-                                    case "Alien":
-                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Alien, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                    case "CloakingRobot":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.CloakingRobot, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    case "BasicShootingRobot":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.BasicShootingRobot, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
                                         break;
                                     case "Spider":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.Spider, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
