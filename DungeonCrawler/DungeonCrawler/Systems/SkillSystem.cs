@@ -4883,6 +4883,46 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 10,
+                                        TotalDuration = 10,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 1,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -6,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 2:
@@ -4896,6 +4936,46 @@ namespace DungeonCrawler.Systems
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 10,
+                                        TotalDuration = 10,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 1,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -5,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 3:
@@ -4903,103 +4983,429 @@ namespace DungeonCrawler.Systems
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 12,
+                                        TimeLeft = 12,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 12,
+                                        TotalDuration = 12,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 2,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -5,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 4:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 14,
+                                        TimeLeft = 14,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
-                                    break;
 
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 14,
+                                        TotalDuration = 14,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 2,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -4,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
+                                    break;
                                 case 5:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 14,
+                                        TimeLeft = 14,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 14,
+                                        TotalDuration = 14,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 3,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -4,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 6:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 16,
+                                        TimeLeft = 16,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 16,
+                                        TotalDuration = 16,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 3,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -3,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 7:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 16,
+                                        TimeLeft = 16,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 16,
+                                        TotalDuration = 16,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 4,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -3,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 8:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 18,
+                                        TimeLeft = 18,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 18,
+                                        TotalDuration = 18,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 4,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -2,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 9:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 18,
+                                        TimeLeft = 18,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 18,
+                                        TotalDuration = 18,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 5,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = false,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = true,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength = -2,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 case 10:
                                     eid = Entity.NextEntity();
+
                                     coolDown = new CoolDown()
                                     {
                                         EntityID = eid,
-                                        MaxTime = 10,
-                                        TimeLeft = 10,
+                                        MaxTime = 20,
+                                        TimeLeft = 20,
                                         Type = SkillType.MeatShield,
                                         UserID = userID,
                                     };
                                     _game.CoolDownComponent.Add(eid, coolDown);
+
+                                    timeEffect = new TimedEffect()
+                                    {
+                                        EntityID = eid,
+                                        TimeLeft = 20,
+                                        TotalDuration = 20,
+                                    };
+                                    _game.TimedEffectComponent.Add(eid, timeEffect);
+                                    buff = new Buff()
+                                    {
+                                        EntityID = eid,
+                                        MovementSpeed = 0,
+                                        DefenseMelee = 0,
+                                        DefenseRanged = 7,
+                                        AttackMelee = 0,
+                                        AttackRanged = 0,
+                                        AttackSpeed = 00,
+                                        isPercentAttackMelee = false,
+                                        isPercentAttackRanged = false,
+                                        isPercentAttackSpeed = false,
+                                        isPercentDefenseMelee = false,
+                                        isPercentDefenseRanged = true,
+                                        isPercentFatigue = false,
+                                        isPercentHealth = false,
+                                        isPercentMovementSpeed = true,
+                                        Fatigue = 0,
+                                        Health = 0,
+                                        isPercentPsi = false,
+                                        isPercentResistPoison = false,
+                                        isPercentWeaponAccuracy = false,
+                                        isPercentWeaponSpeed = false,
+                                        isPercentWeaponStrength = false,
+                                        Psi = 0,
+                                        ResistPoison = 0,
+                                        TargetID = userID,
+                                        WeaponAccuracy = 0,
+                                        WeaponSpeed = 0,
+                                        WeaponStrength =- 1,
+                                    };
+                                    _game.BuffComponent.Add(eid, buff);
                                     break;
 
                                 default:
