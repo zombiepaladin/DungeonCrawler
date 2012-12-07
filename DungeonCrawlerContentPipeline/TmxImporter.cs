@@ -8,6 +8,7 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.IO;
+using System.IO.Compression;
 using System.Xml;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
@@ -239,21 +240,37 @@ namespace DungeonCrawlerContentPipeline
 
             // The tile instances contained within this level
             List<TileData> TileData = new List<TileData>(width * height);
-
-            // Handle the different compression techniques
-            if (reader.GetAttribute("compression") != null)
-            {
-                throw new NotImplementedException("Processing of compressed layer data is not currently implemented");
-            }
-
+            
             // Handle the different encoding styles
             switch (reader.GetAttribute("encoding"))
             {
                 case "base64":
-
-                    // Read in the Base64 data 
+                    
+                    // Create a buffer to hold data
                     byte[] data = new byte[width * height * 4];
-                    reader.ReadElementContentAsBase64(data, 0, width * height * 4);
+
+                    // Handle different compression techniques
+                    if (reader.GetAttribute("compression") == "gzip")
+                    {
+                        byte[] compressedData = new byte[width * height * 4];
+                        int byteCount = reader.ReadElementContentAsBase64(compressedData, 0, width * height * 4);
+                        GZipStream gzipStream = new GZipStream(new MemoryStream(compressedData, 0, byteCount), CompressionMode.Decompress);
+                        for (int i = 0; i < width * height * 4; i++)
+                        {
+                            data[i] = (byte)gzipStream.ReadByte();
+                        }
+                    }
+                    else if (reader.GetAttribute("compression") == "zlib")
+                    {
+                        throw new NotImplementedException("Processing of a zlib compressed layer data is not currently implemented");
+                    }
+                    else if (reader.GetAttribute("compression") == null)
+                    {
+                        // Read in the uncompressed Base64 data                     
+                        reader.ReadElementContentAsBase64(data, 0, width * height * 4);
+                    }
+
+                    
 
                     // Convert the encoded data into TileData
                     int tileIndex = 0;
