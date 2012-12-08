@@ -8,6 +8,7 @@
 //           Brett Barger - corrected functionality of enemy moving towards the player it is targeting.
 //
 // Modified Samuel Fike, Jiri Malina, Brett Barger: Reorganized, added behaviors and stuff, also 
+// Modified Samuel Fike, Jiri Malina: Improved AIs for everything, added death blood, added support for sludge boss splitting
 //              
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -23,6 +24,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler.Systems
@@ -82,33 +84,33 @@ namespace DungeonCrawler.Systems
 
                 if (game.EnemyComponent[id].Health <= 0)
                 {
+                    //Positions for sludge splitting
+                    Position pos1, pos2;
+                    pos1 = pos2 = pos;
+
+                    pos1.Center.X -= pos.Radius / 2;
+                    pos2.Center.X += pos.Radius / 2;
+
                     switch(enemy.Type)
                     {
                         case EnemyType.Sludge5:
-                            Position pos2 = pos;
-                            pos2.Center.X += 70;
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos1);
                             game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos2);
                             game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                             break;
                         case EnemyType.Sludge4:
-                            pos2 = pos;
-                            pos2.Center.X += 70;
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos1);
                             game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos2);
                             game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                             break;
                         case EnemyType.Sludge3:
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos2);
                             game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                             break;
                         case EnemyType.Sludge2:
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
-                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos2);
                             game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                             break;
                         case EnemyType.Sludge1:
@@ -118,6 +120,42 @@ namespace DungeonCrawler.Systems
                             game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
                             break;
                     }
+
+                    uint eid = Entity.NextEntity();
+
+                    Position effectPos = pos;
+                    effectPos.Radius = 40;
+                    effectPos.EntityID = eid;
+                    game.PositionComponent.Add(eid, effectPos);
+
+                    TimedEffect timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid,
+                        TimeLeft = 2f,
+                        TotalDuration = 2f,
+                    };
+                    game.TimedEffectComponent.Add(eid, timedEffect);
+
+                    Sprite sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/blood"),
+                        SpriteBounds = new Rectangle(0, 0, 80, 80),
+                    };
+                    game.SpriteComponent.Add(eid, sprite);
+
+                    SpriteAnimation spriteAnimation = new SpriteAnimation()
+                    {
+                        CurrentAnimationRow = 0,
+                        CurrentFrame = 0,
+                        EntityID = eid,
+                        FramesPerSecond = 20,
+                        IsLooping = false,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                    };
+                    game.SpriteAnimationComponent.Add(eid, spriteAnimation);
+
                 }
 
                 uint targetID;
@@ -127,7 +165,19 @@ namespace DungeonCrawler.Systems
                 {
                     case AIBehaviorType.DefaultMelee:
                         updateTargeting(id);
+                        
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
+                        
                         MoveTowardTarget(id);
+
+                        targetID = enemyAI.TargetID;
+                        game.SkillSystem.EnemyUseBasicMelee(id, targetID, 1, 1);
+                        
+                        ManageAnimation(id);
                         break;
 
                     case AIBehaviorType.DefaultRanged:
@@ -136,6 +186,23 @@ namespace DungeonCrawler.Systems
                         if (!enemyAI.HasTarget)
                         {
                             ManageAnimation(id);
+                            continue;
+                        }
+
+                        bool onCooldown = false;
+
+                        foreach (CoolDown cd in game.CoolDownComponent.All)
+                        {
+                            if (cd.Type == SkillType.BasicRangedAttack && cd.UserID == id)
+                            {
+                                onCooldown = true;
+                                break;
+                            }
+                        }
+
+                        if (onCooldown)
+                        {
+                            //wait/move random direction
                             continue;
                         }
 
@@ -148,19 +215,38 @@ namespace DungeonCrawler.Systems
                             MoveTowardTarget(id);
                         else
                         {
-                            movement.Direction = Vector2.Zero;
-                            game.MovementComponent[id] = movement;
+                            //movement.Direction = Vector2.Zero;
+                            //game.MovementComponent[id] = movement;
                             //Put spritesheets here
                             string spriteSheet;
+                            Rectangle spriteBounds;
+                            int damage;
 
                             switch (enemy.Type)
                             {
+                                case EnemyType.Sludge5:
+                                case EnemyType.Sludge4:
+                                    spriteSheet = "Spritesheets/Skills/Effects/SludgeShotBig";
+                                    spriteBounds = new Rectangle(0, 0, 64, 58);
+                                    damage = 2;
+                                    break;
+                                case EnemyType.Sludge3:
+                                case EnemyType.Sludge2:
+                                    spriteSheet = "Spritesheets/Skills/Effects/SludgeShotSmall";
+                                    spriteBounds = new Rectangle(0, 0, 16, 15);
+                                    damage = 1;
+                                    break;
                                 default:
                                     spriteSheet = "Spritesheets/Skills/Effects/AlienOrb";
+                                    spriteBounds = new Rectangle(0, 0, 20, 20);
+                                    damage = 1;
                                     break;
                             }
 
-                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, 1, 1f, spriteSheet, new Rectangle(0, 0, 20, 20));
+                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, damage, 1.5f, spriteSheet, spriteBounds);
+                            movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
+                            movement.Direction = Vector2.Normalize(movement.Direction);
+                            game.MovementComponent[id] = movement;
                         }
                         
                         ManageAnimation(id);

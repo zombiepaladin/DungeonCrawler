@@ -6,6 +6,8 @@
 // Contributers: Austin Murphy
 // Modfied by:  Adam Clark: cyborg skill added
 //              Michael Fountain: Gargranian skills have been updated
+//
+// Modified Samuel Fike, Jiri Malina: Added all enemy skill methods
 // 
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -270,7 +272,7 @@ namespace DungeonCrawler.Systems
             _game.CoolDownComponent.Add(eid_2, coolDown);
         }
 
-        public void EnemyUseBasicRanged(uint callerID, uint targetID, float damage, float cooldown, string spriteSheet, Rectangle spriteBounds)
+        public void EnemyUseBasicRanged(uint callerID, uint targetID, int damage, float cooldown, string spriteSheet, Rectangle spriteBounds)
         {
             foreach (CoolDown cd in _game.CoolDownComponent.All)
             {
@@ -285,7 +287,7 @@ namespace DungeonCrawler.Systems
 
             Vector2 direction = targetPos.Center - callerPos.Center;
 
-            uint eid = _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BasicRangedAttack, direction, callerPos, 1, 300, callerID, true, false, spriteSheet, spriteBounds);
+            uint eid = _game.SkillEntityFactory.CreateSkillProjectile(SkillType.BasicRangedAttack, direction, callerPos, damage, 175, callerID, true, false, spriteSheet, spriteBounds);
 
             CoolDown coolDown = new CoolDown()
             {

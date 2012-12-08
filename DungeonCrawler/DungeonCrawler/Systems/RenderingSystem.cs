@@ -117,12 +117,12 @@ namespace DungeonCrawler.Systems
                     Position pos = position;
                     if (game.EnemyComponent.Contains(position.EntityID)) //if enemy -> draw centered on position
                     {
-                        pos.Center.X -= sprite.SpriteBounds.Width / 2;
-                        pos.Center.Y -= sprite.SpriteBounds.Height / 2;
+                        //pos.Center.X -= sprite.SpriteBounds.Width / 4;
+                        //pos.Center.Y -= sprite.SpriteBounds.Height / 4;
                     }
 
                     spriteBatch.Draw(sprite.SpriteSheet,
-                                    position.Center,
+                                    pos.Center,
                                     sprite.SpriteBounds,
                                     drawColor,
                                     0f,                                             // rotation

@@ -162,3 +162,6 @@ Content\Tilemaps\D01F03R11.xnb
 Content\Tilemaps\TestDungeon1compressed.xnb
 Content\SpriteFonts\Pescadero.xnb
 Content\SpriteFonts\BoldPescadero.xnb
+Content\Spritesheets\blood.xnb
+Content\Spritesheets\Skills\Effects\SludgeShotBig.xnb
+Content\Spritesheets\Skills\Effects\SludgeShotSmall.xnb
