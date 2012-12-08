@@ -66,6 +66,22 @@ namespace DungeonCrawler.Systems
                 // Update the entity's position in the world
                 Position position = game.PositionComponent[movement.EntityID];
 
+                // Place player off-screen if dead, easy player-death solution
+                if (game.PlayerComponent.Contains(movement.EntityID))
+                {
+                    Player player = game.PlayerComponent[movement.EntityID];
+                    PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
+                    
+                    if (info.Health <= 0)
+                    {
+                        //Don't know how to handle death, just move off screen
+                        Position pos = game.PositionComponent[player.EntityID];
+                        pos.Center.X = -999;
+                        game.PositionComponent[player.EntityID] = pos;
+                        continue;
+                    }
+                }
+
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;
 

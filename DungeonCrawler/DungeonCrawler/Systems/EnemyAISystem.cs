@@ -82,7 +82,42 @@ namespace DungeonCrawler.Systems
 
                 if (game.EnemyComponent[id].Health <= 0)
                 {
-                    game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                    switch(enemy.Type)
+                    {
+                        case EnemyType.Sludge5:
+                            Position pos2 = pos;
+                            pos2.Center.X += 70;
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge4:
+                            pos2 = pos;
+                            pos2.Center.X += 70;
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge3:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge2:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge1:
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        default:
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                    }
                 }
 
                 uint targetID;

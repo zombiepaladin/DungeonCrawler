@@ -68,6 +68,7 @@
     <property name="SpawnName" value="2"/>
    </properties>
   </object>
+  <object name="Enemy" type="Sludge5" x="626" y="261"/>
  </objectgroup>
  <objectgroup name="Triggers" width="40" height="23">
   <object name="Trigger" type="Wall" x="0" y="0" width="704" height="64"/>

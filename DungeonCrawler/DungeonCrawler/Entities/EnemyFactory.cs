@@ -106,6 +106,51 @@ namespace DungeonCrawler.Entities
                     aiBehaviorType = AIBehaviorType.DefaultRanged;
                     position.Radius = 32;
                     break;
+                case EnemyType.Sludge1:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge1";
+                    spriteBounds = new Rectangle(0, 0, 32, 32);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 1;
+                    break;
+                case EnemyType.Sludge2:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge2";
+                    spriteBounds = new Rectangle(0, 0, 64, 64);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 1;
+                    break;
+                case EnemyType.Sludge3:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge3";
+                    spriteBounds = new Rectangle(0, 0, 144, 144);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 1;
+                    break;
+                case EnemyType.Sludge4:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge4";
+                    spriteBounds = new Rectangle(0, 0, 192, 192);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 1;
+                    break;
+                case EnemyType.Sludge5:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge5";
+                    spriteBounds = new Rectangle(0, 0, 256, 256);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 1;
+                    break;
 
                 default:
                     throw new Exception("Unknown EnemyType");

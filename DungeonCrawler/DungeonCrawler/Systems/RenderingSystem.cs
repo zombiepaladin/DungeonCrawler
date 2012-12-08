@@ -114,6 +114,13 @@ namespace DungeonCrawler.Systems
                     else
                         drawColor = Color.White;
 
+                    Position pos = position;
+                    if (game.EnemyComponent.Contains(position.EntityID)) //if enemy -> draw centered on position
+                    {
+                        pos.Center.X -= sprite.SpriteBounds.Width / 2;
+                        pos.Center.Y -= sprite.SpriteBounds.Height / 2;
+                    }
+
                     spriteBatch.Draw(sprite.SpriteSheet,
                                     position.Center,
                                     sprite.SpriteBounds,

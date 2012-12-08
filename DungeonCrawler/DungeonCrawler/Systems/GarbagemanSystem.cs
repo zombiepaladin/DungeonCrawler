@@ -100,6 +100,8 @@ namespace DungeonCrawler.Systems
                         game.StatsComponent.Remove(keyValue.Key);
                         game.PlayerComponent.Remove(keyValue.Key);
                         game.PlayerInfoComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.SpriteAnimationComponent.Remove(keyValue.Key);
                         game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:

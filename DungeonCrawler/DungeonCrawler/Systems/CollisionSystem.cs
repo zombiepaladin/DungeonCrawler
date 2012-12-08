@@ -1411,6 +1411,13 @@ namespace DungeonCrawler.Systems
         {
             PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
             info.Health -= (int)damage;
+            if (info.Health <= 0)
+            {
+                //Don't know how to handle death, just move off screen
+                Position pos = _game.PositionComponent[player.EntityID];
+                pos.Center.X = -999;
+                _game.PositionComponent[player.EntityID] = pos;
+            }
             _game.PlayerInfoComponent[player.EntityID] = info;
 
             _game.ActorTextComponent.Add(player.EntityID, damage.ToString());

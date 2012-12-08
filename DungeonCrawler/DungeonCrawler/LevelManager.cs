@@ -139,6 +139,21 @@ namespace DungeonCrawler
                                     case "Spider":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.Spider, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
                                         break;
+                                    case "Sludge5":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge5, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge4":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge3":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge2":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge1":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
                                     default:
                                         break;
                                 }

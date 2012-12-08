@@ -32,6 +32,11 @@ namespace DungeonCrawler.Components
         Spider,
         CloakingRobot,
         BasicShootingRobot,
+        Sludge1,
+        Sludge2,
+        Sludge3,
+        Sludge4,
+        Sludge5,
     }
 
     public enum EnemyState
