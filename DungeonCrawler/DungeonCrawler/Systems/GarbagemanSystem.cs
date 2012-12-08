@@ -100,6 +100,8 @@ namespace DungeonCrawler.Systems
                         game.StatsComponent.Remove(keyValue.Key);
                         game.PlayerComponent.Remove(keyValue.Key);
                         game.PlayerInfoComponent.Remove(keyValue.Key);
+                        game.SpriteComponent.Remove(keyValue.Key);
+                        game.SpriteAnimationComponent.Remove(keyValue.Key);
                         game.CollisionComponent.Remove(keyValue.Key);
                         break;
                     case ComponentType.Enemy:
@@ -156,6 +158,7 @@ namespace DungeonCrawler.Systems
                         if (game.DirectHealComponent.Contains(keyValue.Key))        game.DirectHealComponent.Remove(keyValue.Key);
                         if (game.FearComponent.Contains(keyValue.Key))              game.FearComponent.Remove(keyValue.Key);
                         if (game.HealOverTimeComponent.Contains(keyValue.Key))      game.HealOverTimeComponent.Remove(keyValue.Key);
+                        if (game.PsiOrFatigueRegenComponent.Contains(keyValue.Key)) game.PsiOrFatigueRegenComponent.Remove(keyValue.Key);
                         if (game.InstantEffectComponent.Contains(keyValue.Key))     game.InstantEffectComponent.Remove(keyValue.Key);
                         if (game.KnockBackComponent.Contains(keyValue.Key))         game.KnockBackComponent.Remove(keyValue.Key);
                         if (game.ReduceAgroRangeComponent.Contains(keyValue.Key))   game.ReduceAgroRangeComponent.Remove(keyValue.Key);

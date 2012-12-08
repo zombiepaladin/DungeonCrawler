@@ -130,11 +130,29 @@ namespace DungeonCrawler
                                     case "StationaryTarget":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.MovingTarget, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
                                         break;
-                                    case "Alien":
-                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Alien, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                    case "CloakingRobot":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.CloakingRobot, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
+                                        break;
+                                    case "BasicShootingRobot":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.BasicShootingRobot, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 32 });
                                         break;
                                     case "Spider":
                                         entityID = game.EnemyFactory.CreateEnemy(EnemyType.Spider, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge5":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge5, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge4":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge3":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge2":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
+                                        break;
+                                    case "Sludge1":
+                                        entityID = game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, new Position { Center = new Vector2(goData.Position.X, goData.Position.Y), RoomID = currentRoomID, Radius = 16 });
                                         break;
                                     default:
                                         break;

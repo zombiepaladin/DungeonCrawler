@@ -349,7 +349,7 @@ namespace DungeonCrawler.Systems
         }
 
         /// <summary>
-        /// Gets a list of the enemie's ids within a certain range of a given position
+        /// Gets a list of the enemy's ids within a certain range of a given position
         /// </summary>
         /// <param name="pos">The center of the check</param>
         /// <param name="range">The radius away from the center to check</param>
@@ -460,6 +460,52 @@ namespace DungeonCrawler.Systems
             }
             //and return that list
             return enemies;
+        }
+
+        public void CheckTeleportCollision(uint playerID, Facing facing)
+        {
+            Position pos = _game.PositionComponent[playerID];
+            uint roomID = _game.PositionComponent[playerID].RoomID;
+
+            //get a list of all collidables in the room
+            List<Collideable> collideablesInRoom = _game.CollisionComponent.InRoom(roomID);
+
+            //get bounds for the player
+            
+            Bounds playerBounds = _game.CollisionComponent[playerID].Bounds;
+            playerBounds.UpdatePosition(pos.Center);
+
+            foreach(Collideable collidable in collideablesInRoom)
+            {
+                if (!collidable.Bounds.Intersect(playerBounds))
+                        continue;
+
+                 CollisionType type = getCollisionType(playerID, collidable.EntityID);
+                if (type == CollisionType.PlayerStatic)
+                {
+                    while (collidable.Bounds.Intersect(playerBounds))
+                    {
+                        switch (facing)
+                        {
+                            case Facing.North:
+                                pos.Center.Y++;
+                                break;
+                            case Facing.East:
+                                pos.Center.X--;
+                                break;
+                            case Facing.South:
+                                pos.Center.Y--;
+                                break;
+                            case Facing.West:
+                                pos.Center.X++;
+                                break;
+                        }
+                        playerBounds.UpdatePosition(pos.Center);
+                    }
+                }
+            }          
+
+            _game.PositionComponent[playerID] = pos;
         }
 
         /// <summary>
@@ -1071,6 +1117,11 @@ namespace DungeonCrawler.Systems
 
             Player player = _game.PlayerComponent[playerId];
             HealingStation healingStation = _game.HealingStationComponent[stationId];
+            Buff buffEffect;
+            TimedEffect timedEffect;
+            Sprite sprite;
+            Position position;
+            uint eid;
 
             if (healingStation.healthAvailable > 0)
             {
@@ -1081,16 +1132,53 @@ namespace DungeonCrawler.Systems
                     int healthBonus = 100 - (int)playerHealth;
                     if (healingStation.healthAvailable >= healthBonus)
                     {
-                        player.abilityModifiers.HealthBonus += healthBonus;
+
                         healingStation.healthAvailable -= healthBonus;
+                        eid = Entity.NextEntity();
+                        buffEffect = new Buff()
+                        {
+                            EntityID = eid,
+                            TargetID = player.EntityID,
+                            Health = healthBonus,
+                        };
+                        _game.BuffComponent.Add(eid, buffEffect);
+
                     }
 
                     else
                     {
-                        player.abilityModifiers.HealthBonus += healingStation.healthAvailable;
+                        eid = Entity.NextEntity();
+                        buffEffect = new Buff()
+                        {
+                            EntityID = eid,
+                            TargetID = player.EntityID,
+                            Health = healingStation.healthAvailable,
+                        };
+                        _game.BuffComponent.Add(eid, buffEffect);
+
                         healingStation.healthAvailable = 0;
                         _game.GarbagemanSystem.ScheduleVisit(healingStation.EntityID, GarbagemanSystem.ComponentType.Effect);
                     }
+
+
+                    timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid,
+                        TotalDuration = 1,
+                        TimeLeft = 1
+                    };
+                    _game.TimedEffectComponent.Add(eid, timedEffect);
+
+                    sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = _game.Content.Load<Texture2D>("Spritesheets/red_cross_logo"),
+                        SpriteBounds = new Rectangle(0, 0, 72, 72),
+                    };
+                    _game.SpriteComponent.Add(eid, sprite);
+                    position = _game.PositionComponent[healingStation.EntityID];
+
+                    _game.PositionComponent.Add(eid, position);
 
                     _game.PlayerComponent[player.EntityID] = player;
                     _game.HealingStationComponent[healingStation.EntityID] = healingStation;
@@ -1323,6 +1411,13 @@ namespace DungeonCrawler.Systems
         {
             PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
             info.Health -= (int)damage;
+            if (info.Health <= 0)
+            {
+                //Don't know how to handle death, just move off screen
+                Position pos = _game.PositionComponent[player.EntityID];
+                pos.Center.X = -999;
+                _game.PositionComponent[player.EntityID] = pos;
+            }
             _game.PlayerInfoComponent[player.EntityID] = info;
 
             _game.ActorTextComponent.Add(player.EntityID, damage.ToString());

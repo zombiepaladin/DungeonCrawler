@@ -114,8 +114,15 @@ namespace DungeonCrawler.Systems
                     else
                         drawColor = Color.White;
 
+                    Position pos = position;
+                    if (game.EnemyComponent.Contains(position.EntityID)) //if enemy -> draw centered on position
+                    {
+                        //pos.Center.X -= sprite.SpriteBounds.Width / 4;
+                        //pos.Center.Y -= sprite.SpriteBounds.Height / 4;
+                    }
+
                     spriteBatch.Draw(sprite.SpriteSheet,
-                                    position.Center,
+                                    pos.Center,
                                     sprite.SpriteBounds,
                                     drawColor,
                                     0f,                                             // rotation
@@ -218,6 +225,7 @@ namespace DungeonCrawler.Systems
 
             game.HUDSystem.Draw(elapsedTime, spriteBatch);
 
+            /*
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {
                 if (sprite.isSeen)
@@ -234,6 +242,7 @@ namespace DungeonCrawler.Systems
                                     0.5f);
                 }
             }
+            */
 
 #if DEBUG
             //If we are in debug, draw the collision bounds.

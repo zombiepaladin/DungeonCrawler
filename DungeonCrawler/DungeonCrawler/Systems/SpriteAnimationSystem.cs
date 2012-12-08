@@ -41,7 +41,7 @@ namespace DungeonCrawler.Systems
 
                 //if animation row has changed
                 if (sprite.SpriteBounds.Y != spriteAnimation.CurrentAnimationRow * sprite.SpriteBounds.Height)
-                {
+               {
                     sprite.SpriteBounds.X = 0;
                     sprite.SpriteBounds.Y = spriteAnimation.CurrentAnimationRow * sprite.SpriteBounds.Height;
                 }

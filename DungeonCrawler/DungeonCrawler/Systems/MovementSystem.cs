@@ -5,7 +5,7 @@
 // Author: Nathan Bean
 //
 // Modified By: Nicholas Strub - Added Player Clamping (Assignment 7). Also fixed player clamping 10/31/12
-// Modified by Samuel Fike and Jiri Malina: Removed MovementSprite code, now handled by SpriteAnimationSystem
+// Modified by Samuel Fike and Jiri Malina: Removed MovementSprite code, now handled by SpriteAnimationSystem, Added player death
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -66,10 +66,26 @@ namespace DungeonCrawler.Systems
                 // Update the entity's position in the world
                 Position position = game.PositionComponent[movement.EntityID];
 
+                // Place player off-screen if dead, easy player-death solution
+                if (game.PlayerComponent.Contains(movement.EntityID))
+                {
+                    Player player = game.PlayerComponent[movement.EntityID];
+                    PlayerInfo info = game.PlayerInfoComponent[player.EntityID];
+                    
+                    if (info.Health <= 0)
+                    {
+                        //Don't know how to handle death, just move off screen
+                        Position pos = game.PositionComponent[player.EntityID];
+                        pos.Center.X = -999;
+                        game.PositionComponent[player.EntityID] = pos;
+                        continue;
+                    }
+                }
+
                 if (position.RoomID != game.CurrentRoomEid)
                     continue;
 
-                if(movement.Speed > 0)
+                if(movement.Speed > 0) //We need this so slow effects don't end up making people move backwards
                     position.Center += elapsedTime * movement.Speed * movement.Direction;
                 // Player clamping based on the size of the walls, the tile sizes, and the room dimensions.
                 Room currentRoom = DungeonCrawlerGame.LevelManager.getCurrentRoom();

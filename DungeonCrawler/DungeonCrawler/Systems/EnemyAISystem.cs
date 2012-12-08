@@ -8,6 +8,7 @@
 //           Brett Barger - corrected functionality of enemy moving towards the player it is targeting.
 //
 // Modified Samuel Fike, Jiri Malina, Brett Barger: Reorganized, added behaviors and stuff, also 
+// Modified Samuel Fike, Jiri Malina: Improved AIs for everything, added death blood, added support for sludge boss splitting
 //              
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
@@ -23,6 +24,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DungeonCrawler.Components;
+using DungeonCrawler.Entities;
 #endregion
 
 namespace DungeonCrawler.Systems
@@ -70,6 +72,7 @@ namespace DungeonCrawler.Systems
             foreach(uint id in keyList)
             {
                 EnemyAI enemyAI = game.EnemyAIComponent[id];
+                Enemy enemy = game.EnemyComponent[id];
                 AIBehaviorType AIBehavior = enemyAI.AIBehaviorType;
                 Position pos = game.PositionComponent[id];
                 Movement movement;
@@ -81,7 +84,78 @@ namespace DungeonCrawler.Systems
 
                 if (game.EnemyComponent[id].Health <= 0)
                 {
-                    game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                    //Positions for sludge splitting
+                    Position pos1, pos2;
+                    pos1 = pos2 = pos;
+
+                    pos1.Center.X -= pos.Radius / 2;
+                    pos2.Center.X += pos.Radius / 2;
+
+                    switch(enemy.Type)
+                    {
+                        case EnemyType.Sludge5:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge4, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge4:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge3, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge3:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge2, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge2:
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos1);
+                            game.EnemyFactory.CreateEnemy(EnemyType.Sludge1, pos2);
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        case EnemyType.Sludge1:
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                        default:
+                            game.GarbagemanSystem.ScheduleVisit(id, GarbagemanSystem.ComponentType.Enemy);
+                            break;
+                    }
+
+                    uint eid = Entity.NextEntity();
+
+                    Position effectPos = pos;
+                    effectPos.Radius = 40;
+                    effectPos.EntityID = eid;
+                    game.PositionComponent.Add(eid, effectPos);
+
+                    TimedEffect timedEffect = new TimedEffect()
+                    {
+                        EntityID = eid,
+                        TimeLeft = 2f,
+                        TotalDuration = 2f,
+                    };
+                    game.TimedEffectComponent.Add(eid, timedEffect);
+
+                    Sprite sprite = new Sprite()
+                    {
+                        EntityID = eid,
+                        SpriteSheet = game.Content.Load<Texture2D>("Spritesheets/blood"),
+                        SpriteBounds = new Rectangle(0, 0, 80, 80),
+                    };
+                    game.SpriteComponent.Add(eid, sprite);
+
+                    SpriteAnimation spriteAnimation = new SpriteAnimation()
+                    {
+                        CurrentAnimationRow = 0,
+                        CurrentFrame = 0,
+                        EntityID = eid,
+                        FramesPerSecond = 20,
+                        IsLooping = false,
+                        IsPlaying = true,
+                        TimePassed = 0f,
+                    };
+                    game.SpriteAnimationComponent.Add(eid, spriteAnimation);
+
                 }
 
                 uint targetID;
@@ -91,46 +165,95 @@ namespace DungeonCrawler.Systems
                 {
                     case AIBehaviorType.DefaultMelee:
                         updateTargeting(id);
+                        
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
+                        
                         MoveTowardTarget(id);
+
+                        targetID = enemyAI.TargetID;
+                        game.SkillSystem.EnemyUseBasicMelee(id, targetID, 1, 1);
+                        
+                        ManageAnimation(id);
                         break;
 
                     case AIBehaviorType.DefaultRanged:
-                        updateTargeting(id);
+                         updateTargeting(id);
 
-                        targetID = enemyAI.TargetID;
-                        dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
-
-                        if (true)
+                        if (!enemyAI.HasTarget)
                         {
-                            bool onCoolDown = false;
-                            foreach (CoolDown cd in game.CoolDownComponent.All)
-                            {
-                                if (cd.Type == SkillType.SniperShot && cd.UserID == id)
-                                {
-                                    onCoolDown = true;
-                                    break;
-                                }
-                            }
+                            ManageAnimation(id);
+                            continue;
+                        }
 
-                            if (!onCoolDown && dist > 299)
-                                MoveTowardTarget(id);
+                        bool onCooldown = false;
 
-                            if (!onCoolDown && dist < 300)
+                        foreach (CoolDown cd in game.CoolDownComponent.All)
+                        {
+                            if (cd.Type == SkillType.BasicRangedAttack && cd.UserID == id)
                             {
-                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
-                                movement = game.MovementComponent[id];
-                                Random next = new Random();
-                                movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
-                                movement.Direction = Vector2.Normalize(movement.Direction);
-                                game.MovementComponent[id] = movement;
+                                onCooldown = true;
+                                break;
                             }
                         }
 
+                        if (onCooldown)
+                        {
+                            //wait/move random direction
+                            continue;
+                        }
+
+                        targetID = enemyAI.TargetID;
+                        dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
+                            
+                        movement = game.MovementComponent[id];
+
+                        if (dist > 300)
+                            MoveTowardTarget(id);
+                        else
+                        {
+                            //movement.Direction = Vector2.Zero;
+                            //game.MovementComponent[id] = movement;
+                            //Put spritesheets here
+                            string spriteSheet;
+                            Rectangle spriteBounds;
+                            int damage;
+
+                            switch (enemy.Type)
+                            {
+                                case EnemyType.Sludge5:
+                                case EnemyType.Sludge4:
+                                    spriteSheet = "Spritesheets/Skills/Effects/SludgeShotBig";
+                                    spriteBounds = new Rectangle(0, 0, 64, 58);
+                                    damage = 2;
+                                    break;
+                                case EnemyType.Sludge3:
+                                case EnemyType.Sludge2:
+                                    spriteSheet = "Spritesheets/Skills/Effects/SludgeShotSmall";
+                                    spriteBounds = new Rectangle(0, 0, 16, 15);
+                                    damage = 1;
+                                    break;
+                                default:
+                                    spriteSheet = "Spritesheets/Skills/Effects/AlienOrb";
+                                    spriteBounds = new Rectangle(0, 0, 20, 20);
+                                    damage = 1;
+                                    break;
+                            }
+
+                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, damage, 1.5f, spriteSheet, spriteBounds);
+                            movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
+                            movement.Direction = Vector2.Normalize(movement.Direction);
+                            game.MovementComponent[id] = movement;
+                        }
+                        
                         ManageAnimation(id);
 
                         break;
 
-                    case AIBehaviorType.Alien:
+                    case AIBehaviorType.CloakingRanged:
                         updateTargeting(id);
 
                         if (!enemyAI.HasTarget)
@@ -164,7 +287,8 @@ namespace DungeonCrawler.Systems
                             {
                                 movement.Direction = Vector2.Zero;
                                 game.MovementComponent[id] = movement;
-                                game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                //game.SkillSystem.EnemyUseSkill(SkillType.SniperShot, id, targetID);
+                                game.SkillSystem.EnemyUseBasicRanged(id, targetID, 1, 1f, "Spritesheets/Skills/Effects/AlienOrb", new Rectangle(0, 0, 20, 20));
                                 game.SkillSystem.EnemyUseSkill(SkillType.Cloak, id, id);
                             }
                         }
@@ -181,13 +305,23 @@ namespace DungeonCrawler.Systems
 
                     case AIBehaviorType.Spider:
                         updateTargeting(id);
+
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
+
                         MoveTowardTarget(id);
                         
                         targetID = enemyAI.TargetID;
                         dist = Vector2.Distance(pos.Center, game.PositionComponent[targetID].Center);
-                        
-                        if(dist < 35)
+
+                        if (dist < 50)
+                        {
                             game.SkillSystem.EnemyUseSkill(SkillType.DamagingPull, id, targetID);
+                            game.SkillSystem.EnemyUseBasicMelee(id, targetID, 1, 1);
+                        }
 
                         ManageAnimation(id);
                         break;
@@ -220,6 +354,15 @@ namespace DungeonCrawler.Systems
             else if (ai.HasTarget == true && game.PlayerInfoComponent[ai.TargetID].Health <= 0)
             {
                 ai.HasTarget = false;
+            }
+
+            if (ai.HasTarget && game.AgroDropComponent.Count() > 0)
+            {
+                foreach (AgroDrop agro in game.AgroDropComponent.All)
+                {
+                    if (agro.PlayerID == ai.TargetID)
+                        ai.HasTarget = false;
+                }
             }
 
             game.EnemyAIComponent[ai.EntityID] = ai;

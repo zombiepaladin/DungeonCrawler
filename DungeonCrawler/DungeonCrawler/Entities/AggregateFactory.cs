@@ -66,6 +66,7 @@ namespace DungeonCrawler.Entities
             WeaponType weaponType;
 
             PlayerSkillInfo skillInfo;
+            PsiOrFatigueRegen psiOrFatigueRegen;
             ActiveSkill active_Skill;
             Sprite sprite;
             SpriteAnimation spriteAnimation;
@@ -217,12 +218,24 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
                     };
                     game.PlayerInfoComponent[entityID] = info;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     break;
                 #endregion
@@ -350,7 +363,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -379,6 +394,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -503,7 +528,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -532,6 +559,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -669,7 +706,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -699,6 +738,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -824,7 +873,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -841,7 +892,7 @@ namespace DungeonCrawler.Entities
                     game.PlayerInfoComponent[entityID] = info;
                     skillInfo = new PlayerSkillInfo()
                     {
-                        Skill1Rank = 1,
+                        Skill1Rank = 10,
                         Skill2Rank = 1,
                         Skill3Rank = 1,
                         Skill4Rank = 1,
@@ -852,6 +903,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                    psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -976,7 +1037,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         Level = 1,
                         Experience = 0,
                         State = PlayerState.Default,
@@ -1005,6 +1068,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -1145,7 +1218,9 @@ namespace DungeonCrawler.Entities
                     info = new PlayerInfo()
                     {
                         Health = 100,
-                        Psi = 100,
+                        MaxHealth = 100,
+                        PsiOrFatigue = 100,
+                        MaxPsiOrFatigue = 100,
                         State = PlayerState.Default,
                         skill1 = Systems.SkillType.ThrownBlades,
                         skill2 = Systems.SkillType.FrenziedAttack,
@@ -1172,6 +1247,16 @@ namespace DungeonCrawler.Entities
                         Skill9Rank = 1,
                     };
                     game.PlayerSkillInfoComponent[entityID] = skillInfo;
+
+                     psiOrFatigueRegen = new PsiOrFatigueRegen()
+                    {
+                        EntityID = entityID,
+                        TargetID = entityID,
+                        AmountPerTick = 2,
+                        TickTime = 1,
+                        CurrentTime = 1,
+                    };
+                    game.PsiOrFatigueRegenComponent[entityID] = psiOrFatigueRegen;
 
                     active_Skill = new ActiveSkill()
                     {
@@ -1358,12 +1443,38 @@ namespace DungeonCrawler.Entities
                 info = new PlayerInfo()
                 {
                     Health = gameSave.health,
-                    Psi = gameSave.psi,
+                    PsiOrFatigue = gameSave.psi,
                     Level = gameSave.level,
                     Experience = gameSave.experience,
                     State = PlayerState.Default,
+                    skill1=gameSave.skill1,
+                    skill2=gameSave.skill2,
+                    skill3 = gameSave.skill3,
+                    skill4=gameSave.skill4,
+                    skill5=gameSave.skill5,
+                    skill6=gameSave.skill6,
+                    skill7=gameSave.skill7,
+                    skill8=gameSave.skill8,
+                    skill9=gameSave.skill9,
                 };
                 game.PlayerInfoComponent[entityID] = info;
+
+                game.ActiveSkillComponent[entityID] = new ActiveSkill()
+                {
+                    activeSkill = info.skill1,
+                };
+                game.PlayerSkillInfoComponent[entityID] = new PlayerSkillInfo()
+                {
+                    Skill1Rank=gameSave.skillInfo.Skill1Rank,
+                    Skill2Rank=gameSave.skillInfo.Skill2Rank,
+                    Skill3Rank=gameSave.skillInfo.Skill3Rank,
+                    Skill4Rank=gameSave.skillInfo.Skill4Rank,
+                    Skill5Rank=gameSave.skillInfo.Skill5Rank,
+                    Skill6Rank=gameSave.skillInfo.Skill6Rank,
+                    Skill7Rank=gameSave.skillInfo.Skill7Rank,
+                    Skill8Rank=gameSave.skillInfo.Skill8Rank,
+                    Skill9Rank=gameSave.skillInfo.Skill9Rank,
+                };
 
                 game.PlayerComponent[entityID] = player;
                 //Create HUD

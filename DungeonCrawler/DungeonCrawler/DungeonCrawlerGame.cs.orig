@@ -618,7 +618,8 @@ namespace DungeonCrawler
                 // Other skills/stats
                 gameSave.stats = game.StatsComponent[entityId];
                 gameSave.health = info.Health;
-                gameSave.psi = info.PsiOrFatigue;
+<<<<<<< HEAD
+                gameSave.psi = info.Psi;
                 gameSave.skill1 = info.skill1;
                 gameSave.skill2 = info.skill2;
                 gameSave.skill3 = info.skill3;
@@ -629,6 +630,9 @@ namespace DungeonCrawler
                 gameSave.skill8 = info.skill8;
                 gameSave.skill9 = info.skill9;
 
+=======
+                gameSave.psi = info.PsiOrFatigue;
+>>>>>>> 3fb62341f03b1f15d57b7a1dd491d25474c85815
                 gameSave.skillInfo = game.PlayerSkillInfoComponent[entityId];
 
                 // Inventory Quantities and Weapon

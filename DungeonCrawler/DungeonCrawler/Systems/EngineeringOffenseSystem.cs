@@ -100,7 +100,7 @@ namespace DungeonCrawler.Systems
                 ExplodingDroid droid = droids[i];
                 if (!(droid.hasEnemy))
                 {
-                    droid.enemyToAttack = _game.EnemyComponent.All.First();
+                    droid.enemyToAttack = findClosestEnemy(droid.EntityID);
                     droid.hasEnemy = true;
                     _game.ExplodingDroidComponent[droid.EntityID] = droid;
 
@@ -108,7 +108,7 @@ namespace DungeonCrawler.Systems
 
                 else
                 {
-                    if (_game.MovementComponent.Contains(droid.EntityID))
+                    if (_game.MovementComponent.Contains(droid.EntityID) && _game.EnemyComponent.Contains(droid.enemyToAttack.EntityID))
                     {
 
                         Vector2 toEnemy = _game.PositionComponent[droid.enemyToAttack.EntityID].Center - droid.position.Center;
@@ -128,6 +128,27 @@ namespace DungeonCrawler.Systems
 
             #endregion
 
+        }
+
+        public Enemy findClosestEnemy(uint droidID)
+        {
+            ExplodingDroid droid = _game.ExplodingDroidComponent[droidID];
+            Enemy closestEnemy = _game.EnemyComponent.All.First();
+            foreach (Enemy enemy in _game.EnemyComponent.All)
+            {
+                Vector2 toEnemy1 = _game.PositionComponent[closestEnemy.EntityID].Center - droid.position.Center;
+                toEnemy1.Normalize();
+
+                Vector2 toEnemy2 = _game.PositionComponent[enemy.EntityID].Center - droid.position.Center;
+                toEnemy2.Normalize();
+
+                if (toEnemy1.Length() < toEnemy2.Length())
+                {
+                    closestEnemy = enemy;
+                }
+
+            }
+            return closestEnemy;
         }
     }
 }

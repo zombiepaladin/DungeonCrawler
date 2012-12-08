@@ -4,6 +4,8 @@
 //
 // Author: Matthew McHaney
 // Modified Samuel Fike and Jiri Malina: Added Alien and organized
+// Modified Samuel Fike and Jiri Malina: Made spiders, changed aliens to robots, added support for default enemies
+// Modified Samuel Fike and Jiri Malina: Added sludge boss/enemies
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.
@@ -59,7 +61,8 @@ namespace DungeonCrawler.Entities
             float moveSpeed = 100;
 
             String spritesheet;
-            Rectangle spriteBounds = new Rectangle(0, 0, 64, 64); ;
+            Rectangle spriteBounds = new Rectangle(0, 0, 64, 64);
+            Color spriteColor = Color.White;
 
             switch (type)
             {
@@ -85,13 +88,69 @@ namespace DungeonCrawler.Entities
                     spriteAnimation.FramesPerSecond = 14;
                     break;
 
-                case EnemyType.Alien:
+                case EnemyType.CloakingRobot:
                     enemy.HurtOnTouch = false;
                     enemy.Health = 150;
-                    spritesheet = "Spritesheets/Enemies/alien";
-                    spriteBounds = new Rectangle(0, 0, 64, 64);
-                    aiBehaviorType = AIBehaviorType.Alien;
+                    spritesheet = "Spritesheets/Enemies/CloakingRobot";
+                    spriteColor = Color.LightCyan;
+                    spriteBounds = new Rectangle(0, 0, 65, 75);
+                    spriteAnimation.FramesPerSecond = 5;
+                    aiBehaviorType = AIBehaviorType.CloakingRanged;
+                    position.Radius = 37;
+                    break;
+                case EnemyType.BasicShootingRobot:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/BasicShootingRobot";
+                    spriteBounds = new Rectangle(0, 0, 65, 75);
+                    spriteAnimation.FramesPerSecond = 5;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
                     position.Radius = 32;
+                    break;
+                case EnemyType.Sludge1:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 50;
+                    spritesheet = "Spritesheets/Enemies/Sludge1";
+                    spriteBounds = new Rectangle(0, 0, 16, 16);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultMelee;
+                    position.Radius = 8;
+                    break;
+                case EnemyType.Sludge2:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 75;
+                    spritesheet = "Spritesheets/Enemies/Sludge2";
+                    spriteBounds = new Rectangle(0, 0, 32, 32);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 16;
+                    break;
+                case EnemyType.Sludge3:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 100;
+                    spritesheet = "Spritesheets/Enemies/Sludge3";
+                    spriteBounds = new Rectangle(0, 0, 64, 64);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 32;
+                    break;
+                case EnemyType.Sludge4:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 125;
+                    spritesheet = "Spritesheets/Enemies/Sludge4";
+                    spriteBounds = new Rectangle(0, 0, 128, 128);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 64;
+                    break;
+                case EnemyType.Sludge5:
+                    enemy.HurtOnTouch = false;
+                    enemy.Health = 150;
+                    spritesheet = "Spritesheets/Enemies/Sludge5";
+                    spriteBounds = new Rectangle(0, 0, 256, 256);
+                    spriteAnimation.FramesPerSecond = 10;
+                    aiBehaviorType = AIBehaviorType.DefaultRanged;
+                    position.Radius = 128;
                     break;
 
                 default:
@@ -113,6 +172,7 @@ namespace DungeonCrawler.Entities
             {
                 EntityID = eid,
                 SpriteSheet = _game.Content.Load<Texture2D>(spritesheet),
+                SpriteColor = spriteColor,
                 SpriteBounds = spriteBounds
             };
 
