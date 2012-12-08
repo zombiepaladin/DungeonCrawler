@@ -219,6 +219,13 @@ namespace DungeonCrawler.Systems
 
                     case AIBehaviorType.Spider:
                         updateTargeting(id);
+
+                        if (!enemyAI.HasTarget)
+                        {
+                            ManageAnimation(id);
+                            continue;
+                        }
+
                         MoveTowardTarget(id);
                         
                         targetID = enemyAI.TargetID;

@@ -116,6 +116,11 @@ Content\Tilesets\tech4.xnb
 Content\Spritesheets\Skills\Effects\Invis.xnb
 Content\Spritesheets\Enemies\BasicShootingRobot.xnb
 Content\Spritesheets\Enemies\CloakingRobot.xnb
+Content\Spritesheets\Enemies\Sludge1.xnb
+Content\Spritesheets\Enemies\Sludge2.xnb
+Content\Spritesheets\Enemies\Sludge3.xnb
+Content\Spritesheets\Enemies\Sludge4.xnb
+Content\Spritesheets\Enemies\Sludge5.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
@@ -131,8 +136,6 @@ Content\Tilemaps\D01F01R04.xnb
 Content\Tilemaps\D01F01R05.xnb
 Content\Tilemaps\D01F01R06.xnb
 Content\Tilemaps\D01F01R07.xnb
-Content\SpriteFonts\Pescadero.xnb
-Content\SpriteFonts\BoldPescadero.xnb
 Content\Tilemaps\D01F01R06solved.xnb
 Content\Tilemaps\D01F02R01.xnb
 Content\Tilemaps\D01F02R02.xnb
@@ -157,3 +160,5 @@ Content\Tilemaps\D01F03R09.xnb
 Content\Tilemaps\D01F03R10.xnb
 Content\Tilemaps\D01F03R11.xnb
 Content\Tilemaps\TestDungeon1compressed.xnb
+Content\SpriteFonts\Pescadero.xnb
+Content\SpriteFonts\BoldPescadero.xnb

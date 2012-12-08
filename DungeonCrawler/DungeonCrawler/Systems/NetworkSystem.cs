@@ -731,46 +731,53 @@ namespace DungeonCrawler.Systems
         /// </summary>
         void SendLocalEntityUpdates()
         {
-            foreach (Local local in game.LocalComponent.All)
+            try //Catch all errors since one keeps happening randomly
             {
-                // Send position
-                if (game.PositionComponent.Contains(local.EntityID))
+                foreach (Local local in game.LocalComponent.All)
                 {
-                    Position position = game.PositionComponent[local.EntityID];
-                    packetWriter.Write(position.EntityID);
-                    packetWriter.Write((short)PacketTypes.Position);
-                    packetWriter.Write(position.Center);
-                    packetWriter.Write(position.Radius);
-                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
-                }
+                    // Send position
+                    if (game.PositionComponent.Contains(local.EntityID))
+                    {
+                        Position position = game.PositionComponent[local.EntityID];
+                        packetWriter.Write(position.EntityID);
+                        packetWriter.Write((short)PacketTypes.Position);
+                        packetWriter.Write(position.Center);
+                        packetWriter.Write(position.Radius);
+                        session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                    }
 
-                // Send sprite
-                if (game.SpriteComponent.Contains(local.EntityID))
-                {
-                    Sprite sprite = game.SpriteComponent[local.EntityID];
-                    packetWriter.Write(sprite.EntityID);
-                    packetWriter.Write((short)PacketTypes.Sprite);
-                    packetWriter.Write(sprite.SpriteSheet.Name);
-                    packetWriter.Write(sprite.SpriteBounds.X);
-                    packetWriter.Write(sprite.SpriteBounds.Y);
-                    packetWriter.Write(sprite.SpriteBounds.Width);
-                    packetWriter.Write(sprite.SpriteBounds.Height);
-                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
-                }
+                    // Send sprite
+                    if (game.SpriteComponent.Contains(local.EntityID))
+                    {
+                        Sprite sprite = game.SpriteComponent[local.EntityID];
+                        packetWriter.Write(sprite.EntityID);
+                        packetWriter.Write((short)PacketTypes.Sprite);
+                        packetWriter.Write(sprite.SpriteSheet.Name);
+                        packetWriter.Write(sprite.SpriteBounds.X);
+                        packetWriter.Write(sprite.SpriteBounds.Y);
+                        packetWriter.Write(sprite.SpriteBounds.Width);
+                        packetWriter.Write(sprite.SpriteBounds.Height);
+                        session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                    }
 
-                // Send movement sprite
-                if (game.MovementSpriteComponent.Contains(local.EntityID))
-                {
-                    MovementSprite sprite = game.MovementSpriteComponent[local.EntityID];
-                    packetWriter.Write(sprite.EntityID);
-                    packetWriter.Write((short)PacketTypes.MovementSprite);
-                    packetWriter.Write(sprite.SpriteSheet.Name);
-                    packetWriter.Write(sprite.SpriteBounds.X);
-                    packetWriter.Write(sprite.SpriteBounds.Y);
-                    packetWriter.Write(sprite.SpriteBounds.Width);
-                    packetWriter.Write(sprite.SpriteBounds.Height);
-                    session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                    // Send movement sprite
+                    if (game.MovementSpriteComponent.Contains(local.EntityID))
+                    {
+                        MovementSprite sprite = game.MovementSpriteComponent[local.EntityID];
+                        packetWriter.Write(sprite.EntityID);
+                        packetWriter.Write((short)PacketTypes.MovementSprite);
+                        packetWriter.Write(sprite.SpriteSheet.Name);
+                        packetWriter.Write(sprite.SpriteBounds.X);
+                        packetWriter.Write(sprite.SpriteBounds.Y);
+                        packetWriter.Write(sprite.SpriteBounds.Width);
+                        packetWriter.Write(sprite.SpriteBounds.Height);
+                        session.LocalGamers[0].SendData(packetWriter, SendDataOptions.InOrder);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+
             }
         }
 
