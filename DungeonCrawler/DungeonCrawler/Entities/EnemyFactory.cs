@@ -5,6 +5,7 @@
 // Author: Matthew McHaney
 // Modified Samuel Fike and Jiri Malina: Added Alien and organized
 // Modified Samuel Fike and Jiri Malina: Made spiders, changed aliens to robots, added support for default enemies
+// Modified Samuel Fike and Jiri Malina: added sludge boss/enemies
 //
 // Kansas State Univerisity CIS 580 Fall 2012 Dungeon Crawler Game
 // Copyright (C) CIS 580 Fall 2012 Class. All rights reserved.

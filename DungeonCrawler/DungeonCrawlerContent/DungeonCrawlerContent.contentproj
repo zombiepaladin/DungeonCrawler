@@ -812,20 +812,30 @@
   <ItemGroup>
     <Compile Include="Tilemaps\D01F01R06solved.tmx">
       <Name>D01F01R06solved</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tilemaps\D01F02R01.tmx">
       <Name>D01F02R01</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R02.tmx">
       <Name>D01F02R02</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R04.tmx">
       <Name>D01F02R04</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\Template.tmx">
       <Name>Template</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -838,59 +848,95 @@
   <ItemGroup>
     <Compile Include="Tilemaps\D01F02R05.tmx">
       <Name>D01F02R05</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Tilemaps\D01F02R06.tmx">
       <Name>D01F02R06</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R07.tmx">
       <Name>D01F02R07</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R08.tmx">
       <Name>D01F02R08</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R09.tmx">
       <Name>D01F02R09</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R10.tmx">
       <Name>D01F02R10</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F02R11.tmx">
       <Name>D01F02R11</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R01.tmx">
       <Name>D01F03R01</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R02.tmx">
       <Name>D01F03R02</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R03.tmx">
       <Name>D01F03R03</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R04.tmx">
       <Name>D01F03R04</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R05.tmx">
       <Name>D01F03R05</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R06.tmx">
       <Name>D01F03R06</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R07.tmx">
       <Name>D01F03R07</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R08.tmx">
       <Name>D01F03R08</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R09.tmx">
       <Name>D01F03R09</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R10.tmx">
       <Name>D01F03R10</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
     <Compile Include="Tilemaps\D01F03R11.tmx">
       <Name>D01F03R11</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -939,6 +985,13 @@
       <Name>Sludge5</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tilemaps\TestDungeon1compressed.tmx">
+      <Name>TestDungeon1compressed</Name>
+      <Importer>TmxImporter</Importer>
+      <Processor>TilemapProcessor</Processor>
     </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
