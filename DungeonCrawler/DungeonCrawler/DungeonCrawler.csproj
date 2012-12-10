@@ -216,6 +216,7 @@
     <Compile Include="Systems\RenderingSystem.cs" />
     <Compile Include="Systems\RoomChangingSystem.cs" />
     <Compile Include="Systems\SkillSystem.cs" />
+    <Compile Include="Systems\SplashSystem.cs" />
     <Compile Include="Systems\SpriteAnimationSystem.cs" />
     <Compile Include="Systems\TextSystem.cs" />
     <Compile Include="Systems\EngineeringOffenseSystem.cs" />

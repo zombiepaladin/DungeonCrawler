@@ -38,6 +38,7 @@ using Microsoft.Xna.Framework.Storage;
 using DungeonCrawler.Components;
 using DungeonCrawler.Systems;
 using DungeonCrawler.Entities;
+using DungeonCrawler.SplashScreens;
 #endregion
 
 namespace DungeonCrawler
@@ -227,6 +228,7 @@ namespace DungeonCrawler
         public GarbagemanSystem GarbagemanSystem;
         public TextSystem TextSystem;
         public HUDSystem HUDSystem;
+        public SplashSystem SplashSystem;
 
         #endregion
 
@@ -365,6 +367,7 @@ namespace DungeonCrawler
             TextSystem = new TextSystem(this);
             EngineeringOffenseSystem = new EngineeringOffenseSystem(this);
             HUDSystem = new HUDSystem(this);
+            SplashSystem = new SplashSystem(this);
 
             InputHelper.Load();
             HUDSystem.LoadContent();
@@ -409,7 +412,7 @@ namespace DungeonCrawler
             switch (GameState)
             {
                 case GameState.SplashScreen:
-                    // TODO: Update splash screens
+                    SplashSystem.Update(elapsedTime);
                     break;
 
                 case GameState.SignIn:
@@ -424,7 +427,8 @@ namespace DungeonCrawler
                     }
                     else
                     {
-                        GameState = GameState.CharacterSelection;
+                        GameState = GameState.SplashScreen;
+                        SplashSystem.Load(SplashSystem.SplashType.GameStart);
                         InputHelper.EnableAll();
                         if (!ContinueNewGameScreen.isConnected)
                         {
@@ -456,6 +460,15 @@ namespace DungeonCrawler
 
                 case GameState.Gameplay:
                     // Update game systems
+#if DEBUG
+                    if(InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.OemTilde))
+                    {
+                        GameState = DungeonCrawler.GameState.SplashScreen;
+                        SplashSystem.Load(Systems.SplashSystem.SplashType.Credits);
+                        return;
+                    }
+#endif
+
                     InputSystem.Update(elapsedTime);
                     NetworkSystem.Update(elapsedTime);
                     MovementSystem.Update(elapsedTime);
@@ -500,7 +513,11 @@ namespace DungeonCrawler
             if (GameState == GameState.SignIn)
                 return;
 
-            if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
+            if (GameState == GameState.SplashScreen)
+            {
+                SplashSystem.Draw(elapsedTime);
+            }
+            else if (GameState != GameState.CharacterSelection && GameState != GameState.RoomChange)
             {
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);

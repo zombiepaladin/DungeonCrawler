@@ -2,23 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace DungeonCrawler.SplashScreens
 {
     public class GameOver : SplashScreen
     {
-        public GameOver()
+        SpriteFont _font;
+        Vector2 _position;
+
+        public GameOver(DungeonCrawlerGame game)
         {
+            _font = game.Content.Load<SpriteFont>("SpriteFonts/BoldPescadero");
+            _position = new Vector2(50);
         }
 
         public override void Update(float elapsedTime)
         {
-            throw new NotImplementedException();
         }
 
-        public override void Draw(float elapsedTime)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            spriteBatch.DrawString(_font, "GAME OVER", _position, Color.White);
         }
     }
 }
