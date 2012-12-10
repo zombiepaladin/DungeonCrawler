@@ -522,6 +522,7 @@ namespace DungeonCrawler
                 LevelManager.Draw(elapsedTime);
                 NetworkSystem.Draw(elapsedTime);
                 RenderingSystem.Draw(elapsedTime);
+                HUDSystem.Draw(elapsedTime);
                 QuestLogSystem.Draw();
             }
             else

@@ -82,6 +82,8 @@ namespace DungeonCrawler.Systems
         private ContentManager _content;
         private PlayerComponent _playerComponent;
 
+        private SpriteBatch spriteBatch;
+
         private HUDSprite _p1;
         private HUDSprite _p2;
         private HUDSprite _p3;
@@ -98,6 +100,7 @@ namespace DungeonCrawler.Systems
             _game = game;
             _content = game.Content;
             _playerComponent = game.PlayerComponent;
+            spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
             _p1 = new HUDSprite { Show = false };
             _p2 = new HUDSprite { Show = false };
@@ -186,34 +189,34 @@ namespace DungeonCrawler.Systems
                     break;
                 case PlayerIndex.Two:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_two");
-                    hud.HudBgPosition = new Vector2(1024, 0);
-                    hud.AvatarPosition = new Vector2(940, 20);
-                    hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 4);
-                    hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 26);
-                    hud.ExpPosition = new Vector2(925 - EXP_BAR_MAX_BOUNDS, 48);
-                    hud.LevelPosition = new Vector2(940, 84);
+                    hud.HudBgPosition = new Vector2(1010, 0);
+                    hud.AvatarPosition = new Vector2(1195, 20);
+                    hud.HealthPosition = new Vector2(1013, 4);
+                    hud.PsiPosition = new Vector2(1013, 26);
+                    hud.ExpPosition = new Vector2(1013, 48);
+                    hud.LevelPosition = new Vector2(1195, 84);
 
                     _p2 = hud;
                     break;
                 case PlayerIndex.Three:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_three");
-                    hud.HudBgPosition = new Vector2(0, 656);
-                    hud.AvatarPosition = new Vector2(20, 572);
-                    hud.HealthPosition = new Vector2(109, 635);
-                    hud.PsiPosition = new Vector2(109, 613);
-                    hud.ExpPosition = new Vector2(109, 591);
-                    hud.LevelPosition = new Vector2(20, 508);
+                    hud.HudBgPosition = new Vector2(0, 577);
+                    hud.AvatarPosition = new Vector2(20, 615);
+                    hud.HealthPosition = new Vector2(109, 700);
+                    hud.PsiPosition = new Vector2(109, 678);
+                    hud.ExpPosition = new Vector2(109, 667);
+                    hud.LevelPosition = new Vector2(20, 679);
 
                     _p3 = hud;
                     break;
                 case PlayerIndex.Four:
                     hud.HudBgSpriteSheet = _content.Load<Texture2D>("Spritesheets/HUD/hud_four");
-                    hud.HudBgPosition = new Vector2(1024, 656);
-                    hud.AvatarPosition = new Vector2(940, 572);
-                    hud.HealthPosition = new Vector2(925 - HEALTH_BAR_MAX_BOUNDS, 635);
-                    hud.PsiPosition = new Vector2(925 - PSI_BAR_MAX_BOUNDS, 613);
-                    hud.ExpPosition = new Vector2(109, 591);
-                    hud.LevelPosition = new Vector2(940, 508);
+                    hud.HudBgPosition = new Vector2(1010, 577);
+                    hud.AvatarPosition = new Vector2(1195, 615);
+                    hud.HealthPosition = new Vector2(1013, 700);
+                    hud.PsiPosition = new Vector2(1013, 678);
+                    hud.ExpPosition = new Vector2(1013, 667);
+                    hud.LevelPosition = new Vector2(1195, 679);
 
                     _p4 = hud;
                     break;
@@ -296,8 +299,10 @@ namespace DungeonCrawler.Systems
         /// </summary>
         /// <param name="elapsedTime">Time since last call.</param>
         /// <param name="spriteBatch">SpriteBatch to draw to.</param>
-        public void Draw(float elapsedTime, SpriteBatch spriteBatch)
+        public void Draw(float elapsedTime)
         {
+            spriteBatch.Begin();
+
             if (_p1.Show)
                 drawHud(_p1, elapsedTime, spriteBatch);
             if (_p2.Show)
@@ -306,6 +311,8 @@ namespace DungeonCrawler.Systems
                 drawHud(_p3, elapsedTime, spriteBatch);
             if (_p4.Show)
                 drawHud(_p4, elapsedTime, spriteBatch);
+
+            spriteBatch.End();
         }
 
         //Handles drawing the individual HUDs.
@@ -374,6 +381,8 @@ namespace DungeonCrawler.Systems
 
             //Level
             spriteBatch.DrawString(_font, hud.Level, hud.LevelPosition, Color.Black);
+
+            
         }
     }
 }

@@ -223,8 +223,6 @@ namespace DungeonCrawler.Systems
                 }
             }*/
 
-            game.HUDSystem.Draw(elapsedTime, spriteBatch);
-
             /*
             foreach (InventorySprite sprite in game.InventorySpriteComponent.All)
             {

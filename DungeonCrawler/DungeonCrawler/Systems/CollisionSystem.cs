@@ -942,7 +942,7 @@ namespace DungeonCrawler.Systems
             //Find the direction, set to 1,0 if nothing, Normalize,
             // Find the radii - distance, divide by 2, set away
 
-            HandleDynamicDynamic(p, p_2);
+            //HandleDynamicDynamic(p, p_2);
         }
 
         /// <summary>
