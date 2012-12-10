@@ -28,7 +28,7 @@ namespace DungeonCrawler.SplashScreens
             "Studio Staff-Programmers/Designers\n\nAdam Steen\nBen Jazen\nDaniel Rymph",
             "Artwork\n\n Napoleon - Globe_0.png \n Tiled Map Editor \nDaniel Cook \n ",
             "Artwork\n\nAkaiSeigi - Andriod\n Rajawali - Robo Tank, Robo Butler, Avadan Sidewiew Mecha",
-            "Arkwork\n\nRetired-Pine - Slime\n",
+            "Arkwork\n\nRetired-Pine - Slime\nknittel - blood\njohndh - Projectiles\n",
             "Developed with Microsoft's \nXNA framwork",
             "Thank you for Playing\n\nPress enter to play again",
         };

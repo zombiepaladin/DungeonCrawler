@@ -51,7 +51,10 @@ namespace DungeonCrawler.Systems
             {
                 if (_screen is GameStart)
                 {
-                    DungeonCrawlerGame.game.GameState = GameState.CharacterSelection;
+                    if (DungeonCrawlerGame.game.PlayerComponent.All.Count() > 0)
+                        DungeonCrawlerGame.game.GameState = GameState.Gameplay;
+                    else
+                        DungeonCrawlerGame.game.GameState = GameState.CharacterSelection;
                 }
                 else
                 {
