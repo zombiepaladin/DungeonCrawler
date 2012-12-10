@@ -243,7 +243,7 @@ namespace DungeonCrawler.Systems
                                     break;
                             }
 
-                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, damage, 1.5f, spriteSheet, spriteBounds);
+                            game.SkillSystem.EnemyUseBasicRanged(id, targetID, damage, 3f, spriteSheet, spriteBounds);
                             movement.Direction = new Vector2(rand.Next(20) - 10, rand.Next(20) - 10);
                             movement.Direction = Vector2.Normalize(movement.Direction);
                             game.MovementComponent[id] = movement;
