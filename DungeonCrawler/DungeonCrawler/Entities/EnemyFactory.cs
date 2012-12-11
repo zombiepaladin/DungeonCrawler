@@ -90,7 +90,7 @@ namespace DungeonCrawler.Entities
 
                 case EnemyType.CloakingRobot:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 150;
+                    enemy.Health = 50;
                     spritesheet = "Spritesheets/Enemies/CloakingRobot";
                     spriteColor = Color.LightCyan;
                     spriteBounds = new Rectangle(0, 0, 65, 75);
@@ -100,7 +100,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.BasicShootingRobot:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 150;
+                    enemy.Health = 50;
                     spritesheet = "Spritesheets/Enemies/BasicShootingRobot";
                     spriteBounds = new Rectangle(0, 0, 65, 75);
                     spriteAnimation.FramesPerSecond = 5;
@@ -109,7 +109,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.Sludge1:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 50;
+                    enemy.Health = 20;
                     spritesheet = "Spritesheets/Enemies/Sludge1";
                     spriteBounds = new Rectangle(0, 0, 16, 16);
                     spriteAnimation.FramesPerSecond = 10;
@@ -118,7 +118,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.Sludge2:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 75;
+                    enemy.Health = 30;
                     spritesheet = "Spritesheets/Enemies/Sludge2";
                     spriteBounds = new Rectangle(0, 0, 32, 32);
                     spriteAnimation.FramesPerSecond = 10;
@@ -127,7 +127,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.Sludge3:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 100;
+                    enemy.Health = 40;
                     spritesheet = "Spritesheets/Enemies/Sludge3";
                     spriteBounds = new Rectangle(0, 0, 64, 64);
                     spriteAnimation.FramesPerSecond = 10;
@@ -136,7 +136,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.Sludge4:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 125;
+                    enemy.Health = 50;
                     spritesheet = "Spritesheets/Enemies/Sludge4";
                     spriteBounds = new Rectangle(0, 0, 128, 128);
                     spriteAnimation.FramesPerSecond = 10;
@@ -145,7 +145,7 @@ namespace DungeonCrawler.Entities
                     break;
                 case EnemyType.Sludge5:
                     enemy.HurtOnTouch = false;
-                    enemy.Health = 150;
+                    enemy.Health = 60;
                     spritesheet = "Spritesheets/Enemies/Sludge5";
                     spriteBounds = new Rectangle(0, 0, 256, 256);
                     spriteAnimation.FramesPerSecond = 10;
