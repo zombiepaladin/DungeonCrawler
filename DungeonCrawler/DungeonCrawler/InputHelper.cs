@@ -16,6 +16,29 @@ using Microsoft.Xna.Framework.Input;
 
 namespace DungeonCrawler
 {
+    public static class Inputs
+    {
+        public const string START = "Start";
+        public const string SELECT = "Select";
+        public const string ENTER = "Enter";
+        public const string UP = "Up";
+        public const string DOWN = "Down";
+        public const string LEFT = "Left";
+        public const string RIGHT = "Right";
+        public const string TRIGGER_WEAPON = "TriggerWeapon";
+        public const string TRIGGER_SKILL = "TriggerSkill";
+        public const string TRIGGER_ITEM = "TriggerItem";
+        public const string SWITCH_WEAPON = "SwitchWeapon";
+        public const string SELECT_SKILL_1 = "SelectSkill1";
+        public const string SELECT_SKILL_2 = "SelectSkill2";
+        public const string SELECT_SKILL_3 = "SelectSkill3";
+        public const string SELECT_SKILL_4 = "SelectSkill4";
+        public const string SELECT_ITEM_1 = "SelectItem1";
+        public const string SELECT_ITEM_2 = "SelectItem2";
+        public const string SELECT_ITEM_3 = "SelectItem3";
+        public const string SELECT_ITEM_4 = "SelectItem4";
+    }
+    
     /// <summary>
     /// Manages user input.
     /// </summary>
@@ -118,6 +141,8 @@ namespace DungeonCrawler
 #elif XBOX
             initGamePad();
 #endif
+
+            loadMappings();
         }
 
         /// <summary>
@@ -133,6 +158,11 @@ namespace DungeonCrawler
 #elif XBOX
             getGamePadState();
 #endif
+        }
+        
+        private void loadMappings()
+        {
+            //Set key mappings here
         }
 
         /// <summary>
