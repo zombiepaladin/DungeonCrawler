@@ -13,6 +13,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DungeonCrawler
 {
@@ -20,6 +21,7 @@ namespace DungeonCrawler
     {
         public const string START = "Start";
         public const string SELECT = "Select";
+        public const string MENU = "Menu";
         public const string ENTER = "Enter";
         public const string UP = "Up";
         public const string DOWN = "Down";
@@ -27,16 +29,16 @@ namespace DungeonCrawler
         public const string RIGHT = "Right";
         public const string TRIGGER_WEAPON = "TriggerWeapon";
         public const string TRIGGER_SKILL = "TriggerSkill";
-        public const string TRIGGER_ITEM = "TriggerItem";
-        public const string SWITCH_WEAPON = "SwitchWeapon";
-        public const string SELECT_SKILL_1 = "SelectSkill1";
-        public const string SELECT_SKILL_2 = "SelectSkill2";
-        public const string SELECT_SKILL_3 = "SelectSkill3";
-        public const string SELECT_SKILL_4 = "SelectSkill4";
-        public const string SELECT_ITEM_1 = "SelectItem1";
-        public const string SELECT_ITEM_2 = "SelectItem2";
-        public const string SELECT_ITEM_3 = "SelectItem3";
-        public const string SELECT_ITEM_4 = "SelectItem4";
+        public const string CYCLE_WEAPON = "CycleWeapon";
+        public const string CYCLE_SKILL = "CycleSkill";
+        public const string SELECT_HOTKEY_1 = "SelectHotKey1";
+        public const string SELECT_HOTKEY_2 = "SelectHotKey2";
+        public const string SELECT_HOTKEY_3 = "SelectHotKey3";
+        public const string SELECT_HOTKEY_4 = "SelectHotKey4";
+        public const string TRIGGER_ITEM_1 = "TriggerItem1";
+        public const string TRIGGER_ITEM_2 = "TriggerItem2";
+        public const string TRIGGER_ITEM_3 = "TriggerItem3";
+        public const string TRIGGER_ITEM_4 = "TriggerItem4";
     }
     
     /// <summary>
@@ -52,12 +54,17 @@ namespace DungeonCrawler
         /// <summary>
         /// Load inputs for up to four players.
         /// </summary>
-        public static void Load()
+        /// <param name="numPlayers">How many players to load.</param>
+        public static void Load(int numPlayers)
         {
-            _inputs.Add(PlayerIndex.One, new InputHelper(PlayerIndex.One));
-            _inputs.Add(PlayerIndex.Two, new InputHelper(PlayerIndex.Two));
-            _inputs.Add(PlayerIndex.Three, new InputHelper(PlayerIndex.Three));
-            _inputs.Add(PlayerIndex.Four, new InputHelper(PlayerIndex.Four));
+            if(numPlayers < 1 || numPlayers > 4)
+                throw new ArgumentOutOfRangeException("numPlayers must be between 1 and 4.");
+
+            for (int i = 1; i <= numPlayers; i++)
+            {
+                PlayerIndex index = (PlayerIndex)(i);
+                _inputs.Add(index, new InputHelper(index));
+            }
         }
 
         /// <summary>
@@ -77,10 +84,10 @@ namespace DungeonCrawler
         /// </summary>
         public static void DisableAll()
         {
-            _inputs[PlayerIndex.One]._disabled = true;
-            _inputs[PlayerIndex.Two]._disabled = true;
-            _inputs[PlayerIndex.Three]._disabled = true;
-            _inputs[PlayerIndex.Four]._disabled = true;
+            foreach (InputHelper input in _inputs.Values)
+            {
+                input._disabled = true;
+            }
         }
 
         /// <summary>
@@ -97,10 +104,10 @@ namespace DungeonCrawler
         /// </summary>
         public static void EnableAll()
         {
-            _inputs[PlayerIndex.One]._disabled = false;
-            _inputs[PlayerIndex.Two]._disabled = false;
-            _inputs[PlayerIndex.Three]._disabled = false;
-            _inputs[PlayerIndex.Four]._disabled = false;
+            foreach (InputHelper input in _inputs.Values)
+            {
+                input._disabled = false;
+            }
         }
 
         /// <summary>
@@ -162,21 +169,78 @@ namespace DungeonCrawler
         
         private void loadMappings()
         {
-            //Set key mappings here
+#if WINDOWS
+            mapKey(Inputs.CYCLE_SKILL, Keys.Q);
+            mapKey(Inputs.CYCLE_WEAPON, Keys.E);
+            mapKey(Inputs.DOWN, Keys.S);
+            mapKey(Inputs.ENTER, Keys.Enter);
+            mapKey(Inputs.LEFT, Keys.A);
+            mapKey(Inputs.RIGHT, Keys.D);
+            mapKey(Inputs.MENU, Keys.Escape);
+            mapKey(Inputs.SELECT_HOTKEY_1, Keys.D1);
+            mapKey(Inputs.SELECT_HOTKEY_2, Keys.D2);
+            mapKey(Inputs.SELECT_HOTKEY_3, Keys.D3);
+            mapKey(Inputs.SELECT_HOTKEY_4, Keys.D4);
+            mapKey(Inputs.START, Keys.Enter);
+            mapKey(Inputs.TRIGGER_ITEM_1, Keys.Up);
+            mapKey(Inputs.TRIGGER_ITEM_2, Keys.Right);
+            mapKey(Inputs.TRIGGER_ITEM_3, Keys.Down);
+            mapKey(Inputs.TRIGGER_ITEM_4, Keys.Left);
+            mapKey(Inputs.TRIGGER_SKILL, Keys.Space);
+            mapKey(Inputs.TRIGGER_WEAPON, Keys.Enter);
+            mapKey(Inputs.UP, Keys.W);
+#endif
+#if WINDOWS || XBOX
+            mapButton(Inputs.DOWN, Buttons.LeftThumbstickDown);
+            mapButton(Inputs.ENTER, Buttons.A);
+            mapButton(Inputs.LEFT, Buttons.LeftThumbstickLeft);
+            mapButton(Inputs.RIGHT, Buttons.LeftThumbstickRight);
+            mapButton(Inputs.MENU, Buttons.Start);
+            mapButton(Inputs.TRIGGER_ITEM_1, Buttons.DPadUp);
+            mapButton(Inputs.TRIGGER_ITEM_2, Buttons.DPadRight);
+            mapButton(Inputs.TRIGGER_ITEM_3, Buttons.DPadDown);
+            mapButton(Inputs.TRIGGER_ITEM_4, Buttons.DPadLeft);
+            mapButton(Inputs.SELECT_HOTKEY_1, Buttons.Y);
+            mapButton(Inputs.SELECT_HOTKEY_2, Buttons.B);
+            mapButton(Inputs.SELECT_HOTKEY_3, Buttons.A);
+            mapButton(Inputs.SELECT_HOTKEY_4, Buttons.X);
+            mapButton(Inputs.START, Buttons.Start);
+            mapButton(Inputs.SELECT, Buttons.Back);
+            mapButton(Inputs.CYCLE_WEAPON, Buttons.RightShoulder);
+            mapButton(Inputs.TRIGGER_SKILL, Buttons.LeftTrigger);
+            mapButton(Inputs.TRIGGER_WEAPON, Buttons.RightTrigger);
+            mapButton(Inputs.UP, Buttons.LeftThumbstickUp);
+            mapButton(Inputs.CYCLE_SKILL, Buttons.LeftShoulder);
+#endif
         }
+
+        #region Public Members
 
         /// <summary>
         /// Maps the given key and button to the name.
         /// </summary>
         /// <param name="name">Name of mapping</param>
         /// <param name="key">Keyboard key to map.</param>
-        /// <param name="button">Xbox controller key to map.</param>
         public void MapInput(string name, Keys key, Buttons button)
         {
 #if WINDOWS
             mapKey(name, key);
             mapButton(name, button);
 #elif XBOX
+            mapButton(name, button);
+#endif
+        }
+
+        public void MapInput(string name, Keys key)
+        {
+#if WINDOWS
+            mapKey(name, key);
+#endif
+        }
+
+        public void MapInput(string name, Buttons button)
+        {
+#if WINDOWS || XBOX
             mapButton(name, button);
 #endif
         }
@@ -247,8 +311,11 @@ namespace DungeonCrawler
         {
             if (_disabled)
                 return false;
-            
+#if WINDOWS
             return isKeyPressed(key);
+#else 
+            return false;
+#endif
         }
 
         /// <summary>
@@ -266,7 +333,7 @@ namespace DungeonCrawler
                 return isButtonPressed(name);
             return isKeyPressed(name);
 #elif XBOX
-            return isBUtton(name);
+            return isButtonPressed(name);
 #endif
         }
 
@@ -317,8 +384,14 @@ namespace DungeonCrawler
         /// <returns></returns>
         public bool IsGamePadConnected()
         {
+#if WINDOWS || XBOX
             return _curGamePadState.IsConnected;
+#else
+            return false;
+#endif
         }
+
+        #endregion
 
         //Keyboard handlers
         #region KEYBOARD

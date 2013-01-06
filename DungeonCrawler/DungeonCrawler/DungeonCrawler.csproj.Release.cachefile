@@ -121,6 +121,11 @@ Content\Spritesheets\Enemies\Sludge2.xnb
 Content\Spritesheets\Enemies\Sludge3.xnb
 Content\Spritesheets\Enemies\Sludge4.xnb
 Content\Spritesheets\Enemies\Sludge5.xnb
+Content\Spritesheets\blood.xnb
+Content\Spritesheets\Skills\Effects\SludgeShotBig.xnb
+Content\Spritesheets\Skills\Effects\SludgeShotSmall.xnb
+Content\Spritesheets\GameStart.xnb
+Content\Spritesheets\TitleScreen.xnb
 Content\Sounds\MenuSelect.xnb
 Content\Audio\BClick_Menu.xnb
 Content\Sounds\8bit_gunloop_explosion.xnb
