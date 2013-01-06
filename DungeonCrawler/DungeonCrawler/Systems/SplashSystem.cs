@@ -47,7 +47,7 @@ namespace DungeonCrawler.Systems
         public void Update(float elapsedTime)
         {
             _screen.Update(elapsedTime);
-            if (_screen.Done && InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Enter, Buttons.Start))
+            if (_screen.Done && InputHelper.GetInput(PlayerIndex.One).IsPressed(Inputs.START))
             {
                 if (_screen is GameStart)
                 {

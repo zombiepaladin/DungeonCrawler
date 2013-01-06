@@ -23,10 +23,12 @@ namespace DungeonCrawler
         public const string SELECT = "Select";
         public const string MENU = "Menu";
         public const string ENTER = "Enter";
+        public const string BACK = "Back";
         public const string UP = "Up";
         public const string DOWN = "Down";
         public const string LEFT = "Left";
         public const string RIGHT = "Right";
+        public const string DISPLAY_QUEST = "DisplayQuest";
         public const string TRIGGER_WEAPON = "TriggerWeapon";
         public const string TRIGGER_SKILL = "TriggerSkill";
         public const string CYCLE_WEAPON = "CycleWeapon";
@@ -121,6 +123,8 @@ namespace DungeonCrawler
 
         #endregion
 
+        #region Private Members
+
         //Conditional variables
 #if WINDOWS 
         private KeyboardState _curKeyboardState;
@@ -170,49 +174,56 @@ namespace DungeonCrawler
         private void loadMappings()
         {
 #if WINDOWS
-            mapKey(Inputs.CYCLE_SKILL, Keys.Q);
-            mapKey(Inputs.CYCLE_WEAPON, Keys.E);
-            mapKey(Inputs.DOWN, Keys.S);
-            mapKey(Inputs.ENTER, Keys.Enter);
-            mapKey(Inputs.LEFT, Keys.A);
-            mapKey(Inputs.RIGHT, Keys.D);
             mapKey(Inputs.MENU, Keys.Escape);
+            mapKey(Inputs.START, Keys.Enter);
+            mapKey(Inputs.SELECT, Keys.Escape);
+            mapKey(Inputs.ENTER, Keys.Enter);
+            mapKey(Inputs.BACK, Keys.Escape);
+            mapKey(Inputs.UP, Keys.W);
+            mapKey(Inputs.RIGHT, Keys.D);
+            mapKey(Inputs.DOWN, Keys.S);
+            mapKey(Inputs.LEFT, Keys.A);
+            mapKey(Inputs.DISPLAY_QUEST, Keys.L);
+            mapKey(Inputs.TRIGGER_WEAPON, Keys.Enter);
+            mapKey(Inputs.CYCLE_WEAPON, Keys.E);
+            mapKey(Inputs.TRIGGER_SKILL, Keys.Space);
+            mapKey(Inputs.CYCLE_SKILL, Keys.Q);
             mapKey(Inputs.SELECT_HOTKEY_1, Keys.D1);
             mapKey(Inputs.SELECT_HOTKEY_2, Keys.D2);
             mapKey(Inputs.SELECT_HOTKEY_3, Keys.D3);
             mapKey(Inputs.SELECT_HOTKEY_4, Keys.D4);
-            mapKey(Inputs.START, Keys.Enter);
             mapKey(Inputs.TRIGGER_ITEM_1, Keys.Up);
             mapKey(Inputs.TRIGGER_ITEM_2, Keys.Right);
             mapKey(Inputs.TRIGGER_ITEM_3, Keys.Down);
             mapKey(Inputs.TRIGGER_ITEM_4, Keys.Left);
-            mapKey(Inputs.TRIGGER_SKILL, Keys.Space);
-            mapKey(Inputs.TRIGGER_WEAPON, Keys.Enter);
-            mapKey(Inputs.UP, Keys.W);
 #endif
 #if WINDOWS || XBOX
-            mapButton(Inputs.DOWN, Buttons.LeftThumbstickDown);
-            mapButton(Inputs.ENTER, Buttons.A);
-            mapButton(Inputs.LEFT, Buttons.LeftThumbstickLeft);
-            mapButton(Inputs.RIGHT, Buttons.LeftThumbstickRight);
             mapButton(Inputs.MENU, Buttons.Start);
-            mapButton(Inputs.TRIGGER_ITEM_1, Buttons.DPadUp);
-            mapButton(Inputs.TRIGGER_ITEM_2, Buttons.DPadRight);
-            mapButton(Inputs.TRIGGER_ITEM_3, Buttons.DPadDown);
-            mapButton(Inputs.TRIGGER_ITEM_4, Buttons.DPadLeft);
+            mapButton(Inputs.START, Buttons.Start);
+            mapButton(Inputs.SELECT, Buttons.Back);
+            mapButton(Inputs.ENTER, Buttons.A);
+            mapButton(Inputs.BACK, Buttons.B);
+            mapButton(Inputs.UP, Buttons.LeftThumbstickUp);
+            mapButton(Inputs.RIGHT, Buttons.LeftThumbstickRight);
+            mapButton(Inputs.DOWN, Buttons.LeftThumbstickDown);
+            mapButton(Inputs.LEFT, Buttons.LeftThumbstickLeft);
+            mapButton(Inputs.DISPLAY_QUEST, Buttons.RightStick);
+            mapButton(Inputs.TRIGGER_WEAPON, Buttons.RightTrigger);
+            mapButton(Inputs.CYCLE_WEAPON, Buttons.RightShoulder);
+            mapButton(Inputs.TRIGGER_SKILL, Buttons.LeftTrigger);
+            mapButton(Inputs.CYCLE_SKILL, Buttons.LeftShoulder);
             mapButton(Inputs.SELECT_HOTKEY_1, Buttons.Y);
             mapButton(Inputs.SELECT_HOTKEY_2, Buttons.B);
             mapButton(Inputs.SELECT_HOTKEY_3, Buttons.A);
             mapButton(Inputs.SELECT_HOTKEY_4, Buttons.X);
-            mapButton(Inputs.START, Buttons.Start);
-            mapButton(Inputs.SELECT, Buttons.Back);
-            mapButton(Inputs.CYCLE_WEAPON, Buttons.RightShoulder);
-            mapButton(Inputs.TRIGGER_SKILL, Buttons.LeftTrigger);
-            mapButton(Inputs.TRIGGER_WEAPON, Buttons.RightTrigger);
-            mapButton(Inputs.UP, Buttons.LeftThumbstickUp);
-            mapButton(Inputs.CYCLE_SKILL, Buttons.LeftShoulder);
+            mapButton(Inputs.TRIGGER_ITEM_1, Buttons.DPadUp);
+            mapButton(Inputs.TRIGGER_ITEM_2, Buttons.DPadRight);
+            mapButton(Inputs.TRIGGER_ITEM_3, Buttons.DPadDown);
+            mapButton(Inputs.TRIGGER_ITEM_4, Buttons.DPadLeft);
 #endif
         }
+
+        #endregion
 
         #region Public Members
 
@@ -221,6 +232,7 @@ namespace DungeonCrawler
         /// </summary>
         /// <param name="name">Name of mapping</param>
         /// <param name="key">Keyboard key to map.</param>
+        /// <param name="button">Button to map</param>
         public void MapInput(string name, Keys key, Buttons button)
         {
 #if WINDOWS
@@ -231,6 +243,11 @@ namespace DungeonCrawler
 #endif
         }
 
+        /// <summary>
+        /// Maps the given key to the name.
+        /// </summary>
+        /// <param name="name">Name of mapping</param>
+        /// <param name="key">Keyboard key to map.</param>
         public void MapInput(string name, Keys key)
         {
 #if WINDOWS
@@ -238,6 +255,11 @@ namespace DungeonCrawler
 #endif
         }
 
+        /// <summary>
+        /// Maps the given button to the name.
+        /// </summary>
+        /// <param name="name">Name of mapping</param>
+        /// <param name="button">Button to map</param>
         public void MapInput(string name, Buttons button)
         {
 #if WINDOWS || XBOX
@@ -361,8 +383,7 @@ namespace DungeonCrawler
         /// <summary>
         /// Returns true if the given key or button is held.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="button"></param>
+        /// <param name="name">Name of mapped key/button.</param>
         /// <returns></returns>
         public bool IsHeld(string name)
         {
@@ -400,11 +421,6 @@ namespace DungeonCrawler
         {
             _curKeyboardState = Keyboard.GetState(_pIndex);
             _mappedKeys = new Dictionary<string, Keys>();
-        }
-
-        public void SetOldKeyboardState()
-        {
-            _oldKeyboardState = _curKeyboardState;
         }
 
         private void getKeyboardState()

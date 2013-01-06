@@ -163,7 +163,7 @@ namespace DungeonCrawler.Systems
                PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
               
 
-               if (state.IsPressed(Keys.Enter, Buttons.LeftTrigger))
+               if (state.IsPressed(Inputs.TRIGGER_WEAPON))
                {
                    info.State = PlayerState.Attacking;
                }
@@ -174,18 +174,18 @@ namespace DungeonCrawler.Systems
 
                 _game.PlayerInfoComponent[player.EntityID] = info;
 
-                if (state.IsPressed(Keys.L, Buttons.RightStick) && !state.IsHeld(Keys.L, Buttons.RightStick)) _game.QuestLogSystem.displayLog = !_game.QuestLogSystem.displayLog;
+                if (state.IsPressed(Inputs.DISPLAY_QUEST) && !state.IsHeld(Inputs.DISPLAY_QUEST)) _game.QuestLogSystem.displayLog = !_game.QuestLogSystem.displayLog;
 
                 //set up a system to switch skills by using the 1-9 keys
-                if (state.IsPressed(Keys.D1, Buttons.A))
+                if (state.IsPressed(Inputs.SELECT_HOTKEY_1))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill1, player.EntityID);
-                else if (state.IsPressed(Keys.D2, Buttons.B))
+                else if (state.IsPressed(Inputs.SELECT_HOTKEY_2))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill2, player.EntityID);
-                else if (state.IsPressed(Keys.D3, Buttons.X))
+                else if (state.IsPressed(Inputs.SELECT_HOTKEY_3))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill3, player.EntityID);
-                else if (state.IsPressed(Keys.D4, Buttons.Y))
+                else if (state.IsPressed(Inputs.SELECT_HOTKEY_4))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill4, player.EntityID);
-                else if (state.IsPressed(Keys.D5, Buttons.DPadUp))
+                /*else if (state.IsPressed(Keys.D5, Buttons.DPadUp))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill5, player.EntityID);
                 else if (state.IsPressed(Keys.D6, Buttons.DPadDown))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill6, player.EntityID);
@@ -195,8 +195,9 @@ namespace DungeonCrawler.Systems
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill8, player.EntityID);
                 else if (state.IsPressed(Keys.D9))
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
+                 */
 
-                if (state.IsPressed(Keys.Space, Buttons.RightTrigger) && !state.IsHeld(Keys.Space, Buttons.RightTrigger))
+                if (state.IsPressed(Inputs.TRIGGER_SKILL) && !state.IsHeld(Inputs.TRIGGER_SKILL))
                 {
                     uint thisPlayerKey = 0;
                     foreach(Player p in _game.PlayerComponent.All)
@@ -212,24 +213,6 @@ namespace DungeonCrawler.Systems
 
                     //game.SkillSystem.UseSkill(player.PlayerRace, SkillType.ThrusterRush, 1, thisPlayerKey);
                 }
-
-
-               
-                
-                
-                #region HUD Displays
-                // Show HUD (A,B,X,Y, or Dpad Item)
-               // HUD hud = game.HUDComponent[player.EntityID];
-              //  HUDSprite hs;
-                Inventory inv = _game.InventoryComponent[player.EntityID];
-                InventorySprite isb;
-                InventorySprite iss;
-
-                //set the old keyboard state to be the same as the current keyboard state
-                state.SetOldKeyboardState();
-              
-                #endregion //end hud control
-                
             }
         }
 
