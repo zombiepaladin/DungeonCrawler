@@ -18,8 +18,9 @@ namespace DungeonCrawler
 {
     public static class Inputs
     {
+        public const string ESCAPE = "Escape";
+        public const string MENU = "Menu";
         public const string START = "Start";
-        public const string SELECT = "Select";
         public const string ENTER = "Enter";
         public const string UP = "Up";
         public const string DOWN = "Down";
@@ -27,12 +28,12 @@ namespace DungeonCrawler
         public const string RIGHT = "Right";
         public const string TRIGGER_WEAPON = "TriggerWeapon";
         public const string TRIGGER_SKILL = "TriggerSkill";
-        public const string TRIGGER_ITEM = "TriggerItem";
         public const string SWITCH_WEAPON = "SwitchWeapon";
-        public const string SELECT_SKILL_1 = "SelectSkill1";
-        public const string SELECT_SKILL_2 = "SelectSkill2";
-        public const string SELECT_SKILL_3 = "SelectSkill3";
-        public const string SELECT_SKILL_4 = "SelectSkill4";
+        public const string SWITCH_SKILL = "SwitchSkill";
+        public const string HOT_KEY_1 = "HotKey1";
+        public const string HOT_KEY_2 = "HotKey2";
+        public const string HOT_KEY_3 = "HotKey3";
+        public const string HOT_KEY_4 = "HotKey4";
         public const string SELECT_ITEM_1 = "SelectItem1";
         public const string SELECT_ITEM_2 = "SelectItem2";
         public const string SELECT_ITEM_3 = "SelectItem3";
@@ -162,7 +163,26 @@ namespace DungeonCrawler
         
         private void loadMappings()
         {
-            //Set key mappings here
+            MapInput(Inputs.ESCAPE, Keys.Escape, Buttons.Back);
+            MapInput(Inputs.MENU, Keys.P, Buttons.Start);
+            MapInput(Inputs.START, Keys.Enter, Buttons.Start);
+            MapInput(Inputs.ENTER, Keys.Enter, Buttons.A);
+            MapInput(Inputs.UP, Keys.W, Buttons.LeftThumbstickUp);
+            MapInput(Inputs.DOWN, Keys.S, Buttons.LeftThumbstickDown);
+            MapInput(Inputs.LEFT, Keys.A, Buttons.LeftThumbstickLeft);
+            MapInput(Inputs.RIGHT, Keys.D, Buttons.LeftThumbstickRight);
+            MapInput(Inputs.TRIGGER_WEAPON, Keys.Enter, Buttons.RightTrigger);
+            MapInput(Inputs.TRIGGER_SKILL, Keys.Space, Buttons.LeftTrigger);
+            MapInput(Inputs.SWITCH_WEAPON, Keys.E, Buttons.RightShoulder);
+            MapInput(Inputs.SWITCH_SKILL, Keys.Q, Buttons.LeftShoulder);
+            MapInput(Inputs.HOT_KEY_1, Keys.D1, Buttons.A);
+            MapInput(Inputs.HOT_KEY_2, Keys.D2, Buttons.B);
+            MapInput(Inputs.HOT_KEY_3, Keys.D2, Buttons.X);
+            MapInput(Inputs.HOT_KEY_4, Keys.D4, Buttons.Y);
+            MapInput(Inputs.SELECT_ITEM_1, Keys.NumPad2, Buttons.DPadDown);
+            MapInput(Inputs.SELECT_ITEM_2, Keys.NumPad4, Buttons.DPadLeft);
+            MapInput(Inputs.SELECT_ITEM_3, Keys.NumPad6, Buttons.DPadRight);
+            MapInput(Inputs.SELECT_ITEM_4, Keys.NumPad8, Buttons.DPadUp);
         }
 
         /// <summary>
@@ -266,7 +286,7 @@ namespace DungeonCrawler
                 return isButtonPressed(name);
             return isKeyPressed(name);
 #elif XBOX
-            return isBUtton(name);
+            return isButtonPressed(name);
 #endif
         }
 

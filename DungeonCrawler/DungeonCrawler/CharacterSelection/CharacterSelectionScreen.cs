@@ -234,7 +234,7 @@ namespace DungeonCrawler
         {
             // Allows the game to exit
             InputHelper state = InputHelper.GetInput(currentPlayer.playerIndex);
-            if (state.IsPressed(Keys.Escape, Buttons.Back))
+            if (state.IsHeld(Inputs.ESCAPE))
             {
                 currentPlayer.Timer = controllerDelay;
                 selectionDone = true;
@@ -247,21 +247,21 @@ namespace DungeonCrawler
                 currentPlayer.Timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
                 if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                 {
-                    if (state.IsPressed(Keys.Down, Buttons.DPadDown) || state.IsPressed(Keys.Up, Buttons.DPadUp))
+                    if (state.IsHeld(Inputs.DOWN) || state.IsHeld(Inputs.UP))
                     {
                         currentPlayer.MoveUpDown();
                         currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
                         currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (state.IsPressed(Keys.Left, Buttons.DPadLeft))
+                    if (state.IsHeld(Inputs.LEFT))
                     {
                         currentPlayer.MoveLeft();
                         currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
                         currentPlayer.Timer = controllerDelay;
                         cursorMoved = true;
                     }
-                    if (state.IsPressed(Keys.Right, Buttons.DPadRight))
+                    if (state.IsHeld(Inputs.RIGHT))
                     {
                         currentPlayer.MoveRight();
                         currentPlayer.Cursor.Position = buttons[currentPlayer.YPos, currentPlayer.XPos].Position;
@@ -269,7 +269,7 @@ namespace DungeonCrawler
                         cursorMoved = true;
                     }
 
-                    if (state.IsPressed(Keys.Enter, Buttons.A))
+                    if (state.IsHeld(Inputs.ENTER))
                     {
                         currentPlayer.Selected = true;
                         currentPlayer.GameSave.Aggregate = (int)buttonAggregates[currentPlayer.YPos, currentPlayer.XPos];

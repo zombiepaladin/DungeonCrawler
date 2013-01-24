@@ -163,7 +163,7 @@ namespace DungeonCrawler.Systems
                PlayerInfo info = _game.PlayerInfoComponent[player.EntityID];
               
 
-               if (state.IsPressed(Keys.Enter, Buttons.LeftTrigger))
+               if (state.IsPressed(Inputs.TRIGGER_WEAPON))
                {
                    info.State = PlayerState.Attacking;
                }

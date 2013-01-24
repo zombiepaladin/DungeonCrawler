@@ -203,7 +203,8 @@ namespace DungeonCrawler
                 if (!isNewGame)
                 {
                     // Allows the game to exit
-                    if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back) 
+                    InputHelper state = InputHelper.GetInput(currentPlayer.PlayerIndex);
+                    if (state.IsHeld(Inputs.ESCAPE) 
                         && currentPlayer.timer <= 0)
                     {
                         if (currentPlayerIndex == 0)
@@ -216,25 +217,25 @@ namespace DungeonCrawler
                             currentPlayer.Selected = false;
                         }
                     }
-                    if (InputHelper.GetInput(PlayerIndex.One).IsPressed(Keys.Enter, Buttons.Start))
+                    if (InputHelper.GetInput(PlayerIndex.One).IsHeld(Inputs.ENTER))
                     {
                         playerOne.Connected = true;
                         if(!players.Contains(playerOne))
                             players.Add(playerOne);
                     }
-                    if (InputHelper.GetInput(PlayerIndex.Two).IsPressed(Keys.Enter, Buttons.Start))
+                    if (InputHelper.GetInput(PlayerIndex.Two).IsHeld(Inputs.ENTER))
                     {
                         playerTwo.Connected = true;
                         if(!players.Contains(playerTwo))
                             players.Add(playerTwo);
                     }
-                    if (InputHelper.GetInput(PlayerIndex.Three).IsPressed(Keys.Enter, Buttons.Start))
+                    if (InputHelper.GetInput(PlayerIndex.Three).IsHeld(Inputs.ENTER))
                     {
                         playerThree.Connected = true;
                         if(!players.Contains(playerThree))
                             players.Add(playerThree);
                     }
-                    if (InputHelper.GetInput(PlayerIndex.Four).IsPressed(Keys.Enter, Buttons.Start))
+                    if (InputHelper.GetInput(PlayerIndex.Four).IsHeld(Inputs.ENTER))
                     {
                         playerFour.Connected = true;
                         if(!players.Contains(playerFour))
@@ -272,7 +273,7 @@ namespace DungeonCrawler
                         if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                         {
                             currentPlayer.timer = controllerDelay;
-                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Down, Buttons.DPadDown))
+                            if (state.IsHeld(Inputs.DOWN))
                             {
                                 selectedGameSave++;
                                 if (selectedGameSave < gameSaves.Count)
@@ -295,7 +296,7 @@ namespace DungeonCrawler
                                 cursorMoved = true;
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
-                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Up, Buttons.DPadUp))
+                            if (state.IsHeld(Inputs.UP))
                             {
                                 selectedGameSave--;
                                 if (selectedGameSave >= 0)
@@ -319,7 +320,7 @@ namespace DungeonCrawler
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
 
-                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Space, Buttons.A))
+                            if (state.IsHeld(Inputs.ENTER))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave == 0)
@@ -351,19 +352,13 @@ namespace DungeonCrawler
                                     }
                                 }
                             }
-                            if (InputHelper.GetInput(currentPlayer.playerIndex).IsPressed(Keys.Escape, Buttons.Back))
+                            if (state.IsHeld(Inputs.ESCAPE))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave != 0)
                                 {
                                     DoGameDelete(LoadGameSave(gameSaves.ElementAt(selectedGameSave)));
                                 }
-                            }
-
-                            if (GamePad.GetState(currentPlayer.PlayerIndex).Buttons.B == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.B))
-                            {
-                                //currentPlayer.selected = false;
-                                //currentPlayer.cursor.Color = Color.White;
                             }
                         }
                     }
