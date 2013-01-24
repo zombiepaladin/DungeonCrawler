@@ -13,6 +13,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace DungeonCrawler
 {
@@ -21,23 +22,26 @@ namespace DungeonCrawler
         public const string ESCAPE = "Escape";
         public const string MENU = "Menu";
         public const string START = "Start";
+        public const string MENU = "Menu";
         public const string ENTER = "Enter";
+        public const string BACK = "Back";
         public const string UP = "Up";
         public const string DOWN = "Down";
         public const string LEFT = "Left";
         public const string RIGHT = "Right";
+        public const string DISPLAY_QUEST = "DisplayQuest";
         public const string TRIGGER_WEAPON = "TriggerWeapon";
         public const string TRIGGER_SKILL = "TriggerSkill";
-        public const string SWITCH_WEAPON = "SwitchWeapon";
-        public const string SWITCH_SKILL = "SwitchSkill";
-        public const string HOT_KEY_1 = "HotKey1";
-        public const string HOT_KEY_2 = "HotKey2";
-        public const string HOT_KEY_3 = "HotKey3";
-        public const string HOT_KEY_4 = "HotKey4";
-        public const string SELECT_ITEM_1 = "SelectItem1";
-        public const string SELECT_ITEM_2 = "SelectItem2";
-        public const string SELECT_ITEM_3 = "SelectItem3";
-        public const string SELECT_ITEM_4 = "SelectItem4";
+        public const string CYCLE_WEAPON = "CycleWeapon";
+        public const string CYCLE_SKILL = "CycleSkill";
+        public const string SELECT_HOTKEY_1 = "SelectHotKey1";
+        public const string SELECT_HOTKEY_2 = "SelectHotKey2";
+        public const string SELECT_HOTKEY_3 = "SelectHotKey3";
+        public const string SELECT_HOTKEY_4 = "SelectHotKey4";
+        public const string TRIGGER_ITEM_1 = "TriggerItem1";
+        public const string TRIGGER_ITEM_2 = "TriggerItem2";
+        public const string TRIGGER_ITEM_3 = "TriggerItem3";
+        public const string TRIGGER_ITEM_4 = "TriggerItem4";
     }
     
     /// <summary>
@@ -53,12 +57,17 @@ namespace DungeonCrawler
         /// <summary>
         /// Load inputs for up to four players.
         /// </summary>
-        public static void Load()
+        /// <param name="numPlayers">How many players to load.</param>
+        public static void Load(int numPlayers)
         {
-            _inputs.Add(PlayerIndex.One, new InputHelper(PlayerIndex.One));
-            _inputs.Add(PlayerIndex.Two, new InputHelper(PlayerIndex.Two));
-            _inputs.Add(PlayerIndex.Three, new InputHelper(PlayerIndex.Three));
-            _inputs.Add(PlayerIndex.Four, new InputHelper(PlayerIndex.Four));
+            if(numPlayers < 1 || numPlayers > 4)
+                throw new ArgumentOutOfRangeException("numPlayers must be between 1 and 4.");
+
+            for (int i = 1; i <= numPlayers; i++)
+            {
+                PlayerIndex index = (PlayerIndex)(i);
+                _inputs.Add(index, new InputHelper(index));
+            }
         }
 
         /// <summary>
@@ -78,10 +87,10 @@ namespace DungeonCrawler
         /// </summary>
         public static void DisableAll()
         {
-            _inputs[PlayerIndex.One]._disabled = true;
-            _inputs[PlayerIndex.Two]._disabled = true;
-            _inputs[PlayerIndex.Three]._disabled = true;
-            _inputs[PlayerIndex.Four]._disabled = true;
+            foreach (InputHelper input in _inputs.Values)
+            {
+                input._disabled = true;
+            }
         }
 
         /// <summary>
@@ -98,10 +107,10 @@ namespace DungeonCrawler
         /// </summary>
         public static void EnableAll()
         {
-            _inputs[PlayerIndex.One]._disabled = false;
-            _inputs[PlayerIndex.Two]._disabled = false;
-            _inputs[PlayerIndex.Three]._disabled = false;
-            _inputs[PlayerIndex.Four]._disabled = false;
+            foreach (InputHelper input in _inputs.Values)
+            {
+                input._disabled = false;
+            }
         }
 
         /// <summary>
@@ -114,6 +123,8 @@ namespace DungeonCrawler
         }
 
         #endregion
+
+        #region Private Members
 
         //Conditional variables
 #if WINDOWS 
@@ -163,40 +174,96 @@ namespace DungeonCrawler
         
         private void loadMappings()
         {
-            MapInput(Inputs.ESCAPE, Keys.Escape, Buttons.Back);
-            MapInput(Inputs.MENU, Keys.P, Buttons.Start);
-            MapInput(Inputs.START, Keys.Enter, Buttons.Start);
-            MapInput(Inputs.ENTER, Keys.Enter, Buttons.A);
-            MapInput(Inputs.UP, Keys.W, Buttons.LeftThumbstickUp);
-            MapInput(Inputs.DOWN, Keys.S, Buttons.LeftThumbstickDown);
-            MapInput(Inputs.LEFT, Keys.A, Buttons.LeftThumbstickLeft);
-            MapInput(Inputs.RIGHT, Keys.D, Buttons.LeftThumbstickRight);
-            MapInput(Inputs.TRIGGER_WEAPON, Keys.Enter, Buttons.RightTrigger);
-            MapInput(Inputs.TRIGGER_SKILL, Keys.Space, Buttons.LeftTrigger);
-            MapInput(Inputs.SWITCH_WEAPON, Keys.E, Buttons.RightShoulder);
-            MapInput(Inputs.SWITCH_SKILL, Keys.Q, Buttons.LeftShoulder);
-            MapInput(Inputs.HOT_KEY_1, Keys.D1, Buttons.A);
-            MapInput(Inputs.HOT_KEY_2, Keys.D2, Buttons.B);
-            MapInput(Inputs.HOT_KEY_3, Keys.D2, Buttons.X);
-            MapInput(Inputs.HOT_KEY_4, Keys.D4, Buttons.Y);
-            MapInput(Inputs.SELECT_ITEM_1, Keys.NumPad2, Buttons.DPadDown);
-            MapInput(Inputs.SELECT_ITEM_2, Keys.NumPad4, Buttons.DPadLeft);
-            MapInput(Inputs.SELECT_ITEM_3, Keys.NumPad6, Buttons.DPadRight);
-            MapInput(Inputs.SELECT_ITEM_4, Keys.NumPad8, Buttons.DPadUp);
+#if WINDOWS
+            mapKey(Inputs.MENU, Keys.Escape);
+            mapKey(Inputs.START, Keys.Enter);
+            mapKey(Inputs.SELECT, Keys.Escape);
+            mapKey(Inputs.ENTER, Keys.Enter);
+            mapKey(Inputs.BACK, Keys.Escape);
+            mapKey(Inputs.UP, Keys.W);
+            mapKey(Inputs.RIGHT, Keys.D);
+            mapKey(Inputs.DOWN, Keys.S);
+            mapKey(Inputs.LEFT, Keys.A);
+            mapKey(Inputs.DISPLAY_QUEST, Keys.L);
+            mapKey(Inputs.TRIGGER_WEAPON, Keys.Enter);
+            mapKey(Inputs.CYCLE_WEAPON, Keys.E);
+            mapKey(Inputs.TRIGGER_SKILL, Keys.Space);
+            mapKey(Inputs.CYCLE_SKILL, Keys.Q);
+            mapKey(Inputs.SELECT_HOTKEY_1, Keys.D1);
+            mapKey(Inputs.SELECT_HOTKEY_2, Keys.D2);
+            mapKey(Inputs.SELECT_HOTKEY_3, Keys.D3);
+            mapKey(Inputs.SELECT_HOTKEY_4, Keys.D4);
+            mapKey(Inputs.TRIGGER_ITEM_1, Keys.Up);
+            mapKey(Inputs.TRIGGER_ITEM_2, Keys.Right);
+            mapKey(Inputs.TRIGGER_ITEM_3, Keys.Down);
+            mapKey(Inputs.TRIGGER_ITEM_4, Keys.Left);
+#endif
+#if WINDOWS || XBOX
+            mapButton(Inputs.MENU, Buttons.Start);
+            mapButton(Inputs.START, Buttons.Start);
+            mapButton(Inputs.SELECT, Buttons.Back);
+            mapButton(Inputs.ENTER, Buttons.A);
+            mapButton(Inputs.BACK, Buttons.B);
+            mapButton(Inputs.UP, Buttons.LeftThumbstickUp);
+            mapButton(Inputs.RIGHT, Buttons.LeftThumbstickRight);
+            mapButton(Inputs.DOWN, Buttons.LeftThumbstickDown);
+            mapButton(Inputs.LEFT, Buttons.LeftThumbstickLeft);
+            mapButton(Inputs.DISPLAY_QUEST, Buttons.RightStick);
+            mapButton(Inputs.TRIGGER_WEAPON, Buttons.RightTrigger);
+            mapButton(Inputs.CYCLE_WEAPON, Buttons.RightShoulder);
+            mapButton(Inputs.TRIGGER_SKILL, Buttons.LeftTrigger);
+            mapButton(Inputs.CYCLE_SKILL, Buttons.LeftShoulder);
+            mapButton(Inputs.SELECT_HOTKEY_1, Buttons.Y);
+            mapButton(Inputs.SELECT_HOTKEY_2, Buttons.B);
+            mapButton(Inputs.SELECT_HOTKEY_3, Buttons.A);
+            mapButton(Inputs.SELECT_HOTKEY_4, Buttons.X);
+            mapButton(Inputs.TRIGGER_ITEM_1, Buttons.DPadUp);
+            mapButton(Inputs.TRIGGER_ITEM_2, Buttons.DPadRight);
+            mapButton(Inputs.TRIGGER_ITEM_3, Buttons.DPadDown);
+            mapButton(Inputs.TRIGGER_ITEM_4, Buttons.DPadLeft);
+#endif
         }
+
+        #endregion
+
+        #region Public Members
 
         /// <summary>
         /// Maps the given key and button to the name.
         /// </summary>
         /// <param name="name">Name of mapping</param>
         /// <param name="key">Keyboard key to map.</param>
-        /// <param name="button">Xbox controller key to map.</param>
+        /// <param name="button">Button to map</param>
         public void MapInput(string name, Keys key, Buttons button)
         {
 #if WINDOWS
             mapKey(name, key);
             mapButton(name, button);
 #elif XBOX
+            mapButton(name, button);
+#endif
+        }
+
+        /// <summary>
+        /// Maps the given key to the name.
+        /// </summary>
+        /// <param name="name">Name of mapping</param>
+        /// <param name="key">Keyboard key to map.</param>
+        public void MapInput(string name, Keys key)
+        {
+#if WINDOWS
+            mapKey(name, key);
+#endif
+        }
+
+        /// <summary>
+        /// Maps the given button to the name.
+        /// </summary>
+        /// <param name="name">Name of mapping</param>
+        /// <param name="button">Button to map</param>
+        public void MapInput(string name, Buttons button)
+        {
+#if WINDOWS || XBOX
             mapButton(name, button);
 #endif
         }
@@ -267,8 +334,11 @@ namespace DungeonCrawler
         {
             if (_disabled)
                 return false;
-            
+#if WINDOWS
             return isKeyPressed(key);
+#else 
+            return false;
+#endif
         }
 
         /// <summary>
@@ -314,8 +384,7 @@ namespace DungeonCrawler
         /// <summary>
         /// Returns true if the given key or button is held.
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="button"></param>
+        /// <param name="name">Name of mapped key/button.</param>
         /// <returns></returns>
         public bool IsHeld(string name)
         {
@@ -337,8 +406,14 @@ namespace DungeonCrawler
         /// <returns></returns>
         public bool IsGamePadConnected()
         {
+#if WINDOWS || XBOX
             return _curGamePadState.IsConnected;
+#else
+            return false;
+#endif
         }
+
+        #endregion
 
         //Keyboard handlers
         #region KEYBOARD
@@ -347,11 +422,6 @@ namespace DungeonCrawler
         {
             _curKeyboardState = Keyboard.GetState(_pIndex);
             _mappedKeys = new Dictionary<string, Keys>();
-        }
-
-        public void SetOldKeyboardState()
-        {
-            _oldKeyboardState = _curKeyboardState;
         }
 
         private void getKeyboardState()
