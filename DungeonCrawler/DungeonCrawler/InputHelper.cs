@@ -22,7 +22,7 @@ namespace DungeonCrawler
         public const string ESCAPE = "Escape";
         public const string MENU = "Menu";
         public const string START = "Start";
-        public const string MENU = "Menu";
+        public const string SELECT = "Select";
         public const string ENTER = "Enter";
         public const string BACK = "Back";
         public const string UP = "Up";
@@ -65,7 +65,7 @@ namespace DungeonCrawler
 
             for (int i = 1; i <= numPlayers; i++)
             {
-                PlayerIndex index = (PlayerIndex)(i);
+                PlayerIndex index = (PlayerIndex)(i-1);
                 _inputs.Add(index, new InputHelper(index));
             }
         }
@@ -426,7 +426,7 @@ namespace DungeonCrawler
 
         private void getKeyboardState()
         {
-            
+            _oldKeyboardState = _curKeyboardState;
             _curKeyboardState = Keyboard.GetState(_pIndex);
         }
 

@@ -213,10 +213,10 @@
     <Compile Include="Entities\InvAggregateFactory.cs" />
     <Compile Include="Entities\RoomFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SplashScreens\Credits.cs" />
-    <Compile Include="SplashScreens\GameOver.cs" />
-    <Compile Include="SplashScreens\GameStart.cs" />
-    <Compile Include="SplashScreens\SplashScreen.cs" />
+    <Compile Include="Systems\SplashScreens\Credits.cs" />
+    <Compile Include="Systems\SplashScreens\GameOver.cs" />
+    <Compile Include="Systems\SplashScreens\GameStart.cs" />
+    <Compile Include="Systems\SplashScreens\SplashScreen.cs" />
     <Compile Include="Systems\CollisionSystem.cs" />
     <Compile Include="Systems\EnemyAISystem.cs" />
     <Compile Include="Systems\GarbagemanSystem.cs" />

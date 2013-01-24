@@ -17,6 +17,8 @@ namespace DungeonCrawler.SplashScreens
         private SpriteFont _font;
         private Vector2 _fontPosition;
 
+        private SpriteBatch _bufferedBatch;
+
         private bool _drawFont;
         private float _timer;
 

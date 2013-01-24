@@ -269,7 +269,6 @@ namespace DungeonCrawler
 
                     if (currentPlayer.Connected)
                     {
-                        InputHelper state = InputHelper.GetInput(currentPlayer.playerIndex);
                         currentPlayer.Timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
                         if (!currentPlayer.Selected && currentPlayer.Timer <= 0)
                         {
