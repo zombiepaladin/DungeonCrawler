@@ -369,7 +369,7 @@ namespace DungeonCrawler
             HUDSystem = new HUDSystem(this);
             SplashSystem = new SplashSystem(this);
 
-            InputHelper.Load();
+            InputHelper.Load(4);
             HUDSystem.LoadContent();
 
             // Testing code.
