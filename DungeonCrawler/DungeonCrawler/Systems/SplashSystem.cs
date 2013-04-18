@@ -56,6 +56,10 @@ namespace DungeonCrawler.Systems
                     else
                         DungeonCrawlerGame.game.GameState = GameState.CharacterSelection;
                 }
+                else if (_screen is GameOver)
+                {
+                    Load(SplashType.GameStart);
+                }
                 else
                 {
                     Load(SplashType.GameStart);
