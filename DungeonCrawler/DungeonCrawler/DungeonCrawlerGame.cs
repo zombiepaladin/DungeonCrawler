@@ -169,6 +169,7 @@ namespace DungeonCrawler
         public SkillAoEComponent SkillAoEComponent;
         public SkillDeployableComponent SkillDeployableComponent;
         public SoundComponent SoundComponent;
+        public PlayerInfo pI;
         //public QuestComponent QuestComponent;
         public ActorTextComponent ActorTextComponent;
         public PlayerSkillInfoComponent PlayerSkillInfoComponent;
@@ -310,6 +311,7 @@ namespace DungeonCrawler
             ActiveSkillComponent = new ActiveSkillComponent();
             PlayerSkillInfoComponent = new PlayerSkillInfoComponent();
             MatchingPuzzleComponent = new MatchingPuzzleComponent();
+            pI = new PlayerInfo();
 
             Quests = new List<Quest>();
 
@@ -483,8 +485,12 @@ namespace DungeonCrawler
                     EnemyAISystem.Update(elapsedTime);
                     TextSystem.Update(elapsedTime);
                     EngineeringOffenseSystem.Update(elapsedTime);
-
                     GarbagemanSystem.Update(elapsedTime);
+
+                    if (pI.Health <= 0)
+                    {
+                        GameState = DungeonCrawler.GameState.SplashScreen;
+                    }
                     break;
 
                 case GameState.Credits:
