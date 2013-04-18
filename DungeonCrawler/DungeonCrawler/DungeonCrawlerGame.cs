@@ -490,6 +490,8 @@ namespace DungeonCrawler
                     if (pI.Health <= 0)
                     {
                         GameState = DungeonCrawler.GameState.SplashScreen;
+                        SplashSystem.Load(Systems.SplashSystem.SplashType.GameOver);
+                        return;
                     }
                     break;
 
