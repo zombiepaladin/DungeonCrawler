@@ -320,7 +320,7 @@ namespace DungeonCrawler
                                 gameSaves.ElementAt(selectedGameSave).Color = selected;
                             }
 
-                            if (state.IsHeld(Inputs.ENTER))
+                            if (state.IsHeld(Keys.Space, Buttons.A))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave == 0)

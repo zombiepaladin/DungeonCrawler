@@ -178,7 +178,7 @@ namespace DungeonCrawler
             mapKey(Inputs.MENU, Keys.Escape);
             mapKey(Inputs.START, Keys.Enter);
             mapKey(Inputs.SELECT, Keys.Escape);
-            mapKey(Inputs.ENTER, Keys.Enter);
+            mapKey(Inputs.ENTER, Keys.Space);
             mapKey(Inputs.BACK, Keys.Escape);
             mapKey(Inputs.UP, Keys.W);
             mapKey(Inputs.RIGHT, Keys.D);
