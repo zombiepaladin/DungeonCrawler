@@ -104,7 +104,7 @@
   <object name="Trigger" type="Wall" x="1216" y="384" width="64" height="288"/>
   <object name="Trigger" type="Door" x="1248" y="320" width="32" height="64">
    <properties>
-    <property name="DestinationRoom" value="D01F02R08"/>
+    <property name="DestinationRoom" value="D01F02R07"/>
     <property name="DestinationSpawnName" value="2"/>
    </properties>
   </object>

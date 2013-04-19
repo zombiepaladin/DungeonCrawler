@@ -487,12 +487,13 @@ namespace DungeonCrawler
                     EngineeringOffenseSystem.Update(elapsedTime);
                     GarbagemanSystem.Update(elapsedTime);
 
+                    /*
                     if (pI.Health <= 0)
                     {
                         GameState = DungeonCrawler.GameState.SplashScreen;
                         SplashSystem.Load(Systems.SplashSystem.SplashType.GameOver);
                         return;
-                    }
+                    }*/
                     break;
 
                 case GameState.Credits:

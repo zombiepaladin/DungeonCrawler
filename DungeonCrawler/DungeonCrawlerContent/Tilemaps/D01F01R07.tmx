@@ -28,7 +28,7 @@
   <object name="Trigger" type="Door" x="0" y="320" width="32" height="64">
    <properties>
     <property name="DestinationRoom" value="D01F01R06"/>
-    <property name="DestinationSpawnName" value="1"/>
+    <property name="DestinationSpawnName" value="15"/>
    </properties>
   </object>
   <object name="Trigger" type="Door" x="960" y="448" width="65" height="69">

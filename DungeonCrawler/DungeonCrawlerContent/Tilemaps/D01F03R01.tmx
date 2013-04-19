@@ -64,15 +64,15 @@
  <objectgroup name="Collisions" width="40" height="23">
   <object name="Trigger" type="Wall" x="0" y="0" width="640" height="64"/>
   <object name="Trigger" type="Wall" x="0" y="65" width="61" height="255"/>
-  <object name="Trigger" type="Wall" x="1214" y="65" width="64" height="288"/>
+  <object name="Trigger" type="Wall" x="1214" y="65" width="69" height="256"/>
   <object name="Trigger" type="Wall" x="1" y="672" width="640" height="64"/>
   <object name="Trigger" type="Wall" x="1" y="390" width="61" height="282"/>
  </objectgroup>
  <objectgroup name="Entities" width="40" height="23">
-  <object name="Trigger" type="Door" x="-3" y="321" width="65" height="69">
+  <object name="Trigger" type="Door" x="-3" y="321" width="35" height="68">
    <properties>
-    <property name="DestinationRoom" value="TestDungeon1"/>
-    <property name="DestinationSpawnName" value="2"/>
+    <property name="DestinationRoom" value="D01F03R01"/>
+    <property name="DestinationSpawnName" value="3"/>
    </properties>
   </object>
   <object name="Enemy" type="MovingTarget" x="300" y="300" width="10" height="10"/>
@@ -82,30 +82,45 @@
  <objectgroup name="Triggers" width="40" height="23">
   <object name="Trigger" type="Wall" x="704" y="672" width="576" height="64"/>
   <object name="Trigger" type="Wall" x="704" y="0" width="576" height="64"/>
-  <object name="Trigger" type="Wall" x="1216" y="416" width="64" height="256"/>
+  <object name="Trigger" type="Wall" x="1217" y="384" width="69" height="287"/>
   <object name="Trigger" type="Door" x="640" y="0" width="64" height="32">
    <properties>
-    <property name="DestinationRoom" value="TestDungeon1"/>
-    <property name="DestinationSpawnName" value="2"/>
+    <property name="DestinationRoom" value="D01F03R01"/>
+    <property name="DestinationSpawnName" value="4"/>
    </properties>
   </object>
-  <object name="Trigger" type="Door" x="1248" y="352" width="32" height="64">
+  <object name="Trigger" type="Door" x="1248" y="319" width="32" height="64">
    <properties>
-    <property name="DestinationRoom" value="TestDungeon1"/>
-    <property name="DestinationSpawnName" value="2"/>
+    <property name="DestinationRoom" value="D01F03R01"/>
+    <property name="DestinationSpawnName" value="1"/>
    </properties>
   </object>
   <object name="Trigger" type="Door" x="640" y="704" width="64" height="32">
    <properties>
-    <property name="DestinationRoom" value="TestDungeon1"/>
+    <property name="DestinationRoom" value="D01F03R01"/>
     <property name="DestinationSpawnName" value="2"/>
+   </properties>
+  </object>
+  <object name="PlayerSpawn" x="93" y="352" width="25" height="26">
+   <properties>
+    <property name="SpawnName" value="1"/>
+   </properties>
+  </object>
+  <object name="PlayerSpawn" x="1174" y="340" width="25" height="26">
+   <properties>
+    <property name="SpawnName" value="3"/>
+   </properties>
+  </object>
+  <object name="PlayerSpawn" x="661" y="597" width="25" height="26">
+   <properties>
+    <property name="SpawnName" value="4"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup name="PlayerSpawns" width="40" height="23">
-  <object name="PlayerSpawn" x="96" y="351" width="25" height="26">
+  <object name="PlayerSpawn" x="658" y="81" width="25" height="26">
    <properties>
-    <property name="SpawnName" value="1"/>
+    <property name="SpawnName" value="2"/>
    </properties>
   </object>
  </objectgroup>

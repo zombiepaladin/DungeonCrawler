@@ -97,7 +97,7 @@
   <object name="Trigger" type="Door" x="160" y="448" width="64" height="32">
    <properties>
     <property name="DestinationRoom" value="D01F03R01"/>
-    <property name="DestinationSpawnName" value="3"/>
+    <property name="DestinationSpawnName" value="1"/>
    </properties>
   </object>
   <object name="Enemy" type="Spider" x="320" y="96"/>

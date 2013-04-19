@@ -108,5 +108,10 @@
     <property name="SpawnName" value="1"/>
    </properties>
   </object>
+  <object name="PlayerSpawn" x="658" y="88" width="25" height="26">
+   <properties>
+    <property name="SpawnName" value="2"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>
