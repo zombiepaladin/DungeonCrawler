@@ -25,6 +25,7 @@ namespace DungeonCrawler
         public const string SELECT = "Select";
         public const string ENTER = "Enter";
         public const string BACK = "Back";
+        public const string DELETE = "Delete";
         public const string UP = "Up";
         public const string DOWN = "Down";
         public const string LEFT = "Left";
@@ -180,6 +181,7 @@ namespace DungeonCrawler
             mapKey(Inputs.SELECT, Keys.Escape);
             mapKey(Inputs.ENTER, Keys.Space);
             mapKey(Inputs.BACK, Keys.Escape);
+            mapKey(Inputs.DELETE, Keys.Delete);
             mapKey(Inputs.UP, Keys.W);
             mapKey(Inputs.RIGHT, Keys.D);
             mapKey(Inputs.DOWN, Keys.S);
@@ -204,6 +206,7 @@ namespace DungeonCrawler
             mapButton(Inputs.SELECT, Buttons.Back);
             mapButton(Inputs.ENTER, Buttons.A);
             mapButton(Inputs.BACK, Buttons.B);
+            mapButton(Inputs.DELETE, Buttons.X);
             mapButton(Inputs.UP, Buttons.LeftThumbstickUp);
             mapButton(Inputs.RIGHT, Buttons.LeftThumbstickRight);
             mapButton(Inputs.DOWN, Buttons.LeftThumbstickDown);

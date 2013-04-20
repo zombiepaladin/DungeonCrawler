@@ -352,7 +352,7 @@ namespace DungeonCrawler
                                     }
                                 }
                             }
-                            if (state.IsHeld(Inputs.ESCAPE))
+                            if (state.IsHeld(Inputs.DELETE))
                             {
                                 currentPlayer.Timer = controllerDelay;
                                 if (selectedGameSave != 0)

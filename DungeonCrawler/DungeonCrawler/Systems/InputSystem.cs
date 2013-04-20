@@ -197,7 +197,7 @@ namespace DungeonCrawler.Systems
                     ChangeActiveSkill(_game.PlayerInfoComponent[player.EntityID].skill9, player.EntityID);
                  */
 
-                if (state.IsPressed(Inputs.TRIGGER_SKILL) && !state.IsHeld(Inputs.TRIGGER_SKILL))
+                if (state.IsHeld(Inputs.TRIGGER_SKILL))
                 {
                     uint thisPlayerKey = 0;
                     foreach(Player p in _game.PlayerComponent.All)

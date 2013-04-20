@@ -1444,6 +1444,8 @@ namespace DungeonCrawler.Entities
                 {
                     Health = gameSave.health,
                     PsiOrFatigue = gameSave.psi,
+                    MaxHealth = gameSave.health,
+                    MaxPsiOrFatigue = gameSave.psi,
                     Level = gameSave.level,
                     Experience = gameSave.experience,
                     State = PlayerState.Default,
