@@ -204,6 +204,7 @@ namespace DungeonCrawler
             mapButton(Inputs.MENU, Buttons.Start);
             mapButton(Inputs.START, Buttons.Start);
             mapButton(Inputs.SELECT, Buttons.Back);
+            mapButton(Inputs.ESCAPE, Buttons.Back);
             mapButton(Inputs.ENTER, Buttons.A);
             mapButton(Inputs.BACK, Buttons.B);
             mapButton(Inputs.DELETE, Buttons.X);
